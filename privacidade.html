@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Política de Privacidade e Segurança dos Produtos – 4Asset</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      font-family: 'Inter', sans-serif;
+      background: #f4f6f9;
+      color: #0f1d33;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+    }
+
+    /* Header */
+    .priv-header {
+      background: #031120;
+      padding: 22px 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .priv-header .logo svg { height: 32px; width: auto; }
+    .priv-header .logo svg .s1 { fill: #fff !important; }
+    .back-link {
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: #fff; }
+
+    /* Hero */
+    .priv-hero {
+      background: linear-gradient(135deg, #031120 0%, #0a2040 100%);
+      color: #fff;
+      padding: 64px 60px 72px;
+    }
+    .priv-hero .wrap { max-width: 880px; margin: 0 auto; }
+    .priv-hero .tag {
+      display: inline-block;
+      background: rgba(80, 95, 255, 0.18);
+      color: #93a8ff;
+      padding: 6px 14px;
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+    .priv-hero h1 {
+      font-size: 40px;
+      font-weight: 700;
+      line-height: 1.16;
+      letter-spacing: -0.8px;
+      margin-bottom: 16px;
+    }
+    .priv-hero .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 28px;
+      color: rgba(255, 255, 255, 0.65);
+      font-size: 14px;
+      margin-top: 22px;
+    }
+    .priv-hero .meta span strong { color: #fff; font-weight: 600; }
+
+    /* Content */
+    .priv-content {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 64px 60px 80px;
+    }
+    .priv-content section { margin-bottom: 40px; }
+    .priv-content h2 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      color: #0f1d33;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e3e7ee;
+    }
+    .priv-content h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: #0f1d33;
+      margin: 22px 0 8px;
+    }
+    .priv-content p {
+      font-size: 15px;
+      line-height: 1.7;
+      color: #4a5462;
+      margin-bottom: 12px;
+    }
+    .priv-content ul {
+      list-style: none;
+      margin: 12px 0;
+    }
+    .priv-content ul li {
+      position: relative;
+      padding-left: 22px;
+      font-size: 15px;
+      line-height: 1.7;
+      color: #4a5462;
+      margin-bottom: 8px;
+    }
+    .priv-content ul li::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 11px;
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #505FFF;
+    }
+    .priv-content strong { color: #0f1d33; font-weight: 600; }
+    .priv-content a { color: #505FFF; text-decoration: none; font-weight: 500; }
+    .priv-content a:hover { text-decoration: underline; }
+
+    .dpo-card {
+      background: #fff;
+      border: 1px solid #e3e7ee;
+      border-radius: 14px;
+      padding: 24px 28px;
+      margin-top: 14px;
+    }
+    .dpo-card .dpo-name { font-size: 17px; font-weight: 700; color: #0f1d33; margin-bottom: 4px; }
+    .dpo-card .dpo-role { font-size: 13px; color: #8b94a3; margin-bottom: 12px; }
+    .dpo-card .dpo-line { font-size: 14px; color: #4a5462; margin-bottom: 4px; }
+
+    .priv-sign {
+      margin-top: 56px;
+      padding-top: 28px;
+      border-top: 2px solid #e3e7ee;
+      font-size: 14px;
+      color: #5b6472;
+    }
+    .priv-sign strong { color: #0f1d33; }
+
+    /* Footer */
+    .priv-footer {
+      background: #080f1c;
+      color: rgba(255, 255, 255, 0.55);
+      padding: 28px 60px;
+      font-size: 13px;
+      text-align: center;
+    }
+    .priv-footer a { color: rgba(255, 255, 255, 0.75); text-decoration: none; margin: 0 12px; }
+    .priv-footer a:hover { color: #fff; }
+
+    @media (max-width: 720px) {
+      .priv-header, .priv-hero, .priv-content, .priv-footer { padding-left: 24px; padding-right: 24px; }
+      .priv-hero h1 { font-size: 30px; }
+      .priv-content h2 { font-size: 19px; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="priv-header">
+  <a href="index.html" class="logo" aria-label="4Asset – voltar ao site">
+    <svg viewBox="0 0 327 57" xmlns="http://www.w3.org/2000/svg">
+      <style>.s0{fill:#505FFF;}.s1{fill:#ffffff;}</style>
+      <path class="s0" d="M316,32.8c1.5,0,2.9-0.3,4.2-0.8c1.3-0.6,2.6-1.4,3.6-2.4c1-1,1.8-2.2,2.4-3.6c0.6-1.3,0.8-2.8,0.8-4.2c0-2.9-1.2-5.7-3.2-7.8c-2.1-2.1-4.9-3.2-7.8-3.2c-1.5,0-2.9,0.3-4.2,0.8c-1.3,0.6-2.6,1.4-3.6,2.4c-1,1-1.8,2.2-2.4,3.6c-0.6,1.3-0.8,2.8-0.8,4.2c0,2.9,1.2,5.7,3.2,7.8C310.2,31.6,313,32.8,316,32.8z"/>
+      <path class="s0" d="M289.1,33.7c-1.5,0-2.9,0.3-4.2,0.8c-1.3,0.6-2.6,1.4-3.6,2.4c-1,1-1.8,2.2-2.4,3.6c-0.6,1.3-0.8,2.8-0.8,4.2c0,2.9,1.2,5.7,3.2,7.8c2.1,2.1,4.9,3.2,7.8,3.2c1.5,0,2.9-0.3,4.2-0.8c1.3-0.6,2.6-1.4,3.6-2.4c1-1,1.8-2.2,2.4-3.6c0.6-1.3,0.8-2.8,0.8-4.2c0-2.9-1.2-5.7-3.2-7.8C294.8,34.9,292,33.7,289.1,33.7L289.1,33.7z"/>
+      <path class="s0" d="M309.1,34.1c-7,3-10.7,10-8.2,15.7c2.4,5.6,10.1,7.8,17.1,4.8c7-3,10.7-10,8.2-15.7C323.8,33.3,316.1,31.1,309.1,34.1z"/>
+      <path class="s0" d="M295.9,32.3c7-3,10.7-10,8.2-15.7c-2.4-5.6-10.1-7.8-17.1-4.8c-7,3-10.7,10-8.2,15.7C281.2,33.2,288.9,35.3,295.9,32.3z"/>
+      <path class="s1" d="M39.6,18.7h-7.3V35H8.4L27.2,0.8h-8L0.1,35.6L0,35.8V42h32.2v13.7h7.3V41.9h7.5V35l-7.5,0V18.7z"/>
+      <path class="s1" d="M59.5,55.9c1.1-3.6,3.4-6.7,6.4-9c3-2.2,6.7-3.5,10.4-3.5c3.8,0,7.4,1.3,10.4,3.5c3,2.2,5.3,5.4,6.4,9h6.7c-1.2-5.4-4.2-10.2-8.4-13.6c-4.3-3.5-9.6-5.4-15.1-5.5c-5.5,0.1-10.8,2-15.1,5.5s-7.2,8.3-8.4,13.6H59.5z"/>
+      <path class="s1" d="M59.5,55.9l14.3-39.6h5l14.4,39.6h8.1l-14-38.7C86.4,15,85,13.1,83,11.7c-2-1.4-4.3-2.1-6.7-2.1l0,0c-2.4,0-4.7,0.7-6.7,2.1s-3.4,3.3-4.3,5.6l-14,38.7L59.5,55.9z"/>
+      <path class="s1" d="M126.6,29.8c-7.5-1.5-14.9-3.1-14.9-7.5c0-2.6,3.1-5.9,10-5.9c4.7,0,7.7,1.7,9.4,3.4c1,1,1.8,2.1,2.4,3.3h7.7c-0.7-2.5-1.9-4.8-3.4-6.8c-2.9-3.4-7.6-6.8-16-6.8c-11.3,0-17.2,5.9-17.2,12.7c0,8.4,7.5,11.7,14.9,13.3c7.5,1.6,14.9,3.1,14.9,7.5c0,3.6-3.1,6.8-11.3,6.8c-1.9,0.1-3.9-0.2-5.7-0.9c-1.8-0.7-3.4-1.8-4.8-3.2c-1.1-1.2-2-2.6-2.6-4.1h-7.7c0.8,2.7,2.1,5.3,3.8,7.5c3,3.7,8.2,7.5,17,7.5c12.2,0,18.6-6.3,18.6-13.6C141.5,34.8,134.1,31.4,126.6,29.8z"/>
+      <path class="s1" d="M169.8,29.8c-7.5-1.5-14.9-3.1-14.9-7.5c0-2.6,3.1-5.9,10-5.9c4.7,0,7.7,1.7,9.4,3.4c1,1,1.8,2.1,2.3,3.3h7.7c-0.7-2.5-1.9-4.8-3.4-6.8c-2.9-3.4-7.6-6.8-16-6.8c-11.3,0-17.2,5.9-17.2,12.7c0,8.4,7.4,11.7,14.9,13.3c7.5,1.6,14.9,3.1,14.9,7.5c0,3.6-3.1,6.8-11.3,6.8c-1.9,0.1-3.9-0.2-5.7-0.9c-1.8-0.7-3.4-1.8-4.8-3.2c-1.1-1.2-2-2.6-2.6-4.1h-7.7c0.8,2.7,2.1,5.3,3.8,7.5c3,3.7,8.2,7.5,17,7.5c12.2,0,18.6-6.3,18.6-13.6C184.7,34.8,177.3,31.4,169.8,29.8z"/>
+      <path class="s1" d="M212.6,9.6c-13.2,0-23.1,10.1-23.1,23.6c0,13.4,9.9,23.6,23.1,23.6c3.3,0.1,6.6-0.5,9.6-1.8c3-1.3,5.7-3.2,8-5.6c2-2.2,3.6-4.7,4.6-7.5l0.1-0.2h-7.5v0.1c-0.9,1.5-2.1,2.9-3.4,4c-3.2,2.7-7.2,4.1-11.4,4c-8.2,0-14.6-5.8-15.6-14.1h38.7v-2.8c0.1-3.1-0.5-6.1-1.6-8.9c-1.1-2.8-2.8-5.4-5-7.6s-4.7-3.8-7.6-5C218.7,10.1,215.7,9.6,212.6,9.6L212.6,9.6z M197.2,29c0.7-3.6,2.6-6.8,5.4-9c2.8-2.3,6.4-3.4,10-3.3c6.4,0,13.9,3.9,15.2,12.3H197.2z"/>
+      <path class="s1" d="M250.5,0.8H243v9.9h-5.9v7h5.9V42c0,9.1,5,14.1,14.1,14.1h9.9v-7h-9.9c-4.4,0-6.6-2.4-6.6-7.1V17.8h16.8v-7h-16.8L250.5,0.8z"/>
+    </svg>
+  </a>
+  <a href="index.html" class="back-link">← Voltar ao site</a>
+</header>
+
+<section class="priv-hero">
+  <div class="wrap">
+    <span class="tag">POL-SI-002 · Documento Público</span>
+    <h1>Política de Privacidade e Segurança dos Produtos</h1>
+    <div class="meta">
+      <span><strong>Versão:</strong> 2.0</span>
+      <span><strong>Data:</strong> 14 de fevereiro de 2026</span>
+      <span><strong>Próxima revisão:</strong> Fevereiro de 2027</span>
+      <span><strong>Aprovado por:</strong> Maurício Fiorese — CTO/DPO</span>
+    </div>
+  </div>
+</section>
+
+<main class="priv-content">
+
+  <section>
+    <h2>Identificação</h2>
+    <p>Este documento é de propriedade da <strong>4Asset Tecnologia S.A.</strong>, CNPJ 31.740.853/0001-93, com sede na Rodovia José Carlos Daux, nº 600, Ed. Alfama, 6º andar, Parque Tecnológico Alfa, Florianópolis/SC, CEP 88030-911.</p>
+  </section>
+
+  <section>
+    <h2>Definições</h2>
+    <ul>
+      <li><strong>4Asset:</strong> 4Asset Tecnologia S.A.</li>
+      <li><strong>Produto Contratado:</strong> Specifor SaaS, Specifor Enterprise ou qualquer outro produto de software desenvolvido e comercializado pela 4Asset.</li>
+      <li><strong>Usuário:</strong> Usuário dos produtos da 4Asset, também denominado titular dos dados.</li>
+      <li><strong>Companhia Cliente ou Cliente:</strong> Instituições públicas, mistas e/ou privadas detentoras da licença de uso do Produto Contratado.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Contato — SAC</h2>
+    <p>Canal de comunicação para dúvidas sobre privacidade e segurança: <a href="mailto:encarregados.dados@4asset.net.br">encarregados.dados@4asset.net.br</a>.</p>
+  </section>
+
+  <section>
+    <h2>Informações Gerais</h2>
+    <p>A 4Asset toma todas as medidas necessárias para proteger a privacidade do Usuário, em atendimento à legislação vigente, em especial a <strong>Lei n.º 13.709/2018 (Lei Geral de Proteção de Dados — LGPD)</strong>, Lei n.º 13.853/2019, norma complementar e atenção ao Guia de Elaboração de Termo de Uso e Política de Privacidade (versão 2.1).</p>
+    <p>O presente documento detalha as formas de coleta, guarda, utilização, compartilhamento e divulgação dos dados pessoais e as medidas para sua proteção.</p>
+  </section>
+
+  <section>
+    <h2>Coleta, Utilização e Armazenamento dos Dados</h2>
+
+    <h3>Conta de Acesso</h3>
+    <p>Os dados fornecidos pelo Usuário serão armazenados e utilizados pela 4Asset para fornecer as funcionalidades do Produto Contratado. A criação de cada conta de acesso pressupõe o consentimento expresso quanto à coleta, uso, armazenamento e tratamento de dados pessoais. O Usuário é responsável pela veracidade dos dados fornecidos.</p>
+
+    <h3>Cookies</h3>
+    <p>A 4Asset utiliza cookies para personalizar a experiência de navegação. A coleta é automatizada, sem contato humano direto. O Usuário pode desabilitar cookies a qualquer tempo, ciente de que algumas funcionalidades poderão apresentar limitações.</p>
+
+    <h3>Registros de Acesso</h3>
+    <p>A 4Asset mantém registros de acesso (IP, páginas, horários, dispositivos) conforme a LGPD, podendo utilizá-los em investigações internas ou mediante solicitação de autoridade competente.</p>
+
+    <h3>Formulários Dinâmicos e Campos de Extensão</h3>
+    <p>O Produto não coleta nativamente dados pessoais sensíveis. Entretanto, o Usuário pode criar formulários personalizados. A responsabilidade pelo controle desses dados é da Companhia Cliente.</p>
+
+    <h3>Utilização dos Dados</h3>
+    <p>Os dados poderão ser utilizados para: envio de informações sobre serviços, recuperação de senha, integrações com plataformas de terceiros (mediante solicitação da Companhia Cliente), atualização de cadastro, garantia de segurança, conformidade legal e elaboração de estatísticas anonimizadas.</p>
+
+    <h3>Guarda dos Dados</h3>
+    <p>Os dados são armazenados seguindo os mais altos padrões de mercado. Em caso de exclusão, a 4Asset reserva o direito de manter cópias de salvaguarda por até <strong>6 meses</strong> para cumprimento de obrigações legais (art. 7º, incisos I e II e art. 52, inciso X, da Lei n.º 13.709/2018).</p>
+  </section>
+
+  <section>
+    <h2>Compartilhamento e Divulgação</h2>
+    <p>A 4Asset não divulga, vende ou disponibiliza dados pessoais a terceiros, exceto:</p>
+    <ul>
+      <li>com consentimento do Usuário;</li>
+      <li>para concluir transações ou fornecer produtos solicitados;</li>
+      <li>com parceiros controlados pela 4Asset;</li>
+      <li>para cumprimento de obrigações legais ou judiciais;</li>
+      <li>para proteção de direitos da 4Asset e segurança dos usuários.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Medidas de Segurança</h2>
+    <p>A 4Asset adota <strong>criptografia, firewalls, controles de acesso rigorosos</strong> e infraestrutura <strong>AWS certificada (FTR/Well-Architected)</strong>. O acesso à base de dados é limitado a profissionais autorizados. O Usuário deve manter sua senha sob sigilo e substituir imediatamente em caso de suspeita de comprometimento.</p>
+  </section>
+
+  <section>
+    <h2>Direitos dos Titulares</h2>
+    <p>O Usuário poderá exercer seus direitos previstos na Lei Geral de Proteção de Dados, tais como <strong>acesso, correção, exclusão, portabilidade e oposição ao tratamento</strong> — previstos nas disposições do inciso I ao IX do art. 18, bem como nas considerações do Capítulo III da Lei n.º 13.709/2018 — através das funcionalidades do Produto ou pelo canal: <a href="mailto:encarregados.dados@4asset.net.br">encarregados.dados@4asset.net.br</a>.</p>
+    <p>A 4Asset assegura anonimização, bloqueio ou eliminação de dados desnecessários ou tratados em desconformidade.</p>
+  </section>
+
+  <section>
+    <h2>Dados de Menores</h2>
+    <p>O Produto não é direcionado a menores de 18 anos e não visa obter dados de menores. Caso tais dados sejam inseridos, o representante legal poderá contatar o SAC para retificação ou remoção.</p>
+  </section>
+
+  <section>
+    <h2>Transferência Internacional</h2>
+    <p>A 4Asset <strong>não realiza transferência internacional</strong> de dados pessoais. Todo o tratamento ocorre em infraestrutura localizada no Brasil (AWS São Paulo). Observada as possibilidades de cooperação jurídica internacional e acordos de cooperação internacional (art. 33, incisos III e VI, da Lei n.º 13.709/2018).</p>
+  </section>
+
+  <section>
+    <h2>Encarregado de Proteção de Dados (DPO)</h2>
+    <div class="dpo-card">
+      <div class="dpo-name">Maurício Fiorese</div>
+      <div class="dpo-role">CTO / DPO da 4Asset Tecnologia S.A.</div>
+      <div class="dpo-line">E-mail: <a href="mailto:mauricio@4asset.com.br">mauricio@4asset.com.br</a></div>
+      <div class="dpo-line">Telefone: (48) 99982-5478</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Revisão</h2>
+    <p>Esta política será revisada anualmente ou quando houver alterações relevantes nos produtos, processos ou legislação.</p>
+  </section>
+
+  <div class="priv-sign">
+    Florianópolis, <strong>14 de fevereiro de 2026</strong><br>
+    Maurício Fiorese — CTO/DPO da 4Asset Tecnologia S.A.
+  </div>
+
+</main>
+
+<footer class="priv-footer">
+  © 2025 4Asset Tecnologia S.A. · Uma empresa do Grupo Verante ·
+  <a href="index.html">Voltar ao site</a> ·
+  <a href="mailto:encarregados.dados@4asset.net.br">Fale com nosso DPO</a>
+</footer>
+
+</body>
+</html>

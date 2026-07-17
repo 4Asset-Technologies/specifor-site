@@ -1,0 +1,1579 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Specifor — Gestão fundiária, patrimonial e socioambiental | 4Asset</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy: #0b1220;
+    --navy-2: #0f1830;
+    --card-dark: #121b30;
+    --blue: #4f63ff;
+    --blue-2: #7b8bff;
+    --green: #25c05a;
+    --gray-bg: #f4f5f9;
+    --gray-text: #8a93a6;
+    --white: #ffffff;
+    --border: rgba(255,255,255,0.08);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:'Inter',Arial,sans-serif; color:#0f1d33; background:#fff; line-height:1.4;}
+  img,.ph{display:block; max-width:100%;}
+  .ph{
+    background:repeating-linear-gradient(45deg, #dfe3ee 0 10px, #eceff7 10px 20px);
+    border:1px dashed #b7bfd4;
+    color:#7b849c;
+    display:flex; align-items:center; justify-content:center;
+    text-align:center; font-size:12px; font-style:italic; padding:8px;
+    border-radius:8px;
+  }
+  .pill{
+    display:inline-flex; align-items:center; gap:6px;
+    font-size:12px; font-weight:700; letter-spacing:.04em; text-transform:uppercase;
+    padding:6px 14px; border-radius:999px;
+  }
+  .pill-blue{background:rgba(79,99,255,0.12); color:var(--blue);}
+  .pill-green{background:rgba(37,192,90,0.12); color:var(--green);}
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center;
+    padding:13px 26px; border-radius:10px; font-weight:600; font-size:14px;
+    text-decoration:none; cursor:pointer; border:none;
+  }
+  .btn-outline{background:transparent; color:#fff; border:1px solid rgba(255,255,255,0.3);}
+  .section{padding:90px 24px;}
+  .wrap{max-width:1180px; margin:0 auto;}
+  .center{text-align:center;}
+  h1,h2,h3{font-weight:700; letter-spacing:-0.02em;}
+
+  /* ===== NAV (hero) ===== */
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:clamp(12px,2vh,22px) 40px; position:relative; z-index:5; flex-shrink:0;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+  }
+  .nav .logo{color:#fff; font-weight:800; font-size:20px; display:flex; align-items:center; gap:8px;}
+  .nav .logo .dot{width:10px; height:10px; border-radius:50%; background:var(--blue);}
+  .nav ul{display:flex; align-items:center; gap:36px; list-style:none;}
+  .nav ul a{color:rgba(255,255,255,0.9); text-decoration:none; font-size:15px; font-weight:600; display:flex; align-items:center; gap:5px;}
+  .nav ul a svg{opacity:.7;}
+  .nav .actions{display:flex; align-items:center; gap:12px;}
+
+  /* ===== HERO (fiel ao print real do Specifor) ===== */
+  .hero{
+    position:relative; overflow:hidden;
+    height:100vh; display:flex; flex-direction:column;
+    background:radial-gradient(120% 100% at 12% 0%, #1a2c54 0%, #101d3d 40%, #0b1730 70%, #0a1428 100%);
+  }
+  .hero-dots-area{
+    grid-column:1; grid-row:1; position:relative; z-index:0; pointer-events:none;
+    min-width:0; min-height:0;
+    transform:translateY(clamp(-60px,-4.5vh,-30px));
+  }
+  .hero-dots{
+    position:absolute;
+    top:50%; right:3%; transform:translateY(-50%);
+    height:min(34vh,300px); width:calc(min(34vh,300px) * 1.29);
+  }
+  .hero-dots span{
+    position:absolute; width:19%; aspect-ratio:1; border-radius:50%;
+    background:rgba(140,165,255,0.08);
+  }
+
+  .hero-logo{display:flex; align-items:center;}
+  .hero-logo img{height:20px; width:auto; display:block;}
+
+  .btn-comecar{
+    background:transparent; border:1px solid rgba(255,255,255,0.35); color:#fff; padding:11px 20px;
+    border-radius:999px; font-size:14px; font-weight:600; display:inline-flex; align-items:center; gap:8px;
+  }
+
+  .hero-inner{
+    position:relative; z-index:2; max-width:1280px; margin:0 auto; width:100%;
+    padding:clamp(10px,2vh,28px) 44px; display:grid; grid-template-columns:minmax(0,1fr); grid-template-rows:minmax(0,1fr);
+    flex:1; min-height:0;
+  }
+  .hero-content{
+    grid-column:1; grid-row:1; align-self:center; justify-self:start; z-index:2;
+    max-width:480px; color:#fff; text-align:left;
+    transform:translateY(clamp(-60px,-4.5vh,-30px));
+  }
+  .hero-content .pill{
+    background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12); color:#8fc4ff;
+    margin-bottom:clamp(8px,1.6vh,20px);
+  }
+  .hero-content h1{
+    font-family:'Inter',Arial,sans-serif;
+    font-weight:800; font-size:clamp(26px,3.6vw,46px); line-height:1.1;
+    margin-bottom:clamp(8px,1.5vh,18px); letter-spacing:-0.02em;
+  }
+  .hero-content p{
+    color:rgba(255,255,255,0.65); font-size:clamp(13px,1.1vw,16px); line-height:1.5;
+    max-width:460px; margin:0 0 clamp(14px,2.2vh,28px);
+  }
+  .hero-content .actions{display:flex; gap:12px; align-items:center; justify-content:flex-start;}
+
+  .btn-falar{
+    background:linear-gradient(180deg,#3f8dff,#2f6ef0); color:#fff; font-weight:700;
+    padding:clamp(10px,1.6vh,15px) 26px; border-radius:10px; font-size:clamp(13px,1vw,15px);
+  }
+  .btn-ver{
+    width:clamp(38px,4vh,48px); height:clamp(38px,4vh,48px); padding:0; border-radius:50%;
+    background:rgba(79,140,255,0.15); border:1px solid rgba(79,163,255,0.4); color:#fff;
+    display:inline-flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;
+  }
+
+  .hero-laptop{
+    grid-column:1; grid-row:1; z-index:1; pointer-events:none;
+    display:flex; align-items:center; justify-content:center;
+    padding-top:clamp(35px,4.5vh,55px); padding-bottom:clamp(100px,13.5vh,140px);
+    min-height:0; min-width:0; overflow:hidden;
+  }
+  .hero-laptop img{
+    width:auto; height:auto; max-width:min(100%,900px); max-height:100%; display:block; margin:0 auto;
+    translate:0 var(--heroImgY, 0px); will-change:translate;
+  }
+
+  .hero-stats{
+    position:absolute; left:0; right:0; z-index:3; bottom:clamp(34px,5.5vh,64px);
+    padding:0 40px; display:grid; grid-template-columns:repeat(4,1fr);
+    gap:14px; max-width:1280px; margin:0 auto; width:100%;
+  }
+  .hero-stats .h-stat{padding:clamp(10px,1.7vh,17px);}
+  .hero-stats .icon-badge{width:clamp(40px,5.2vh,52px); height:clamp(40px,5.2vh,52px);}
+  .hero-stats .icon{width:clamp(20px,2.7vh,28px); height:clamp(20px,2.7vh,28px);}
+  .hero-stats .num{font-size:clamp(13px,1.25vw,16px);}
+  .hero-stats .label{font-size:clamp(10px,0.8vw,12px);}
+  .h-stat{
+    position:relative; overflow:hidden;
+    display:flex; flex-direction:column; align-items:flex-start; gap:clamp(8px,1.4vh,14px);
+    padding:clamp(12px,2vh,20px); border-radius:14px;
+    background:rgba(255,255,255,0.035);
+    -webkit-backdrop-filter:blur(28px) saturate(200%);
+    backdrop-filter:blur(28px) saturate(200%);
+    border:1px solid rgba(255,255,255,0.16);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,0.18), inset 0 0 24px rgba(255,255,255,0.03), 0 12px 30px rgba(0,0,0,0.28);
+  }
+  .h-stat::before{
+    content:''; position:absolute; inset:0; pointer-events:none; border-radius:inherit;
+    background:linear-gradient(135deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.02) 35%, rgba(255,255,255,0) 60%);
+  }
+
+  /* ===== SF Symbols-style "Appear" (surgimento gradual) ===== */
+  .sf-appear{
+    opacity:0; transform:translateY(18px) scale(0.94);
+    transition:opacity .7s cubic-bezier(.22,.7,.32,1), transform .7s cubic-bezier(.22,.7,.32,1);
+  }
+  .sf-appear.is-visible{opacity:1; transform:translateY(0) scale(1);}
+  /* Variante "liquid glass" (Depoimentos): materializa saindo do desfoque, estilo SF Symbols appear */
+  .usecases .sf-appear{
+    opacity:0; transform:translateY(30px) scale(0.93);
+    filter:blur(16px) saturate(180%) brightness(1.12);
+    transition:opacity .95s cubic-bezier(.22,.7,.32,1), transform .95s cubic-bezier(.22,.7,.32,1), filter .95s cubic-bezier(.22,.7,.32,1);
+  }
+  .usecases .sf-appear.is-visible{opacity:1; transform:translateY(0) scale(1); filter:blur(0) saturate(100%) brightness(1);}
+  .hero-laptop-appear{
+    opacity:0; transform:translateY(26px) scale(0.93);
+    transition:opacity 1.6s cubic-bezier(.19,.6,.22,1), transform 1.6s cubic-bezier(.19,.6,.22,1);
+  }
+  .hero-laptop-appear.is-visible{opacity:1; transform:translateY(0) scale(1);}
+  /* Texto e bolinhas do hero: entram depois do notebook (offset via translate,
+     pra não brigar com o transform de posicionamento que já existe) */
+  .hero-text-appear{
+    opacity:0; translate:0 18px;
+    transition:opacity 1.1s cubic-bezier(.22,.7,.32,1), translate 1.1s cubic-bezier(.22,.7,.32,1);
+  }
+  .hero-text-appear.is-visible{opacity:1; translate:0 0;}
+  /* Big numbers do hero: mesma entrada, porém mais suave */
+  .hero-stats .sf-appear{
+    transform:translateY(12px) scale(0.97);
+    transition:opacity 1.1s cubic-bezier(.22,.7,.32,1), transform 1.1s cubic-bezier(.22,.7,.32,1);
+  }
+
+  /* ===== SF Symbols-style "Breathe" (pulsação lenta e contínua) ===== */
+  @keyframes sf-breathe{
+    0%, 100%{transform:scale(1); opacity:1;}
+    50%{transform:scale(1.14); opacity:.72;}
+  }
+  .sf-breathe{animation:sf-breathe 2.8s ease-in-out infinite;}
+
+  /* ===== SF Symbols "Bounce" — feedback elástico único ao interagir ===== */
+  @keyframes sf-bounce{
+    0%{transform:scale(1);}
+    30%{transform:scale(1.22);}
+    55%{transform:scale(0.94);}
+    75%{transform:scale(1.06);}
+    100%{transform:scale(1);}
+  }
+  .addon-item:hover .icon{animation:sf-bounce .6s cubic-bezier(.28,.84,.42,1) 1;}
+  .orbit-card:hover .icon-badge .icon{animation:sf-bounce .6s cubic-bezier(.28,.84,.42,1) 1;}
+
+  /* ===== SF Symbols "Scale" — feedback de pressão nos controles ===== */
+  .btn, .quiz-opt, .quiz-check{transition-property:background, border-color, transform; transition-duration:.15s;}
+  .btn:active, .quiz-opt:active, .quiz-check:active{transform:scale(0.97);}
+
+  /* ===== SF Symbols "Wiggle" — chama atenção pro WhatsApp a cada ~9s ===== */
+  @keyframes sf-wiggle{
+    0%, 88%, 100%{transform:rotate(0);}
+    90%{transform:rotate(-9deg);}
+    92.5%{transform:rotate(8deg);}
+    95%{transform:rotate(-5deg);}
+    97.5%{transform:rotate(3deg);}
+  }
+  .whatsapp-float img{animation:sf-wiggle 9s ease-in-out 3s infinite; transform-origin:50% 60%;}
+
+  /* ===== SF Symbols "Pulse" — atividade contínua (status online do modal) ===== */
+  @keyframes sf-pulse{
+    0%, 100%{opacity:1;}
+    50%{opacity:.3;}
+  }
+  .wa-status::before{
+    content:''; display:inline-block; width:7px; height:7px; border-radius:50%;
+    background:#25d366; margin-right:6px; vertical-align:middle;
+    animation:sf-pulse 2.2s ease-in-out infinite;
+  }
+
+  /* Acessibilidade: desliga animações contínuas pra quem prefere menos movimento */
+  @media (prefers-reduced-motion: reduce){
+    .sf-breathe, .whatsapp-float img, .wa-status::before,
+    .addon-item:hover .icon, .orbit-card:hover .icon-badge .icon,
+    .btn:hover::after, .btn-parceiro:hover::after{animation:none;}
+    .sf-appear, .usecases .sf-appear, .hero-laptop-appear{transition:none; opacity:1; transform:none; filter:none;}
+    .hero-text-appear{transition:none; opacity:1; translate:none;}
+    .btn, .btn-parceiro, .a-card, .usecases .sf-appear.is-visible{transition:none;}
+    .btn-falar:hover, .btn-comecar:hover, .btn-outline:hover, .btn-parceiro:hover,
+    .btn-ver:hover, .a-card:hover, .usecases .sf-appear.is-visible:hover{transform:none;}
+  }
+  .addon-item:nth-child(2) .sf-breathe{animation-delay:.35s;}
+  .addon-item:nth-child(3) .sf-breathe{animation-delay:.7s;}
+  .addon-item:nth-child(4) .sf-breathe{animation-delay:1.05s;}
+  .addon-item:nth-child(5) .sf-breathe{animation-delay:1.4s;}
+  .addon-item:nth-child(6) .sf-breathe{animation-delay:1.75s;}
+  .h-stat .icon-badge{
+    width:clamp(46px,6vh,60px); height:clamp(46px,6vh,60px); border-radius:14px;
+    background:rgba(79,163,255,0.16);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .h-stat .icon{color:#8fc8ff; width:clamp(24px,3.2vh,34px); height:clamp(24px,3.2vh,34px);}
+  .h-stat .num{color:#fff; font-weight:800; font-size:clamp(14px,1.4vw,18px); line-height:1.2;}
+  .h-stat .label{color:rgba(255,255,255,0.55); font-size:clamp(10.5px,0.85vw,12.5px); line-height:1.4;}
+
+  /* ===== NOSSAS SOLUÇÕES / LOGO MARQUEE ===== */
+  .seen-in{padding:60px 0; text-align:center; background:#05070d; overflow:hidden;}
+  .seen-in .label{
+    font-size:14px; letter-spacing:.06em; text-transform:uppercase; font-weight:700;
+    color:#fff; margin-bottom:36px; padding:0 24px;
+  }
+  .marquee-row{
+    display:flex; width:max-content; align-items:center;
+    gap:64px; will-change:transform;
+  }
+  .marquee-row.row1{animation:marquee-scroll 24s linear infinite; margin-bottom:36px;}
+  .marquee-row.row2{animation:marquee-scroll 30s linear infinite reverse;}
+  .marquee-row .logo-item{
+    height:34px; width:auto; flex-shrink:0;
+    filter:grayscale(100%) brightness(0) invert(1); opacity:.55;
+    transition:opacity .2s;
+  }
+  .marquee-row .logo-item:hover{opacity:.9;}
+  @keyframes marquee-scroll{
+    from{transform:translateX(0);}
+    to{transform:translateX(-50%);}
+  }
+
+  /* ===== SCHOOL / STARS SECTION ===== */
+  .stars{
+    background:radial-gradient(circle at 50% 20%, #10192f 0%, #05070d 70%);
+    color:#fff; position:relative; height:100vh; padding:0 24px;
+    display:flex; flex-direction:column;
+  }
+  .stars .wrap{max-width:1400px; display:flex; flex-direction:column; height:100%; padding:clamp(40px,7.5vh,100px) 0 clamp(34px,6vh,72px);}
+  .stars h2{
+    text-align:center; font-size:clamp(22px,min(3.4vw,5.6vh),46px); line-height:1.15;
+    max-width:1360px; margin:0 auto; flex-shrink:0;
+  }
+  .stars-sub{
+    text-align:center; max-width:640px; margin:clamp(10px,2vh,20px) auto 0; flex-shrink:0;
+    color:rgba(255,255,255,0.6); font-size:clamp(13px,1.5vh,16px); line-height:1.5;
+  }
+  .stars-diagram{
+    position:relative; max-width:1040px; margin:clamp(38px,6.5vh,84px) auto 0; width:100%;
+    flex:1; min-height:0;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .stars-main-img{
+    width:auto; max-width:min(100%,780px); max-height:100%; display:block; position:relative; z-index:1;
+    translate:0 var(--imgY, 0px); will-change:translate;
+  }
+  .stars-diagram .orbit-card{translate:0 var(--cardsY, 0px);}
+  .orbit-card{
+    position:absolute; z-index:2; text-align:left; cursor:pointer;
+    width:230px; min-height:auto; justify-content:flex-start;
+    flex-direction:row !important; align-items:center; gap:12px;
+    overflow:visible; transition:opacity .2s ease, transform .2s ease, background .2s ease;
+  }
+  .orbit-card:hover{background:rgba(255,255,255,0.08);}
+  .stars-diagram:hover .orbit-card{opacity:0.4;}
+  .stars-diagram .orbit-card:hover{opacity:1; z-index:15;}
+  .orbit-card.pos-tl:hover, .orbit-card.pos-tr:hover, .orbit-card.pos-bl:hover, .orbit-card.pos-br:hover{
+    transform:scale(1.1);
+  }
+  .orbit-card.pos-ml:hover, .orbit-card.pos-mr:hover{
+    transform:translateY(-50%) scale(1.1);
+  }
+  .orbit-card .icon-badge{flex-shrink:0; margin-bottom:0;}
+  .orbit-card .num{font-size:13.5px; margin-bottom:0; line-height:1.3; pointer-events:none;}
+  .orbit-card .label{
+    display:block; position:absolute; top:calc(100% + 12px); left:50%;
+    transform:translateX(-50%) translateY(-6px);
+    width:300px; background:rgba(16,26,46,0.82);
+    -webkit-backdrop-filter:blur(20px) saturate(180%); backdrop-filter:blur(20px) saturate(180%);
+    border:1px solid rgba(255,255,255,0.14); border-radius:12px;
+    padding:16px 18px; font-size:13px; font-weight:400; line-height:1.55; color:rgba(255,255,255,0.75);
+    text-align:left; opacity:0; visibility:hidden;
+    transition:opacity .3s ease, transform .3s ease, visibility 0s linear .3s;
+    box-shadow:0 16px 34px rgba(0,0,0,0.45); z-index:20; pointer-events:none;
+  }
+  .orbit-card .label::before{
+    content:''; position:absolute; bottom:100%; left:50%; transform:translateX(-50%);
+    border:6px solid transparent; border-bottom-color:#101a2e;
+  }
+  .orbit-card:hover .label{
+    opacity:1; visibility:visible; transform:translateX(-50%) translateY(0);
+    transition:opacity .9s cubic-bezier(.16,.5,.24,1) .38s, transform .9s cubic-bezier(.16,.5,.24,1) .38s, visibility 0s linear .38s;
+  }
+  .orbit-card.pos-tl{left:8%; top:4%;}
+  .orbit-card.pos-ml{left:4%; top:46%; transform:translateY(-50%);}
+  .orbit-card.pos-bl{left:7%; bottom:2%;}
+  .orbit-card.pos-tr{right:8%; top:3%;}
+  .orbit-card.pos-mr{right:4%; top:52%; transform:translateY(-50%);}
+  .orbit-card.pos-br{right:7%; bottom:-2%;}
+  .orbit-card.pos-tl .label, .orbit-card.pos-ml .label, .orbit-card.pos-bl .label{
+    left:0; transform:translateX(0) translateY(-6px);
+  }
+  .orbit-card.pos-tl:hover .label, .orbit-card.pos-ml:hover .label, .orbit-card.pos-bl:hover .label{
+    transform:translateX(0) translateY(0);
+  }
+  .orbit-card.pos-tl .label::before, .orbit-card.pos-ml .label::before, .orbit-card.pos-bl .label::before{
+    left:24px; transform:none;
+  }
+  .orbit-card.pos-tr .label, .orbit-card.pos-mr .label, .orbit-card.pos-br .label{
+    left:auto; right:0; transform:translateX(0) translateY(-6px);
+  }
+  .orbit-card.pos-tr:hover .label, .orbit-card.pos-mr:hover .label, .orbit-card.pos-br:hover .label{
+    transform:translateX(0) translateY(0);
+  }
+  .orbit-card.pos-tr .label::before, .orbit-card.pos-mr .label::before, .orbit-card.pos-br .label::before{
+    left:auto; right:24px; transform:none;
+  }
+  .stars-quote{
+    text-align:center; max-width:520px; margin:60px auto 0; font-size:20px; font-weight:600;
+  }
+  .stars-quote p.small{font-size:13px; font-weight:400; color:rgba(255,255,255,0.55); margin-top:12px;}
+
+  /* ===== PRICING (Standard x Professional, estilo do print) ===== */
+  .approval{
+    background:radial-gradient(120% 100% at 50% 0%, #16214a 0%, var(--navy) 55%, #05070d 100%);
+    color:#fff; padding:56px 24px 28px;
+  }
+  .approval .head{max-width:1100px; margin:0 auto 34px;}
+  .approval h2{font-size:clamp(20px,2vw,32px); line-height:1.3; margin:12px 0 10px; white-space:nowrap;}
+  .approval p.sub{color:rgba(255,255,255,0.55); font-size:clamp(12px,1.05vw,14.5px); white-space:nowrap;}
+  .approval-cards{display:grid; grid-template-columns:1fr 1fr; gap:26px; max-width:1020px; margin:0 auto;}
+  .a-card{
+    background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:14px;
+    padding:30px; text-align:left; display:flex; flex-direction:column;
+  }
+  .a-card .a-label{font-size:12px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--blue-2); margin-bottom:10px;}
+  .a-card .a-big{font-size:28px; font-weight:800; color:#fff; line-height:1.2; margin-bottom:6px;}
+  .a-card .a-sub{font-size:13.5px; color:rgba(255,255,255,0.5); margin-bottom:18px;}
+  .a-card .a-desc{font-size:14px; color:rgba(255,255,255,0.55); line-height:1.55; margin-bottom:18px;}
+  .a-card .a-divider{border:none; border-top:1px solid rgba(255,255,255,0.1); margin:0 0 16px;}
+  .a-card .a-specs{display:flex; flex-direction:column; gap:9px; margin-bottom:18px;}
+  .a-card .a-specs .spec-row{display:flex; justify-content:space-between; font-size:13.5px; color:rgba(255,255,255,0.7);}
+  .a-card .a-specs .spec-row b{color:#fff; font-weight:700;}
+  .a-card .a-list-title{font-size:14px; font-weight:700; color:#fff; margin-bottom:10px;}
+  .a-card .a-check{list-style:none; display:flex; flex-direction:column; gap:8px; margin-bottom:18px;}
+  .a-card .a-check li{display:flex; align-items:flex-start; gap:8px; font-size:13.5px; color:rgba(255,255,255,0.75); line-height:1.45;}
+  .a-card .a-check li::before{content:'✓'; color:#4ade80; font-weight:700; flex-shrink:0;}
+  .a-card .a-cta{margin-top:auto; text-align:center; font-size:14.5px; padding:13px;}
+  .a-card .a-fine{font-size:11px; color:rgba(255,255,255,0.35); margin-top:10px; text-align:center;}
+
+  /* ===== ADD-ONS (ícone em cima, nome embaixo) ===== */
+  .addons{background:#05070d; padding:36px 24px 90px;}
+  .addons .head{max-width:640px; margin:0 auto 44px;}
+  .addons h2{font-size:32px; margin:16px 0 10px; color:#fff;}
+  .addons p.sub{color:rgba(255,255,255,0.55); font-size:15px;}
+  .addons-strip{
+    display:flex; flex-wrap:wrap; max-width:1180px; margin:0 auto;
+    background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:14px;
+    position:relative;
+  }
+  .addons-strip::before{
+    content:''; position:absolute; top:0; left:10%; right:10%; height:1px;
+    background:linear-gradient(90deg, transparent, rgba(79,163,255,0.8), transparent);
+    filter:blur(1px); pointer-events:none;
+  }
+  .addon-item{
+    flex:1 1 0; min-width:140px; display:flex; flex-direction:column; align-items:center; gap:14px;
+    padding:34px 16px; text-align:center; border-right:1px solid rgba(255,255,255,0.08);
+    position:relative; cursor:pointer; transition:background .2s, opacity .2s; border-radius:inherit;
+  }
+  .addon-item:first-child{border-radius:14px 0 0 14px;}
+  .addon-item:last-child{border-right:none; border-radius:0 14px 14px 0;}
+  .addon-item:hover{background:rgba(255,255,255,0.05);}
+  .addons-strip:hover .addon-item{opacity:0.4;}
+  .addons-strip .addon-item:hover{opacity:1; z-index:15;}
+  .addon-item .icon{width:30px; height:30px; color:#7cbcff; pointer-events:none;}
+  .addon-item .name{font-size:13px; font-weight:700; color:#fff; line-height:1.3; pointer-events:none;}
+  .addon-tip{
+    position:absolute; top:calc(100% + 14px); left:50%; transform:translateX(-50%) translateY(-6px);
+    width:230px; background:rgba(16,26,46,0.82);
+    -webkit-backdrop-filter:blur(20px) saturate(180%); backdrop-filter:blur(20px) saturate(180%);
+    border:1px solid rgba(255,255,255,0.14); border-radius:12px;
+    padding:14px 16px; font-size:12.5px; font-weight:400; line-height:1.5; color:rgba(255,255,255,0.75);
+    text-align:left; opacity:0; visibility:hidden; transition:opacity .18s ease, transform .18s ease, width .18s ease, padding .18s ease;
+    box-shadow:0 16px 34px rgba(0,0,0,0.45); z-index:10; pointer-events:none;
+  }
+  .addon-tip::after{
+    content:''; position:absolute; bottom:100%; left:50%; transform:translateX(-50%);
+    border:6px solid transparent; border-bottom-color:#101a2e;
+  }
+  .addon-item:hover .addon-tip{
+    opacity:1; visibility:visible; transform:translateX(-50%) translateY(0);
+    width:290px; padding:18px 20px; font-size:13.5px;
+  }
+  .addon-item:first-child .addon-tip{left:0; transform:translateX(0) translateY(-6px);}
+  .addon-item:first-child:hover .addon-tip{transform:translateX(0) translateY(0);}
+  .addon-item:first-child .addon-tip::after{left:24px;}
+  .addon-item:last-child .addon-tip{left:auto; right:0; transform:translateX(0) translateY(-6px);}
+  .addon-item:last-child:hover .addon-tip{transform:translateX(0) translateY(0);}
+  .addon-item:last-child .addon-tip::after{left:auto; right:24px; transform:none;}
+
+  /* ===== CTA: QUAL O PLANO IDEAL ===== */
+  .quiz-cta{background:#05070d; padding:0 24px 100px; text-align:center;}
+  .quiz-cta .quiz-question{
+    max-width:560px; margin:0 auto 26px; color:rgba(255,255,255,0.75);
+    font-size:17px; line-height:1.55;
+  }
+
+  /* ===== MODAL (dark glass) ===== */
+  .modal-overlay{
+    position:fixed; inset:0; z-index:1000; background:rgba(4,6,12,0.7);
+    -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
+    display:flex; align-items:center; justify-content:center; padding:24px;
+  }
+  .modal-overlay[hidden]{display:none;}
+  .modal-box{
+    position:relative; width:100%; max-width:560px; max-height:85vh; overflow:auto;
+    background:rgba(16,26,46,0.78);
+    -webkit-backdrop-filter:blur(30px) saturate(180%); backdrop-filter:blur(30px) saturate(180%);
+    border:1px solid rgba(255,255,255,0.14); border-radius:18px; padding:44px 40px;
+    color:#fff; box-shadow:0 30px 80px rgba(0,0,0,0.55);
+  }
+  .modal-close{
+    position:absolute; top:18px; right:18px; width:32px; height:32px; border-radius:50%;
+    background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.14); color:#fff;
+    font-size:18px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center;
+  }
+  .modal-close:hover{background:rgba(255,255,255,0.16);}
+  .modal-progress{font-size:12px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:#8fc4ff; margin-bottom:18px;}
+  .quiz-step h3{font-size:22px; line-height:1.35; margin-bottom:24px; padding-right:20px;}
+  .quiz-options{display:flex; flex-direction:column; gap:12px;}
+  .quiz-options-multi{gap:10px;}
+  .quiz-opt{
+    display:block; width:100%; text-align:left; background:rgba(255,255,255,0.04);
+    border:1px solid rgba(255,255,255,0.14); color:#fff; padding:15px 18px; border-radius:12px;
+    font-size:14.5px; font-weight:600; cursor:pointer; transition:background .15s, border-color .15s;
+  }
+  .quiz-opt:hover{background:rgba(79,163,255,0.14); border-color:rgba(79,163,255,0.5);}
+  .quiz-check{
+    display:flex; align-items:center; gap:12px; background:rgba(255,255,255,0.04);
+    border:1px solid rgba(255,255,255,0.14); padding:13px 16px; border-radius:12px;
+    font-size:14px; cursor:pointer; transition:background .15s;
+  }
+  .quiz-check:hover{background:rgba(255,255,255,0.08);}
+  .quiz-check input{width:16px; height:16px; accent-color:#4f63ff; flex-shrink:0;}
+  #quizSeeResult{margin-top:22px; width:100%;}
+  .quiz-result-label{font-size:12px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:#8fc4ff; margin-bottom:10px;}
+  #quizResultPlan{font-size:32px; margin-bottom:12px;}
+  #quizResult p{color:rgba(255,255,255,0.65); font-size:14.5px; line-height:1.55; margin-bottom:18px;}
+  .quiz-addons-title{font-size:13px; font-weight:700; margin-bottom:8px;}
+  #quizResultAddons ul{list-style:none; display:flex; flex-direction:column; gap:6px; margin-bottom:24px;}
+  #quizResultAddons li{font-size:13.5px; color:rgba(255,255,255,0.8); display:flex; align-items:center; gap:8px;}
+  #quizResultAddons li::before{content:'✓'; color:#4ade80; font-weight:700;}
+  #quizResult .btn{width:100%; margin-bottom:14px;}
+  .quiz-restart{
+    display:block; width:100%; text-align:center; background:none; border:none;
+    color:rgba(255,255,255,0.5); font-size:13px; text-decoration:underline; cursor:pointer; padding:4px;
+  }
+
+  /* ===== DEPOIMENTOS (foto em cima com degradê, texto embaixo) ===== */
+  .usecases{background:#fff; padding:90px 24px;}
+  .depo-header{position:relative; display:flex; align-items:center; justify-content:flex-start; min-height:90px; max-width:1180px; margin-left:auto; margin-right:auto;}
+  .depo-header h2{position:relative; z-index:1; font-size:32px; color:#0f1d33; margin:0;}
+  .usecases{position:relative; overflow:hidden;}
+  /* Marca d'água: mesma malha de bolinhas do hero, mesmo tamanho/posição (ancorada na
+     seção inteira, como no hero) — os cards cobrem a maior parte e uma fatia fica visível */
+  .depo-dots{
+    position:absolute; top:50%; right:3%; transform:translateY(-50%);
+    height:min(34vh,300px); width:calc(min(34vh,300px) * 1.29);
+    z-index:0; pointer-events:none;
+  }
+  .depo-dots span{
+    position:absolute; width:19%; aspect-ratio:1; border-radius:50%;
+    background:rgba(79,99,255,0.07);
+  }
+  .usecases .row{display:flex; gap:24px; max-width:1180px; margin:0 auto; position:relative; z-index:1;}
+  .u-card{
+    flex:1; min-width:0; height:560px; border-radius:14px; position:relative; overflow:hidden;
+    background:#fff; border:1px solid rgba(15,29,51,0.08); box-shadow:0 10px 30px rgba(15,29,51,0.06);
+    display:flex; flex-direction:column;
+  }
+  .u-card .u-photo{
+    flex:0 0 52%; background-size:cover; background-position:center; position:relative;
+  }
+  .u-card .u-photo::after{
+    content:''; position:absolute; inset:0;
+    background:linear-gradient(180deg, transparent 55%, #fff 100%);
+  }
+  .u-card .u-logo{
+    position:absolute; top:20px; left:20px; z-index:2;
+    height:38px; padding:6px 12px; border-radius:8px;
+    background:rgba(255,255,255,0.92); backdrop-filter:blur(4px);
+    display:flex; align-items:center; font-size:12px; font-weight:700; color:rgba(15,29,51,0.4);
+    letter-spacing:.02em; box-shadow:0 2px 8px rgba(15,29,51,0.1);
+  }
+  .u-card .u-logo img{height:100%; width:auto; max-width:110px; object-fit:contain; display:block;}
+  .u-card .u-content{padding:8px 26px 26px; flex:1;}
+  .u-card h4{font-size:21px; font-weight:700; color:#0f1d33; line-height:1.3; margin-bottom:12px;}
+  .u-card .u-quote{font-size:14px; color:var(--gray-text); line-height:1.55;}
+  .u-card .u-quote .role{display:block; margin-top:8px; color:rgba(15,29,51,0.35); font-size:12.5px;}
+
+  /* ===== FAMILIES SECTION ===== */
+  .families{background:#fff;}
+  .families-top{display:flex; justify-content:space-between; align-items:flex-start; gap:24px; margin-bottom:40px; flex-wrap:wrap;}
+  .families-top h2{font-size:32px; max-width:340px;}
+  .families-top p{max-width:300px; font-size:13px; color:var(--gray-text); text-align:right;}
+  .families-grid{display:grid; grid-template-columns:1.3fr 1fr; grid-template-rows:1fr 1fr; gap:16px; height:520px;}
+  .f-photo{position:relative; border-radius:16px; overflow:hidden;}
+  .f-photo .tag{
+    position:absolute; left:16px; bottom:16px; background:rgba(255,255,255,0.9);
+    padding:6px 12px; border-radius:8px; font-size:12px; font-weight:600; color:#0f1d33;
+  }
+  .blog-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:20px;}
+  .blog-card{text-decoration:none; color:inherit; display:block;}
+  .blog-card .thumb{
+    height:150px; border-radius:12px; margin-bottom:14px;
+    background-size:cover; background-position:center;
+    transition:opacity .2s ease;
+  }
+  .blog-card:hover .thumb{opacity:.85;}
+  .blog-card h3{font-size:15px; line-height:1.4; margin-bottom:8px; color:#0f1d33;}
+  .blog-card p{font-size:13px; color:var(--gray-text); line-height:1.5;}
+  .blog-top-row{display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:40px; gap:24px; flex-wrap:wrap;}
+  .blog-top-row .head{text-align:left; max-width:460px;}
+  .blog-top-row h2{font-size:32px; margin:16px 0 10px;}
+  .blog-top-row p{color:var(--gray-text); font-size:15px;}
+  .blog-link{font-weight:700; color:var(--blue); text-decoration:none; white-space:nowrap;}
+
+  /* ===== FOOTER (estilo portal Specifor) ===== */
+  .site-footer{
+    background:#111d22; color:#fff; padding:70px 60px 40px;
+    font-family:'Inter',Arial,sans-serif; overflow:hidden;
+  }
+  .footer-top{display:flex; justify-content:space-between; align-items:flex-start; gap:32px; flex-wrap:wrap;}
+  .footer-tagline{
+    font-family:'Courier New',ui-monospace,monospace; font-size:22px; font-weight:700;
+    letter-spacing:.04em; line-height:1.4; text-transform:uppercase;
+  }
+  .footer-markets{
+    display:flex; gap:28px; align-items:flex-start; text-align:right;
+    font-size:17px; line-height:1.5;
+  }
+  .footer-markets a{color:#fff; text-decoration:none;}
+  .footer-markets a:hover{text-decoration:underline;}
+  .footer-markets .markets-label{color:#fff; font-weight:400;}
+  .footer-mid{
+    display:flex; justify-content:space-between; align-items:center; gap:32px;
+    flex-wrap:wrap; margin:70px 0 40px;
+  }
+  .footer-mid-left{display:flex; align-items:center; gap:44px; flex-wrap:wrap;}
+  .footer-link-especialista{color:#fff; font-size:14.5px; text-decoration:underline; text-underline-offset:4px;}
+  .btn-parceiro{
+    display:inline-flex; align-items:center; gap:14px;
+    border:1px solid rgba(255,255,255,0.5); border-radius:10px; padding:14px 26px;
+    color:#fff; font-size:14.5px; text-decoration:none; transition:background .2s;
+  }
+  .btn-parceiro:hover{background:rgba(255,255,255,0.06);}
+  .footer-verante{
+    text-align:left; font-family:'Courier New',ui-monospace,monospace;
+    font-size:13px; letter-spacing:.08em; text-transform:uppercase; line-height:1.5;
+  }
+  .footer-verante .verante-nome{font-family:'Inter',Arial,sans-serif; font-size:26px; font-weight:700; letter-spacing:0; text-transform:none;}
+  .footer-verante .verante-nome span{font-family:'Courier New',ui-monospace,monospace; font-size:15px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; margin-right:4px;}
+  .footer-watermark{margin:10px 0 60px;}
+  .footer-watermark img{width:100%; height:auto; display:block; opacity:.14;}
+  .footer-bottom{
+    display:flex; justify-content:space-between; align-items:center; gap:24px; flex-wrap:wrap;
+    font-size:13.5px; color:rgba(255,255,255,0.85);
+  }
+  .footer-bottom a{color:#fff; text-decoration:underline; text-underline-offset:3px;}
+
+  /* ===== LIQUID GLASS — botões (material de vidro + animações) ===== */
+  .btn, .btn-parceiro{
+    position:relative; overflow:hidden;
+    transition:transform .45s cubic-bezier(.34,1.56,.64,1), box-shadow .35s ease,
+               background .25s ease, border-color .25s ease, filter .25s ease;
+  }
+  /* Sheen: reflexo especular que varre o botão no hover */
+  .btn::after, .btn-parceiro::after{
+    content:''; position:absolute; top:0; bottom:0; left:-80%; width:55%;
+    background:linear-gradient(105deg, transparent, rgba(255,255,255,0.32), transparent);
+    transform:skewX(-20deg); opacity:0; pointer-events:none;
+  }
+  .btn:hover::after, .btn-parceiro:hover::after{animation:lg-sheen .9s ease;}
+  @keyframes lg-sheen{
+    from{left:-80%; opacity:0;}
+    30%{opacity:1;}
+    to{left:120%; opacity:0;}
+  }
+  /* Botão primário: vidro tingido do mesmo azul */
+  .btn-falar{
+    background:linear-gradient(180deg, rgba(63,141,255,0.82), rgba(47,110,240,0.82));
+    -webkit-backdrop-filter:blur(16px) saturate(180%); backdrop-filter:blur(16px) saturate(180%);
+    border:1px solid rgba(255,255,255,0.28);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,0.35), inset 0 -1px 0 rgba(0,0,0,0.12), 0 8px 24px rgba(47,110,240,0.35);
+  }
+  .btn-falar:hover{
+    filter:brightness(1.08); transform:translateY(-2px) scale(1.02);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,0.4), inset 0 -1px 0 rgba(0,0,0,0.12), 0 14px 32px rgba(47,110,240,0.45);
+  }
+  /* Botões neutros: vidro claro */
+  .btn-comecar, .btn-outline, .btn-parceiro{
+    background:rgba(255,255,255,0.07);
+    -webkit-backdrop-filter:blur(16px) saturate(180%); backdrop-filter:blur(16px) saturate(180%);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,0.22), 0 6px 18px rgba(0,0,0,0.18);
+  }
+  .btn-comecar:hover, .btn-outline:hover, .btn-parceiro:hover{
+    background:rgba(255,255,255,0.13); transform:translateY(-2px);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,0.3), 0 10px 26px rgba(0,0,0,0.24);
+  }
+  .btn-ver{
+    -webkit-backdrop-filter:blur(16px) saturate(180%); backdrop-filter:blur(16px) saturate(180%);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,0.3), 0 6px 18px rgba(0,0,0,0.18);
+  }
+  .btn-ver:hover{background:rgba(79,140,255,0.28); transform:translateY(-2px) scale(1.06);}
+  /* Gel squish: compressão elástica no toque (release volta com mola) */
+  .btn:active, .btn-parceiro:active{transform:scale(0.94); transition-duration:.1s;}
+
+  /* ===== LIQUID GLASS — cards (brilho que segue o ponteiro + flutuação) ===== */
+  .a-card{position:relative;}
+  .h-stat::after, .a-card::after, .addon-item::after, .quiz-opt::after{
+    content:''; position:absolute; inset:0; border-radius:inherit; pointer-events:none; z-index:0;
+    background:radial-gradient(240px circle at var(--mx,50%) var(--my,50%), rgba(255,255,255,0.13), transparent 62%);
+    opacity:0; transition:opacity .35s ease;
+  }
+  .u-card::after{
+    content:''; position:absolute; inset:0; border-radius:inherit; pointer-events:none; z-index:1;
+    background:radial-gradient(280px circle at var(--mx,50%) var(--my,50%), rgba(79,99,255,0.09), transparent 62%);
+    opacity:0; transition:opacity .35s ease;
+  }
+  .h-stat:hover::after, .a-card:hover::after, .addon-item:hover::after,
+  .quiz-opt:hover::after, .u-card:hover::after{opacity:1;}
+  .quiz-opt{position:relative; overflow:hidden;}
+  /* Flutuação: cards sobem de leve com mola */
+  .a-card{transition:transform .5s cubic-bezier(.34,1.4,.64,1), box-shadow .4s ease;}
+  .a-card:hover{transform:translateY(-6px); box-shadow:0 18px 44px rgba(0,0,0,0.35);}
+  .usecases .sf-appear.is-visible{
+    transition:opacity .5s ease, transform .5s cubic-bezier(.34,1.4,.64,1), filter .5s ease, box-shadow .4s ease;
+  }
+  .usecases .sf-appear.is-visible:hover{
+    transform:translateY(-6px) scale(1.01);
+    box-shadow:0 20px 48px rgba(15,29,51,0.14);
+  }
+
+  /* ===== WHATSAPP FLOAT BUTTON ===== */
+  .whatsapp-float{
+    position:fixed; bottom:28px; right:28px; width:62px; height:62px; z-index:999;
+    display:flex; align-items:center; justify-content:center;
+    transition:transform .2s;
+  }
+  .whatsapp-float:hover{transform:scale(1.07);}
+  .whatsapp-float img{width:100%; height:100%;}
+
+  /* ===== MODAL DO WHATSAPP — formulário + redirect com pré-msg ===== */
+  .wa-modal{
+    position:fixed; inset:0; z-index:1000; display:none;
+    align-items:flex-end; justify-content:flex-end; padding:24px 28px 100px 28px;
+    animation:waFadeIn .2s ease;
+  }
+  .wa-modal.is-open{display:flex;}
+  .wa-overlay{
+    position:absolute; inset:0; background:rgba(8,14,26,0.5);
+    -webkit-backdrop-filter:blur(2px); backdrop-filter:blur(2px);
+  }
+  .wa-window{
+    position:relative; width:100%; max-width:380px; background:#efe7dc; border-radius:14px;
+    overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,0.35);
+    animation:waPopIn .25s cubic-bezier(.22,1,.36,1);
+    background-image:
+      radial-gradient(circle at 12% 18%, rgba(7,94,84,0.05) 0 8px, transparent 9px),
+      radial-gradient(circle at 86% 36%, rgba(7,94,84,0.05) 0 6px, transparent 7px),
+      radial-gradient(circle at 28% 72%, rgba(7,94,84,0.04) 0 7px, transparent 8px),
+      radial-gradient(circle at 74% 86%, rgba(7,94,84,0.04) 0 6px, transparent 7px);
+  }
+  @keyframes waFadeIn{ from{opacity:0;} to{opacity:1;} }
+  @keyframes waPopIn{ from{transform:translateY(20px) scale(0.95); opacity:0;} to{transform:none; opacity:1;} }
+  .wa-header{background:#075e54; color:#fff; padding:14px 16px; display:flex; align-items:center; gap:12px;}
+  .wa-avatar{
+    width:42px; height:42px; border-radius:50%; background:linear-gradient(135deg,#128c7e,#25d366);
+    color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:15px;
+    flex-shrink:0; letter-spacing:.5px;
+  }
+  .wa-info{flex:1; min-width:0;}
+  .wa-info .wa-name{font-size:15px; font-weight:700; line-height:1.2; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .wa-info .wa-status{font-size:12px; color:rgba(255,255,255,0.75); margin-top:2px;}
+  .wa-close{background:transparent; border:0; color:#fff; font-size:22px; cursor:pointer; padding:4px 6px; line-height:1; opacity:.85; transition:opacity .2s;}
+  .wa-close:hover{opacity:1;}
+  .wa-body{padding:16px;}
+  .wa-bubble{
+    background:#fff; color:#1f2a37; font-size:13.5px; line-height:1.5; padding:10px 14px;
+    border-radius:0 12px 12px 12px; max-width:88%; box-shadow:0 1px 1px rgba(0,0,0,0.08); margin-bottom:16px;
+  }
+  .wa-form{display:flex; flex-direction:column; gap:10px;}
+  .wa-form input{
+    width:100%; background:#e7f5ea; border:1px solid rgba(7,94,84,0.15); border-radius:6px;
+    padding:11px 14px; font-size:13.5px; font-family:inherit; color:#1f2a37; outline:none;
+    transition:border-color .2s, background .2s;
+  }
+  .wa-form input::placeholder{color:#6b7280;}
+  .wa-form input:focus{border-color:#25d366; background:#fff;}
+  .wa-tel{
+    display:flex; align-items:center; background:#e7f5ea; border:1px solid rgba(7,94,84,0.15);
+    border-radius:6px; padding-left:10px; transition:border-color .2s, background .2s;
+  }
+  .wa-tel:focus-within{border-color:#25d366; background:#fff;}
+  .wa-tel .wa-flag{font-size:16px; margin-right:6px; line-height:1;}
+  .wa-tel .wa-code{font-size:12px; color:#4b5563; margin-right:8px; font-weight:600;}
+  .wa-tel input{background:transparent; border:0; flex:1; padding:11px 14px 11px 0;}
+  .wa-tel input:focus{background:transparent;}
+  .wa-submit{
+    background:#25d366; color:#fff; border:0; border-radius:6px; padding:12px 18px; font-size:14px;
+    font-weight:700; font-family:inherit; cursor:pointer; align-self:flex-end; margin-top:6px;
+    transition:background .2s, transform .1s; box-shadow:0 4px 12px rgba(37,211,102,0.35);
+  }
+  .wa-submit:hover{background:#1ebe5d;}
+  .wa-submit:active{transform:scale(0.98);}
+  @media (max-width: 520px){
+    .wa-modal{padding:0; align-items:stretch; justify-content:stretch;}
+    .wa-window{max-width:none; border-radius:0;}
+  }
+
+  @media (max-width: 900px){
+    .footer-top, .footer-mid, .footer-bottom{flex-direction:column; align-items:flex-start;}
+    .footer-markets{text-align:left;}
+    .approval h2, .approval p.sub{white-space:normal; font-size:inherit;}
+    .approval h2{font-size:24px;}
+    .approval p.sub{font-size:13px;}
+    .approval-cards{grid-template-columns:1fr;}
+    .usecases .row{flex-direction:column;}
+    .u-card{height:440px;}
+    .addon-item{flex:1 1 33%; min-width:33%; border-bottom:1px solid rgba(255,255,255,0.08);}
+    .addon-item:nth-child(3n){border-right:none;}
+    .families-grid{grid-template-columns:1fr; grid-template-rows:auto; height:auto;}
+    .blog-grid{grid-template-columns:1fr 1fr;}
+    .nav ul{display:none;}
+    .hero{height:auto; min-height:100vh;}
+    .hero-inner{display:flex; flex-direction:column; text-align:center; padding:16px 24px; gap:12px;}
+    .hero-content{max-width:100%; text-align:center; justify-self:unset; align-self:unset; transform:none;}
+    .hero-content .actions{justify-content:center;}
+    .hero-content h1{font-size:clamp(26px,7vw,34px);}
+    .hero-laptop{position:relative; padding-top:0; padding-bottom:0;}
+    .hero-laptop img{max-height:220px;}
+    .hero-dots-area{display:none;}
+    .hero-stats{position:relative; grid-template-columns:1fr 1fr; padding:18px 24px;}
+    .stars{height:auto; min-height:100vh;}
+    .stars .wrap{height:auto;}
+    .stars-diagram{flex-direction:column; min-height:auto; max-width:100%; gap:20px;}
+    .stars-main-img{max-height:none;}
+    .orbit-card{position:relative; left:auto; right:auto; top:auto; bottom:auto; width:100%; max-width:420px; min-height:auto; margin:0 auto; flex-wrap:wrap;}
+    .orbit-card.pos-tl, .orbit-card.pos-tr, .orbit-card.pos-bl, .orbit-card.pos-br,
+    .orbit-card.pos-ml, .orbit-card.pos-mr{transform:none;}
+    .orbit-card .label{
+      position:static !important; opacity:1 !important; visibility:visible !important; transform:none !important; width:100%;
+      box-shadow:none; border:none; background:transparent; padding:8px 0 0; margin-top:2px;
+    }
+    .orbit-card .label::before{display:none;}
+    .stars-main-img{order:-1; width:100%;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ 1. HERO ============ -->
+<section class="hero">
+  <nav class="nav">
+    <div class="hero-logo">
+      <img src="logo-specifor-branco.svg" alt="Specifor">
+    </div>
+    <ul>
+      <li><a href="#planos">Benefícios</a></li>
+      <li><a href="#cases">Setores</a></li>
+      <li><a href="#blog">Parceiros</a></li>
+    </ul>
+    <div class="actions">
+      <a class="btn btn-comecar" href="https://4asset.rds.land/fale-com-um-consultor">Falar com um especialista →</a>
+    </div>
+  </nav>
+
+  <div class="hero-inner">
+    <div class="hero-content hero-text-appear">
+      <h1>Mais controle.<br>Mais resultado.</h1>
+      <p>O Specifor Essencial é a plataforma base para você digitalizar, centralizar e gerir os cadastros fundiários da sua empresa.</p>
+      <div class="actions">
+        <a class="btn btn-falar" href="https://4asset.rds.land/fale-com-um-consultor">Falar com um especialista</a>
+        <a class="btn btn-ver" href="#planos">→</a>
+      </div>
+    </div>
+    <div class="hero-laptop">
+      <img class="sf-appear hero-laptop-appear" src="specifor-laptop-mockup.png" alt="Plataforma Specifor — visão Meu Trabalho">
+    </div>
+    <div class="hero-dots-area hero-text-appear">
+      <div class="hero-dots">
+        <span style="left:3.4%; top:4.45%;"></span>
+        <span style="left:49.1%; top:4.45%;"></span>
+        <span style="left:29.3%; top:37.75%;"></span>
+        <span style="left:77.6%; top:37.75%;"></span>
+        <span style="left:3.4%; top:71.05%;"></span>
+        <span style="left:49.1%; top:71.05%;"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="h-stat sf-appear">
+      <div class="icon-badge">
+        <svg class="icon" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="16" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M3 9h18M8 3v4M16 3v4" stroke="currentColor" stroke-width="1.6"/></svg>
+      </div>
+      <div class="num">3 semanas</div>
+      <div class="label">Go-live a partir da assinatura do contrato.</div>
+    </div>
+    <div class="h-stat sf-appear">
+      <div class="icon-badge">
+        <svg class="icon" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.6"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </div>
+      <div class="num">80%</div>
+      <div class="label">De redução no tempo de busca de documentos.</div>
+    </div>
+    <div class="h-stat sf-appear">
+      <div class="icon-badge">
+        <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M12 3a5 5 0 00-5 5v3.2c0 .7-.28 1.37-.78 1.87L5 14.3c-.6.6-.18 1.7.7 1.7h12.6c.88 0 1.3-1.1.7-1.7l-1.22-1.23A2.65 2.65 0 0117 11.2V8a5 5 0 00-5-5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9.5 19a2.5 2.5 0 005 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </div>
+      <div class="num">Zero</div>
+      <div class="label">Prazos perdidos, com alertas automáticos.</div>
+    </div>
+    <div class="h-stat sf-appear">
+      <div class="icon-badge">
+        <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M12 3l7 3v5c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6l7-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9.5 12l1.8 1.8L15 10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="num">Dados confiáveis</div>
+      <div class="label">Decisões com segurança e agilidade.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2. AS SEEN IN ============ -->
+<section class="seen-in">
+  <div class="label">Nossas soluções estão com os melhores do mercado</div>
+  <div class="marquee-row row1">
+    <img class="logo-item" src="clientes/image 13.png" alt="Copel">
+    <img class="logo-item" src="clientes/image 14.png" alt="SPIC Brasil">
+    <img class="logo-item" src="clientes/image 15.png" alt="Elera">
+    <img class="logo-item" src="clientes/image 16.png" alt="Echoenergia">
+    <img class="logo-item" src="clientes/image 17.png" alt="Votorantim Energia">
+    <img class="logo-item" src="clientes/image 18.png" alt="Brasilian Nickel">
+    <img class="logo-item" src="clientes/image 19.png" alt="Sabesp">
+    <img class="logo-item" src="clientes/image 20.png" alt="Volga">
+    <img class="logo-item" src="clientes/image 21.png" alt="SA Energia Fotovoltaica">
+    <img class="logo-item" src="clientes/image 22.png" alt="Ventos de São Zacarias">
+    <img class="logo-item" src="clientes/image 23.png" alt="Neoenergia">
+    <img class="logo-item" src="clientes/image 24.png" alt="Eletrobras">
+    <img class="logo-item" src="clientes/image 25.png" alt="Gerdau">
+    <img class="logo-item" src="clientes/image 26.png" alt="Brennand Energia">
+    <!-- duplicado para loop contínuo -->
+    <img class="logo-item" src="clientes/image 13.png" alt="Copel">
+    <img class="logo-item" src="clientes/image 14.png" alt="SPIC Brasil">
+    <img class="logo-item" src="clientes/image 15.png" alt="Elera">
+    <img class="logo-item" src="clientes/image 16.png" alt="Echoenergia">
+    <img class="logo-item" src="clientes/image 17.png" alt="Votorantim Energia">
+    <img class="logo-item" src="clientes/image 18.png" alt="Brasilian Nickel">
+    <img class="logo-item" src="clientes/image 19.png" alt="Sabesp">
+    <img class="logo-item" src="clientes/image 20.png" alt="Volga">
+    <img class="logo-item" src="clientes/image 21.png" alt="SA Energia Fotovoltaica">
+    <img class="logo-item" src="clientes/image 22.png" alt="Ventos de São Zacarias">
+    <img class="logo-item" src="clientes/image 23.png" alt="Neoenergia">
+    <img class="logo-item" src="clientes/image 24.png" alt="Eletrobras">
+    <img class="logo-item" src="clientes/image 25.png" alt="Gerdau">
+    <img class="logo-item" src="clientes/image 26.png" alt="Brennand Energia">
+  </div>
+  <div class="marquee-row row2">
+    <img class="logo-item" src="clientes/image 27.png" alt="Mosaic">
+    <img class="logo-item" src="clientes/image 28.png" alt="Engie">
+    <img class="logo-item" src="clientes/image 29.png" alt="Aliança">
+    <img class="logo-item" src="clientes/image 30.png" alt="Anglo American">
+    <img class="logo-item" src="clientes/image 31.png" alt="CPFL Energia">
+    <img class="logo-item" src="clientes/image 32.png" alt="EDP">
+    <img class="logo-item" src="clientes/image 33.png" alt="Vale">
+    <img class="logo-item" src="clientes/image 34.png" alt="Qair">
+    <img class="logo-item" src="clientes/image 35.png" alt="Grupo Marista">
+    <img class="logo-item" src="clientes/image 36.png" alt="TAG">
+    <img class="logo-item" src="clientes/image 37.png" alt="Equinox Gold">
+    <img class="logo-item" src="clientes/image 38.png" alt="ISA CTEEP">
+    <img class="logo-item" src="clientes/image 39.png" alt="GOL">
+    <!-- duplicado para loop contínuo -->
+    <img class="logo-item" src="clientes/image 27.png" alt="Mosaic">
+    <img class="logo-item" src="clientes/image 28.png" alt="Engie">
+    <img class="logo-item" src="clientes/image 29.png" alt="Aliança">
+    <img class="logo-item" src="clientes/image 30.png" alt="Anglo American">
+    <img class="logo-item" src="clientes/image 31.png" alt="CPFL Energia">
+    <img class="logo-item" src="clientes/image 32.png" alt="EDP">
+    <img class="logo-item" src="clientes/image 33.png" alt="Vale">
+    <img class="logo-item" src="clientes/image 34.png" alt="Qair">
+    <img class="logo-item" src="clientes/image 35.png" alt="Grupo Marista">
+    <img class="logo-item" src="clientes/image 36.png" alt="TAG">
+    <img class="logo-item" src="clientes/image 37.png" alt="Equinox Gold">
+    <img class="logo-item" src="clientes/image 38.png" alt="ISA CTEEP">
+    <img class="logo-item" src="clientes/image 39.png" alt="GOL">
+  </div>
+</section>
+
+<!-- ============ 3. PROBLEMA / DOR DO CLIENTE ============ -->
+<section class="stars">
+  <div class="wrap">
+    <h2>Você sofre com a falta de controle na sua gestão<br>territorial e precisa automatizar workflows?</h2>
+    <p class="stars-sub">Uma operação com algumas dezenas de imóveis até pode ser gerida em planilhas, mas quando esse número ultrapassa milhares de ativos distribuídos em diferentes regiões, com contratos, licenças e obrigações associadas o esforço operacional se multiplica de maneira desproporcional.</p>
+    <div class="stars-diagram">
+      <div class="orbit-card h-stat sf-appear pos-tl">
+        <div class="icon-badge">
+          <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M7 3h7l4 4v14H7z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M10 11h6M10 15h6M10 19h3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <div class="num">Cadastro fundiário digital</div>
+        <div class="label">Digitalize e centralize títulos, matrículas e documentos fundiários com indexação automática e busca inteligente.</div>
+      </div>
+      <div class="orbit-card h-stat sf-appear pos-tr">
+        <div class="icon-badge">
+          <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M12 3a5 5 0 00-5 5v3.2c0 .7-.28 1.37-.78 1.87L5 14.3c-.6.6-.18 1.7.7 1.7h12.6c.88 0 1.3-1.1.7-1.7l-1.22-1.23A2.65 2.65 0 0117 11.2V8a5 5 0 00-5-5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9.5 19a2.5 2.5 0 005 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <div class="num">Alertas automáticos</div>
+        <div class="label">Receba notificações de vencimentos, renovações e obrigações antes que se tornem problemas. Zero prazo perdido.</div>
+      </div>
+      <div class="orbit-card h-stat sf-appear pos-bl">
+        <div class="icon-badge">
+          <svg class="icon" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="1.6"/><rect x="13" y="3" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="1.6"/><rect x="3" y="13" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="1.6"/><rect x="13" y="13" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="1.6"/></svg>
+        </div>
+        <div class="num">Dashboards executivos</div>
+        <div class="label">Visualize o portfólio completo em tempo real. KPIs, mapas e relatórios personalizados para cada nível da organização.</div>
+      </div>
+      <div class="orbit-card h-stat sf-appear pos-br">
+        <div class="icon-badge">
+          <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M12 3l7 3v5c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6l7-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9.5 12l1.8 1.8L15 10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="num">Conformidade e rastreabilidade</div>
+        <div class="label">Histórico completo de ações, documentos e aprovações. Auditoria simplificada e conformidade com regulações do setor.</div>
+      </div>
+      <div class="orbit-card h-stat sf-appear pos-ml">
+        <div class="icon-badge">
+          <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M3 5l7-2 7 2 4-1v15l-4 1-7-2-7 2z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M10 3v15M17 4v15" stroke="currentColor" stroke-width="1.6"/></svg>
+        </div>
+        <div class="num">Specifor GIS</div>
+        <div class="label">Visualize e analise seus ativos territoriais em mapas interativos, com camadas geoespaciais integradas ao cadastro.</div>
+      </div>
+      <div class="orbit-card h-stat sf-appear pos-mr">
+        <div class="icon-badge">
+          <svg class="icon" viewBox="0 0 24 24" fill="none"><rect x="7" y="2" width="10" height="20" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M10 18h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <div class="num">Mobile Campo</div>
+        <div class="label">Leve o Specifor pro campo: vistorias, coletas e atualizações cadastrais direto do celular, mesmo sem conexão.</div>
+      </div>
+      <img class="stars-main-img" src="specifor-laptop-processos.png" alt="Specifor — tela de Processos">
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4. DEPOIMENTOS ============ -->
+<section class="usecases" id="cases">
+  <div class="wrap">
+    <div class="depo-header" style="margin-bottom:40px;">
+      <h2>Depoimentos</h2>
+    </div>
+    <div class="depo-dots" aria-hidden="true">
+      <span style="left:3.4%; top:4.45%;"></span>
+      <span style="left:49.1%; top:4.45%;"></span>
+      <span style="left:29.3%; top:37.75%;"></span>
+      <span style="left:77.6%; top:37.75%;"></span>
+      <span style="left:3.4%; top:71.05%;"></span>
+      <span style="left:49.1%; top:71.05%;"></span>
+    </div>
+    <div class="row">
+    <div class="u-card sf-appear">
+      <div class="u-photo" style="background-image:url('energia.jpg')">
+        <div class="u-logo"><img src="clientes/logo-echoenergia.png" alt="Echoenergia"></div>
+      </div>
+      <div class="u-content">
+        <h4>Setor Energia</h4>
+        <p class="u-quote">"O Specifor transformou a forma como gerenciamos nossos ativos fundiários. O que levava semanas hoje é resolvido em horas, com total rastreabilidade."<span class="role">Gerência de Sustentabilidade</span></p>
+      </div>
+    </div>
+    <div class="u-card sf-appear">
+      <div class="u-photo" style="background-image:url('mineracao.jpg')">
+        <div class="u-logo"><img src="clientes/vale-logo.svg" alt="Vale"></div>
+      </div>
+      <div class="u-content">
+        <h4>Setor Mineração</h4>
+        <p class="u-quote">"Reduzimos em 80% o tempo de busca por documentos. A equipe jurídica ganhou autonomia e a diretoria passou a ter visibilidade real do portfólio."<span class="role">Jurídico Corporativo</span></p>
+      </div>
+    </div>
+    <div class="u-card sf-appear">
+      <div class="u-photo" style="background-image:url('infraestrutura.jpg')">
+        <div class="u-logo"><img src="clientes/tag-logo.jpg" alt="TAG"></div>
+      </div>
+      <div class="u-content">
+        <h4>Setor Infraestrutura</h4>
+        <p class="u-quote">"O go-live em 3 semanas foi uma surpresa positiva. A implementação foi guiada, sem impacto operacional, e a equipe adotou o sistema rapidamente."<span class="role">Relações com Proprietários</span></p>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5. PLANOS (Standard x Professional) ============ -->
+<section class="section approval" id="planos">
+  <div class="wrap">
+    <div class="head center">
+      <span class="pill pill-blue">Planos</span>
+      <h2>Duas ofertas. Uma plataforma completa. Sem custo escondido.</h2>
+      <p class="sub">Specifor Essencial é a base obrigatória de todo contrato. Escolha o Template que faz sentido pra sua operação.</p>
+    </div>
+    <div class="approval-cards">
+      <div class="a-card">
+        <div class="a-label">Template Standard</div>
+        <div class="a-big">Até 500 imóveis</div>
+        <div class="a-sub">Controle essencial pra sua operação</div>
+        <hr class="a-divider">
+        <div class="a-specs">
+          <div class="spec-row"><span>Go-live</span><b>3 semanas</b></div>
+          <div class="spec-row"><span>Dashboard</span><b>Executivo</b></div>
+          <div class="spec-row"><span>Alertas</span><b>Automáticos</b></div>
+        </div>
+        <hr class="a-divider">
+        <div class="a-list-title">Incluso no Standard:</div>
+        <ul class="a-check">
+          <li>Fundiário e Compliance dominial</li>
+          <li>Meio Ambiente/Socioambiental</li>
+          <li>Patrimonial/Facilities</li>
+          <li>Inspeções/Vistorias</li>
+        </ul>
+        <a class="btn btn-falar a-cta" href="https://4asset.rds.land/fale-com-um-consultor">Falar com um especialista</a>
+        <div class="a-fine">*Escopo pode variar conforme volume de ativos.</div>
+      </div>
+      <div class="a-card">
+        <div class="a-label">Template Professional</div>
+        <div class="a-big">Imóveis ilimitados</div>
+        <div class="a-desc">Workflows personalizados e integração com ERP/SAP. Migração gradual, sem impactar sua operação atual.</div>
+        <hr class="a-divider">
+        <div class="a-list-title">Tudo do Standard, mais:</div>
+        <ul class="a-check">
+          <li>Contratos e Pagamentos</li>
+          <li>Monitoramento 360º/Territorial</li>
+          <li>Integração ERP/SAP</li>
+          <li>Relatórios customizados</li>
+          <li>Suporte dedicado</li>
+        </ul>
+        <a class="btn btn-outline a-cta" href="https://4asset.rds.land/fale-com-um-consultor">Falar com um especialista</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6. ADD-ONS ============ -->
+<section class="addons">
+  <div class="wrap">
+    <div class="head center">
+      <h2>Add-ons</h2>
+      <p class="sub">Funcionalidades transversais para potencializar a gestão operacional. Transversais a todos os templates.</p>
+    </div>
+    <div class="addons-strip">
+      <div class="addon-item">
+        <svg class="icon sf-breathe" viewBox="0 0 24 24" fill="none"><path d="M3 5l7-2 7 2 4-1v15l-4 1-7-2-7 2z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M10 3v15M17 4v15" stroke="currentColor" stroke-width="1.6"/></svg>
+        <div class="name">Specifor GIS</div>
+        <div class="addon-tip">Visualize e analise seus ativos territoriais em mapas interativos, com camadas geoespaciais integradas ao cadastro.</div>
+      </div>
+      <div class="addon-item">
+        <svg class="icon sf-breathe" viewBox="0 0 24 24" fill="none"><rect x="7" y="2" width="10" height="20" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M10 18h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <div class="name">Mobile Campo</div>
+        <div class="addon-tip">Leve o Specifor pro campo: vistorias, coletas e atualizações cadastrais direto do celular, mesmo sem conexão.</div>
+      </div>
+      <div class="addon-item">
+        <svg class="icon sf-breathe" viewBox="0 0 24 24" fill="none"><path d="M12 3a5 5 0 00-5 5v3.2c0 .7-.28 1.37-.78 1.87L5 14.3c-.6.6-.18 1.7.7 1.7h12.6c.88 0 1.3-1.1.7-1.7l-1.22-1.23A2.65 2.65 0 0117 11.2V8a5 5 0 00-5-5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9.5 19a2.5 2.5 0 005 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <div class="name">Specifor Notify</div>
+        <div class="addon-tip">Alertas automáticos de vencimentos, renovações e obrigações — direto pra quem precisa agir.</div>
+      </div>
+      <div class="addon-item">
+        <svg class="icon sf-breathe" viewBox="0 0 24 24" fill="none"><rect x="5" y="8" width="14" height="10" rx="2" stroke="currentColor" stroke-width="1.6"/><circle cx="9.5" cy="13" r="1.1" fill="currentColor"/><circle cx="14.5" cy="13" r="1.1" fill="currentColor"/><path d="M12 8V5M9 5h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <div class="name">Agentes IA</div>
+        <div class="addon-tip">Automatize tarefas repetitivas e tenha respostas rápidas sobre o seu portfólio com inteligência artificial.</div>
+      </div>
+      <div class="addon-item">
+        <svg class="icon sf-breathe" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M3 12h18" stroke="currentColor" stroke-width="1.6"/><path d="M12 3c2.5 2.5 2.5 15.5 0 18M12 3c-2.5 2.5-2.5 15.5 0 18" stroke="currentColor" stroke-width="1.6"/></svg>
+        <div class="name">Base GIS Pública</div>
+        <div class="addon-tip">Acesse camadas públicas de dados geoespaciais (limites, zoneamento, infraestrutura) já integradas à plataforma.</div>
+      </div>
+      <div class="addon-item">
+        <svg class="icon sf-breathe" viewBox="0 0 24 24" fill="none"><path d="M12 3l7 3v5c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6l7-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9.5 12l1.8 1.8L15 10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="name">Compliance e Automação Legal</div>
+        <div class="addon-tip">Automatize o acompanhamento de obrigações legais e regulatórias, com trilha de auditoria completa.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6b. CTA: QUAL O PLANO IDEAL ============ -->
+<section class="quiz-cta">
+  <div class="wrap">
+    <p class="quiz-question">Não sabe qual é o seu plano ideal? Então clique no botão e descubra a combinação perfeita para sua empresa.</p>
+    <button class="btn btn-falar" id="openQuizBtn" type="button">Descubra o plano ideal para sua empresa</button>
+  </div>
+</section>
+
+<!-- ============ 8. BLOG ============ -->
+<section class="section families" id="blog">
+  <div class="wrap">
+    <div class="blog-top-row">
+      <div class="head">
+        <span class="pill pill-blue">Blog</span>
+        <h2>Para quem decide sobre gestão de ativos e território</h2>
+        <p>Conteúdo sobre gestão fundiária, compliance e auditoria de ativos direto do blog da 4Asset.</p>
+      </div>
+      <a class="blog-link" href="https://www.4asset.com.br/blog/">Ver todos os artigos →</a>
+    </div>
+    <div class="blog-grid">
+      <a class="blog-card" href="https://www.4asset.com.br/como-identificar-falhas-na-gestao-territorial/">
+        <div class="thumb" style="background-image:url('blog/falhas-gestao-territorial.jpg');"></div>
+        <h3>Como identificar falhas na gestão territorial</h3>
+        <p>A análise necessária ao escolher uma solução de gestão estratégica.</p>
+      </a>
+      <a class="blog-card" href="https://www.4asset.com.br/os-criterios-que-separam-uma-solucao-funcional-de-uma-solucao-de-gestao-estrategica/">
+        <div class="thumb" style="background-image:url('blog/solucao-funcional-estrategica.jpg');"></div>
+        <h3>Os critérios que separam uma solução funcional de uma solução de gestão estratégica</h3>
+        <p>Os pontos-chave que o gestor deve considerar no processo de decisão.</p>
+      </a>
+      <a class="blog-card" href="https://www.4asset.com.br/auditoria-de-ativos-como-identificar-inconsistencias-antes-que-elas-se-tornem-prejuizo/">
+        <div class="thumb" style="background-image:url('blog/auditoria-de-ativos.jpg');"></div>
+        <h3>Auditoria de ativos: como identificar inconsistências antes que elas se tornem prejuízo</h3>
+        <p>Caso prático de auditoria interna durante expansão de parque eólico.</p>
+      </a>
+      <a class="blog-card" href="https://www.4asset.com.br/por-que-a-integracao-com-erp-e-gis-e-decisiva-na-gestao-de-empreendimentos-complexos/">
+        <div class="thumb" style="background-image:url('blog/integracao-erp-gis.jpg');"></div>
+        <h3>Por que a integração com ERP e GIS é decisiva na gestão de empreendimentos complexos</h3>
+        <p>A importância da integração de sistemas para ativos territoriais distribuídos.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 9. FOOTER ============ -->
+<footer class="site-footer">
+  <div class="footer-top">
+    <div class="footer-tagline">Inteligência<br>Operacional</div>
+    <nav class="footer-markets">
+      <div>
+        <a href="#">Construction</a>
+      </div>
+      <div>
+        <a href="#">Agro</a>
+      </div>
+      <div>
+        <a href="#">Mining</a><br>
+        <a href="#">Infra</a>
+      </div>
+      <div>
+        <span class="markets-label">Specifor<br>Mercados</span><br>
+        <a href="#">Energy</a><br>
+        <a href="#">Industry</a>
+      </div>
+    </nav>
+  </div>
+
+  <div class="footer-mid">
+    <div class="footer-mid-left">
+      <a class="footer-link-especialista" href="https://4asset.rds.land/fale-com-um-consultor">Fale com um especialista</a>
+      <a class="btn-parceiro" href="#">Seja um parceiro <span>→</span></a>
+    </div>
+    <div class="footer-verante">
+      Uma empresa do<br>
+      <div class="verante-nome"><span>Grupo</span>verante</div>
+    </div>
+  </div>
+
+  <div class="footer-watermark">
+    <img src="logo-specifor-branco.svg" alt="">
+  </div>
+
+  <div class="footer-bottom">
+    <div>Copyright © 2026. Specifor® Todos os direitos reservados</div>
+    <a href="#">Termos de uso</a>
+    <div><a href="privacidade.html">Privacidade</a> – <a href="mailto:dpo@4asset.com.br">dpo@4asset.com.br</a></div>
+    <div>#brandingbybolden</div>
+  </div>
+</footer>
+
+<!-- ============ MODAL: QUIZ DO PLANO IDEAL ============ -->
+<div class="modal-overlay" id="quizModal" hidden>
+  <div class="modal-box">
+    <button class="modal-close" id="closeQuizBtn" type="button" aria-label="Fechar">✕</button>
+    <div class="modal-progress" id="quizProgress">Pergunta 1 de 4</div>
+
+    <div class="quiz-step" id="quizStep1">
+      <h3>Quantos imóveis sua empresa gerencia?</h3>
+      <div class="quiz-options">
+        <button class="quiz-opt" data-q="1" data-v="standard">Até 500 imóveis</button>
+        <button class="quiz-opt" data-q="1" data-v="professional">Mais de 500 imóveis</button>
+      </div>
+    </div>
+
+    <div class="quiz-step" id="quizStep2" hidden>
+      <h3>Você precisa de integração com ERP ou SAP?</h3>
+      <div class="quiz-options">
+        <button class="quiz-opt" data-q="2" data-v="professional">Sim, precisamos integrar</button>
+        <button class="quiz-opt" data-q="2" data-v="standard">Não precisamos</button>
+      </div>
+    </div>
+
+    <div class="quiz-step" id="quizStep3" hidden>
+      <h3>Sua operação exige gestão de contratos/pagamentos ou monitoramento territorial contínuo?</h3>
+      <div class="quiz-options">
+        <button class="quiz-opt" data-q="3" data-v="professional">Sim, precisamos disso</button>
+        <button class="quiz-opt" data-q="3" data-v="standard">Não, o essencial já resolve</button>
+      </div>
+    </div>
+
+    <div class="quiz-step" id="quizStep4" hidden>
+      <h3>Quais funcionalidades extras fazem sentido pra sua operação? (escolha quantas quiser)</h3>
+      <div class="quiz-options quiz-options-multi">
+        <label class="quiz-check"><input type="checkbox" value="Specifor GIS"> Specifor GIS</label>
+        <label class="quiz-check"><input type="checkbox" value="Mobile Campo"> Mobile Campo</label>
+        <label class="quiz-check"><input type="checkbox" value="Specifor Notify"> Specifor Notify</label>
+        <label class="quiz-check"><input type="checkbox" value="Agentes IA"> Agentes IA</label>
+        <label class="quiz-check"><input type="checkbox" value="Base GIS Pública"> Base GIS Pública</label>
+        <label class="quiz-check"><input type="checkbox" value="Compliance e Automação Legal"> Compliance e Automação Legal</label>
+      </div>
+      <button class="btn btn-falar" id="quizSeeResult" type="button">Ver resultado</button>
+    </div>
+
+    <div class="quiz-step" id="quizResult" hidden>
+      <div class="quiz-result-label">Seu plano ideal</div>
+      <h3 id="quizResultPlan">Standard</h3>
+      <p id="quizResultDesc"></p>
+      <div id="quizResultAddons"></div>
+      <a class="btn btn-falar" href="https://4asset.rds.land/fale-com-um-consultor">Falar com um especialista</a>
+      <button class="quiz-restart" id="quizRestart" type="button">Refazer o quiz</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ WHATSAPP FLOAT (abre modal) ============ -->
+<button type="button" class="whatsapp-float" aria-label="Abrir WhatsApp" id="wa-trigger" style="background:transparent;border:0;padding:0;cursor:pointer;">
+  <img src="WhatsApp-Logo.wine.svg" alt="" />
+</button>
+
+<!-- ============ MODAL DO WHATSAPP ============ -->
+<div class="wa-modal" id="wa-modal" role="dialog" aria-labelledby="wa-name" aria-modal="true">
+  <div class="wa-overlay" data-wa-close></div>
+  <div class="wa-window">
+    <div class="wa-header">
+      <div class="wa-avatar" aria-hidden="true">VC</div>
+      <div class="wa-info">
+        <div class="wa-name" id="wa-name">Vinicius Costa - 4Asset</div>
+        <div class="wa-status">online</div>
+      </div>
+      <button type="button" class="wa-close" data-wa-close aria-label="Fechar">×</button>
+    </div>
+    <div class="wa-body">
+      <div class="wa-bubble">
+        Olá! Quer saber mais sobre os softwares da 4Asset? Estou aqui para te ajudar!
+      </div>
+      <form class="wa-form" id="wa-form" novalidate>
+        <input type="text" name="nome" placeholder="Nome *" required autocomplete="name" />
+        <input type="email" name="email" placeholder="Email *" required autocomplete="email" />
+        <div class="wa-tel">
+          <span class="wa-flag" aria-hidden="true">🇧🇷</span>
+          <span class="wa-code">+55</span>
+          <input type="tel" name="telefone" placeholder="Telefone *" required autocomplete="tel-national" />
+        </div>
+        <input type="text" name="empresa" placeholder="Empresa *" required autocomplete="organization" />
+        <input type="text" name="cargo" placeholder="Cargo *" required autocomplete="organization-title" />
+        <button type="submit" class="wa-submit">Iniciar conversa</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  // "Appear" — surgimento gradual dos cards (big numbers, cards do notebook e depoimentos)
+  var appearEls = document.querySelectorAll('.sf-appear');
+
+  function revealGroup(list, baseDelay){
+    for (var i=0;i<list.length;i++){
+      (function(el, idx){
+        setTimeout(function(){ el.classList.add('is-visible'); }, baseDelay + idx*90);
+      })(list[i], i);
+    }
+  }
+
+  // Coreografia do hero: 1) notebook → 2) texto + bolinhas → 3) big numbers.
+  var heroLaptopEl = document.querySelector('.hero-laptop-appear');
+  var heroTextEls = document.querySelectorAll('.hero-text-appear');
+  var heroStatEls = document.querySelectorAll('.hero-stats .sf-appear');
+
+  if (heroLaptopEl){
+    setTimeout(function(){ heroLaptopEl.classList.add('is-visible'); }, 200);
+  }
+  setTimeout(function(){
+    heroTextEls.forEach(function(el){ el.classList.add('is-visible'); });
+  }, 1300);
+  revealGroup(heroStatEls, 2100);
+
+  // Cards que estão mais abaixo na página: revela quando entram na viewport.
+  if ('IntersectionObserver' in window){
+    var scrollGroups = {};
+    appearEls.forEach(function(el){
+      if (el.closest('.hero-stats') || el.closest('.hero-laptop')) return; // já tratados acima
+      var groupKey = el.closest('.stars-diagram') ? 'stars' : (el.closest('.usecases') ? 'depo' : 'other');
+      if (!scrollGroups[groupKey]) scrollGroups[groupKey] = [];
+      scrollGroups[groupKey].push(el);
+    });
+    var observer = new IntersectionObserver(function(entries, obs){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting){
+          var group = null;
+          for (var key in scrollGroups){
+            if (scrollGroups[key].indexOf(entry.target) !== -1){ group = scrollGroups[key]; break; }
+          }
+          var list = group || [entry.target];
+          var idx = list.indexOf(entry.target);
+          setTimeout(function(){ entry.target.classList.add('is-visible'); }, Math.max(0, idx)*90);
+          obs.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.2});
+    for (var g in scrollGroups){
+      scrollGroups[g].forEach(function(el){ observer.observe(el); });
+    }
+  } else {
+    // Fallback sem IntersectionObserver: revela tudo direto.
+    appearEls.forEach(function(el){ el.classList.add('is-visible'); });
+  }
+
+  // Rede de segurança: nunca deixa um card preso invisível (ex.: observer não dispara).
+  setTimeout(function(){
+    appearEls.forEach(function(el){ el.classList.add('is-visible'); });
+    document.querySelectorAll('.hero-text-appear').forEach(function(el){ el.classList.add('is-visible'); });
+  }, 4000);
+
+  // Parallax do notebook do hero: a imagem desce mais devagar que o scroll.
+  (function(){
+    var img = document.querySelector('.hero-laptop img');
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!img || reduce) return;
+    var ticking = false;
+    function update(){
+      ticking = false;
+      var vh = window.innerHeight || 1;
+      var p = Math.min(1, Math.max(0, (window.scrollY || 0) / vh));
+      img.style.setProperty('--heroImgY', (p * 110).toFixed(1) + 'px');
+    }
+    function onScroll(){
+      if (!ticking){ ticking = true; window.requestAnimationFrame(update); }
+    }
+    window.addEventListener('scroll', onScroll, {passive:true});
+    window.addEventListener('resize', onScroll);
+    update();
+  })();
+
+  // Parallax leve: notebook e cards se movem em sentidos opostos conforme o scroll.
+  (function(){
+    var diagram = document.querySelector('.stars-diagram');
+    var section = document.querySelector('.stars');
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!diagram || !section || reduce) return;
+
+    var ticking = false;
+    function update(){
+      ticking = false;
+      var r = section.getBoundingClientRect();
+      var vh = window.innerHeight || 1;
+      // progresso: -1 (seção entrando por baixo) → 0 (centrada) → 1 (saindo por cima)
+      var p = Math.max(-1, Math.min(1, (vh/2 - (r.top + r.height/2)) / (r.height/2 + vh/2)));
+      diagram.style.setProperty('--imgY', (p * 44).toFixed(1) + 'px');
+      diagram.style.setProperty('--cardsY', (p * -30).toFixed(1) + 'px');
+    }
+    function onScroll(){
+      if (!ticking){ ticking = true; window.requestAnimationFrame(update); }
+    }
+    window.addEventListener('scroll', onScroll, {passive:true});
+    window.addEventListener('resize', onScroll);
+    update();
+  })();
+
+  // Liquid Glass: o brilho especular dos cards/botões segue o ponteiro.
+  (function(){
+    var els = document.querySelectorAll('.h-stat, .a-card, .u-card, .addon-item, .quiz-opt');
+    els.forEach(function(el){
+      el.addEventListener('pointermove', function(e){
+        var r = el.getBoundingClientRect();
+        el.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100).toFixed(1) + '%');
+        el.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100).toFixed(1) + '%');
+      });
+    });
+  })();
+
+  var modal = document.getElementById('quizModal');
+  var openBtn = document.getElementById('openQuizBtn');
+  var closeBtn = document.getElementById('closeQuizBtn');
+  var progress = document.getElementById('quizProgress');
+  var steps = ['quizStep1','quizStep2','quizStep3','quizStep4','quizResult'];
+  var answers = {};
+
+  function showStep(id){
+    for (var i=0;i<steps.length;i++){
+      document.getElementById(steps[i]).hidden = (steps[i] !== id);
+    }
+    var idx = steps.indexOf(id);
+    progress.textContent = (id === 'quizResult') ? 'Resultado' : ('Pergunta ' + (idx+1) + ' de 4');
+  }
+
+  function resetQuiz(){
+    answers = {};
+    var checks = document.querySelectorAll('.quiz-check input');
+    for (var i=0;i<checks.length;i++){ checks[i].checked = false; }
+    showStep('quizStep1');
+  }
+
+  openBtn.addEventListener('click', function(){
+    modal.hidden = false;
+    resetQuiz();
+  });
+  closeBtn.addEventListener('click', function(){ modal.hidden = true; });
+  modal.addEventListener('click', function(e){ if (e.target === modal) modal.hidden = true; });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !modal.hidden) modal.hidden = true; });
+
+  var opts = document.querySelectorAll('.quiz-opt');
+  for (var j=0;j<opts.length;j++){
+    opts[j].addEventListener('click', function(){
+      var q = this.getAttribute('data-q');
+      answers[q] = this.getAttribute('data-v');
+      showStep('quizStep' + (parseInt(q,10)+1));
+    });
+  }
+
+  document.getElementById('quizSeeResult').addEventListener('click', function(){
+    var isPro = answers['1']==='professional' || answers['2']==='professional' || answers['3']==='professional';
+    var plan = isPro ? 'Professional' : 'Standard';
+    document.getElementById('quizResultPlan').textContent = plan;
+    document.getElementById('quizResultDesc').textContent = isPro
+      ? 'Imóveis ilimitados, workflows personalizados, integração com ERP/SAP e suporte dedicado.'
+      : 'Até 500 imóveis, alertas automáticos, dashboard executivo e go-live em 3 semanas.';
+    var checked = document.querySelectorAll('.quiz-check input:checked');
+    var addonsDiv = document.getElementById('quizResultAddons');
+    if (checked.length){
+      var html = '<div class="quiz-addons-title">Add-ons recomendados:</div><ul>';
+      for (var k=0;k<checked.length;k++){ html += '<li>' + checked[k].value + '</li>'; }
+      html += '</ul>';
+      addonsDiv.innerHTML = html;
+    } else {
+      addonsDiv.innerHTML = '';
+    }
+    showStep('quizResult');
+  });
+
+  document.getElementById('quizRestart').addEventListener('click', resetQuiz);
+})();
+</script>
+
+<!-- Modal do WhatsApp: abre, valida, envia para RD Station e redireciona -->
+<script>
+  (function () {
+    var trigger = document.getElementById('wa-trigger');
+    var modal = document.getElementById('wa-modal');
+    var form = document.getElementById('wa-form');
+    if (!trigger || !modal || !form) return;
+
+    function openModal() {
+      modal.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+      var first = form.querySelector('input');
+      if (first) setTimeout(function () { first.focus(); }, 150);
+    }
+    function closeModal() {
+      modal.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    trigger.addEventListener('click', openModal);
+
+    modal.querySelectorAll('[data-wa-close]').forEach(function (el) {
+      el.addEventListener('click', closeModal);
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+    });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      var data = new FormData(form);
+      var nome = (data.get('nome') || '').toString().trim();
+      var email = (data.get('email') || '').toString().trim();
+      var telefone = (data.get('telefone') || '').toString().trim();
+      var empresa = (data.get('empresa') || '').toString().trim();
+      var cargo = (data.get('cargo') || '').toString().trim();
+
+      // RD Station — fire-and-forget (no-cors, não bloqueia redirect)
+      try {
+        fetch('https://cta-redirect.rdstation.com/v2/conversions', {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            conversion_identifier: 'site-4asset-bruna',
+            name: nome,
+            email: email,
+            mobile_phone: '+55' + telefone.replace(/\D/g, ''),
+            company_name: empresa,
+            cf_cargo: cargo
+          })
+        }).catch(function () {});
+      } catch (err) { /* ignora */ }
+
+      // Monta mensagem personalizada e abre WhatsApp em nova aba
+      var msg = 'Quero saber mais sobre os produtos da 4Asset.' +
+        '\n\nNome: ' + nome +
+        '\nEmpresa: ' + empresa +
+        '\nCargo: ' + cargo;
+      var waUrl = 'https://wa.me/5548984360428?text=' + encodeURIComponent(msg);
+      window.open(waUrl, '_blank', 'noopener');
+
+      closeModal();
+      form.reset();
+    });
+  })();
+</script>
+
+</body>
+</html>
