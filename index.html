@@ -269,16 +269,18 @@
   }
   .marquee-row{
     display:flex; width:max-content; align-items:center;
-    gap:72px; will-change:transform;
+    gap:52px; will-change:transform;
   }
   .marquee-row.row1{animation:marquee-scroll 46s linear infinite; margin-bottom:48px;}
   .marquee-row.row2{animation:marquee-scroll 54s linear infinite reverse;}
   /* Logos coloridas (sem filtro), todas com a mesma altura nas duas linhas. */
+  /* Mesma caixa pra todos os logos → tamanho visual equilibrado (object-fit centraliza). */
   .marquee-row .logo-item{
-    height:68px; width:auto; flex-shrink:0; opacity:.9;
+    width:132px; height:64px; object-fit:contain; object-position:center;
+    flex-shrink:0; opacity:.9;
     transition:opacity .25s, transform .25s cubic-bezier(.34,1.4,.64,1);
   }
-  .marquee-row .logo-item:hover{opacity:1; transform:scale(1.3);}
+  .marquee-row .logo-item:hover{opacity:1; transform:scale(1.32);}
   @keyframes marquee-scroll{
     from{transform:translateX(0);}
     to{transform:translateX(-50%);}
@@ -1204,7 +1206,6 @@
 <!-- ============ 9. FOOTER ============ -->
 <footer class="site-footer">
   <div class="footer-top">
-    <div class="footer-tagline">Inteligência<br>Operacional</div>
     <nav class="footer-markets">
       <div>
         <a href="#">Construction</a>
@@ -1243,7 +1244,6 @@
     <div>Copyright © 2026. Specifor® Todos os direitos reservados</div>
     <a href="#">Termos de uso</a>
     <div><a href="privacidade.html">Privacidade</a> – <a href="mailto:dpo@4asset.com.br">dpo@4asset.com.br</a></div>
-    <div>#brandingbybolden</div>
   </div>
 </footer>
 
