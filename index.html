@@ -274,9 +274,10 @@
   .marquee-row.row1{animation:marquee-scroll 46s linear infinite; margin-bottom:48px;}
   .marquee-row.row2{animation:marquee-scroll 54s linear infinite reverse;}
   /* Logos coloridas (sem filtro), todas com a mesma altura nas duas linhas. */
-  /* Mesma caixa pra todos os logos → tamanho visual equilibrado (object-fit centraliza). */
+  /* Logos recortados (sem margem interna) + altura igual = linha de base consistente.
+     Teto de largura só pros ultra-largos, com object-fit pra não distorcer. */
   .marquee-row .logo-item{
-    width:132px; height:64px; object-fit:contain; object-position:center;
+    height:52px; width:auto; max-width:190px; object-fit:contain; object-position:center;
     flex-shrink:0; opacity:.9;
     transition:opacity .25s, transform .25s cubic-bezier(.34,1.4,.64,1);
   }
