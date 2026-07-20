@@ -269,16 +269,16 @@
   }
   .marquee-row{
     display:flex; width:max-content; align-items:center;
-    gap:64px; will-change:transform;
+    gap:72px; will-change:transform;
   }
-  .marquee-row.row1{animation:marquee-scroll 24s linear infinite; margin-bottom:36px;}
-  .marquee-row.row2{animation:marquee-scroll 30s linear infinite reverse;}
+  .marquee-row.row1{animation:marquee-scroll 30s linear infinite; margin-bottom:44px;}
+  .marquee-row.row2{animation:marquee-scroll 36s linear infinite reverse;}
+  /* Logos coloridas (sem filtro), todas com a mesma altura nas duas linhas. */
   .marquee-row .logo-item{
-    height:34px; width:auto; flex-shrink:0;
-    filter:grayscale(100%) brightness(0) invert(1); opacity:.55;
-    transition:opacity .2s;
+    height:52px; width:auto; flex-shrink:0; opacity:.9;
+    transition:opacity .2s, transform .2s;
   }
-  .marquee-row .logo-item:hover{opacity:.9;}
+  .marquee-row .logo-item:hover{opacity:1; transform:scale(1.05);}
   @keyframes marquee-scroll{
     from{transform:translateX(0);}
     to{transform:translateX(-50%);}
@@ -502,9 +502,9 @@
   #quizResultPlan{font-size:32px; margin-bottom:12px;}
   #quizResult p{color:rgba(255,255,255,0.65); font-size:14.5px; line-height:1.55; margin-bottom:18px;}
   .quiz-addons-title{font-size:13px; font-weight:700; margin-bottom:8px;}
-  #quizResultAddons ul{list-style:none; display:flex; flex-direction:column; gap:6px; margin-bottom:24px;}
-  #quizResultAddons li{font-size:13.5px; color:rgba(255,255,255,0.8); display:flex; align-items:center; gap:8px;}
-  #quizResultAddons li::before{content:'✓'; color:#4ade80; font-weight:700;}
+  #quizResultAddons ul, #quizResultTemplates ul{list-style:none; display:flex; flex-direction:column; gap:6px; margin-bottom:24px;}
+  #quizResultAddons li, #quizResultTemplates li{font-size:13.5px; color:rgba(255,255,255,0.8); display:flex; align-items:center; gap:8px;}
+  #quizResultAddons li::before, #quizResultTemplates li::before{content:'✓'; color:#4ade80; font-weight:700;}
   #quizResult .btn{width:100%; margin-bottom:14px;}
   .quiz-restart{
     display:block; width:100%; text-align:center; background:none; border:none;
@@ -890,64 +890,72 @@
 <section class="seen-in">
   <div class="label">Nossas soluções estão com os melhores do mercado</div>
   <div class="marquee-row row1">
-    <img class="logo-item" src="clientes/image 13.png" alt="Copel">
-    <img class="logo-item" src="clientes/image 14.png" alt="SPIC Brasil">
-    <img class="logo-item" src="clientes/image 15.png" alt="Elera">
-    <img class="logo-item" src="clientes/image 16.png" alt="Echoenergia">
-    <img class="logo-item" src="clientes/image 17.png" alt="Votorantim Energia">
-    <img class="logo-item" src="clientes/image 18.png" alt="Brasilian Nickel">
-    <img class="logo-item" src="clientes/image 19.png" alt="Sabesp">
-    <img class="logo-item" src="clientes/image 20.png" alt="Volga">
-    <img class="logo-item" src="clientes/image 21.png" alt="SA Energia Fotovoltaica">
-    <img class="logo-item" src="clientes/image 22.png" alt="Ventos de São Zacarias">
-    <img class="logo-item" src="clientes/image 23.png" alt="Neoenergia">
-    <img class="logo-item" src="clientes/image 24.png" alt="Eletrobras">
-    <img class="logo-item" src="clientes/image 25.png" alt="Gerdau">
-    <img class="logo-item" src="clientes/image 26.png" alt="Brennand Energia">
+    <img class="logo-item" src="clientes-cor/auren.png" alt="Auren">
+    <img class="logo-item" src="clientes-cor/brf.png" alt="BRF">
+    <img class="logo-item" src="clientes-cor/copel.png" alt="Copel">
+    <img class="logo-item" src="clientes-cor/cpfl.png" alt="CPFL Energia">
+    <img class="logo-item" src="clientes-cor/csn.png" alt="CSN">
+    <img class="logo-item" src="clientes-cor/enel.png" alt="Enel">
+    <img class="logo-item" src="clientes-cor/engie.png" alt="Engie">
+    <img class="logo-item" src="clientes-cor/gerdau.png" alt="Gerdau">
+    <img class="logo-item" src="clientes-cor/gol.png" alt="Gol">
+    <img class="logo-item" src="clientes-cor/isa-energia.png" alt="Isa Energia">
+    <img class="logo-item" src="clientes-cor/marista.png" alt="Marista">
+    <img class="logo-item" src="clientes-cor/petrobras.png" alt="Petrobras">
+    <img class="logo-item" src="clientes-cor/taesa.png" alt="Taesa">
+    <img class="logo-item" src="clientes-cor/vale.png" alt="Vale">
+    <img class="logo-item" src="clientes-cor/usiminas.png" alt="Usiminas">
     <!-- duplicado para loop contínuo -->
-    <img class="logo-item" src="clientes/image 13.png" alt="Copel">
-    <img class="logo-item" src="clientes/image 14.png" alt="SPIC Brasil">
-    <img class="logo-item" src="clientes/image 15.png" alt="Elera">
-    <img class="logo-item" src="clientes/image 16.png" alt="Echoenergia">
-    <img class="logo-item" src="clientes/image 17.png" alt="Votorantim Energia">
-    <img class="logo-item" src="clientes/image 18.png" alt="Brasilian Nickel">
-    <img class="logo-item" src="clientes/image 19.png" alt="Sabesp">
-    <img class="logo-item" src="clientes/image 20.png" alt="Volga">
-    <img class="logo-item" src="clientes/image 21.png" alt="SA Energia Fotovoltaica">
-    <img class="logo-item" src="clientes/image 22.png" alt="Ventos de São Zacarias">
-    <img class="logo-item" src="clientes/image 23.png" alt="Neoenergia">
-    <img class="logo-item" src="clientes/image 24.png" alt="Eletrobras">
-    <img class="logo-item" src="clientes/image 25.png" alt="Gerdau">
-    <img class="logo-item" src="clientes/image 26.png" alt="Brennand Energia">
+    <img class="logo-item" src="clientes-cor/auren.png" alt="Auren">
+    <img class="logo-item" src="clientes-cor/brf.png" alt="BRF">
+    <img class="logo-item" src="clientes-cor/copel.png" alt="Copel">
+    <img class="logo-item" src="clientes-cor/cpfl.png" alt="CPFL Energia">
+    <img class="logo-item" src="clientes-cor/csn.png" alt="CSN">
+    <img class="logo-item" src="clientes-cor/enel.png" alt="Enel">
+    <img class="logo-item" src="clientes-cor/engie.png" alt="Engie">
+    <img class="logo-item" src="clientes-cor/gerdau.png" alt="Gerdau">
+    <img class="logo-item" src="clientes-cor/gol.png" alt="Gol">
+    <img class="logo-item" src="clientes-cor/isa-energia.png" alt="Isa Energia">
+    <img class="logo-item" src="clientes-cor/marista.png" alt="Marista">
+    <img class="logo-item" src="clientes-cor/petrobras.png" alt="Petrobras">
+    <img class="logo-item" src="clientes-cor/taesa.png" alt="Taesa">
+    <img class="logo-item" src="clientes-cor/vale.png" alt="Vale">
+    <img class="logo-item" src="clientes-cor/usiminas.png" alt="Usiminas">
   </div>
   <div class="marquee-row row2">
-    <img class="logo-item" src="clientes/image 27.png" alt="Mosaic">
-    <img class="logo-item" src="clientes/image 28.png" alt="Engie">
-    <img class="logo-item" src="clientes/image 29.png" alt="Aliança">
-    <img class="logo-item" src="clientes/image 30.png" alt="Anglo American">
-    <img class="logo-item" src="clientes/image 31.png" alt="CPFL Energia">
-    <img class="logo-item" src="clientes/image 32.png" alt="EDP">
-    <img class="logo-item" src="clientes/image 33.png" alt="Vale">
-    <img class="logo-item" src="clientes/image 34.png" alt="Qair">
-    <img class="logo-item" src="clientes/image 35.png" alt="Grupo Marista">
-    <img class="logo-item" src="clientes/image 36.png" alt="TAG">
-    <img class="logo-item" src="clientes/image 37.png" alt="Equinox Gold">
-    <img class="logo-item" src="clientes/image 38.png" alt="ISA CTEEP">
-    <img class="logo-item" src="clientes/image 39.png" alt="GOL">
+    <img class="logo-item" src="clientes-cor/alianca.png" alt="Aliança">
+    <img class="logo-item" src="clientes-cor/bmte.png" alt="BMTE">
+    <img class="logo-item" src="clientes-cor/brazilian-nickel.png" alt="Brazilian Nickel">
+    <img class="logo-item" src="clientes-cor/cgn.png" alt="CGN">
+    <img class="logo-item" src="clientes-cor/ciscea.png" alt="Ciscea">
+    <img class="logo-item" src="clientes-cor/cmoc.png" alt="CMOC">
+    <img class="logo-item" src="clientes-cor/foz-do-chapeco.png" alt="Foz do Chapecó">
+    <img class="logo-item" src="clientes-cor/grupo-itaquareia.png" alt="Grupo Itaquareia">
+    <img class="logo-item" src="clientes-cor/mosaic.png" alt="Mosaic">
+    <img class="logo-item" src="clientes-cor/pec-energia.png" alt="PEC Energia">
+    <img class="logo-item" src="clientes-cor/spic.png" alt="SPIC Brasil">
+    <img class="logo-item" src="clientes-cor/state-grid.png" alt="State Grid">
+    <img class="logo-item" src="clientes-cor/tag.png" alt="TAG">
+    <img class="logo-item" src="clientes-cor/echoenergia.png" alt="Echoenergia">
+    <img class="logo-item" src="clientes-cor/elera.png" alt="Elera Renováveis">
+    <img class="logo-item" src="clientes-cor/qair.png" alt="Qair">
     <!-- duplicado para loop contínuo -->
-    <img class="logo-item" src="clientes/image 27.png" alt="Mosaic">
-    <img class="logo-item" src="clientes/image 28.png" alt="Engie">
-    <img class="logo-item" src="clientes/image 29.png" alt="Aliança">
-    <img class="logo-item" src="clientes/image 30.png" alt="Anglo American">
-    <img class="logo-item" src="clientes/image 31.png" alt="CPFL Energia">
-    <img class="logo-item" src="clientes/image 32.png" alt="EDP">
-    <img class="logo-item" src="clientes/image 33.png" alt="Vale">
-    <img class="logo-item" src="clientes/image 34.png" alt="Qair">
-    <img class="logo-item" src="clientes/image 35.png" alt="Grupo Marista">
-    <img class="logo-item" src="clientes/image 36.png" alt="TAG">
-    <img class="logo-item" src="clientes/image 37.png" alt="Equinox Gold">
-    <img class="logo-item" src="clientes/image 38.png" alt="ISA CTEEP">
-    <img class="logo-item" src="clientes/image 39.png" alt="GOL">
+    <img class="logo-item" src="clientes-cor/alianca.png" alt="Aliança">
+    <img class="logo-item" src="clientes-cor/bmte.png" alt="BMTE">
+    <img class="logo-item" src="clientes-cor/brazilian-nickel.png" alt="Brazilian Nickel">
+    <img class="logo-item" src="clientes-cor/cgn.png" alt="CGN">
+    <img class="logo-item" src="clientes-cor/ciscea.png" alt="Ciscea">
+    <img class="logo-item" src="clientes-cor/cmoc.png" alt="CMOC">
+    <img class="logo-item" src="clientes-cor/foz-do-chapeco.png" alt="Foz do Chapecó">
+    <img class="logo-item" src="clientes-cor/grupo-itaquareia.png" alt="Grupo Itaquareia">
+    <img class="logo-item" src="clientes-cor/mosaic.png" alt="Mosaic">
+    <img class="logo-item" src="clientes-cor/pec-energia.png" alt="PEC Energia">
+    <img class="logo-item" src="clientes-cor/spic.png" alt="SPIC Brasil">
+    <img class="logo-item" src="clientes-cor/state-grid.png" alt="State Grid">
+    <img class="logo-item" src="clientes-cor/tag.png" alt="TAG">
+    <img class="logo-item" src="clientes-cor/echoenergia.png" alt="Echoenergia">
+    <img class="logo-item" src="clientes-cor/elera.png" alt="Elera Renováveis">
+    <img class="logo-item" src="clientes-cor/qair.png" alt="Qair">
   </div>
 </section>
 
@@ -1024,17 +1032,8 @@
         <div class="u-logo"><img src="clientes/logo-echoenergia.png" alt="Echoenergia"></div>
       </div>
       <div class="u-content">
-        <h4>Setor Energia</h4>
-        <p class="u-quote">"O Specifor transformou a forma como gerenciamos nossos ativos fundiários. O que levava semanas hoje é resolvido em horas, com total rastreabilidade."<span class="role">Gerência de Sustentabilidade</span></p>
-      </div>
-    </div>
-    <div class="u-card sf-appear">
-      <div class="u-photo" style="background-image:url('mineracao.jpg')">
-        <div class="u-logo"><img src="clientes/vale-logo.svg" alt="Vale"></div>
-      </div>
-      <div class="u-content">
-        <h4>Setor Mineração</h4>
-        <p class="u-quote">"Reduzimos em 80% o tempo de busca por documentos. A equipe jurídica ganhou autonomia e a diretoria passou a ter visibilidade real do portfólio."<span class="role">Jurídico Corporativo</span></p>
+        <h4>Energia Renovável</h4>
+        <p class="u-quote">"Hoje, nós economizamos, no mínimo, 40 horas/homem mensais na gestão de pagamentos. Antes, eram duas pessoas durante quase dois dias inteiros para fazer a gestão de planilhas e hoje fazemos com uma pessoa em, no máximo, 3 horas."<span class="role">Wander Pires e Guilherme Avelar — Echoenergia</span></p>
       </div>
     </div>
     <div class="u-card sf-appear">
@@ -1042,8 +1041,17 @@
         <div class="u-logo"><img src="clientes/tag-logo.jpg" alt="TAG"></div>
       </div>
       <div class="u-content">
-        <h4>Setor Infraestrutura</h4>
-        <p class="u-quote">"O go-live em 3 semanas foi uma surpresa positiva. A implementação foi guiada, sem impacto operacional, e a equipe adotou o sistema rapidamente."<span class="role">Relações com Proprietários</span></p>
+        <h4>Transporte de Gás</h4>
+        <p class="u-quote">"Sistema Specifor é um ótimo produto para digitalização e padronização de processos. O Sistema SaaS é a opção de baixo custo de implantação e modelável para as necessidades do cliente."<span class="role">Bruno Silva — TAG</span></p>
+      </div>
+    </div>
+    <div class="u-card sf-appear">
+      <div class="u-photo" style="background-image:url('mineracao.jpg')">
+        <div class="u-logo"><img src="clientes-cor/bmte.png" alt="BMTE"></div>
+      </div>
+      <div class="u-content">
+        <h4>Transmissão de Energia</h4>
+        <p class="u-quote">"Com o Specifor, conseguimos entregar a linha de transmissão 2 meses antes do prazo, mesmo com os atrasos ocorridos na obra."<span class="role">Raphael Sims — BMTE</span></p>
       </div>
     </div>
     </div>
@@ -1056,40 +1064,48 @@
     <div class="head center">
       <span class="pill pill-blue">Planos</span>
       <h2>Duas ofertas. Uma plataforma completa. Sem custo escondido.</h2>
-      <p class="sub">Specifor Essencial é a base obrigatória de todo contrato. Escolha o Template que faz sentido pra sua operação.</p>
+      <p class="sub">Escolha sua base de acordo com o volume de imóveis controlados pela sua operação e agregue os templates que fazem sentido para o seu negócio.</p>
     </div>
     <div class="approval-cards">
       <div class="a-card">
-        <div class="a-label">Template Standard</div>
-        <div class="a-big">Até 500 imóveis</div>
-        <div class="a-sub">Controle essencial pra sua operação</div>
+        <div class="a-label">Standard</div>
+        <div class="a-big">Até 5.000 imóveis</div>
+        <div class="a-sub">Controle essencial para sua operação</div>
         <hr class="a-divider">
-        <div class="a-specs">
-          <div class="spec-row"><span>Go-live</span><b>3 semanas</b></div>
-          <div class="spec-row"><span>Dashboard</span><b>Executivo</b></div>
-          <div class="spec-row"><span>Alertas</span><b>Automáticos</b></div>
-        </div>
-        <hr class="a-divider">
-        <div class="a-list-title">Incluso no Standard:</div>
+        <div class="a-list-title">Templates disponíveis</div>
         <ul class="a-check">
           <li>Fundiário e Compliance dominial</li>
-          <li>Meio Ambiente/Socioambiental</li>
+          <li>Meio ambiente/Socioambiental</li>
           <li>Patrimonial/Facilities</li>
           <li>Inspeções/Vistorias</li>
         </ul>
+        <hr class="a-divider">
+        <div class="a-list-title">Mais:</div>
+        <ul class="a-check">
+          <li>Go live em 3 semanas</li>
+          <li>Dashboard executivo</li>
+          <li>Alertas automáticos</li>
+        </ul>
         <a class="btn btn-falar a-cta" href="https://4asset.rds.land/fale-com-um-consultor">Falar com um especialista</a>
-        <div class="a-fine">*Escopo pode variar conforme volume de ativos.</div>
       </div>
       <div class="a-card">
-        <div class="a-label">Template Professional</div>
+        <div class="a-label">Professional</div>
         <div class="a-big">Imóveis ilimitados</div>
-        <div class="a-desc">Workflows personalizados e integração com ERP/SAP. Migração gradual, sem impactar sua operação atual.</div>
+        <div class="a-sub">Para operações maiores</div>
+        <hr class="a-divider">
+        <div class="a-list-title">Templates disponíveis</div>
+        <ul class="a-check">
+          <li>Fundiário e Compliance dominial</li>
+          <li>Meio ambiente/Socioambiental</li>
+          <li>Patrimonial/Facilities</li>
+          <li>Inspeções/Vistorias</li>
+          <li>Contratos e Pagamentos</li>
+          <li>Monitoramento 360º/Territorial</li>
+        </ul>
         <hr class="a-divider">
         <div class="a-list-title">Tudo do Standard, mais:</div>
         <ul class="a-check">
-          <li>Contratos e Pagamentos</li>
-          <li>Monitoramento 360º/Territorial</li>
-          <li>Integração ERP/SAP</li>
+          <li>Integração com os principais ERPs do mercado</li>
           <li>Relatórios customizados</li>
           <li>Suporte dedicado</li>
         </ul>
@@ -1104,7 +1120,7 @@
   <div class="wrap">
     <div class="head center">
       <h2>Add-ons</h2>
-      <p class="sub">Funcionalidades transversais para potencializar a gestão operacional. Transversais a todos os templates.</p>
+      <p class="sub">Potencialize a sua gestão operacional com add-ons transversais a todos os templates.</p>
     </div>
     <div class="addons-strip">
       <div class="addon-item">
@@ -1240,44 +1256,53 @@
     <div class="quiz-step" id="quizStep1">
       <h3>Quantos imóveis sua empresa gerencia?</h3>
       <div class="quiz-options">
-        <button class="quiz-opt" data-q="1" data-v="standard">Até 500 imóveis</button>
-        <button class="quiz-opt" data-q="1" data-v="professional">Mais de 500 imóveis</button>
+        <button class="quiz-opt" data-q="1" data-v="standard">Até 250</button>
+        <button class="quiz-opt" data-q="1" data-v="standard">Até 500</button>
+        <button class="quiz-opt" data-q="1" data-v="standard">Até 1.000</button>
+        <button class="quiz-opt" data-q="1" data-v="standard">Até 5.000</button>
+        <button class="quiz-opt" data-q="1" data-v="professional">Acima de 5.000</button>
       </div>
     </div>
 
     <div class="quiz-step" id="quizStep2" hidden>
-      <h3>Você precisa de integração com ERP ou SAP?</h3>
+      <h3>Sua empresa utiliza ERPs, necessitando de integração?</h3>
       <div class="quiz-options">
-        <button class="quiz-opt" data-q="2" data-v="professional">Sim, precisamos integrar</button>
-        <button class="quiz-opt" data-q="2" data-v="standard">Não precisamos</button>
+        <button class="quiz-opt" data-q="2" data-v="professional">Sim</button>
+        <button class="quiz-opt" data-q="2" data-v="standard">Não</button>
       </div>
     </div>
 
     <div class="quiz-step" id="quizStep3" hidden>
-      <h3>Sua operação exige gestão de contratos/pagamentos ou monitoramento territorial contínuo?</h3>
-      <div class="quiz-options">
-        <button class="quiz-opt" data-q="3" data-v="professional">Sim, precisamos disso</button>
-        <button class="quiz-opt" data-q="3" data-v="standard">Não, o essencial já resolve</button>
+      <h3>Escolha os templates necessários para o seu negócio:</h3>
+      <div class="quiz-options quiz-options-multi">
+        <label class="quiz-check"><input type="checkbox" name="template" value="Fundiário e Compliance dominial"> Fundiário e Compliance dominial</label>
+        <label class="quiz-check"><input type="checkbox" name="template" value="Meio ambiente/Socioambiental"> Meio ambiente/Socioambiental</label>
+        <label class="quiz-check"><input type="checkbox" name="template" value="Patrimonial/Facilities"> Patrimonial/Facilities</label>
+        <label class="quiz-check"><input type="checkbox" name="template" value="Inspeções/Vistorias"> Inspeções/Vistorias</label>
+        <label class="quiz-check"><input type="checkbox" name="template" value="Contratos e Pagamentos" data-pro="1"> Contratos e Pagamentos</label>
+        <label class="quiz-check"><input type="checkbox" name="template" value="Monitoramento 360º/Territorial" data-pro="1"> Monitoramento 360º/Territorial</label>
       </div>
+      <button class="btn btn-falar" id="quizStep3Next" type="button" style="margin-top:22px; width:100%;">Continuar</button>
     </div>
 
     <div class="quiz-step" id="quizStep4" hidden>
-      <h3>Quais funcionalidades extras fazem sentido pra sua operação? (escolha quantas quiser)</h3>
+      <h3>Escolha os complementos que fazem sentido para sua operação:</h3>
       <div class="quiz-options quiz-options-multi">
-        <label class="quiz-check"><input type="checkbox" value="Specifor GIS"> Specifor GIS</label>
-        <label class="quiz-check"><input type="checkbox" value="Mobile Campo"> Mobile Campo</label>
-        <label class="quiz-check"><input type="checkbox" value="Specifor Notify"> Specifor Notify</label>
-        <label class="quiz-check"><input type="checkbox" value="Agentes IA"> Agentes IA</label>
-        <label class="quiz-check"><input type="checkbox" value="Base GIS Pública"> Base GIS Pública</label>
-        <label class="quiz-check"><input type="checkbox" value="Compliance e Automação Legal"> Compliance e Automação Legal</label>
+        <label class="quiz-check"><input type="checkbox" name="addon" value="Specifor GIS"> Specifor GIS</label>
+        <label class="quiz-check"><input type="checkbox" name="addon" value="Mobile Campo"> Mobile Campo</label>
+        <label class="quiz-check"><input type="checkbox" name="addon" value="Specifor Notify"> Specifor Notify</label>
+        <label class="quiz-check"><input type="checkbox" name="addon" value="Agentes IA"> Agentes IA</label>
+        <label class="quiz-check"><input type="checkbox" name="addon" value="Base GIS Pública"> Base GIS Pública</label>
+        <label class="quiz-check"><input type="checkbox" name="addon" value="Compliance e automação legal"> Compliance e automação legal</label>
       </div>
       <button class="btn btn-falar" id="quizSeeResult" type="button">Ver resultado</button>
     </div>
 
     <div class="quiz-step" id="quizResult" hidden>
-      <div class="quiz-result-label">Seu plano ideal</div>
+      <div class="quiz-result-label">Sua base ideal</div>
       <h3 id="quizResultPlan">Standard</h3>
       <p id="quizResultDesc"></p>
+      <div id="quizResultTemplates"></div>
       <div id="quizResultAddons"></div>
       <a class="btn btn-falar" href="https://4asset.rds.land/fale-com-um-consultor">Falar com um especialista</a>
       <button class="quiz-restart" id="quizRestart" type="button">Refazer o quiz</button>
@@ -1472,6 +1497,7 @@
   modal.addEventListener('click', function(e){ if (e.target === modal) modal.hidden = true; });
   document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !modal.hidden) modal.hidden = true; });
 
+  // Perguntas 1 e 2: escolha única — avança automaticamente.
   var opts = document.querySelectorAll('.quiz-opt');
   for (var j=0;j<opts.length;j++){
     opts[j].addEventListener('click', function(){
@@ -1481,23 +1507,42 @@
     });
   }
 
+  // Pergunta 3 (templates, múltipla escolha): botão Continuar avança pra pergunta 4.
+  document.getElementById('quizStep3Next').addEventListener('click', function(){
+    showStep('quizStep4');
+  });
+
   document.getElementById('quizSeeResult').addEventListener('click', function(){
-    var isPro = answers['1']==='professional' || answers['2']==='professional' || answers['3']==='professional';
+    // Base Professional se: volume acima de 5.000, uso de ERP, ou template exclusivo Pro.
+    var proTemplate = false;
+    var tmpl = document.querySelectorAll('#quizStep3 input:checked');
+    for (var t=0;t<tmpl.length;t++){ if (tmpl[t].getAttribute('data-pro')) proTemplate = true; }
+    var isPro = answers['1']==='professional' || answers['2']==='professional' || proTemplate;
     var plan = isPro ? 'Professional' : 'Standard';
     document.getElementById('quizResultPlan').textContent = plan;
     document.getElementById('quizResultDesc').textContent = isPro
-      ? 'Imóveis ilimitados, workflows personalizados, integração com ERP/SAP e suporte dedicado.'
-      : 'Até 500 imóveis, alertas automáticos, dashboard executivo e go-live em 3 semanas.';
-    var checked = document.querySelectorAll('.quiz-check input:checked');
+      ? 'Imóveis ilimitados, com todos os templates disponíveis e integração com os principais ERPs do mercado.'
+      : 'Até 5.000 imóveis, com os templates essenciais, go live em 3 semanas e alertas automáticos.';
+
+    // Templates escolhidos
+    var tmplDiv = document.getElementById('quizResultTemplates');
+    if (tmpl.length){
+      var th = '<div class="quiz-addons-title">Templates selecionados:</div><ul>';
+      for (var i=0;i<tmpl.length;i++){ th += '<li>' + tmpl[i].value + '</li>'; }
+      th += '</ul>';
+      tmplDiv.innerHTML = th;
+    } else { tmplDiv.innerHTML = ''; }
+
+    // Complementos (add-ons) escolhidos
+    var addon = document.querySelectorAll('#quizStep4 input:checked');
     var addonsDiv = document.getElementById('quizResultAddons');
-    if (checked.length){
-      var html = '<div class="quiz-addons-title">Add-ons recomendados:</div><ul>';
-      for (var k=0;k<checked.length;k++){ html += '<li>' + checked[k].value + '</li>'; }
+    if (addon.length){
+      var html = '<div class="quiz-addons-title">Complementos recomendados:</div><ul>';
+      for (var k=0;k<addon.length;k++){ html += '<li>' + addon[k].value + '</li>'; }
       html += '</ul>';
       addonsDiv.innerHTML = html;
-    } else {
-      addonsDiv.innerHTML = '';
-    }
+    } else { addonsDiv.innerHTML = ''; }
+
     showStep('quizResult');
   });
 
