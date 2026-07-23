@@ -1,0 +1,1993 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Specifor On Premise — a plataforma para gestão de ativos mais robusta do mercado. Centralize a gestão em um ambiente único e seguro, com rastreabilidade, segurança jurídica e controle total da operação.">
+<title>Specifor On Premise — A plataforma de gestão de ativos mais robusta do mercado | 4Asset</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy: #0b1220;
+    --navy-2: #0f1830;
+    --card-dark: #121b30;
+    --blue: #4f63ff;
+    --blue-2: #7b8bff;
+    --green: #25c05a;
+    --gray-bg: #f4f5f9;
+    --gray-text: #8a93a6;
+    --white: #ffffff;
+    --border: rgba(255,255,255,0.08);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:'Inter',Arial,sans-serif; color:#0f1d33; background:#fff; line-height:1.4;}
+  img,.ph{display:block; max-width:100%;}
+  .ph{
+    background:repeating-linear-gradient(45deg, #dfe3ee 0 10px, #eceff7 10px 20px);
+    border:1px dashed #b7bfd4;
+    color:#7b849c;
+    display:flex; align-items:center; justify-content:center;
+    text-align:center; font-size:12px; font-style:italic; padding:8px;
+    border-radius:8px;
+  }
+  .pill{
+    display:inline-flex; align-items:center; gap:6px;
+    font-size:12px; font-weight:700; letter-spacing:.04em; text-transform:uppercase;
+    padding:6px 14px; border-radius:999px;
+  }
+  .pill-blue{background:rgba(79,99,255,0.12); color:var(--blue);}
+  .pill-green{background:rgba(37,192,90,0.12); color:var(--green);}
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center;
+    padding:13px 26px; border-radius:10px; font-weight:600; font-size:14px;
+    text-decoration:none; cursor:pointer; border:none;
+  }
+  .btn-outline{background:transparent; color:#fff; border:1px solid rgba(255,255,255,0.3);}
+  .section{padding:90px 24px;}
+  .wrap{max-width:1180px; margin:0 auto;}
+  .center{text-align:center;}
+  h1,h2,h3{font-weight:700; letter-spacing:-0.02em;}
+
+  /* ===== NAV (hero) ===== */
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:clamp(12px,2vh,22px) 40px; position:relative; z-index:5; flex-shrink:0;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+  }
+  .nav .logo{color:#fff; font-weight:800; font-size:20px; display:flex; align-items:center; gap:8px;}
+  .nav .logo .dot{width:10px; height:10px; border-radius:50%; background:var(--blue);}
+  .nav ul{display:flex; align-items:center; gap:36px; list-style:none;}
+  .nav ul a{color:rgba(255,255,255,0.9); text-decoration:none; font-size:15px; font-weight:600; display:flex; align-items:center; gap:5px;}
+  .nav ul a svg{opacity:.7;}
+  .nav .actions{display:flex; align-items:center; gap:12px;}
+  /* topbar estilo anexo: logo à esquerda, nav centralizada, ações à direita */
+  .nav .hero-logo{flex:1 1 0;}
+  .nav ul{flex:0 0 auto;}
+  .nav .actions{flex:1 1 0; justify-content:flex-end;}
+  .btn-signup{background:#fff; color:#0b1220; border-radius:999px; padding:11px 22px; font-weight:700; font-size:14px;}
+  .btn-signup:hover{background:rgba(255,255,255,0.88);}
+  .btn-nav-outline{padding:10px 18px; font-size:14px; gap:7px;}
+  .btn-nav-outline svg{width:16px; height:16px;}
+
+  /* ===== HERO (fiel ao print real do Specifor) ===== */
+  .hero{
+    position:relative; overflow:hidden;
+    height:100vh; display:flex; flex-direction:column;
+    background:radial-gradient(120% 100% at 12% 0%, #1a2c54 0%, #101d3d 40%, #0b1730 70%, #0a1428 100%);
+  }
+  .hero-dots-area{
+    grid-column:1; grid-row:1; position:relative; z-index:0; pointer-events:none;
+    min-width:0; min-height:0;
+    transform:translateY(clamp(-60px,-4.5vh,-30px));
+  }
+  .hero-dots{
+    position:absolute;
+    top:50%; right:3%; transform:translateY(-50%);
+    height:min(34vh,300px); width:calc(min(34vh,300px) * 1.29);
+  }
+  .hero-dots span{
+    position:absolute; width:19%; aspect-ratio:1; border-radius:50%;
+    background:rgba(140,165,255,0.08);
+  }
+
+  .hero-logo{display:flex; align-items:center;}
+  .hero-logo img{height:20px; width:auto; display:block;}
+
+  .btn-comecar{
+    background:transparent; border:1px solid rgba(255,255,255,0.35); color:#fff; padding:11px 20px;
+    border-radius:999px; font-size:14px; font-weight:600; display:inline-flex; align-items:center; gap:8px;
+  }
+
+  .hero-inner{
+    position:relative; z-index:2; max-width:1280px; margin:0 auto; width:100%;
+    padding:clamp(10px,2vh,28px) 44px; display:grid; grid-template-columns:minmax(0,1fr); grid-template-rows:minmax(0,1fr);
+    flex:1; min-height:0;
+  }
+  .hero-content{
+    grid-column:1; grid-row:1; align-self:center; justify-self:start; z-index:2;
+    max-width:480px; color:#fff; text-align:left;
+    margin-top:clamp(-256px,-21vh,-136px);
+  }
+  .hero-content .pill{
+    background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12); color:#8fc4ff;
+    margin-bottom:clamp(8px,1.6vh,20px);
+  }
+  .hero-content h1{
+    font-family:'Inter',Arial,sans-serif;
+    font-weight:800; font-size:clamp(26px,3.6vw,46px); line-height:1.1;
+    margin-bottom:clamp(8px,1.5vh,18px); letter-spacing:-0.02em;
+  }
+  .hero-content p{
+    color:rgba(255,255,255,0.65); font-size:clamp(13px,1.1vw,16px); line-height:1.5;
+    max-width:460px; margin:0 0 clamp(14px,2.2vh,28px);
+  }
+  .hero-content .actions{display:flex; gap:12px; align-items:center; justify-content:flex-start;}
+
+  .btn-falar{
+    background:linear-gradient(180deg,#3f8dff,#2f6ef0); color:#fff; font-weight:700;
+    padding:clamp(10px,1.6vh,15px) 26px; border-radius:10px; font-size:clamp(13px,1vw,15px);
+  }
+  .btn-ver{
+    width:clamp(38px,4vh,48px); height:clamp(38px,4vh,48px); padding:0; border-radius:50%;
+    background:rgba(79,140,255,0.15); border:1px solid rgba(79,163,255,0.4); color:#fff;
+    display:inline-flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;
+  }
+
+  .hero-laptop{
+    grid-column:1; grid-row:1; z-index:1; pointer-events:none;
+    display:flex; align-items:center; justify-content:center;
+    padding-top:clamp(35px,4.5vh,55px); padding-bottom:clamp(100px,13.5vh,140px);
+    min-height:0; min-width:0; overflow:hidden;
+  }
+  .hero-laptop img{
+    width:auto; height:auto; max-width:min(100%,900px); max-height:100%; display:block; margin:0 auto;
+    translate:0 var(--heroImgY, 0px); will-change:translate;
+  }
+
+  /* ===== HERO — VÍDEO DE FUNDO (toca 1x e congela no último frame) ===== */
+  .hero-video{
+    position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+    z-index:0; pointer-events:none;
+  }
+  .hero-scrim{
+    position:absolute; inset:0; z-index:1; pointer-events:none;
+    background:
+      linear-gradient(90deg, rgba(8,12,26,0.88) 0%, rgba(8,12,26,0.55) 42%, rgba(8,12,26,0.28) 100%),
+      linear-gradient(0deg, rgba(8,12,26,0.75) 0%, rgba(8,12,26,0.10) 42%, transparent 70%);
+  }
+  /* Degradê forte na base: cobre a marca/logo do vídeo no canto, atrás dos big numbers */
+  .hero-fade{
+    position:absolute; left:0; right:0; bottom:0; height:38%; z-index:2; pointer-events:none;
+    background:linear-gradient(to top,
+      #05070d 0%, #05070d 16%, rgba(5,7,13,0.94) 34%, rgba(5,7,13,0.55) 62%, rgba(5,7,13,0) 100%);
+  }
+  /* nav e conteúdo acima do vídeo/scrim */
+  .hero .nav{position:relative; z-index:5;}
+  .hero-inner{z-index:3;}
+  .hero-stats{z-index:4;}
+  /* Com vídeo de fundo, o laptop e os pontos decorativos saem de cena */
+  .hero-laptop, .hero-dots-area{display:none !important;}
+  /* Texto fixado à esquerda e estreito — o personagem do vídeo fica ao centro (43–62%),
+     então o conteúdo ocupa só a faixa esquerda livre, sem sobrepor a pessoa. */
+  .hero .hero-inner{max-width:none; margin:0; padding-left:clamp(28px,5vw,84px); padding-right:24px;}
+  .hero .hero-content{max-width:min(36vw,440px);}
+
+  /* Sequência: o texto/CTA/big numbers ENTRAM primeiro; o vídeo começa depois. */
+  .hero[data-intro="playing"] .hero-content,
+  .hero[data-intro="playing"] .hero-stats{
+    opacity:0; transform:translateY(26px); transition:none;
+  }
+  .hero[data-intro="ready"] .hero-content{
+    opacity:1; transform:none;
+    transition:opacity 1s cubic-bezier(.22,.7,.32,1), transform 1s cubic-bezier(.22,.7,.32,1);
+  }
+  .hero[data-intro="ready"] .hero-stats{
+    opacity:1; transform:none;
+    transition:opacity 1s cubic-bezier(.22,.7,.32,1) .35s, transform 1s cubic-bezier(.22,.7,.32,1) .35s;
+  }
+  /* Marca Specifor no lado direito — surge após o vídeo terminar */
+  /* Marca Specifor: grande, colada na margem direita e cortada (saindo da tela) */
+  .hero-brand{
+    position:absolute; z-index:4; right:0; top:50%;
+    width:clamp(320px,34vw,560px); height:auto; pointer-events:none;
+    opacity:0; transform:translate(30%,-50%) scale(0.94);
+    transition:opacity 1.1s cubic-bezier(.22,.7,.32,1), transform 1.1s cubic-bezier(.22,.7,.32,1);
+    filter:brightness(2.1) saturate(1.2) drop-shadow(0 0 46px rgba(80,150,255,0.6));
+  }
+  .hero[data-video="done"] .hero-brand{opacity:0.35; transform:translate(30%,-50%) scale(1);}
+
+  /* ===== HERO — BIG NUMBERS (estilo do anexo: ícone + 2 linhas, sem card) ===== */
+  .hero-stats{
+    position:absolute; left:0; right:0; bottom:clamp(74px,9vh,94px); z-index:4;
+    padding:0 clamp(28px,5vw,84px); margin:0; max-width:none; width:100%;
+    display:flex; flex-wrap:wrap; align-items:center;
+    gap:clamp(16px,2.4vh,24px) clamp(22px,3vw,56px); justify-content:space-between;
+  }
+  .hero .hero-stats .h-stat{
+    display:grid; grid-template-columns:auto 1fr; grid-template-rows:auto auto;
+    column-gap:14px; row-gap:2px; align-items:center;
+    background:none; -webkit-backdrop-filter:none; backdrop-filter:none;
+    border:none; box-shadow:none; border-radius:0; padding:0; overflow:visible;
+  }
+  .hero .hero-stats .h-stat::before{display:none;}
+  .hero .hero-stats .icon-badge{
+    grid-row:1 / 3; grid-column:1; width:auto; height:auto; border-radius:0; margin:0; padding:0;
+    background:none; border:none; box-shadow:none;
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .hero .hero-stats .icon-badge::before{display:none;}
+  .hero .hero-stats .icon{width:30px; height:30px; color:#5cc6ff;}
+  .hero .hero-stats .num{grid-column:2; grid-row:1; font-size:clamp(15px,1.25vw,18px); font-weight:700; color:#fff; line-height:1.2;}
+  .hero .hero-stats .label{grid-column:2; grid-row:2; font-size:clamp(12px,0.92vw,13.5px); color:rgba(255,255,255,0.62); line-height:1.3; white-space:nowrap;}
+  .h-stat{
+    position:relative; overflow:hidden;
+    display:flex; flex-direction:column; align-items:flex-start; gap:clamp(8px,1.4vh,14px);
+    padding:clamp(12px,2vh,20px); border-radius:14px;
+    background:rgba(255,255,255,0.035);
+    -webkit-backdrop-filter:blur(28px) saturate(200%);
+    backdrop-filter:blur(28px) saturate(200%);
+    border:1px solid rgba(255,255,255,0.16);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,0.18), inset 0 0 24px rgba(255,255,255,0.03), 0 12px 30px rgba(0,0,0,0.28);
+  }
+  .h-stat::before{
+    content:''; position:absolute; inset:0; pointer-events:none; border-radius:inherit;
+    background:linear-gradient(135deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.02) 35%, rgba(255,255,255,0) 60%);
+  }
+
+  /* ===== SF Symbols-style "Appear" (surgimento gradual) ===== */
+  .sf-appear{
+    opacity:0; transform:translateY(18px) scale(0.94);
+    transition:opacity .7s cubic-bezier(.22,.7,.32,1), transform .7s cubic-bezier(.22,.7,.32,1);
+  }
+  .sf-appear.is-visible{opacity:1; transform:translateY(0) scale(1);}
+  /* Variante "liquid glass" (Depoimentos): materializa saindo do desfoque, estilo SF Symbols appear */
+  .usecases .sf-appear{
+    opacity:0; transform:translateY(30px) scale(0.93);
+    filter:blur(16px) saturate(180%) brightness(1.12);
+    transition:opacity .95s cubic-bezier(.22,.7,.32,1), transform .95s cubic-bezier(.22,.7,.32,1), filter .95s cubic-bezier(.22,.7,.32,1);
+  }
+  .usecases .sf-appear.is-visible{opacity:1; transform:translateY(0) scale(1); filter:blur(0) saturate(100%) brightness(1);}
+  .hero-laptop-appear{
+    opacity:0; transform:translateY(26px) scale(0.93);
+    transition:opacity 1.6s cubic-bezier(.19,.6,.22,1), transform 1.6s cubic-bezier(.19,.6,.22,1);
+  }
+  .hero-laptop-appear.is-visible{opacity:1; transform:translateY(0) scale(1);}
+  /* Texto e bolinhas do hero: entram depois do notebook (offset via translate,
+     pra não brigar com o transform de posicionamento que já existe) */
+  .hero-text-appear{
+    opacity:0; translate:0 18px;
+    transition:opacity 1.1s cubic-bezier(.22,.7,.32,1), translate 1.1s cubic-bezier(.22,.7,.32,1);
+  }
+  .hero-text-appear.is-visible{opacity:1; translate:0 0;}
+  /* Big numbers do hero: mesma entrada, porém mais suave */
+  .hero-stats .sf-appear{
+    transition:opacity 1.1s cubic-bezier(.22,.7,.32,1), transform 1.1s cubic-bezier(.22,.7,.32,1);
+  }
+  .hero-stats .sf-appear.is-visible{transform:none;}
+
+  /* ===== SF Symbols-style "Breathe" (pulsação lenta e contínua) ===== */
+  @keyframes sf-breathe{
+    0%, 100%{transform:scale(1); opacity:1;}
+    50%{transform:scale(1.14); opacity:.72;}
+  }
+  .sf-breathe{animation:sf-breathe 2.8s ease-in-out infinite;}
+
+  /* ===== SF Symbols "Bounce" — feedback elástico único ao interagir ===== */
+  @keyframes sf-bounce{
+    0%{transform:scale(1);}
+    30%{transform:scale(1.22);}
+    55%{transform:scale(0.94);}
+    75%{transform:scale(1.06);}
+    100%{transform:scale(1);}
+  }
+  .addon-item:hover .icon{animation:sf-bounce .6s cubic-bezier(.28,.84,.42,1) 1;}
+  .orbit-card:hover .icon-badge .icon{animation:sf-bounce .6s cubic-bezier(.28,.84,.42,1) 1;}
+
+  /* ===== SF Symbols "Scale" — feedback de pressão nos controles ===== */
+  .btn, .quiz-opt, .quiz-check{transition-property:background, border-color, transform; transition-duration:.15s;}
+  .btn:active, .quiz-opt:active, .quiz-check:active{transform:scale(0.97);}
+
+  /* ===== SF Symbols "Wiggle" — chama atenção pro WhatsApp a cada ~9s ===== */
+  @keyframes sf-wiggle{
+    0%, 88%, 100%{transform:rotate(0);}
+    90%{transform:rotate(-9deg);}
+    92.5%{transform:rotate(8deg);}
+    95%{transform:rotate(-5deg);}
+    97.5%{transform:rotate(3deg);}
+  }
+  .whatsapp-float img{animation:sf-wiggle 9s ease-in-out 3s infinite; transform-origin:50% 60%;}
+
+  /* ===== SF Symbols "Pulse" — atividade contínua (status online do modal) ===== */
+  @keyframes sf-pulse{
+    0%, 100%{opacity:1;}
+    50%{opacity:.3;}
+  }
+  .wa-status::before{
+    content:''; display:inline-block; width:7px; height:7px; border-radius:50%;
+    background:#25d366; margin-right:6px; vertical-align:middle;
+    animation:sf-pulse 2.2s ease-in-out infinite;
+  }
+
+  /* Acessibilidade: desliga animações contínuas pra quem prefere menos movimento */
+  @media (prefers-reduced-motion: reduce){
+    .sf-breathe, .whatsapp-float img, .wa-status::before,
+    .addon-item:hover .icon, .orbit-card:hover .icon-badge .icon,
+    .btn:hover::after, .btn-parceiro:hover::after{animation:none;}
+    .sf-appear, .usecases .sf-appear, .hero-laptop-appear{transition:none; opacity:1; transform:none; filter:none;}
+    .hero-text-appear{transition:none; opacity:1; translate:none;}
+    .btn, .btn-parceiro, .a-card, .usecases .sf-appear.is-visible{transition:none;}
+    .btn-falar:hover, .btn-comecar:hover, .btn-outline:hover, .btn-parceiro:hover,
+    .btn-ver:hover, .a-card:hover, .usecases .sf-appear.is-visible:hover{transform:none;}
+  }
+  .addon-item:nth-child(2) .sf-breathe{animation-delay:.35s;}
+  .addon-item:nth-child(3) .sf-breathe{animation-delay:.7s;}
+  .addon-item:nth-child(4) .sf-breathe{animation-delay:1.05s;}
+  .addon-item:nth-child(5) .sf-breathe{animation-delay:1.4s;}
+  .addon-item:nth-child(6) .sf-breathe{animation-delay:1.75s;}
+  .h-stat .icon-badge{
+    width:clamp(46px,6vh,60px); height:clamp(46px,6vh,60px); border-radius:14px;
+    background:rgba(79,163,255,0.16);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .h-stat .icon{color:#8fc8ff; width:clamp(24px,3.2vh,34px); height:clamp(24px,3.2vh,34px);}
+  .h-stat .num{color:#fff; font-weight:800; font-size:clamp(14px,1.4vw,18px); line-height:1.2;}
+  .h-stat .label{color:rgba(255,255,255,0.55); font-size:clamp(10.5px,0.85vw,12.5px); line-height:1.4;}
+
+  /* ===== NOSSAS SOLUÇÕES / LOGO MARQUEE ===== */
+  .seen-in{padding:60px 0; text-align:center; background:#05070d; overflow:hidden;}
+  .seen-in .label{
+    font-size:14px; letter-spacing:.06em; text-transform:uppercase; font-weight:700;
+    color:#fff; margin-bottom:36px; padding:0 24px;
+  }
+  .marquee-row{
+    display:flex; width:max-content; align-items:center;
+    gap:52px; will-change:transform;
+  }
+  .marquee-row.row1{animation:marquee-scroll 46s linear infinite; margin-bottom:48px;}
+  .marquee-row.row2{animation:marquee-scroll 54s linear infinite reverse;}
+  /* Logos coloridas (sem filtro), todas com a mesma altura nas duas linhas. */
+  /* Logos recortados (sem margem interna) + altura igual = linha de base consistente.
+     Teto de largura só pros ultra-largos, com object-fit pra não distorcer. */
+  .marquee-row .logo-item{
+    height:52px; width:auto; max-width:190px; object-fit:contain; object-position:center;
+    flex-shrink:0; opacity:.9;
+    transition:opacity .25s, transform .25s cubic-bezier(.34,1.4,.64,1);
+  }
+  .marquee-row .logo-item:hover{opacity:1; transform:scale(1.32);}
+  @keyframes marquee-scroll{
+    from{transform:translateX(0);}
+    to{transform:translateX(-50%);}
+  }
+
+  /* ===== SCHOOL / STARS SECTION ===== */
+  .stars{
+    background:radial-gradient(circle at 50% 20%, #10192f 0%, #05070d 70%);
+    color:#fff; position:relative; height:100vh; padding:0 24px;
+    display:flex; flex-direction:column;
+  }
+  .stars .wrap{max-width:1400px; display:flex; flex-direction:column; height:100%; padding:clamp(40px,7.5vh,100px) 0 clamp(34px,6vh,72px);}
+  .stars h2{
+    text-align:center; font-size:clamp(22px,min(3.4vw,5.6vh),46px); line-height:1.15;
+    max-width:1360px; margin:0 auto; flex-shrink:0;
+  }
+  .stars-sub{
+    text-align:center; max-width:640px; margin:clamp(10px,2vh,20px) auto 0; flex-shrink:0;
+    color:rgba(255,255,255,0.6); font-size:clamp(13px,1.5vh,16px); line-height:1.5;
+  }
+  .stars-diagram{
+    position:relative; max-width:1040px; margin:clamp(38px,6.5vh,84px) auto 0; width:100%;
+    flex:1; min-height:0;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .stars-main-img{
+    width:auto; max-width:min(100%,780px); max-height:100%; display:block; position:relative; z-index:1;
+    translate:0 var(--imgY, 0px); will-change:translate;
+  }
+  .stars-diagram .orbit-card{translate:0 var(--cardsY, 0px);}
+  .orbit-card{
+    position:absolute; z-index:2; text-align:left; cursor:pointer;
+    width:230px; min-height:auto; justify-content:flex-start;
+    flex-direction:row !important; align-items:center; gap:12px;
+    overflow:visible; transition:opacity .2s ease, transform .2s ease, background .2s ease;
+  }
+  .orbit-card:hover{background:rgba(255,255,255,0.08);}
+  .stars-diagram:hover .orbit-card{opacity:0.4;}
+  .stars-diagram .orbit-card:hover{opacity:1; z-index:15;}
+  .orbit-card.pos-tl:hover, .orbit-card.pos-tr:hover, .orbit-card.pos-bl:hover, .orbit-card.pos-br:hover{
+    transform:scale(1.1);
+  }
+  .orbit-card.pos-ml:hover, .orbit-card.pos-mr:hover{
+    transform:translateY(-50%) scale(1.1);
+  }
+  .orbit-card .icon-badge{flex-shrink:0; margin-bottom:0;}
+  .orbit-card .num{font-size:13.5px; margin-bottom:0; line-height:1.3; pointer-events:none;}
+  .orbit-card .label{
+    display:block; position:absolute; top:calc(100% + 12px); left:50%;
+    transform:translateX(-50%) translateY(-6px);
+    width:300px; background:rgba(16,26,46,0.82);
+    -webkit-backdrop-filter:blur(20px) saturate(180%); backdrop-filter:blur(20px) saturate(180%);
+    border:1px solid rgba(255,255,255,0.14); border-radius:12px;
+    padding:16px 18px; font-size:13px; font-weight:400; line-height:1.55; color:rgba(255,255,255,0.75);
+    text-align:left; opacity:0; visibility:hidden;
+    transition:opacity .3s ease, transform .3s ease, visibility 0s linear .3s;
+    box-shadow:0 16px 34px rgba(0,0,0,0.45); z-index:20; pointer-events:none;
+  }
+  .orbit-card .label::before{
+    content:''; position:absolute; bottom:100%; left:50%; transform:translateX(-50%);
+    border:6px solid transparent; border-bottom-color:#101a2e;
+  }
+  .orbit-card:hover .label{
+    opacity:1; visibility:visible; transform:translateX(-50%) translateY(0);
+    transition:opacity .9s cubic-bezier(.16,.5,.24,1) .38s, transform .9s cubic-bezier(.16,.5,.24,1) .38s, visibility 0s linear .38s;
+  }
+  .orbit-card.pos-tl{left:8%; top:4%;}
+  .orbit-card.pos-ml{left:4%; top:46%; transform:translateY(-50%);}
+  .orbit-card.pos-bl{left:7%; bottom:2%;}
+  .orbit-card.pos-tr{right:8%; top:3%;}
+  .orbit-card.pos-mr{right:4%; top:52%; transform:translateY(-50%);}
+  .orbit-card.pos-br{right:7%; bottom:-2%;}
+  .orbit-card.pos-tl .label, .orbit-card.pos-ml .label, .orbit-card.pos-bl .label{
+    left:0; transform:translateX(0) translateY(-6px);
+  }
+  .orbit-card.pos-tl:hover .label, .orbit-card.pos-ml:hover .label, .orbit-card.pos-bl:hover .label{
+    transform:translateX(0) translateY(0);
+  }
+  .orbit-card.pos-tl .label::before, .orbit-card.pos-ml .label::before, .orbit-card.pos-bl .label::before{
+    left:24px; transform:none;
+  }
+  .orbit-card.pos-tr .label, .orbit-card.pos-mr .label, .orbit-card.pos-br .label{
+    left:auto; right:0; transform:translateX(0) translateY(-6px);
+  }
+  .orbit-card.pos-tr:hover .label, .orbit-card.pos-mr:hover .label, .orbit-card.pos-br:hover .label{
+    transform:translateX(0) translateY(0);
+  }
+  .orbit-card.pos-tr .label::before, .orbit-card.pos-mr .label::before, .orbit-card.pos-br .label::before{
+    left:auto; right:24px; transform:none;
+  }
+  .stars-quote{
+    text-align:center; max-width:520px; margin:60px auto 0; font-size:20px; font-weight:600;
+  }
+  .stars-quote p.small{font-size:13px; font-weight:400; color:rgba(255,255,255,0.55); margin-top:12px;}
+
+  /* ===== DIAGRAMA DE PROBLEMAS — 7 cards ao redor da imagem do engenheiro ===== */
+  /* Seção cresce para acomodar a imagem maior */
+  #problema.stars{
+    height:auto; min-height:100vh; justify-content:center;
+    padding-top:clamp(40px,6vh,80px); padding-bottom:clamp(40px,6vh,80px);
+    background:
+      radial-gradient(48% 32% at 50% -3%, rgba(58,138,250,0.50) 0%, rgba(20,74,150,0.28) 26%, transparent 56%),
+      radial-gradient(78% 66% at 74% 26%, rgba(4,43,85,0.55) 0%, transparent 60%),
+      linear-gradient(180deg, #06122a 0%, #05070d 58%);
+  }
+  /* Glow azul (#042b55) atrás do topo da tablet — estilo do 2º print */
+  .diagram-problems::before{
+    content:''; position:absolute; left:50%; top:-1%; transform:translateX(-50%);
+    width:min(66%,900px); height:clamp(170px,24vh,270px); z-index:0; pointer-events:none;
+    background:radial-gradient(ellipse 60% 100% at 50% 16%, rgba(40,116,215,0.62) 0%, rgba(4,43,85,0.55) 36%, rgba(4,43,85,0) 74%);
+    filter:blur(18px);
+  }
+  #problema .wrap{height:auto; width:100%; max-width:1680px;}
+  .diagram-problems{width:100%; max-width:1680px; min-height:560px; align-items:center;}
+  #problema .stars-diagram{margin-top:0;}
+  .diagram-problems .orbit-card{width:210px;}
+  /* Tablet com o app, no centro, com sombra/brilho azul (estilo do 2º print) */
+  .diagram-problems .stars-main-img{
+    height:auto; width:clamp(400px,50vw,720px); max-width:none; max-height:none;
+    -webkit-mask-image:linear-gradient(to bottom, #000 0%, #000 42%, rgba(0,0,0,0) 77%);
+    mask-image:linear-gradient(to bottom, #000 0%, #000 42%, rgba(0,0,0,0) 77%);
+    filter: drop-shadow(0 18px 42px rgba(0,0,0,0.5));
+  }
+  /* Título como cabeçalho no topo da seção (não sobre a tablet) */
+  .problems-head{max-width:820px; margin:0 auto clamp(6px,1vh,14px); text-align:center;}
+  .problems-head .pill{margin-bottom:16px;}
+  #problema .problems-center-title{
+    position:static; transform:none; white-space:normal; pointer-events:auto;
+    margin:0; text-align:center; color:#fff;
+    font-size:clamp(28px,3.6vw,48px); font-weight:800; line-height:1.12; letter-spacing:-0.02em;
+    text-shadow:none;
+  }
+  #problema .problems-sub{
+    position:relative; z-index:5;
+    max-width:680px; margin:clamp(-120px,-13vh,-76px) auto 0; text-align:center;
+    font-size:clamp(14px,1.05vw,16.5px); font-weight:500; line-height:1.7; color:rgba(255,255,255,0.72);
+  }
+  /* Cards distribuídos em círculo (elipse) ao redor do personagem.
+     Centro do card ancorado no ponto via translate(-50%,-50%); ângulos iguais (~51°).
+     z-index acima do título para permanecerem legíveis. */
+  .diagram-problems .orbit-card{
+    transform:translate(-50%,-50%); z-index:4;
+    background:rgba(11,18,35,0.88); border-color:rgba(255,255,255,0.20);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,0.14), 0 18px 40px rgba(0,0,0,0.45);
+  }
+  .diagram-problems .orbit-card:hover{transform:translate(-50%,-50%) scale(1.06); background:rgba(22,32,58,0.94);}
+  /* Cards flanqueando a tablet: 3 à esquerda, 3 à direita (escalonados, meio mais afastado) */
+  .diagram-problems .p1{left:18%; top:30%;}   /* esq — topo   */
+  .diagram-problems .p3{left:14%; top:50%;}   /* esq — meio (mais afastado) */
+  .diagram-problems .p5{left:24%; top:68%;}   /* esq — baixo  */
+  .diagram-problems .p2{left:77%; top:39%;}   /* dir — topo   */
+  .diagram-problems .p4{left:86%; top:56%;}   /* dir — meio (mais afastado) */
+  .diagram-problems .p6{left:79%; top:73%;}   /* dir — baixo  */
+  /* Tooltips dos cards da esquerda (p1,p3,p5,p7) alinhados à esquerda */
+  .diagram-problems .p1 .label,.diagram-problems .p3 .label,.diagram-problems .p5 .label,.diagram-problems .p7 .label{
+    left:0; right:auto; transform:translateX(0) translateY(-6px);
+  }
+  .diagram-problems .p1:hover .label,.diagram-problems .p3:hover .label,.diagram-problems .p5:hover .label,.diagram-problems .p7:hover .label{
+    transform:translateX(0) translateY(0);
+  }
+  .diagram-problems .p1 .label::before,.diagram-problems .p3 .label::before,.diagram-problems .p5 .label::before,.diagram-problems .p7 .label::before{
+    left:24px; right:auto; transform:none;
+  }
+  /* Tooltips dos cards da direita (p2,p4,p6) alinhados à direita */
+  .diagram-problems .p2 .label,.diagram-problems .p4 .label,.diagram-problems .p6 .label{
+    left:auto; right:0; transform:translateX(0) translateY(-6px);
+  }
+  .diagram-problems .p2:hover .label,.diagram-problems .p4:hover .label,.diagram-problems .p6:hover .label{
+    transform:translateX(0) translateY(0);
+  }
+  .diagram-problems .p2 .label::before,.diagram-problems .p4 .label::before,.diagram-problems .p6 .label::before{
+    left:auto; right:24px; transform:none;
+  }
+  /* Cards mais baixos (p5,p6): tooltip abre para cima, para não cortar na base */
+  .diagram-problems .p5 .label,.diagram-problems .p6 .label{top:auto; bottom:calc(100% + 12px);}
+  .diagram-problems .p5 .label::before,.diagram-problems .p6 .label::before{
+    top:100%; bottom:auto; border-bottom-color:transparent; border-top-color:#101a2e;
+  }
+
+  /* ===== RECURSOS — BENTO GRID (liquid glass) ===== */
+  /* Espaçamento em escala de 8px; superfícies de vidro coerentes com os cards .h-stat */
+  .bento{background:#05070d; padding:clamp(72px,10vh,120px) 24px; color:#fff;}
+  .bento .head{max-width:720px; margin:0 auto clamp(48px,7vh,64px); text-align:center;}
+  .bento .head .pill{margin-bottom:20px;}
+  .bento h2{font-size:clamp(28px,3.6vw,46px); line-height:1.12; margin:0 0 16px; color:#fff; letter-spacing:-0.015em;}
+  .bento p.sub{color:rgba(255,255,255,0.62); font-size:clamp(14px,1.1vw,16.5px); line-height:1.65; max-width:600px; margin:0 auto;}
+  .bento-grid{display:grid; grid-template-columns:repeat(6,1fr); gap:24px; max-width:1160px; margin:0 auto;}
+  .bento-card{
+    grid-column:span 2; position:relative; overflow:hidden; border-radius:26px;
+    min-height:300px; padding:32px; display:flex; flex-direction:column; justify-content:flex-end;
+    background:rgba(255,255,255,0.045);
+    -webkit-backdrop-filter:blur(30px) saturate(170%); backdrop-filter:blur(30px) saturate(170%);
+    border:1px solid rgba(255,255,255,0.10);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,0.16), inset 0 0 42px rgba(255,255,255,0.02), 0 24px 60px rgba(0,0,0,0.42);
+    transition:transform .35s cubic-bezier(.22,.7,.32,1), border-color .35s ease, box-shadow .35s ease;
+  }
+  .bento-card.bento-lg{grid-column:span 3; min-height:340px;}
+  .bento-card:hover{
+    transform:translateY(-6px);
+    border-color:rgba(90,160,255,0.55);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.22),
+      0 0 0 1px rgba(90,160,255,0.30),
+      0 24px 60px rgba(0,0,0,0.5),
+      0 0 52px rgba(30,95,205,0.60);
+  }
+  /* brilho azul no topo */
+  .bento-card::before{
+    content:''; position:absolute; left:0; right:0; top:0; height:74%;
+    background:radial-gradient(88% 100% at 50% -8%, rgba(70,105,240,0.46) 0%, rgba(34,52,124,0.14) 46%, transparent 72%);
+    pointer-events:none;
+  }
+  /* reflexo de vidro (liquid glass) */
+  .bento-card::after{
+    content:''; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
+    background:linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.02) 30%, rgba(255,255,255,0) 56%);
+  }
+  .bento-icon{position:absolute; left:0; right:0; top:8%; height:50%; display:flex; align-items:center; justify-content:center; pointer-events:none; z-index:1;}
+  .bento-icon svg{width:clamp(60px,6.5vw,92px); height:clamp(60px,6.5vw,92px); color:#d6e3ff; opacity:.97; filter:drop-shadow(0 14px 36px rgba(60,100,240,0.6));}
+  .bento-text{position:relative; z-index:2;}
+  .bento-text h3{font-size:clamp(17px,1.4vw,21px); font-weight:700; color:#fff; margin:0 0 10px; letter-spacing:-0.01em;}
+  .bento-text p{
+    font-size:clamp(13px,1vw,14.5px); line-height:1.55; margin:0;
+    background:linear-gradient(92deg,#f0c49a 0%,#d7a0c0 52%,#a99cdb 100%);
+    -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent;
+  }
+  /* Cards com foto de fundo (a imagem substitui o ícone e ocupa o card todo) */
+  .bento-photo .bento-img{
+    position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center; z-index:0;
+  }
+  .bento-photo::before{display:none;}          /* remove o brilho azul do topo */
+  .bento-photo::after{                          /* degradê escuro atrás do texto */
+    background:linear-gradient(to top,
+      rgba(5,8,18,0.96) 0%, rgba(5,8,18,0.82) 26%, rgba(5,8,18,0.32) 52%, rgba(5,8,18,0) 78%);
+    z-index:1;
+  }
+  .bento-photo .bento-text{position:relative; z-index:2;}
+
+  @media(max-width:900px){
+    .bento{padding:clamp(56px,8vh,88px) 20px;}
+    .bento-grid{grid-template-columns:1fr 1fr; gap:18px;}
+    .bento-card, .bento-card.bento-lg{grid-column:span 1; min-height:248px; padding:26px;}
+  }
+  @media(max-width:560px){
+    .bento-grid{grid-template-columns:1fr; gap:16px;}
+    .bento-card, .bento-card.bento-lg{grid-column:span 1; min-height:224px;}
+  }
+
+  /* ===== PRICING (Standard x Professional, estilo do print) ===== */
+  .approval{
+    background:radial-gradient(120% 100% at 50% 0%, #16214a 0%, var(--navy) 55%, #05070d 100%);
+    color:#fff; padding:56px 24px 28px;
+  }
+  .approval .head{max-width:1100px; margin:0 auto 34px;}
+  .approval h2{font-size:clamp(20px,2vw,32px); line-height:1.3; margin:12px 0 10px; white-space:nowrap;}
+  .approval p.sub{color:rgba(255,255,255,0.55); font-size:clamp(12px,1.05vw,14.5px); white-space:nowrap;}
+  .approval-cards{display:grid; grid-template-columns:1fr 1fr; gap:26px; max-width:1020px; margin:0 auto;}
+  .a-card{
+    background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:14px;
+    padding:30px; text-align:left; display:flex; flex-direction:column;
+  }
+  .a-card .a-label{font-size:12px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--blue-2); margin-bottom:10px;}
+  .a-card .a-big{font-size:28px; font-weight:800; color:#fff; line-height:1.2; margin-bottom:6px;}
+  .a-card .a-sub{font-size:13.5px; color:rgba(255,255,255,0.5); margin-bottom:18px;}
+  .a-card .a-desc{font-size:14px; color:rgba(255,255,255,0.55); line-height:1.55; margin-bottom:18px;}
+  .a-card .a-divider{border:none; border-top:1px solid rgba(255,255,255,0.1); margin:0 0 16px;}
+  .a-card .a-specs{display:flex; flex-direction:column; gap:9px; margin-bottom:18px;}
+  .a-card .a-specs .spec-row{display:flex; justify-content:space-between; font-size:13.5px; color:rgba(255,255,255,0.7);}
+  .a-card .a-specs .spec-row b{color:#fff; font-weight:700;}
+  .a-card .a-list-title{font-size:14px; font-weight:700; color:#fff; margin-bottom:10px;}
+  .a-card .a-check{list-style:none; display:flex; flex-direction:column; gap:8px; margin-bottom:18px;}
+  .a-card .a-check li{display:flex; align-items:flex-start; gap:8px; font-size:13.5px; color:rgba(255,255,255,0.75); line-height:1.45;}
+  .a-card .a-check li::before{content:'✓'; color:#4ade80; font-weight:700; flex-shrink:0;}
+  .a-card .a-cta{margin-top:auto; text-align:center; font-size:14.5px; padding:13px;}
+  .a-card .a-fine{font-size:11px; color:rgba(255,255,255,0.35); margin-top:10px; text-align:center;}
+
+  /* ===== ADD-ONS (ícone em cima, nome embaixo) ===== */
+  .addons{background:#05070d; padding:36px 24px 90px;}
+  .addons .head{max-width:640px; margin:0 auto 44px;}
+  .addons h2{font-size:32px; margin:16px 0 10px; color:#fff;}
+  .addons p.sub{color:rgba(255,255,255,0.55); font-size:15px;}
+  .addons-strip{
+    display:flex; flex-wrap:wrap; max-width:1180px; margin:0 auto;
+    background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:14px;
+    position:relative;
+  }
+  .addons-strip::before{
+    content:''; position:absolute; top:0; left:10%; right:10%; height:1px;
+    background:linear-gradient(90deg, transparent, rgba(79,163,255,0.8), transparent);
+    filter:blur(1px); pointer-events:none;
+  }
+  .addon-item{
+    flex:1 1 0; min-width:140px; display:flex; flex-direction:column; align-items:center; gap:14px;
+    padding:34px 16px; text-align:center; border-right:1px solid rgba(255,255,255,0.08);
+    position:relative; cursor:pointer; transition:background .2s, opacity .2s; border-radius:inherit;
+  }
+  .addon-item:first-child{border-radius:14px 0 0 14px;}
+  .addon-item:last-child{border-right:none; border-radius:0 14px 14px 0;}
+  .addon-item:hover{background:rgba(255,255,255,0.05);}
+  .addons-strip:hover .addon-item{opacity:0.4;}
+  .addons-strip .addon-item:hover{opacity:1; z-index:15;}
+  .addon-item .icon{width:30px; height:30px; color:#7cbcff; pointer-events:none;}
+  .addon-item .name{font-size:13px; font-weight:700; color:#fff; line-height:1.3; pointer-events:none;}
+  .addon-tip{
+    position:absolute; top:calc(100% + 14px); left:50%; transform:translateX(-50%) translateY(-6px);
+    width:230px; background:rgba(16,26,46,0.82);
+    -webkit-backdrop-filter:blur(20px) saturate(180%); backdrop-filter:blur(20px) saturate(180%);
+    border:1px solid rgba(255,255,255,0.14); border-radius:12px;
+    padding:14px 16px; font-size:12.5px; font-weight:400; line-height:1.5; color:rgba(255,255,255,0.75);
+    text-align:left; opacity:0; visibility:hidden; transition:opacity .18s ease, transform .18s ease, width .18s ease, padding .18s ease;
+    box-shadow:0 16px 34px rgba(0,0,0,0.45); z-index:10; pointer-events:none;
+  }
+  .addon-tip::after{
+    content:''; position:absolute; bottom:100%; left:50%; transform:translateX(-50%);
+    border:6px solid transparent; border-bottom-color:#101a2e;
+  }
+  .addon-item:hover .addon-tip{
+    opacity:1; visibility:visible; transform:translateX(-50%) translateY(0);
+    width:290px; padding:18px 20px; font-size:13.5px;
+  }
+  .addon-item:first-child .addon-tip{left:0; transform:translateX(0) translateY(-6px);}
+  .addon-item:first-child:hover .addon-tip{transform:translateX(0) translateY(0);}
+  .addon-item:first-child .addon-tip::after{left:24px;}
+  .addon-item:last-child .addon-tip{left:auto; right:0; transform:translateX(0) translateY(-6px);}
+  .addon-item:last-child:hover .addon-tip{transform:translateX(0) translateY(0);}
+  .addon-item:last-child .addon-tip::after{left:auto; right:24px; transform:none;}
+
+  /* ===== CTA: QUAL O PLANO IDEAL ===== */
+  .quiz-cta{background:#05070d; padding:0 24px 100px; text-align:center;}
+  .quiz-cta .quiz-question{
+    max-width:560px; margin:0 auto 26px; color:rgba(255,255,255,0.75);
+    font-size:17px; line-height:1.55;
+  }
+
+  /* ===== MODAL (dark glass) ===== */
+  .modal-overlay{
+    position:fixed; inset:0; z-index:1000; background:rgba(4,6,12,0.7);
+    -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
+    display:flex; align-items:center; justify-content:center; padding:24px;
+  }
+  .modal-overlay[hidden]{display:none;}
+  .modal-box{
+    position:relative; width:100%; max-width:560px; max-height:85vh; overflow:auto;
+    background:rgba(16,26,46,0.78);
+    -webkit-backdrop-filter:blur(30px) saturate(180%); backdrop-filter:blur(30px) saturate(180%);
+    border:1px solid rgba(255,255,255,0.14); border-radius:18px; padding:44px 40px;
+    color:#fff; box-shadow:0 30px 80px rgba(0,0,0,0.55);
+  }
+  .modal-close{
+    position:absolute; top:18px; right:18px; width:32px; height:32px; border-radius:50%;
+    background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.14); color:#fff;
+    font-size:18px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center;
+  }
+  .modal-close:hover{background:rgba(255,255,255,0.16);}
+  .modal-progress{font-size:12px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:#8fc4ff; margin-bottom:18px;}
+  .quiz-step h3{font-size:22px; line-height:1.35; margin-bottom:24px; padding-right:20px;}
+  .quiz-options{display:flex; flex-direction:column; gap:12px;}
+  .quiz-options-multi{gap:10px;}
+  .quiz-opt{
+    display:block; width:100%; text-align:left; background:rgba(255,255,255,0.04);
+    border:1px solid rgba(255,255,255,0.14); color:#fff; padding:15px 18px; border-radius:12px;
+    font-size:14.5px; font-weight:600; cursor:pointer; transition:background .15s, border-color .15s;
+  }
+  .quiz-opt:hover{background:rgba(79,163,255,0.14); border-color:rgba(79,163,255,0.5);}
+  .quiz-check{
+    display:flex; align-items:center; gap:12px; background:rgba(255,255,255,0.04);
+    border:1px solid rgba(255,255,255,0.14); padding:13px 16px; border-radius:12px;
+    font-size:14px; cursor:pointer; transition:background .15s;
+  }
+  .quiz-check:hover{background:rgba(255,255,255,0.08);}
+  .quiz-check input{width:16px; height:16px; accent-color:#4f63ff; flex-shrink:0;}
+  #quizSeeResult{margin-top:22px; width:100%;}
+  .quiz-result-label{font-size:12px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:#8fc4ff; margin-bottom:10px;}
+  #quizResultPlan{font-size:32px; margin-bottom:12px;}
+  #quizResult p{color:rgba(255,255,255,0.65); font-size:14.5px; line-height:1.55; margin-bottom:18px;}
+  .quiz-addons-title{font-size:13px; font-weight:700; margin-bottom:8px;}
+  #quizResultAddons ul, #quizResultTemplates ul{list-style:none; display:flex; flex-direction:column; gap:6px; margin-bottom:24px;}
+  #quizResultAddons li, #quizResultTemplates li{font-size:13.5px; color:rgba(255,255,255,0.8); display:flex; align-items:center; gap:8px;}
+  #quizResultAddons li::before, #quizResultTemplates li::before{content:'✓'; color:#4ade80; font-weight:700;}
+  #quizResult .btn{width:100%; margin-bottom:14px;}
+  .quiz-restart{
+    display:block; width:100%; text-align:center; background:none; border:none;
+    color:rgba(255,255,255,0.5); font-size:13px; text-decoration:underline; cursor:pointer; padding:4px;
+  }
+
+  /* ===== DEPOIMENTOS (foto em cima com degradê, texto embaixo) ===== */
+  .usecases{background:#fff; padding:90px 24px;}
+  .depo-header{position:relative; display:flex; align-items:center; justify-content:flex-start; min-height:90px; max-width:1180px; margin-left:auto; margin-right:auto;}
+  .depo-header h2{position:relative; z-index:1; font-size:32px; color:#0f1d33; margin:0;}
+  .usecases{position:relative; overflow:hidden;}
+  /* Marca d'água: mesma malha de bolinhas do hero, mesmo tamanho/posição (ancorada na
+     seção inteira, como no hero) — os cards cobrem a maior parte e uma fatia fica visível */
+  .depo-dots{
+    position:absolute; top:50%; right:3%; transform:translateY(-50%);
+    height:min(34vh,300px); width:calc(min(34vh,300px) * 1.29);
+    z-index:0; pointer-events:none;
+  }
+  .depo-dots span{
+    position:absolute; width:19%; aspect-ratio:1; border-radius:50%;
+    background:rgba(79,99,255,0.07);
+  }
+  .usecases .row{display:flex; gap:24px; max-width:1180px; margin:0 auto; position:relative; z-index:1;}
+  .u-card{
+    flex:1; min-width:0; height:560px; border-radius:14px; position:relative; overflow:hidden;
+    background:#fff; border:1px solid rgba(15,29,51,0.08); box-shadow:0 10px 30px rgba(15,29,51,0.06);
+    display:flex; flex-direction:column;
+  }
+  .u-card .u-photo{
+    flex:0 0 52%; background-size:cover; background-position:center; position:relative;
+  }
+  .u-card .u-photo::after{
+    content:''; position:absolute; inset:0;
+    background:linear-gradient(180deg, transparent 55%, #fff 100%);
+  }
+  .u-card .u-logo{
+    position:absolute; top:20px; left:20px; z-index:2;
+    height:38px; padding:6px 12px; border-radius:8px;
+    background:rgba(255,255,255,0.92); backdrop-filter:blur(4px);
+    display:flex; align-items:center; font-size:12px; font-weight:700; color:rgba(15,29,51,0.4);
+    letter-spacing:.02em; box-shadow:0 2px 8px rgba(15,29,51,0.1);
+  }
+  .u-card .u-logo img{height:100%; width:auto; max-width:110px; object-fit:contain; display:block;}
+  .u-card .u-content{padding:8px 26px 26px; flex:1;}
+  .u-card h4{font-size:21px; font-weight:700; color:#0f1d33; line-height:1.3; margin-bottom:12px;}
+  .u-card .u-quote{font-size:14px; color:var(--gray-text); line-height:1.55;}
+  .u-card .u-quote .role{display:block; margin-top:8px; color:rgba(15,29,51,0.35); font-size:12.5px;}
+
+  /* ===== FAMILIES SECTION ===== */
+  .families{background:#fff;}
+  .families-top{display:flex; justify-content:space-between; align-items:flex-start; gap:24px; margin-bottom:40px; flex-wrap:wrap;}
+  .families-top h2{font-size:32px; max-width:340px;}
+  .families-top p{max-width:300px; font-size:13px; color:var(--gray-text); text-align:right;}
+  .families-grid{display:grid; grid-template-columns:1.3fr 1fr; grid-template-rows:1fr 1fr; gap:16px; height:520px;}
+  .f-photo{position:relative; border-radius:16px; overflow:hidden;}
+  .f-photo .tag{
+    position:absolute; left:16px; bottom:16px; background:rgba(255,255,255,0.9);
+    padding:6px 12px; border-radius:8px; font-size:12px; font-weight:600; color:#0f1d33;
+  }
+  .blog-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:20px;}
+  .blog-card{text-decoration:none; color:inherit; display:block;}
+  .blog-card .thumb{
+    height:150px; border-radius:12px; margin-bottom:14px;
+    background-size:cover; background-position:center;
+    transition:opacity .2s ease;
+  }
+  .blog-card:hover .thumb{opacity:.85;}
+  .blog-card h3{font-size:15px; line-height:1.4; margin-bottom:8px; color:#0f1d33;}
+  .blog-card p{font-size:13px; color:var(--gray-text); line-height:1.5;}
+  .blog-top-row{display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:40px; gap:24px; flex-wrap:wrap;}
+  .blog-top-row .head{text-align:left; max-width:460px;}
+  .blog-top-row h2{font-size:32px; margin:16px 0 10px;}
+  .blog-top-row p{color:var(--gray-text); font-size:15px;}
+  .blog-link{font-weight:700; color:var(--blue); text-decoration:none; white-space:nowrap;}
+
+  /* ===== FOOTER (estilo portal Specifor) ===== */
+  .site-footer{
+    background:#111d22; color:#fff; padding:70px 60px 40px;
+    font-family:'Inter',Arial,sans-serif; overflow:hidden;
+  }
+  .footer-top{display:flex; justify-content:space-between; align-items:flex-start; gap:32px; flex-wrap:wrap;}
+  .footer-tagline{
+    font-family:'Courier New',ui-monospace,monospace; font-size:22px; font-weight:700;
+    letter-spacing:.04em; line-height:1.4; text-transform:uppercase;
+  }
+  .footer-markets{
+    display:flex; gap:28px; align-items:flex-start; text-align:right;
+    font-size:17px; line-height:1.5;
+  }
+  .footer-markets a{color:#fff; text-decoration:none;}
+  .footer-markets a:hover{text-decoration:underline;}
+  .footer-markets .markets-label{color:#fff; font-weight:400;}
+  .footer-mid{
+    display:flex; justify-content:space-between; align-items:center; gap:32px;
+    flex-wrap:wrap; margin:70px 0 40px;
+  }
+  .footer-mid-left{display:flex; align-items:center; gap:44px; flex-wrap:wrap;}
+  .footer-link-especialista{color:#fff; font-size:14.5px; text-decoration:underline; text-underline-offset:4px;}
+  .btn-parceiro{
+    display:inline-flex; align-items:center; gap:14px;
+    border:1px solid rgba(255,255,255,0.5); border-radius:10px; padding:14px 26px;
+    color:#fff; font-size:14.5px; text-decoration:none; transition:background .2s;
+  }
+  .btn-parceiro:hover{background:rgba(255,255,255,0.06);}
+  .footer-verante{
+    text-align:left; font-family:'Courier New',ui-monospace,monospace;
+    font-size:13px; letter-spacing:.08em; text-transform:uppercase; line-height:1.5;
+  }
+  .footer-verante .verante-nome{font-family:'Inter',Arial,sans-serif; font-size:26px; font-weight:700; letter-spacing:0; text-transform:none;}
+  .footer-verante .verante-nome span{font-family:'Courier New',ui-monospace,monospace; font-size:15px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; margin-right:4px;}
+  .footer-watermark{margin:10px 0 60px;}
+  .footer-watermark img{width:100%; height:auto; display:block; opacity:.14;}
+  .footer-bottom{
+    display:flex; justify-content:space-between; align-items:center; gap:24px; flex-wrap:wrap;
+    font-size:13.5px; color:rgba(255,255,255,0.85);
+  }
+  .footer-bottom a{color:#fff; text-decoration:underline; text-underline-offset:3px;}
+
+  /* ===== LIQUID GLASS — botões (material de vidro + animações) ===== */
+  .btn, .btn-parceiro{
+    position:relative; overflow:hidden;
+    transition:transform .45s cubic-bezier(.34,1.56,.64,1), box-shadow .35s ease,
+               background .25s ease, border-color .25s ease, filter .25s ease;
+  }
+  /* Sheen: reflexo especular que varre o botão no hover */
+  .btn::after, .btn-parceiro::after{
+    content:''; position:absolute; top:0; bottom:0; left:-80%; width:55%;
+    background:linear-gradient(105deg, transparent, rgba(255,255,255,0.32), transparent);
+    transform:skewX(-20deg); opacity:0; pointer-events:none;
+  }
+  .btn:hover::after, .btn-parceiro:hover::after{animation:lg-sheen .9s ease;}
+  @keyframes lg-sheen{
+    from{left:-80%; opacity:0;}
+    30%{opacity:1;}
+    to{left:120%; opacity:0;}
+  }
+  /* Botão primário: vidro tingido do mesmo azul */
+  .btn-falar{
+    background:linear-gradient(180deg, rgba(63,141,255,0.82), rgba(47,110,240,0.82));
+    -webkit-backdrop-filter:blur(16px) saturate(180%); backdrop-filter:blur(16px) saturate(180%);
+    border:1px solid rgba(255,255,255,0.28);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,0.35), inset 0 -1px 0 rgba(0,0,0,0.12), 0 8px 24px rgba(47,110,240,0.35);
+  }
+  .btn-falar:hover{
+    filter:brightness(1.08); transform:translateY(-2px) scale(1.02);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,0.4), inset 0 -1px 0 rgba(0,0,0,0.12), 0 14px 32px rgba(47,110,240,0.45);
+  }
+  /* Botões neutros: vidro claro */
+  .btn-comecar, .btn-outline, .btn-parceiro{
+    background:rgba(255,255,255,0.07);
+    -webkit-backdrop-filter:blur(16px) saturate(180%); backdrop-filter:blur(16px) saturate(180%);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,0.22), 0 6px 18px rgba(0,0,0,0.18);
+  }
+  .btn-comecar:hover, .btn-outline:hover, .btn-parceiro:hover{
+    background:rgba(255,255,255,0.13); transform:translateY(-2px);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,0.3), 0 10px 26px rgba(0,0,0,0.24);
+  }
+  .btn-ver{
+    -webkit-backdrop-filter:blur(16px) saturate(180%); backdrop-filter:blur(16px) saturate(180%);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,0.3), 0 6px 18px rgba(0,0,0,0.18);
+  }
+  .btn-ver:hover{background:rgba(79,140,255,0.28); transform:translateY(-2px) scale(1.06);}
+  /* Gel squish: compressão elástica no toque (release volta com mola) */
+  .btn:active, .btn-parceiro:active{transform:scale(0.94); transition-duration:.1s;}
+
+  /* ===== LIQUID GLASS — cards (brilho que segue o ponteiro + flutuação) ===== */
+  .a-card{position:relative;}
+  .h-stat::after, .a-card::after, .addon-item::after, .quiz-opt::after{
+    content:''; position:absolute; inset:0; border-radius:inherit; pointer-events:none; z-index:0;
+    background:radial-gradient(240px circle at var(--mx,50%) var(--my,50%), rgba(255,255,255,0.13), transparent 62%);
+    opacity:0; transition:opacity .35s ease;
+  }
+  .u-card::after{
+    content:''; position:absolute; inset:0; border-radius:inherit; pointer-events:none; z-index:1;
+    background:radial-gradient(280px circle at var(--mx,50%) var(--my,50%), rgba(79,99,255,0.09), transparent 62%);
+    opacity:0; transition:opacity .35s ease;
+  }
+  .h-stat:hover::after, .a-card:hover::after, .addon-item:hover::after,
+  .quiz-opt:hover::after, .u-card:hover::after{opacity:1;}
+  .quiz-opt{position:relative; overflow:hidden;}
+  /* Flutuação: cards sobem de leve com mola */
+  .a-card{transition:transform .5s cubic-bezier(.34,1.4,.64,1), box-shadow .4s ease;}
+  .a-card:hover{transform:translateY(-6px); box-shadow:0 18px 44px rgba(0,0,0,0.35);}
+  .usecases .sf-appear.is-visible{
+    transition:opacity .5s ease, transform .5s cubic-bezier(.34,1.4,.64,1), filter .5s ease, box-shadow .4s ease;
+  }
+  .usecases .sf-appear.is-visible:hover{
+    transform:translateY(-6px) scale(1.01);
+    box-shadow:0 20px 48px rgba(15,29,51,0.14);
+  }
+
+  /* ===== WHATSAPP FLOAT BUTTON ===== */
+  .whatsapp-float{
+    position:fixed; bottom:14px; right:22px; width:54px; height:54px; z-index:999;
+    display:flex; align-items:center; justify-content:center;
+    transition:transform .2s;
+  }
+  .whatsapp-float:hover{transform:scale(1.07);}
+  .whatsapp-float img{width:100%; height:100%;}
+
+  /* ===== MODAL DO WHATSAPP — formulário + redirect com pré-msg ===== */
+  .wa-modal{
+    position:fixed; inset:0; z-index:1000; display:none;
+    align-items:flex-end; justify-content:flex-end; padding:24px 28px 100px 28px;
+    animation:waFadeIn .2s ease;
+  }
+  .wa-modal.is-open{display:flex;}
+  .wa-overlay{
+    position:absolute; inset:0; background:rgba(8,14,26,0.5);
+    -webkit-backdrop-filter:blur(2px); backdrop-filter:blur(2px);
+  }
+  .wa-window{
+    position:relative; width:100%; max-width:380px; background:#efe7dc; border-radius:14px;
+    overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,0.35);
+    animation:waPopIn .25s cubic-bezier(.22,1,.36,1);
+    background-image:
+      radial-gradient(circle at 12% 18%, rgba(7,94,84,0.05) 0 8px, transparent 9px),
+      radial-gradient(circle at 86% 36%, rgba(7,94,84,0.05) 0 6px, transparent 7px),
+      radial-gradient(circle at 28% 72%, rgba(7,94,84,0.04) 0 7px, transparent 8px),
+      radial-gradient(circle at 74% 86%, rgba(7,94,84,0.04) 0 6px, transparent 7px);
+  }
+  @keyframes waFadeIn{ from{opacity:0;} to{opacity:1;} }
+  @keyframes waPopIn{ from{transform:translateY(20px) scale(0.95); opacity:0;} to{transform:none; opacity:1;} }
+  .wa-header{background:#075e54; color:#fff; padding:14px 16px; display:flex; align-items:center; gap:12px;}
+  .wa-avatar{
+    width:42px; height:42px; border-radius:50%; background:linear-gradient(135deg,#128c7e,#25d366);
+    color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:15px;
+    flex-shrink:0; letter-spacing:.5px;
+  }
+  .wa-info{flex:1; min-width:0;}
+  .wa-info .wa-name{font-size:15px; font-weight:700; line-height:1.2; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .wa-info .wa-status{font-size:12px; color:rgba(255,255,255,0.75); margin-top:2px;}
+  .wa-close{background:transparent; border:0; color:#fff; font-size:22px; cursor:pointer; padding:4px 6px; line-height:1; opacity:.85; transition:opacity .2s;}
+  .wa-close:hover{opacity:1;}
+  .wa-body{padding:16px;}
+  .wa-bubble{
+    background:#fff; color:#1f2a37; font-size:13.5px; line-height:1.5; padding:10px 14px;
+    border-radius:0 12px 12px 12px; max-width:88%; box-shadow:0 1px 1px rgba(0,0,0,0.08); margin-bottom:16px;
+  }
+  .wa-form{display:flex; flex-direction:column; gap:10px;}
+  .wa-form input{
+    width:100%; background:#e7f5ea; border:1px solid rgba(7,94,84,0.15); border-radius:6px;
+    padding:11px 14px; font-size:13.5px; font-family:inherit; color:#1f2a37; outline:none;
+    transition:border-color .2s, background .2s;
+  }
+  .wa-form input::placeholder{color:#6b7280;}
+  .wa-form input:focus{border-color:#25d366; background:#fff;}
+  .wa-tel{
+    display:flex; align-items:center; background:#e7f5ea; border:1px solid rgba(7,94,84,0.15);
+    border-radius:6px; padding-left:10px; transition:border-color .2s, background .2s;
+  }
+  .wa-tel:focus-within{border-color:#25d366; background:#fff;}
+  .wa-tel .wa-flag{font-size:16px; margin-right:6px; line-height:1;}
+  .wa-tel .wa-code{font-size:12px; color:#4b5563; margin-right:8px; font-weight:600;}
+  .wa-tel input{background:transparent; border:0; flex:1; padding:11px 14px 11px 0;}
+  .wa-tel input:focus{background:transparent;}
+  .wa-submit{
+    background:#25d366; color:#fff; border:0; border-radius:6px; padding:12px 18px; font-size:14px;
+    font-weight:700; font-family:inherit; cursor:pointer; align-self:flex-end; margin-top:6px;
+    transition:background .2s, transform .1s; box-shadow:0 4px 12px rgba(37,211,102,0.35);
+  }
+  .wa-submit:hover{background:#1ebe5d;}
+  .wa-submit:active{transform:scale(0.98);}
+  @media (max-width: 520px){
+    .wa-modal{padding:0; align-items:stretch; justify-content:stretch;}
+    .wa-window{max-width:none; border-radius:0;}
+  }
+
+  @media (max-width: 900px){
+    .footer-top, .footer-mid, .footer-bottom{flex-direction:column; align-items:flex-start;}
+    .footer-markets{text-align:left;}
+    .approval h2, .approval p.sub{white-space:normal; font-size:inherit;}
+    .approval h2{font-size:24px;}
+    .approval p.sub{font-size:13px;}
+    .approval-cards{grid-template-columns:1fr;}
+    .usecases .row{flex-direction:column;}
+    .u-card{height:440px;}
+    .addon-item{flex:1 1 33%; min-width:33%; border-bottom:1px solid rgba(255,255,255,0.08);}
+    .addon-item:nth-child(3n){border-right:none;}
+    .families-grid{grid-template-columns:1fr; grid-template-rows:auto; height:auto;}
+    .blog-grid{grid-template-columns:1fr 1fr;}
+    .nav ul{display:none;}
+    .hero{height:auto; min-height:100vh;}
+    .hero-inner{display:flex; flex-direction:column; text-align:center; padding:16px 24px; gap:12px;}
+    .hero-content{max-width:100%; text-align:center; justify-self:unset; align-self:unset; transform:none; margin-top:0;}
+    .hero-content .actions{justify-content:center;}
+    .hero-content h1{font-size:clamp(26px,7vw,34px);}
+    .hero-laptop{position:relative; padding-top:0; padding-bottom:0;}
+    .hero-laptop img{max-height:220px;}
+    .hero-dots-area{display:none;}
+    .hero-stats{position:relative; grid-template-columns:1fr 1fr; padding:18px 24px;}
+    .stars{height:auto; min-height:100vh;}
+    .stars .wrap{height:auto;}
+    .stars-diagram{flex-direction:column; min-height:auto; max-width:100%; gap:20px;}
+    .stars-main-img{max-height:none;}
+    .orbit-card{position:relative; left:auto; right:auto; top:auto; bottom:auto; width:100%; max-width:420px; min-height:auto; margin:0 auto; flex-wrap:wrap;}
+    .orbit-card.pos-tl, .orbit-card.pos-tr, .orbit-card.pos-bl, .orbit-card.pos-br,
+    .orbit-card.pos-ml, .orbit-card.pos-mr{transform:none;}
+    .orbit-card .label{
+      position:static !important; opacity:1 !important; visibility:visible !important; transform:none !important; width:100%;
+      box-shadow:none; border:none; background:transparent; padding:8px 0 0; margin-top:2px;
+    }
+    .orbit-card .label::before{display:none;}
+    .stars-main-img{order:-1; width:100%;}
+  }
+
+  /* ===== PROBLEMAS (dores do cliente) ===== */
+  .problems{background:#05070d; padding:90px 24px; color:#fff;}
+  .problems .head{max-width:820px; margin:0 auto 48px; text-align:center;}
+  .problems h2{font-size:clamp(26px,3.4vw,42px); line-height:1.15; margin:16px 0 14px; color:#fff;}
+  .problems p.sub{color:rgba(255,255,255,0.6); font-size:16px; line-height:1.6; max-width:760px; margin:0 auto;}
+  .problems-grid{display:flex; flex-wrap:wrap; justify-content:center; gap:20px; max-width:1180px; margin:0 auto;}
+  .problems-grid .h-stat{flex:0 1 268px; cursor:default;}
+  .problems-turn{
+    text-align:center; font-family:'Lora',serif; font-weight:600;
+    font-size:clamp(21px,2.7vw,32px); line-height:1.3; color:#fff;
+    max-width:760px; margin:54px auto 0;
+  }
+  @media(max-width:640px){ .problems-grid .h-stat{flex:1 1 100%;} }
+
+  /* ===== CTA intermediário (após recursos) ===== */
+  .mid-cta{background:#05070d; padding:0 24px 84px; text-align:center;}
+
+  /* ===== CTA final (Pronto para começar?) ===== */
+  .final-cta{
+    background:radial-gradient(circle at 50% 0%, #10192f 0%, #05070d 72%);
+    padding:104px 24px; text-align:center; color:#fff;
+  }
+  .final-cta h2{font-size:clamp(30px,4vw,48px); font-weight:800; line-height:1.15; margin-bottom:16px;}
+  .final-cta p{color:rgba(255,255,255,0.6); font-size:17px; line-height:1.6; max-width:620px; margin:0 auto 34px;}
+  .final-cta .btn{font-size:16px; padding:15px 34px;}
+</style>
+</head>
+<body>
+
+<!-- ============ 1. HERO ============ -->
+<section class="hero" data-intro="playing">
+  <video class="hero-video" autoplay muted playsinline preload="auto">
+    <source src="video/hero-bg.mp4" type="video/mp4">
+  </video>
+  <div class="hero-scrim" aria-hidden="true"></div>
+  <div class="hero-fade" aria-hidden="true"></div>
+  <nav class="nav">
+    <div class="hero-logo">
+      <img src="logo-specifor-branco.svg" alt="Specifor">
+    </div>
+    <ul>
+      <li><a href="#problema">O que resolve</a></li>
+      <li><a href="#recursos">Recursos</a></li>
+      <li><a href="#planos">Preços</a></li>
+      <li><a href="#cases">Depoimentos</a></li>
+    </ul>
+    <div class="actions">
+      <a class="btn btn-comecar btn-nav-outline" href="https://4asset.rds.land/fale-com-um-consultor">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.6"/><path d="M4 20a8 8 0 0116 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        Já sou cliente
+      </a>
+      <a class="btn btn-signup" href="https://4asset.rds.land/fale-com-um-consultor">Falar com especialistas</a>
+    </div>
+  </nav>
+
+  <div class="hero-inner">
+    <div class="hero-content hero-text-appear">
+      <h1>A plataforma de gestão de ativos<br>mais robusta do mercado.</h1>
+      <p>Ao centralizar a gestão de ativos em um ambiente único e seguro, o Specifor On Premise automatiza rotinas operacionais de grandes empresas e garante rastreabilidade, segurança jurídica e controle sobre toda a operação.</p>
+      <div class="actions">
+        <a class="btn btn-falar" href="https://4asset.rds.land/fale-com-um-consultor">Falar com especialistas</a>
+        <a class="btn btn-ver" href="#recursos">→</a>
+      </div>
+    </div>
+    <div class="hero-laptop">
+      <img class="sf-appear hero-laptop-appear" src="specifor-laptop-mockup.png" alt="Plataforma Specifor — visão Meu Trabalho">
+    </div>
+    <div class="hero-dots-area hero-text-appear">
+      <div class="hero-dots">
+        <span style="left:3.4%; top:4.45%;"></span>
+        <span style="left:49.1%; top:4.45%;"></span>
+        <span style="left:29.3%; top:37.75%;"></span>
+        <span style="left:77.6%; top:37.75%;"></span>
+        <span style="left:3.4%; top:71.05%;"></span>
+        <span style="left:49.1%; top:71.05%;"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="h-stat sf-appear">
+      <div class="icon-badge">
+        <svg class="icon" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="16" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M3 9h18M8 3v4M16 3v4" stroke="currentColor" stroke-width="1.6"/></svg>
+      </div>
+      <div class="num">Go-live em 3 semanas</div>
+      <div class="label">A partir do contrato</div>
+    </div>
+    <div class="h-stat sf-appear">
+      <div class="icon-badge">
+        <svg class="icon" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.6"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </div>
+      <div class="num">80% mais rápido</div>
+      <div class="label">Na busca de documentos</div>
+    </div>
+    <div class="h-stat sf-appear">
+      <div class="icon-badge">
+        <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M12 3a5 5 0 00-5 5v3.2c0 .7-.28 1.37-.78 1.87L5 14.3c-.6.6-.18 1.7.7 1.7h12.6c.88 0 1.3-1.1.7-1.7l-1.22-1.23A2.65 2.65 0 0117 11.2V8a5 5 0 00-5-5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9.5 19a2.5 2.5 0 005 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </div>
+      <div class="num">Zero prazos perdidos</div>
+      <div class="label">Com alertas automáticos</div>
+    </div>
+    <div class="h-stat sf-appear">
+      <div class="icon-badge">
+        <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M12 3l7 3v5c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6l7-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9.5 12l1.8 1.8L15 10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="num">Dados confiáveis</div>
+      <div class="label">Decisões com segurança</div>
+    </div>
+  </div>
+
+  <img class="hero-brand" src="icone-specifor.png" alt="" aria-hidden="true">
+</section>
+
+<!-- ============ 2. AS SEEN IN ============ -->
+<section class="seen-in">
+  <div class="label">Nossas soluções estão com os melhores do mercado</div>
+  <div class="marquee-row row1">
+    <img class="logo-item" src="clientes-cor/auren.png" alt="Auren">
+    <img class="logo-item" src="clientes-cor/brf.png" alt="BRF">
+    <img class="logo-item" src="clientes-cor/copel.png" alt="Copel">
+    <img class="logo-item" src="clientes-cor/cpfl.png" alt="CPFL Energia">
+    <img class="logo-item" src="clientes-cor/csn.png" alt="CSN">
+    <img class="logo-item" src="clientes-cor/enel.png" alt="Enel">
+    <img class="logo-item" src="clientes-cor/engie.png" alt="Engie">
+    <img class="logo-item" src="clientes-cor/gerdau.png" alt="Gerdau">
+    <img class="logo-item" src="clientes-cor/gol.png" alt="Gol">
+    <img class="logo-item" src="clientes-cor/isa-energia.png" alt="Isa Energia">
+    <img class="logo-item" src="clientes-cor/marista.png" alt="Marista">
+    <img class="logo-item" src="clientes-cor/petrobras.png" alt="Petrobras">
+    <img class="logo-item" src="clientes-cor/taesa.png" alt="Taesa">
+    <img class="logo-item" src="clientes-cor/vale.png" alt="Vale">
+    <img class="logo-item" src="clientes-cor/usiminas.png" alt="Usiminas">
+    <!-- duplicado para loop contínuo -->
+    <img class="logo-item" src="clientes-cor/auren.png" alt="Auren">
+    <img class="logo-item" src="clientes-cor/brf.png" alt="BRF">
+    <img class="logo-item" src="clientes-cor/copel.png" alt="Copel">
+    <img class="logo-item" src="clientes-cor/cpfl.png" alt="CPFL Energia">
+    <img class="logo-item" src="clientes-cor/csn.png" alt="CSN">
+    <img class="logo-item" src="clientes-cor/enel.png" alt="Enel">
+    <img class="logo-item" src="clientes-cor/engie.png" alt="Engie">
+    <img class="logo-item" src="clientes-cor/gerdau.png" alt="Gerdau">
+    <img class="logo-item" src="clientes-cor/gol.png" alt="Gol">
+    <img class="logo-item" src="clientes-cor/isa-energia.png" alt="Isa Energia">
+    <img class="logo-item" src="clientes-cor/marista.png" alt="Marista">
+    <img class="logo-item" src="clientes-cor/petrobras.png" alt="Petrobras">
+    <img class="logo-item" src="clientes-cor/taesa.png" alt="Taesa">
+    <img class="logo-item" src="clientes-cor/vale.png" alt="Vale">
+    <img class="logo-item" src="clientes-cor/usiminas.png" alt="Usiminas">
+  </div>
+  <div class="marquee-row row2">
+    <img class="logo-item" src="clientes-cor/alianca.png" alt="Aliança">
+    <img class="logo-item" src="clientes-cor/bmte.png" alt="BMTE">
+    <img class="logo-item" src="clientes-cor/brazilian-nickel.png" alt="Brazilian Nickel">
+    <img class="logo-item" src="clientes-cor/cgn.png" alt="CGN">
+    <img class="logo-item" src="clientes-cor/ciscea.png" alt="Ciscea">
+    <img class="logo-item" src="clientes-cor/cmoc.png" alt="CMOC">
+    <img class="logo-item" src="clientes-cor/foz-do-chapeco.png" alt="Foz do Chapecó">
+    <img class="logo-item" src="clientes-cor/grupo-itaquareia.png" alt="Grupo Itaquareia">
+    <img class="logo-item" src="clientes-cor/mosaic.png" alt="Mosaic">
+    <img class="logo-item" src="clientes-cor/pec-energia.png" alt="PEC Energia">
+    <img class="logo-item" src="clientes-cor/spic.png" alt="SPIC Brasil">
+    <img class="logo-item" src="clientes-cor/state-grid.png" alt="State Grid">
+    <img class="logo-item" src="clientes-cor/tag.png" alt="TAG">
+    <img class="logo-item" src="clientes-cor/echoenergia.png" alt="Echoenergia">
+    <img class="logo-item" src="clientes-cor/elera.png" alt="Elera Renováveis">
+    <img class="logo-item" src="clientes-cor/qair.png" alt="Qair">
+    <!-- duplicado para loop contínuo -->
+    <img class="logo-item" src="clientes-cor/alianca.png" alt="Aliança">
+    <img class="logo-item" src="clientes-cor/bmte.png" alt="BMTE">
+    <img class="logo-item" src="clientes-cor/brazilian-nickel.png" alt="Brazilian Nickel">
+    <img class="logo-item" src="clientes-cor/cgn.png" alt="CGN">
+    <img class="logo-item" src="clientes-cor/ciscea.png" alt="Ciscea">
+    <img class="logo-item" src="clientes-cor/cmoc.png" alt="CMOC">
+    <img class="logo-item" src="clientes-cor/foz-do-chapeco.png" alt="Foz do Chapecó">
+    <img class="logo-item" src="clientes-cor/grupo-itaquareia.png" alt="Grupo Itaquareia">
+    <img class="logo-item" src="clientes-cor/mosaic.png" alt="Mosaic">
+    <img class="logo-item" src="clientes-cor/pec-energia.png" alt="PEC Energia">
+    <img class="logo-item" src="clientes-cor/spic.png" alt="SPIC Brasil">
+    <img class="logo-item" src="clientes-cor/state-grid.png" alt="State Grid">
+    <img class="logo-item" src="clientes-cor/tag.png" alt="TAG">
+    <img class="logo-item" src="clientes-cor/echoenergia.png" alt="Echoenergia">
+    <img class="logo-item" src="clientes-cor/elera.png" alt="Elera Renováveis">
+    <img class="logo-item" src="clientes-cor/qair.png" alt="Qair">
+  </div>
+</section>
+
+<!-- ============ 3. PROBLEMA / DOR DO CLIENTE ============ -->
+<section class="stars" id="problema">
+  <div class="wrap">
+    <div class="head center problems-head">
+      <span class="pill pill-blue">O que resolve</span>
+      <h2 class="problems-center-title">O que o On Premise resolve?</h2>
+    </div>
+    <div class="stars-diagram diagram-problems">
+
+      <div class="orbit-card h-stat sf-appear p1">
+        <div class="icon-badge">
+          <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M7 3h7l4 4v14H7z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M10 11h6M10 15h6M10 19h3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <div class="num">Grande volume de contratos</div>
+        <div class="label">Milhares de contratos com diversas variáveis, difíceis de acompanhar manualmente.</div>
+      </div>
+
+      <div class="orbit-card h-stat sf-appear p2">
+        <div class="icon-badge">
+          <svg class="icon" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M3 12h18" stroke="currentColor" stroke-width="1.6"/><path d="M12 3c2.6 2.7 2.6 15.3 0 18M12 3c-2.6 2.7-2.6 15.3 0 18" stroke="currentColor" stroke-width="1.6"/></svg>
+        </div>
+        <div class="num">Falta de visão integrada</div>
+        <div class="label">Áreas trabalham em silos, sem uma visão única e consolidada da operação.</div>
+      </div>
+
+      <div class="orbit-card h-stat sf-appear p3">
+        <div class="icon-badge">
+          <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M13 3H7v18h11V8z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M13 3v5h5" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M4 7v13a1 1 0 001 1h9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <div class="num">Informação descentralizada</div>
+        <div class="label">Múltiplos documentos espalhados e descentralização da informação crítica.</div>
+      </div>
+
+      <div class="orbit-card h-stat sf-appear p4">
+        <div class="icon-badge">
+          <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M20 11a8 8 0 10-2.3 5.7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M20 4v6h-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="num">Cadastros desatualizados</div>
+        <div class="label">Dificuldade em manter os cadastros atualizados diante do volume da operação.</div>
+      </div>
+
+      <div class="orbit-card h-stat sf-appear p5">
+        <div class="icon-badge">
+          <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M11 20A7 7 0 019.8 6.1C15.5 5 17 4.5 19 2c1 2 2 4.2 2 8 0 5.5-4.8 10-10 10z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M2 21c0-3 1.9-5.4 5.1-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <div class="num">Licenciamento ineficiente</div>
+        <div class="label">Licenciamento ambiental lento e sem controle sobre condicionantes e prazos.</div>
+      </div>
+
+      <div class="orbit-card h-stat sf-appear p6">
+        <div class="icon-badge">
+          <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M16 20v-1.5a3.5 3.5 0 00-3.5-3.5h-5A3.5 3.5 0 004 18.5V20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="10" cy="8" r="3.2" stroke="currentColor" stroke-width="1.6"/><path d="M20 20v-1.4a3.4 3.4 0 00-2.6-3.3M15.5 5.2a3.2 3.2 0 010 5.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <div class="num">Impactos sociais sem gestão</div>
+        <div class="label">Falhas na gestão de impactos sociais junto às comunidades e proprietários.</div>
+      </div>
+
+      <img class="stars-main-img" src="tablet-app.png" alt="Specifor On Premise em tablet — mapa e GIS">
+    </div>
+    <p class="stars-quote problems-sub">Em setores de alta complexidade, a gestão territorial exige um nível de controle e agilidade que planilhas convencionais e sistemas legados cadastrais não conseguem mais suportar, pois estas são suscetíveis a erros humanos e perda de prazos. Mas, e se esses desafios fossem superados com apenas uma solução?</p>
+  </div>
+</section>
+
+<!-- ============ 3b. SOLUÇÃO / RECURSOS (bento) ============ -->
+<section class="bento" id="recursos">
+  <div class="wrap">
+    <div class="head center">
+      <span class="pill pill-blue">Recursos</span>
+      <h2>Toda a gestão de ativos<br>em um único ambiente</h2>
+      <p class="sub">O Specifor On Premise elimina a dispersão de dados e centraliza tudo em um único ambiente — com rastreabilidade total no campo e no escritório.</p>
+    </div>
+    <div class="bento-grid">
+
+      <article class="bento-card bento-lg bento-photo">
+        <img class="bento-img" src="card-gis.png" alt="Especialista usando o Specifor On Premise com mapa GIS" loading="lazy">
+        <div class="bento-text">
+          <h3>Integração GIS nativa</h3>
+          <p>Mapas e georreferenciamento integrados ao ArcGIS Server ESRI, com dados territoriais precisos no cadastro.</p>
+        </div>
+      </article>
+
+      <article class="bento-card bento-lg bento-photo">
+        <img class="bento-img" src="card-integracoes.png" alt="Engenheira em campo usando o Specifor On Premise em tablet" loading="lazy">
+        <div class="bento-text">
+          <h3>Integrações e segurança</h3>
+          <p>Conexão nativa com ERP e Jurídico, e gestão de identidade e acesso com controle granular de permissões.</p>
+        </div>
+      </article>
+
+      <article class="bento-card bento-photo">
+        <img class="bento-img" src="card-documentos.png" alt="Especialista usando o Specifor On Premise em tablet no campo" loading="lazy">
+        <div class="bento-text">
+          <h3>Documentos e processos</h3>
+          <p>Tramitação documental, busca de documentos e emissão de certidões online com rastreabilidade total.</p>
+        </div>
+      </article>
+
+      <article class="bento-card bento-photo">
+        <img class="bento-img" src="card-dashboard.png" alt="Apresentação do dashboard de processos do Specifor On Premise" loading="lazy">
+        <div class="bento-text">
+          <h3>Relatórios e dashboards</h3>
+          <p>Relatórios, indicadores e dashboard executivo para decisões com dados confiáveis em tempo real.</p>
+        </div>
+      </article>
+
+      <article class="bento-card bento-photo">
+        <img class="bento-img" src="card-app-mobile.png" alt="Engenheira usando o Specifor On Premise no celular em campo" loading="lazy">
+        <div class="bento-text">
+          <h3>App Mobile Offline</h3>
+          <p>Aplicativo mobile com modo offline para coleta de dados em campo, mesmo sem conexão.</p>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3c. CTA INTERMEDIÁRIO ============ -->
+<section class="mid-cta">
+  <div class="wrap">
+    <a class="btn btn-falar" href="https://4asset.rds.land/fale-com-um-consultor">Quero falar com especialista →</a>
+  </div>
+</section>
+
+<!-- ============ 4. DEPOIMENTOS ============ -->
+<section class="usecases" id="cases">
+  <div class="wrap">
+    <div class="depo-header" style="margin-bottom:40px;">
+      <h2>Depoimentos</h2>
+    </div>
+    <div class="depo-dots" aria-hidden="true">
+      <span style="left:3.4%; top:4.45%;"></span>
+      <span style="left:49.1%; top:4.45%;"></span>
+      <span style="left:29.3%; top:37.75%;"></span>
+      <span style="left:77.6%; top:37.75%;"></span>
+      <span style="left:3.4%; top:71.05%;"></span>
+      <span style="left:49.1%; top:71.05%;"></span>
+    </div>
+    <div class="row">
+    <div class="u-card sf-appear">
+      <div class="u-photo" style="background-image:url('energia.jpg')"></div>
+      <div class="u-content">
+        <h4>Customização e atendimento</h4>
+        <p class="u-quote">"Produto excelente, principalmente pela possibilidade de realizar customizações e deixá-lo de acordo com as necessidades do cliente. O excelente atendimento e a cordialidade da equipe técnica são destaques do time 4Asset, sempre disponíveis para buscar melhorias e na solução de eventuais problemas."<span class="role">Guilherme — AXIA</span></p>
+      </div>
+    </div>
+    <div class="u-card sf-appear">
+      <div class="u-photo" style="background-image:url('infraestrutura.jpg')">
+        <div class="u-logo"><img src="clientes-cor/vale.png" alt="Vale"></div>
+      </div>
+      <div class="u-content">
+        <h4>Economia em distratos</h4>
+        <p class="u-quote">"Com a 4Asset, tivemos um ganho de distrato — de contratos de imóveis — de quase 50% de saving. Uma economia de R$15 milhões em 18 meses."<span class="role">Daniel e Emília — Vale</span></p>
+      </div>
+    </div>
+    <div class="u-card sf-appear">
+      <div class="u-photo" style="background-image:url('mineracao.jpg')">
+        <div class="u-logo"><img src="clientes-cor/brf.png" alt="BRF"></div>
+      </div>
+      <div class="u-content">
+        <h4>Robustez e flexibilidade</h4>
+        <p class="u-quote">"Sistema robusto, tem flexibilidade para adaptações. Muito bom!"<span class="role">Ivan — BRF</span></p>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5. MODELOS DE CONTRATAÇÃO (Perpétua x Mensal/Anual) ============ -->
+<section class="section approval" id="planos">
+  <div class="wrap">
+    <div class="head center">
+      <span class="pill pill-blue">Modelos de contratação</span>
+      <h2>Escolha o modelo ideal para a sua operação</h2>
+      <p class="sub">O Specifor On Premise é implantado sob medida no seu ambiente, com Contrato AMS de suporte e evolução contínua. Escolha entre licença perpétua ou licença mensal/anual.</p>
+    </div>
+    <div class="approval-cards">
+      <div class="a-card">
+        <div class="a-label">Licença Perpétua</div>
+        <div class="a-big">Investimento único</div>
+        <div class="a-sub">Propriedade definitiva da licença</div>
+        <hr class="a-divider">
+        <div class="a-list-title">Incluído</div>
+        <ul class="a-check">
+          <li>Implantação sob medida</li>
+          <li>Ambiente on premise dedicado</li>
+          <li>Integração GIS nativa (ArcGIS ESRI)</li>
+          <li>Integração com ERP e Jurídico</li>
+        </ul>
+        <hr class="a-divider">
+        <div class="a-list-title">Suporte:</div>
+        <ul class="a-check">
+          <li>Contrato AMS de manutenção</li>
+          <li>Atualizações e evolução contínua</li>
+          <li>Suporte técnico especializado</li>
+        </ul>
+        <a class="btn btn-falar a-cta" href="https://4asset.rds.land/fale-com-um-consultor">Falar com especialistas</a>
+      </div>
+      <div class="a-card">
+        <div class="a-label">Licença Mensal/Anual</div>
+        <div class="a-big">Custo previsível</div>
+        <div class="a-sub">Flexibilidade de assinatura</div>
+        <hr class="a-divider">
+        <div class="a-list-title">Incluído</div>
+        <ul class="a-check">
+          <li>Implantação sob medida</li>
+          <li>Ambiente on premise dedicado</li>
+          <li>Integração GIS nativa (ArcGIS ESRI)</li>
+          <li>Integração com ERP e Jurídico</li>
+          <li>App Mobile Offline para campo</li>
+        </ul>
+        <hr class="a-divider">
+        <div class="a-list-title">Suporte:</div>
+        <ul class="a-check">
+          <li>Contrato AMS incluído na assinatura</li>
+          <li>Atualizações e evolução contínua</li>
+          <li>Escalabilidade conforme a operação</li>
+        </ul>
+        <a class="btn btn-outline a-cta" href="https://4asset.rds.land/fale-com-um-consultor">Falar com especialistas</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6. ADD-ONS ============ -->
+<section class="addons">
+  <div class="wrap">
+    <div class="head center">
+      <h2>Add-ons</h2>
+      <p class="sub">Potencialize a sua gestão operacional com add-ons que ampliam a plataforma conforme a necessidade da sua operação.</p>
+    </div>
+    <div class="addons-strip">
+      <div class="addon-item">
+        <svg class="icon sf-breathe" viewBox="0 0 24 24" fill="none"><path d="M3 5l7-2 7 2 4-1v15l-4 1-7-2-7 2z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M10 3v15M17 4v15" stroke="currentColor" stroke-width="1.6"/></svg>
+        <div class="name">Specifor GIS</div>
+        <div class="addon-tip">Visualize e analise seus ativos territoriais em mapas interativos, com camadas geoespaciais integradas ao cadastro.</div>
+      </div>
+      <div class="addon-item">
+        <svg class="icon sf-breathe" viewBox="0 0 24 24" fill="none"><rect x="7" y="2" width="10" height="20" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M10 18h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <div class="name">Mobile Campo</div>
+        <div class="addon-tip">Leve o Specifor pro campo: vistorias, coletas e atualizações cadastrais direto do celular, mesmo sem conexão.</div>
+      </div>
+      <div class="addon-item">
+        <svg class="icon sf-breathe" viewBox="0 0 24 24" fill="none"><path d="M12 3a5 5 0 00-5 5v3.2c0 .7-.28 1.37-.78 1.87L5 14.3c-.6.6-.18 1.7.7 1.7h12.6c.88 0 1.3-1.1.7-1.7l-1.22-1.23A2.65 2.65 0 0117 11.2V8a5 5 0 00-5-5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9.5 19a2.5 2.5 0 005 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <div class="name">Specifor Notify</div>
+        <div class="addon-tip">Alertas automáticos de vencimentos, renovações e obrigações — direto pra quem precisa agir.</div>
+      </div>
+      <div class="addon-item">
+        <svg class="icon sf-breathe" viewBox="0 0 24 24" fill="none"><rect x="5" y="8" width="14" height="10" rx="2" stroke="currentColor" stroke-width="1.6"/><circle cx="9.5" cy="13" r="1.1" fill="currentColor"/><circle cx="14.5" cy="13" r="1.1" fill="currentColor"/><path d="M12 8V5M9 5h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <div class="name">Agentes IA</div>
+        <div class="addon-tip">Automatize tarefas repetitivas e tenha respostas rápidas sobre o seu portfólio com inteligência artificial.</div>
+      </div>
+      <div class="addon-item">
+        <svg class="icon sf-breathe" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M3 12h18" stroke="currentColor" stroke-width="1.6"/><path d="M12 3c2.5 2.5 2.5 15.5 0 18M12 3c-2.5 2.5-2.5 15.5 0 18" stroke="currentColor" stroke-width="1.6"/></svg>
+        <div class="name">Base GIS Pública</div>
+        <div class="addon-tip">Acesse camadas públicas de dados geoespaciais (limites, zoneamento, infraestrutura) já integradas à plataforma.</div>
+      </div>
+      <div class="addon-item">
+        <svg class="icon sf-breathe" viewBox="0 0 24 24" fill="none"><path d="M12 3l7 3v5c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6l7-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9.5 12l1.8 1.8L15 10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="name">Compliance e Automação Legal</div>
+        <div class="addon-tip">Automatize o acompanhamento de obrigações legais e regulatórias, com trilha de auditoria completa.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6b. CTA: QUAL O PLANO IDEAL ============ -->
+<section class="quiz-cta">
+  <div class="wrap">
+    <p class="quiz-question">Não sabe qual é o seu plano ideal? Então clique no botão e descubra a combinação perfeita para sua empresa.</p>
+    <button class="btn btn-falar" id="openQuizBtn" type="button">Descubra o plano ideal para sua empresa</button>
+  </div>
+</section>
+
+<!-- ============ 8. BLOG ============ -->
+<section class="section families" id="blog">
+  <div class="wrap">
+    <div class="blog-top-row">
+      <div class="head">
+        <span class="pill pill-blue">Blog</span>
+        <h2>Para quem decide sobre gestão de ativos e território</h2>
+        <p>Conteúdo sobre gestão fundiária, compliance e auditoria de ativos direto do blog da 4Asset.</p>
+      </div>
+      <a class="blog-link" href="https://www.4asset.com.br/blog/">Ver todos os artigos →</a>
+    </div>
+    <div class="blog-grid">
+      <a class="blog-card" href="https://www.4asset.com.br/como-identificar-falhas-na-gestao-territorial/">
+        <div class="thumb" style="background-image:url('blog/falhas-gestao-territorial.jpg');"></div>
+        <h3>Como identificar falhas na gestão territorial</h3>
+        <p>A análise necessária ao escolher uma solução de gestão estratégica.</p>
+      </a>
+      <a class="blog-card" href="https://www.4asset.com.br/os-criterios-que-separam-uma-solucao-funcional-de-uma-solucao-de-gestao-estrategica/">
+        <div class="thumb" style="background-image:url('blog/solucao-funcional-estrategica.jpg');"></div>
+        <h3>Os critérios que separam uma solução funcional de uma solução de gestão estratégica</h3>
+        <p>Os pontos-chave que o gestor deve considerar no processo de decisão.</p>
+      </a>
+      <a class="blog-card" href="https://www.4asset.com.br/auditoria-de-ativos-como-identificar-inconsistencias-antes-que-elas-se-tornem-prejuizo/">
+        <div class="thumb" style="background-image:url('blog/auditoria-de-ativos.jpg');"></div>
+        <h3>Auditoria de ativos: como identificar inconsistências antes que elas se tornem prejuízo</h3>
+        <p>Caso prático de auditoria interna durante expansão de parque eólico.</p>
+      </a>
+      <a class="blog-card" href="https://www.4asset.com.br/por-que-a-integracao-com-erp-e-gis-e-decisiva-na-gestao-de-empreendimentos-complexos/">
+        <div class="thumb" style="background-image:url('blog/integracao-erp-gis.jpg');"></div>
+        <h3>Por que a integração com ERP e GIS é decisiva na gestão de empreendimentos complexos</h3>
+        <p>A importância da integração de sistemas para ativos territoriais distribuídos.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 8b. CTA FINAL ============ -->
+<section class="final-cta">
+  <div class="wrap">
+    <h2>Pronto para começar?</h2>
+    <p>Agende uma demonstração personalizada e saiba na prática o que o Specifor On Premise pode fazer pela sua operação.</p>
+    <a class="btn btn-falar" href="https://4asset.rds.land/fale-com-um-consultor">Quero agendar demonstração →</a>
+  </div>
+</section>
+
+<!-- ============ 9. FOOTER ============ -->
+<footer class="site-footer">
+  <div class="footer-top">
+    <nav class="footer-markets">
+      <div>
+        <a href="#">Construction</a>
+      </div>
+      <div>
+        <a href="#">Agro</a>
+      </div>
+      <div>
+        <a href="#">Mining</a><br>
+        <a href="#">Infra</a>
+      </div>
+      <div>
+        <span class="markets-label">Specifor<br>Mercados</span><br>
+        <a href="#">Energy</a><br>
+        <a href="#">Industry</a>
+      </div>
+    </nav>
+  </div>
+
+  <div class="footer-mid">
+    <div class="footer-mid-left">
+      <a class="footer-link-especialista" href="https://4asset.rds.land/fale-com-um-consultor">Fale com um especialista</a>
+      <a class="btn-parceiro" href="#">Seja um parceiro <span>→</span></a>
+    </div>
+    <div class="footer-verante">
+      Uma empresa do<br>
+      <div class="verante-nome"><span>Grupo</span>verante</div>
+    </div>
+  </div>
+
+  <div class="footer-watermark">
+    <img src="logo-specifor-branco.svg" alt="">
+  </div>
+
+  <div class="footer-bottom">
+    <div>Copyright © 2026. Specifor® Todos os direitos reservados</div>
+    <a href="#">Termos de uso</a>
+    <div><a href="privacidade.html">Privacidade</a> – <a href="mailto:dpo@4asset.com.br">dpo@4asset.com.br</a></div>
+  </div>
+</footer>
+
+<!-- ============ MODAL: QUIZ DO PLANO IDEAL ============ -->
+<div class="modal-overlay" id="quizModal" hidden>
+  <div class="modal-box">
+    <button class="modal-close" id="closeQuizBtn" type="button" aria-label="Fechar">✕</button>
+    <div class="modal-progress" id="quizProgress">Pergunta 1 de 4</div>
+
+    <div class="quiz-step" id="quizStep1">
+      <h3>Quantos imóveis sua empresa gerencia?</h3>
+      <div class="quiz-options">
+        <button class="quiz-opt" data-q="1" data-v="standard">Até 250</button>
+        <button class="quiz-opt" data-q="1" data-v="standard">Até 500</button>
+        <button class="quiz-opt" data-q="1" data-v="standard">Até 1.000</button>
+        <button class="quiz-opt" data-q="1" data-v="standard">Até 5.000</button>
+        <button class="quiz-opt" data-q="1" data-v="professional">Acima de 5.000</button>
+      </div>
+    </div>
+
+    <div class="quiz-step" id="quizStep2" hidden>
+      <h3>Sua empresa utiliza ERPs, necessitando de integração?</h3>
+      <div class="quiz-options">
+        <button class="quiz-opt" data-q="2" data-v="professional">Sim</button>
+        <button class="quiz-opt" data-q="2" data-v="standard">Não</button>
+      </div>
+    </div>
+
+    <div class="quiz-step" id="quizStep3" hidden>
+      <h3>Escolha os templates necessários para o seu negócio:</h3>
+      <div class="quiz-options quiz-options-multi">
+        <label class="quiz-check"><input type="checkbox" name="template" value="Fundiário e Compliance dominial"> Fundiário e Compliance dominial</label>
+        <label class="quiz-check"><input type="checkbox" name="template" value="Meio ambiente/Socioambiental"> Meio ambiente/Socioambiental</label>
+        <label class="quiz-check"><input type="checkbox" name="template" value="Patrimonial/Facilities"> Patrimonial/Facilities</label>
+        <label class="quiz-check"><input type="checkbox" name="template" value="Inspeções/Vistorias"> Inspeções/Vistorias</label>
+        <label class="quiz-check"><input type="checkbox" name="template" value="Contratos e Pagamentos" data-pro="1"> Contratos e Pagamentos</label>
+        <label class="quiz-check"><input type="checkbox" name="template" value="Monitoramento 360º/Territorial" data-pro="1"> Monitoramento 360º/Territorial</label>
+      </div>
+      <button class="btn btn-falar" id="quizStep3Next" type="button" style="margin-top:22px; width:100%;">Continuar</button>
+    </div>
+
+    <div class="quiz-step" id="quizStep4" hidden>
+      <h3>Escolha os complementos que fazem sentido para sua operação:</h3>
+      <div class="quiz-options quiz-options-multi">
+        <label class="quiz-check"><input type="checkbox" name="addon" value="Specifor GIS"> Specifor GIS</label>
+        <label class="quiz-check"><input type="checkbox" name="addon" value="Mobile Campo"> Mobile Campo</label>
+        <label class="quiz-check"><input type="checkbox" name="addon" value="Specifor Notify"> Specifor Notify</label>
+        <label class="quiz-check"><input type="checkbox" name="addon" value="Agentes IA"> Agentes IA</label>
+        <label class="quiz-check"><input type="checkbox" name="addon" value="Base GIS Pública"> Base GIS Pública</label>
+        <label class="quiz-check"><input type="checkbox" name="addon" value="Compliance e automação legal"> Compliance e automação legal</label>
+      </div>
+      <button class="btn btn-falar" id="quizSeeResult" type="button">Ver resultado</button>
+    </div>
+
+    <div class="quiz-step" id="quizResult" hidden>
+      <div class="quiz-result-label">Sua base ideal</div>
+      <h3 id="quizResultPlan">Standard</h3>
+      <p id="quizResultDesc"></p>
+      <div id="quizResultTemplates"></div>
+      <div id="quizResultAddons"></div>
+      <a class="btn btn-falar" href="https://4asset.rds.land/fale-com-um-consultor">Falar com um especialista</a>
+      <button class="quiz-restart" id="quizRestart" type="button">Refazer o quiz</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ WHATSAPP FLOAT (abre modal) ============ -->
+<button type="button" class="whatsapp-float" aria-label="Abrir WhatsApp" id="wa-trigger" style="background:transparent;border:0;padding:0;cursor:pointer;">
+  <img src="WhatsApp-Logo.wine.svg" alt="" />
+</button>
+
+<!-- ============ MODAL DO WHATSAPP ============ -->
+<div class="wa-modal" id="wa-modal" role="dialog" aria-labelledby="wa-name" aria-modal="true">
+  <div class="wa-overlay" data-wa-close></div>
+  <div class="wa-window">
+    <div class="wa-header">
+      <div class="wa-avatar" aria-hidden="true">VC</div>
+      <div class="wa-info">
+        <div class="wa-name" id="wa-name">Vinicius Costa - 4Asset</div>
+        <div class="wa-status">online</div>
+      </div>
+      <button type="button" class="wa-close" data-wa-close aria-label="Fechar">×</button>
+    </div>
+    <div class="wa-body">
+      <div class="wa-bubble">
+        Olá! Quer saber mais sobre os softwares da 4Asset? Estou aqui para te ajudar!
+      </div>
+      <form class="wa-form" id="wa-form" novalidate>
+        <input type="text" name="nome" placeholder="Nome *" required autocomplete="name" />
+        <input type="email" name="email" placeholder="Email *" required autocomplete="email" />
+        <div class="wa-tel">
+          <span class="wa-flag" aria-hidden="true">🇧🇷</span>
+          <span class="wa-code">+55</span>
+          <input type="tel" name="telefone" placeholder="Telefone *" required autocomplete="tel-national" />
+        </div>
+        <input type="text" name="empresa" placeholder="Empresa *" required autocomplete="organization" />
+        <input type="text" name="cargo" placeholder="Cargo *" required autocomplete="organization-title" />
+        <button type="submit" class="wa-submit">Iniciar conversa</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  // "Appear" — surgimento gradual dos cards (big numbers, cards do notebook e depoimentos)
+  var appearEls = document.querySelectorAll('.sf-appear');
+
+  function revealGroup(list, baseDelay){
+    for (var i=0;i<list.length;i++){
+      (function(el, idx){
+        setTimeout(function(){ el.classList.add('is-visible'); }, baseDelay + idx*90);
+      })(list[i], i);
+    }
+  }
+
+  // Coreografia do hero: 1) notebook → 2) texto + bolinhas → 3) big numbers.
+  var heroLaptopEl = document.querySelector('.hero-laptop-appear');
+  var heroTextEls = document.querySelectorAll('.hero-text-appear');
+  var heroStatEls = document.querySelectorAll('.hero-stats .sf-appear');
+
+  if (heroLaptopEl){
+    setTimeout(function(){ heroLaptopEl.classList.add('is-visible'); }, 200);
+  }
+  setTimeout(function(){
+    heroTextEls.forEach(function(el){ el.classList.add('is-visible'); });
+  }, 1300);
+  revealGroup(heroStatEls, 2100);
+
+  // Cards que estão mais abaixo na página: revela quando entram na viewport.
+  if ('IntersectionObserver' in window){
+    var scrollGroups = {};
+    appearEls.forEach(function(el){
+      if (el.closest('.hero-stats') || el.closest('.hero-laptop')) return; // já tratados acima
+      var groupKey = el.closest('.stars-diagram') ? 'stars' : (el.closest('.usecases') ? 'depo' : 'other');
+      if (!scrollGroups[groupKey]) scrollGroups[groupKey] = [];
+      scrollGroups[groupKey].push(el);
+    });
+    var observer = new IntersectionObserver(function(entries, obs){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting){
+          var group = null;
+          for (var key in scrollGroups){
+            if (scrollGroups[key].indexOf(entry.target) !== -1){ group = scrollGroups[key]; break; }
+          }
+          var list = group || [entry.target];
+          var idx = list.indexOf(entry.target);
+          setTimeout(function(){ entry.target.classList.add('is-visible'); }, Math.max(0, idx)*90);
+          obs.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.2});
+    for (var g in scrollGroups){
+      scrollGroups[g].forEach(function(el){ observer.observe(el); });
+    }
+  } else {
+    // Fallback sem IntersectionObserver: revela tudo direto.
+    appearEls.forEach(function(el){ el.classList.add('is-visible'); });
+  }
+
+  // Rede de segurança: nunca deixa um card preso invisível (ex.: observer não dispara).
+  setTimeout(function(){
+    appearEls.forEach(function(el){ el.classList.add('is-visible'); });
+    document.querySelectorAll('.hero-text-appear').forEach(function(el){ el.classList.add('is-visible'); });
+  }, 4000);
+
+  // Parallax do notebook do hero: a imagem desce mais devagar que o scroll.
+  (function(){
+    var img = document.querySelector('.hero-laptop img');
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!img || reduce) return;
+    var ticking = false;
+    function update(){
+      ticking = false;
+      var vh = window.innerHeight || 1;
+      var p = Math.min(1, Math.max(0, (window.scrollY || 0) / vh));
+      img.style.setProperty('--heroImgY', (p * 110).toFixed(1) + 'px');
+    }
+    function onScroll(){
+      if (!ticking){ ticking = true; window.requestAnimationFrame(update); }
+    }
+    window.addEventListener('scroll', onScroll, {passive:true});
+    window.addEventListener('resize', onScroll);
+    update();
+  })();
+
+  // Parallax leve: notebook e cards se movem em sentidos opostos conforme o scroll.
+  (function(){
+    var diagram = document.querySelector('.stars-diagram');
+    var section = document.querySelector('.stars');
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!diagram || !section || reduce) return;
+
+    var ticking = false;
+    function update(){
+      ticking = false;
+      var r = section.getBoundingClientRect();
+      var vh = window.innerHeight || 1;
+      // progresso: -1 (seção entrando por baixo) → 0 (centrada) → 1 (saindo por cima)
+      var p = Math.max(-1, Math.min(1, (vh/2 - (r.top + r.height/2)) / (r.height/2 + vh/2)));
+      diagram.style.setProperty('--imgY', (p * 44).toFixed(1) + 'px');
+      diagram.style.setProperty('--cardsY', (p * -30).toFixed(1) + 'px');
+    }
+    function onScroll(){
+      if (!ticking){ ticking = true; window.requestAnimationFrame(update); }
+    }
+    window.addEventListener('scroll', onScroll, {passive:true});
+    window.addEventListener('resize', onScroll);
+    update();
+  })();
+
+  // Liquid Glass: o brilho especular dos cards/botões segue o ponteiro.
+  (function(){
+    var els = document.querySelectorAll('.h-stat, .a-card, .u-card, .addon-item, .quiz-opt');
+    els.forEach(function(el){
+      el.addEventListener('pointermove', function(e){
+        var r = el.getBoundingClientRect();
+        el.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100).toFixed(1) + '%');
+        el.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100).toFixed(1) + '%');
+      });
+    });
+  })();
+
+  var modal = document.getElementById('quizModal');
+  var openBtn = document.getElementById('openQuizBtn');
+  var closeBtn = document.getElementById('closeQuizBtn');
+  var progress = document.getElementById('quizProgress');
+  var steps = ['quizStep1','quizStep2','quizStep3','quizStep4','quizResult'];
+  var answers = {};
+
+  function showStep(id){
+    for (var i=0;i<steps.length;i++){
+      document.getElementById(steps[i]).hidden = (steps[i] !== id);
+    }
+    var idx = steps.indexOf(id);
+    progress.textContent = (id === 'quizResult') ? 'Resultado' : ('Pergunta ' + (idx+1) + ' de 4');
+  }
+
+  function resetQuiz(){
+    answers = {};
+    var checks = document.querySelectorAll('.quiz-check input');
+    for (var i=0;i<checks.length;i++){ checks[i].checked = false; }
+    showStep('quizStep1');
+  }
+
+  openBtn.addEventListener('click', function(){
+    modal.hidden = false;
+    resetQuiz();
+  });
+  closeBtn.addEventListener('click', function(){ modal.hidden = true; });
+  modal.addEventListener('click', function(e){ if (e.target === modal) modal.hidden = true; });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !modal.hidden) modal.hidden = true; });
+
+  // Perguntas 1 e 2: escolha única — avança automaticamente.
+  var opts = document.querySelectorAll('.quiz-opt');
+  for (var j=0;j<opts.length;j++){
+    opts[j].addEventListener('click', function(){
+      var q = this.getAttribute('data-q');
+      answers[q] = this.getAttribute('data-v');
+      showStep('quizStep' + (parseInt(q,10)+1));
+    });
+  }
+
+  // Pergunta 3 (templates, múltipla escolha): botão Continuar avança pra pergunta 4.
+  document.getElementById('quizStep3Next').addEventListener('click', function(){
+    showStep('quizStep4');
+  });
+
+  document.getElementById('quizSeeResult').addEventListener('click', function(){
+    // Base Professional se: volume acima de 5.000, uso de ERP, ou template exclusivo Pro.
+    var proTemplate = false;
+    var tmpl = document.querySelectorAll('#quizStep3 input:checked');
+    for (var t=0;t<tmpl.length;t++){ if (tmpl[t].getAttribute('data-pro')) proTemplate = true; }
+    var isPro = answers['1']==='professional' || answers['2']==='professional' || proTemplate;
+    var plan = isPro ? 'Professional' : 'Standard';
+    document.getElementById('quizResultPlan').textContent = plan;
+    document.getElementById('quizResultDesc').textContent = isPro
+      ? 'Imóveis ilimitados, com todos os templates disponíveis e integração com os principais ERPs do mercado.'
+      : 'Até 5.000 imóveis, com os templates essenciais, go live em 3 semanas e alertas automáticos.';
+
+    // Templates escolhidos
+    var tmplDiv = document.getElementById('quizResultTemplates');
+    if (tmpl.length){
+      var th = '<div class="quiz-addons-title">Templates selecionados:</div><ul>';
+      for (var i=0;i<tmpl.length;i++){ th += '<li>' + tmpl[i].value + '</li>'; }
+      th += '</ul>';
+      tmplDiv.innerHTML = th;
+    } else { tmplDiv.innerHTML = ''; }
+
+    // Complementos (add-ons) escolhidos
+    var addon = document.querySelectorAll('#quizStep4 input:checked');
+    var addonsDiv = document.getElementById('quizResultAddons');
+    if (addon.length){
+      var html = '<div class="quiz-addons-title">Complementos recomendados:</div><ul>';
+      for (var k=0;k<addon.length;k++){ html += '<li>' + addon[k].value + '</li>'; }
+      html += '</ul>';
+      addonsDiv.innerHTML = html;
+    } else { addonsDiv.innerHTML = ''; }
+
+    showStep('quizResult');
+  });
+
+  document.getElementById('quizRestart').addEventListener('click', resetQuiz);
+})();
+</script>
+
+<!-- Modal do WhatsApp: abre, valida, envia para RD Station e redireciona -->
+<script>
+  (function () {
+    var trigger = document.getElementById('wa-trigger');
+    var modal = document.getElementById('wa-modal');
+    var form = document.getElementById('wa-form');
+    if (!trigger || !modal || !form) return;
+
+    function openModal() {
+      modal.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+      var first = form.querySelector('input');
+      if (first) setTimeout(function () { first.focus(); }, 150);
+    }
+    function closeModal() {
+      modal.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    trigger.addEventListener('click', openModal);
+
+    modal.querySelectorAll('[data-wa-close]').forEach(function (el) {
+      el.addEventListener('click', closeModal);
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+    });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      var data = new FormData(form);
+      var nome = (data.get('nome') || '').toString().trim();
+      var email = (data.get('email') || '').toString().trim();
+      var telefone = (data.get('telefone') || '').toString().trim();
+      var empresa = (data.get('empresa') || '').toString().trim();
+      var cargo = (data.get('cargo') || '').toString().trim();
+
+      // RD Station — fire-and-forget (no-cors, não bloqueia redirect)
+      try {
+        fetch('https://cta-redirect.rdstation.com/v2/conversions', {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            conversion_identifier: 'site-4asset-bruna',
+            name: nome,
+            email: email,
+            mobile_phone: '+55' + telefone.replace(/\D/g, ''),
+            company_name: empresa,
+            cf_cargo: cargo
+          })
+        }).catch(function () {});
+      } catch (err) { /* ignora */ }
+
+      // Monta mensagem personalizada e abre WhatsApp em nova aba
+      var msg = 'Quero saber mais sobre os produtos da 4Asset.' +
+        '\n\nNome: ' + nome +
+        '\nEmpresa: ' + empresa +
+        '\nCargo: ' + cargo;
+      var waUrl = 'https://wa.me/5548984360428?text=' + encodeURIComponent(msg);
+      window.open(waUrl, '_blank', 'noopener');
+
+      closeModal();
+      form.reset();
+    });
+  })();
+</script>
+
+<!-- ============ HERO: vídeo toca 1x, congela no último frame e revela o conteúdo ============ -->
+<script>
+(function(){
+  var hero = document.querySelector('.hero[data-intro]');
+  if (!hero) return;
+  var video = hero.querySelector('.hero-video');
+
+  // 1) O texto, CTA e big numbers entram primeiro (assim que a página carrega).
+  requestAnimationFrame(function(){ hero.dataset.intro = 'ready'; });
+
+  if (!video) return;
+
+  // 2) Só depois do texto entrar, o vídeo de fundo começa a tocar.
+  var started = false;
+  function startVideo(){
+    if (started) return; started = true;
+    var p = video.play && video.play();
+    if (p && typeof p.catch === 'function') p.catch(function(){});
+  }
+  setTimeout(startVideo, 1200);
+
+  // 3) Sem loop: ao terminar, o <video> mantém o último frame como imagem fixa.
+  video.addEventListener('ended', function(){ try { video.pause(); } catch(e){} hero.dataset.video = 'done'; });
+})();
+</script>
+
+</body>
+</html>
