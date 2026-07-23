@@ -471,10 +471,14 @@
   #problema .wrap{height:auto; width:100%; max-width:1680px;}
   .diagram-problems{width:100%; max-width:1680px; min-height:560px; align-items:center;}
   #problema .stars-diagram{margin-top:0;}
-  .diagram-problems .orbit-card{width:210px;}
+  .diagram-problems .orbit-card{width:188px;}
+  /* Palco com a MESMA largura da tablet — cards são posicionados relativos a ele,
+     não ao container grande (1680px). Assim o padrão de distância cards↔tablet
+     fica idêntico em qualquer monitor, em vez de "esticar" em telas largas. */
+  .problems-stage{position:relative; z-index:1; width:clamp(400px,50vw,720px);}
   /* Tablet com o app, no centro, com sombra/brilho azul (estilo do 2º print) */
   .diagram-problems .stars-main-img{
-    height:auto; width:clamp(400px,50vw,720px); max-width:none; max-height:none;
+    display:block; height:auto; width:100%; max-width:none; max-height:none;
     -webkit-mask-image:linear-gradient(to bottom, #000 0%, #000 42%, rgba(0,0,0,0) 77%);
     mask-image:linear-gradient(to bottom, #000 0%, #000 42%, rgba(0,0,0,0) 77%);
     filter: drop-shadow(0 18px 42px rgba(0,0,0,0.5));
@@ -502,13 +506,17 @@
     box-shadow:inset 0 1px 0 rgba(255,255,255,0.14), 0 18px 40px rgba(0,0,0,0.45);
   }
   .diagram-problems .orbit-card:hover{transform:translate(-50%,-50%) scale(1.06); background:rgba(22,32,58,0.94);}
-  /* Cards flanqueando a tablet: 3 à esquerda, 3 à direita (escalonados, meio mais afastado) */
-  .diagram-problems .p1{left:18%; top:30%;}   /* esq — topo   */
-  .diagram-problems .p3{left:14%; top:50%;}   /* esq — meio (mais afastado) */
-  .diagram-problems .p5{left:24%; top:68%;}   /* esq — baixo  */
-  .diagram-problems .p2{left:77%; top:39%;}   /* dir — topo   */
-  .diagram-problems .p4{left:86%; top:56%;}   /* dir — meio (mais afastado) */
-  .diagram-problems .p6{left:79%; top:73%;}   /* dir — baixo  */
+  /* Cards flanqueando a tablet: 3 à esquerda, 3 à direita (escalonados, meio mais afastado).
+     left em % do próprio .problems-stage (mesma largura da tablet): a distância
+     cards↔tablet escala junto com a tablet em qualquer monitor — e como a tablet
+     trava em 720px (clamp), a distância também trava, nunca "espalhando" em telas
+     largas. top em % da altura do stage (idem, sempre proporcional à tablet). */
+  .diagram-problems .p1{left:-25%; top:24%;}  /* esq — topo   */
+  .diagram-problems .p3{left:-27%; top:46%;}  /* esq — meio (mais afastado) */
+  .diagram-problems .p5{left:-24%; top:63%;}  /* esq — baixo  */
+  .diagram-problems .p2{left:125%; top:33%;}  /* dir — topo   */
+  .diagram-problems .p4{left:127%; top:50%;}  /* dir — meio (mais afastado) */
+  .diagram-problems .p6{left:124%; top:68%;}  /* dir — baixo  */
   /* Tooltips dos cards da esquerda (p1,p3,p5,p7) alinhados à esquerda */
   .diagram-problems .p1 .label,.diagram-problems .p3 .label,.diagram-problems .p5 .label,.diagram-problems .p7 .label{
     left:0; right:auto; transform:translateX(0) translateY(-6px);
@@ -1030,7 +1038,17 @@
     .stars .wrap{height:auto;}
     .stars-diagram{flex-direction:column; min-height:auto; max-width:100%; gap:20px;}
     .stars-main-img{max-height:none;}
+    .problems-stage{
+      position:static; width:100%; max-width:420px; margin:0 auto;
+      display:flex; flex-direction:column; gap:20px;
+    }
     .orbit-card{position:relative; left:auto; right:auto; top:auto; bottom:auto; width:100%; max-width:420px; min-height:auto; margin:0 auto; flex-wrap:wrap;}
+    /* especificidade igual/maior que as regras .diagram-problems .p1..p6 (calc()),
+       garantindo que o empilhamento mobile vença mesmo com o novo posicionamento */
+    .diagram-problems .p1, .diagram-problems .p2, .diagram-problems .p3,
+    .diagram-problems .p4, .diagram-problems .p5, .diagram-problems .p6{
+      position:relative; left:auto; top:auto;
+    }
     .orbit-card.pos-tl, .orbit-card.pos-tr, .orbit-card.pos-bl, .orbit-card.pos-br,
     .orbit-card.pos-ml, .orbit-card.pos-mr{transform:none;}
     .orbit-card .label{
@@ -1235,6 +1253,7 @@
       <h2 class="problems-center-title">O que o On Premise resolve?</h2>
     </div>
     <div class="stars-diagram diagram-problems">
+     <div class="problems-stage">
 
       <div class="orbit-card h-stat sf-appear p1">
         <div class="icon-badge">
@@ -1285,6 +1304,7 @@
       </div>
 
       <img class="stars-main-img" src="tablet-app.png" alt="Specifor On Premise em tablet — mapa e GIS">
+     </div>
     </div>
     <p class="stars-quote problems-sub">Em setores de alta complexidade, a gestão territorial exige um nível de controle e agilidade que planilhas convencionais e sistemas legados cadastrais não conseguem mais suportar, pois estas são suscetíveis a erros humanos e perda de prazos. Mas, e se esses desafios fossem superados com apenas uma solução?</p>
   </div>
