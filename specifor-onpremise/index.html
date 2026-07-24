@@ -116,7 +116,7 @@
   }
   .hero-content h1{
     font-family:'Inter',Arial,sans-serif;
-    font-weight:800; font-size:clamp(26px,3.6vw,46px); line-height:1.1;
+    font-weight:800; font-size:clamp(24px,3.3vw,42px); line-height:1.1;
     margin-bottom:clamp(8px,1.5vh,18px); letter-spacing:-0.02em;
   }
   .hero-content p{
@@ -471,7 +471,9 @@
   #problema .wrap{height:auto; width:100%; max-width:1680px;}
   .diagram-problems{width:100%; max-width:1680px; min-height:560px; align-items:center;}
   #problema .stars-diagram{margin-top:0;}
-  .diagram-problems .orbit-card{width:188px;}
+  .diagram-problems .orbit-card{width:210px; gap:8px;}
+  .diagram-problems .orbit-card .icon-badge{width:40px; height:40px;}
+  .diagram-problems .orbit-card .icon{width:20px; height:20px;}
   /* Palco com a MESMA largura da tablet — cards são posicionados relativos a ele,
      não ao container grande (1680px). Assim o padrão de distância cards↔tablet
      fica idêntico em qualquer monitor, em vez de "esticar" em telas largas. */
@@ -497,6 +499,10 @@
     max-width:680px; margin:clamp(-120px,-13vh,-76px) auto 0; text-align:center;
     font-size:clamp(14px,1.05vw,16.5px); font-weight:500; line-height:1.7; color:rgba(255,255,255,0.72);
   }
+  .problems-turn-phrase{
+    font-family:'Lora',serif; font-weight:600; color:#fff;
+    font-size:clamp(15px,1.9vw,21.8px); white-space:nowrap;
+  }
   /* Cards distribuídos em círculo (elipse) ao redor do personagem.
      Centro do card ancorado no ponto via translate(-50%,-50%); ângulos iguais (~51°).
      z-index acima do título para permanecerem legíveis. */
@@ -511,12 +517,12 @@
      cards↔tablet escala junto com a tablet em qualquer monitor — e como a tablet
      trava em 720px (clamp), a distância também trava, nunca "espalhando" em telas
      largas. top em % da altura do stage (idem, sempre proporcional à tablet). */
-  .diagram-problems .p1{left:-25%; top:24%;}  /* esq — topo   */
-  .diagram-problems .p3{left:-27%; top:46%;}  /* esq — meio (mais afastado) */
-  .diagram-problems .p5{left:-24%; top:63%;}  /* esq — baixo  */
-  .diagram-problems .p2{left:125%; top:33%;}  /* dir — topo   */
-  .diagram-problems .p4{left:127%; top:50%;}  /* dir — meio (mais afastado) */
-  .diagram-problems .p6{left:124%; top:68%;}  /* dir — baixo  */
+  .diagram-problems .p1{left:-25%; top:15%;}  /* esq — topo   */
+  .diagram-problems .p3{left:-25%; top:50%;}  /* esq — meio   */
+  .diagram-problems .p5{left:-25%; top:85%;}  /* esq — baixo  */
+  .diagram-problems .p2{left:125%; top:15%;}  /* dir — topo   */
+  .diagram-problems .p4{left:125%; top:50%;}  /* dir — meio   */
+  .diagram-problems .p6{left:125%; top:85%;}  /* dir — baixo  */
   /* Tooltips dos cards da esquerda (p1,p3,p5,p7) alinhados à esquerda */
   .diagram-problems .p1 .label,.diagram-problems .p3 .label,.diagram-problems .p5 .label,.diagram-problems .p7 .label{
     left:0; right:auto; transform:translateX(0) translateY(-6px);
@@ -1056,6 +1062,7 @@
       box-shadow:none; border:none; background:transparent; padding:8px 0 0; margin-top:2px;
     }
     .orbit-card .label::before{display:none;}
+    .problems-turn-phrase{white-space:normal;}
     .stars-main-img{order:-1; width:100%;}
   }
 
@@ -1116,8 +1123,8 @@
 
   <div class="hero-inner">
     <div class="hero-content hero-text-appear">
-      <h1>A plataforma de gestão de ativos<br>mais robusta do mercado.</h1>
-      <p>Ao centralizar a gestão de ativos em um ambiente único e seguro, o Specifor On Premise automatiza rotinas operacionais de grandes empresas e garante rastreabilidade, segurança jurídica e controle sobre toda a operação.</p>
+      <h1>A plataforma de inteligência de ativos mais robusta do mercado</h1>
+      <p>Ao centralizar a gestão de ativos em um ambiente único<br> e seguro, o Specifor On Premise automatiza rotinas operacionais de grandes empresas e garante rastreabilidade, segurança jurídica e controle<br> sobre toda a operação.</p>
       <div class="actions">
         <a class="btn btn-falar" href="https://4asset.rds.land/fale-com-um-consultor">Falar com especialistas</a>
         <a class="btn btn-ver" href="#recursos">→</a>
@@ -1141,31 +1148,31 @@
   <div class="hero-stats">
     <div class="h-stat sf-appear">
       <div class="icon-badge">
-        <svg class="icon" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="16" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M3 9h18M8 3v4M16 3v4" stroke="currentColor" stroke-width="1.6"/></svg>
+        <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M12 21s7-7.58 7-12a7 7 0 10-14 0c0 4.42 7 12 7 12z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="9" r="2.4" stroke="currentColor" stroke-width="1.6"/></svg>
       </div>
-      <div class="num">Go-live em 3 semanas</div>
-      <div class="label">A partir do contrato</div>
+      <div class="num">+500 mil</div>
+      <div class="label">Imóveis gerenciados</div>
     </div>
     <div class="h-stat sf-appear">
       <div class="icon-badge">
-        <svg class="icon" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.6"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <svg class="icon" viewBox="0 0 24 24" fill="none"><circle cx="4.5" cy="12" r="2.2" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="2.2" stroke="currentColor" stroke-width="1.6"/><circle cx="19.5" cy="12" r="2.2" stroke="currentColor" stroke-width="1.6"/><path d="M6.7 12h3.1M14.2 12h3.1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
       </div>
-      <div class="num">80% mais rápido</div>
-      <div class="label">Na busca de documentos</div>
+      <div class="num">+300</div>
+      <div class="label">Processos de negócio</div>
     </div>
     <div class="h-stat sf-appear">
       <div class="icon-badge">
-        <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M12 3a5 5 0 00-5 5v3.2c0 .7-.28 1.37-.78 1.87L5 14.3c-.6.6-.18 1.7.7 1.7h12.6c.88 0 1.3-1.1.7-1.7l-1.22-1.23A2.65 2.65 0 0117 11.2V8a5 5 0 00-5-5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9.5 19a2.5 2.5 0 005 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <svg class="icon" viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M8 15v-3M12 15V9M16 15v-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
       </div>
-      <div class="num">Zero prazos perdidos</div>
-      <div class="label">Com alertas automáticos</div>
+      <div class="num">Até 50% de redução</div>
+      <div class="label">No tempo com geração de relatórios</div>
     </div>
     <div class="h-stat sf-appear">
       <div class="icon-badge">
-        <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M12 3l7 3v5c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6l7-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9.5 12l1.8 1.8L15 10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="icon" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="12" r="8" stroke="currentColor" stroke-width="1.6"/><path d="M11 7v5l3.5 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M17 17l4 4M21 18v3h-3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
-      <div class="num">Dados confiáveis</div>
-      <div class="label">Decisões com segurança</div>
+      <div class="num">Até 40% de redução</div>
+      <div class="label">No tempo dos processos operacionais</div>
     </div>
   </div>
 
@@ -1259,7 +1266,7 @@
         <div class="icon-badge">
           <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M7 3h7l4 4v14H7z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M10 11h6M10 15h6M10 19h3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
         </div>
-        <div class="num">Grande volume de contratos</div>
+        <div class="num">Grande volume<br> de contratos</div>
         <div class="label">Milhares de contratos com diversas variáveis, difíceis de acompanhar manualmente.</div>
       </div>
 
@@ -1267,7 +1274,7 @@
         <div class="icon-badge">
           <svg class="icon" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M3 12h18" stroke="currentColor" stroke-width="1.6"/><path d="M12 3c2.6 2.7 2.6 15.3 0 18M12 3c-2.6 2.7-2.6 15.3 0 18" stroke="currentColor" stroke-width="1.6"/></svg>
         </div>
-        <div class="num">Falta de visão integrada</div>
+        <div class="num">Falta de<br> visão integrada</div>
         <div class="label">Áreas trabalham em silos, sem uma visão única e consolidada da operação.</div>
       </div>
 
@@ -1275,7 +1282,7 @@
         <div class="icon-badge">
           <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M13 3H7v18h11V8z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M13 3v5h5" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M4 7v13a1 1 0 001 1h9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
         </div>
-        <div class="num">Informação descentralizada</div>
+        <div class="num">Informação<br> descentralizada</div>
         <div class="label">Múltiplos documentos espalhados e descentralização da informação crítica.</div>
       </div>
 
@@ -1283,7 +1290,7 @@
         <div class="icon-badge">
           <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M20 11a8 8 0 10-2.3 5.7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M20 4v6h-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
-        <div class="num">Cadastros desatualizados</div>
+        <div class="num">Cadastros<br> desatualizados</div>
         <div class="label">Dificuldade em manter os cadastros atualizados diante do volume da operação.</div>
       </div>
 
@@ -1291,7 +1298,7 @@
         <div class="icon-badge">
           <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M11 20A7 7 0 019.8 6.1C15.5 5 17 4.5 19 2c1 2 2 4.2 2 8 0 5.5-4.8 10-10 10z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M2 21c0-3 1.9-5.4 5.1-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
         </div>
-        <div class="num">Licenciamento ineficiente</div>
+        <div class="num">Licenciamento<br> ineficiente</div>
         <div class="label">Licenciamento ambiental lento e sem controle sobre condicionantes e prazos.</div>
       </div>
 
@@ -1299,14 +1306,14 @@
         <div class="icon-badge">
           <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M16 20v-1.5a3.5 3.5 0 00-3.5-3.5h-5A3.5 3.5 0 004 18.5V20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="10" cy="8" r="3.2" stroke="currentColor" stroke-width="1.6"/><path d="M20 20v-1.4a3.4 3.4 0 00-2.6-3.3M15.5 5.2a3.2 3.2 0 010 5.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
         </div>
-        <div class="num">Impactos sociais sem gestão</div>
+        <div class="num">Impactos sociais<br> sem gestão</div>
         <div class="label">Falhas na gestão de impactos sociais junto às comunidades e proprietários.</div>
       </div>
 
       <img class="stars-main-img" src="tablet-app.png" alt="Specifor On Premise em tablet — mapa e GIS">
      </div>
     </div>
-    <p class="stars-quote problems-sub">Em setores de alta complexidade, a gestão territorial exige um nível de controle e agilidade que planilhas convencionais e sistemas legados cadastrais não conseguem mais suportar, pois estas são suscetíveis a erros humanos e perda de prazos. Mas, e se esses desafios fossem superados com apenas uma solução?</p>
+    <p class="stars-quote problems-sub">Em setores de alta complexidade, a gestão territorial exige um nível de controle e agilidade que planilhas convencionais e sistemas legados cadastrais não conseguem mais suportar, pois estas são suscetíveis a erros humanos e perda de prazos. <br><br><span class="problems-turn-phrase">Mas, e se esses desafios fossem superados com apenas uma solução?</span></p>
   </div>
 </section>
 
@@ -1316,23 +1323,23 @@
     <div class="head center">
       <span class="pill pill-blue">Recursos</span>
       <h2>Toda a gestão de ativos<br>em um único ambiente</h2>
-      <p class="sub">O Specifor On Premise elimina a dispersão de dados e centraliza tudo em um único ambiente — com rastreabilidade total no campo e no escritório.</p>
+      <p class="sub">Automatize processos e garanta rastreabilidade total das rotinas operacionais no campo e no escritório</p>
     </div>
     <div class="bento-grid">
 
-      <article class="bento-card bento-lg bento-photo">
+      <article class="bento-card bento-photo">
         <img class="bento-img" src="card-gis.jpg" alt="Especialista usando o Specifor On Premise com mapa GIS" loading="lazy">
         <div class="bento-text">
-          <h3>Integração GIS nativa</h3>
-          <p>Mapas e georreferenciamento integrados ao ArcGIS Server ESRI, com dados territoriais precisos no cadastro.</p>
+          <h3>Integrações e Segurança</h3>
+          <p>Conexão nativa com ArcGIS Server ESRI e integração com ERP e sistemas.</p>
         </div>
       </article>
 
-      <article class="bento-card bento-lg bento-photo">
+      <article class="bento-card bento-photo">
         <img class="bento-img" src="card-integracoes.jpg" alt="Engenheira em campo usando o Specifor On Premise em tablet" loading="lazy">
         <div class="bento-text">
-          <h3>Integrações e segurança</h3>
-          <p>Conexão nativa com ERP e Jurídico, e gestão de identidade e acesso com controle granular de permissões.</p>
+          <h3>Gerenciamento de identidade e acesso</h3>
+          <p>Usuários, equipes, grupos e segurança</p>
         </div>
       </article>
 
@@ -1357,6 +1364,14 @@
         <div class="bento-text">
           <h3>App Mobile Offline</h3>
           <p>Aplicativo mobile com modo offline para coleta de dados em campo, mesmo sem conexão.</p>
+        </div>
+      </article>
+
+      <article class="bento-card bento-photo">
+        <img class="bento-img" src="card-implantacao.jpg" alt="Especialista implantando o Specifor On Premise em notebook" loading="lazy">
+        <div class="bento-text">
+          <h3>Implantação e AMS</h3>
+          <p>Implantação sob medida com contrato AMS e opção de licença perpétua ou mensal/anual.</p>
         </div>
       </article>
 
@@ -1387,7 +1402,9 @@
     </div>
     <div class="row">
     <div class="u-card sf-appear">
-      <div class="u-photo" style="background-image:url('energia.jpg')"></div>
+      <div class="u-photo" style="background-image:url('energia.jpg')">
+        <div class="u-logo"><img src="clientes-cor/axia.png" alt="Axia Energia"></div>
+      </div>
       <div class="u-content">
         <h4>Customização e atendimento</h4>
         <p class="u-quote">"Produto excelente, principalmente pela possibilidade de realizar customizações e deixá-lo de acordo com as necessidades do cliente. O excelente atendimento e a cordialidade da equipe técnica são destaques do time 4Asset, sempre disponíveis para buscar melhorias e na solução de eventuais problemas."<span class="role">Guilherme — AXIA</span></p>
