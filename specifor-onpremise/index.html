@@ -92,8 +92,15 @@
     background:rgba(140,165,255,0.08);
   }
 
-  .hero-logo{display:flex; align-items:center;}
+  .hero-logo{display:flex; align-items:center; gap:10px;}
   .hero-logo img{height:20px; width:auto; display:block;}
+  .tag-onpremise{
+    display:inline-flex; align-items:center; line-height:1;
+    padding:5px 12px; border-radius:999px;
+    background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.16);
+    color:#fff; font-size:11px; font-weight:700; letter-spacing:.03em; text-transform:uppercase;
+    white-space:nowrap;
+  }
 
   .btn-comecar{
     background:transparent; border:1px solid rgba(255,255,255,0.35); color:#fff; padding:11px 20px;
@@ -1145,6 +1152,7 @@
   <nav class="nav">
     <div class="hero-logo">
       <img src="logo-specifor-branco.svg" alt="Specifor">
+      <span class="tag-onpremise">On Premise</span>
     </div>
     <ul>
       <li><a href="#problema">O que resolve</a></li>
