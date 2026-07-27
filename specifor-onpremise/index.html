@@ -92,8 +92,15 @@
     background:rgba(140,165,255,0.08);
   }
 
-  .hero-logo{display:flex; align-items:center;}
+  .hero-logo{display:flex; align-items:center; gap:10px;}
   .hero-logo img{height:20px; width:auto; display:block;}
+  .tag-onpremise{
+    display:inline-flex; align-items:center; line-height:1;
+    padding:5px 12px; border-radius:999px;
+    background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.16);
+    color:#fff; font-size:11px; font-weight:700; letter-spacing:.03em; text-transform:uppercase;
+    white-space:nowrap;
+  }
 
   .btn-comecar{
     background:transparent; border:1px solid rgba(255,255,255,0.35); color:#fff; padding:11px 20px;
@@ -756,7 +763,7 @@
   }
 
   /* ===== DEPOIMENTOS (foto em cima com degradê, texto embaixo) ===== */
-  .usecases{background:#fff; padding:90px 24px;}
+  .usecases{background:#fff; padding:90px 24px 40px;}
   .depo-header{position:relative; display:flex; align-items:center; justify-content:flex-start; min-height:90px; max-width:1180px; margin-left:auto; margin-right:auto;}
   .depo-header h2{position:relative; z-index:1; font-size:32px; color:#0f1d33; margin:0;}
   .usecases{position:relative; overflow:hidden;}
@@ -800,6 +807,8 @@
   /* ===== MERCADOS ATENDIDOS ===== */
   .markets{background:#fff; padding:90px 24px;}
   .markets .head{max-width:640px; margin:0 auto 48px;}
+  .markets .head .pill{margin-bottom:18px;}
+  .markets p.sub{color:var(--gray-text); font-size:clamp(14px,1.1vw,16.5px); line-height:1.65; max-width:600px; margin:10px auto 0;}
   .markets-row{display:flex; flex-wrap:wrap; justify-content:center; gap:20px; max-width:1180px; margin:0 auto;}
   .market-card{
     position:relative; overflow:hidden;
@@ -1143,6 +1152,7 @@
   <nav class="nav">
     <div class="hero-logo">
       <img src="logo-specifor-branco.svg" alt="Specifor">
+      <span class="tag-onpremise">On Premise</span>
     </div>
     <ul>
       <li><a href="#problema">O que resolve</a></li>
@@ -1476,6 +1486,7 @@
     <div class="head center">
       <span class="pill pill-blue">Mercados atendidos</span>
       <h2>Setores que confiam no Specifor On Premise</h2>
+      <p class="sub">Nossa expertise aplicada em diversos setores</p>
     </div>
     <div class="markets-row">
       <div class="market-card sf-appear">
