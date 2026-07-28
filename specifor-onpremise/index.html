@@ -507,7 +507,7 @@
     font-size:clamp(14px,1.05vw,16.5px); font-weight:500; line-height:1.7; color:rgba(255,255,255,0.72);
   }
   .problems-turn-phrase{
-    font-family:'Lora',serif; font-weight:600; color:#fff;
+    font-family:'Inter',Arial,sans-serif; font-weight:700; color:#fff;
     font-size:clamp(15px,1.9vw,21.8px); white-space:nowrap;
   }
   /* Cards distribuídos em círculo (elipse) ao redor do personagem.
@@ -703,6 +703,11 @@
   .addon-item:last-child .addon-tip{left:auto; right:0; transform:translateX(0) translateY(-6px);}
   .addon-item:last-child:hover .addon-tip{transform:translateX(0) translateY(0);}
   .addon-item:last-child .addon-tip::after{left:auto; right:24px; transform:none;}
+  .addons-strip + .addons-strip{margin-top:16px;}
+  .addon-tip .partner{
+    display:block; margin-top:10px; padding-top:10px; border-top:1px solid rgba(255,255,255,0.14);
+    font-size:11.5px; font-weight:700; color:#7cbcff; text-transform:uppercase; letter-spacing:.03em;
+  }
 
   /* ===== CTA: QUAL O PLANO IDEAL ===== */
   .quiz-cta{background:#05070d; padding:0 24px 100px; text-align:center;}
@@ -894,18 +899,18 @@
   }
   .footer-mid-left{display:flex; align-items:center; gap:44px; flex-wrap:wrap;}
   .footer-link-especialista{color:#fff; font-size:14.5px; text-decoration:underline; text-underline-offset:4px;}
+  .footer-nav-link{color:rgba(255,255,255,0.75); font-size:14.5px; font-weight:600; text-decoration:none;}
+  .footer-nav-link:hover{color:#fff;}
   .btn-parceiro{
     display:inline-flex; align-items:center; gap:14px;
     border:1px solid rgba(255,255,255,0.5); border-radius:10px; padding:14px 26px;
     color:#fff; font-size:14.5px; text-decoration:none; transition:background .2s;
   }
   .btn-parceiro:hover{background:rgba(255,255,255,0.06);}
-  .footer-verante{
-    text-align:left; font-family:'Courier New',ui-monospace,monospace;
-    font-size:13px; letter-spacing:.08em; text-transform:uppercase; line-height:1.5;
-  }
-  .footer-verante .verante-nome{font-family:'Inter',Arial,sans-serif; font-size:26px; font-weight:700; letter-spacing:0; text-transform:none;}
-  .footer-verante .verante-nome span{font-family:'Courier New',ui-monospace,monospace; font-size:15px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; margin-right:4px;}
+  .footer-verante{display:flex; align-items:center; gap:22px;}
+  .footer-verante .footer-logo-divider{width:1px; height:32px; background:rgba(255,255,255,0.2);}
+  .footer-verante .footer-logo-4asset{height:24px; width:auto; display:block;}
+  .footer-verante .footer-logo-verante{height:38px; width:auto; display:block;}
   .footer-watermark{margin:10px 0 60px;}
   .footer-watermark img{width:100%; height:auto; display:block; opacity:.14;}
   .footer-bottom{
@@ -1172,7 +1177,7 @@
   <div class="hero-inner">
     <div class="hero-content hero-text-appear">
       <h1>A plataforma de inteligência de ativos mais robusta do mercado</h1>
-      <p>Ao centralizar a gestão de ativos em um ambiente único<br> e seguro, o Specifor On Premise automatiza rotinas operacionais de grandes empresas e garante rastreabilidade, segurança jurídica e controle<br> sobre toda a operação.</p>
+      <p>Ao centralizar a gestão de ativos em um ambiente único e&nbsp;seguro, o Specifor On Premise automatiza rotinas operacionais de grandes empresas e garante rastreabilidade, segurança jurídica e controle sobre&nbsp;toda&nbsp;a&nbsp;operação.</p>
       <div class="actions">
         <a class="btn btn-falar" href="https://4asset.rds.land/fale-com-um-consultor">Falar com especialistas</a>
         <a class="btn btn-ver" href="#recursos">→</a>
@@ -1205,7 +1210,7 @@
       <div class="icon-badge">
         <svg class="icon" viewBox="0 0 24 24" fill="none"><circle cx="4.5" cy="12" r="2.2" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="2.2" stroke="currentColor" stroke-width="1.6"/><circle cx="19.5" cy="12" r="2.2" stroke="currentColor" stroke-width="1.6"/><path d="M6.7 12h3.1M14.2 12h3.1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
       </div>
-      <div class="num">+300</div>
+      <div class="num">+650</div>
       <div class="label">Processos de negócio</div>
     </div>
     <div class="h-stat sf-appear">
@@ -1213,14 +1218,14 @@
         <svg class="icon" viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M8 15v-3M12 15V9M16 15v-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
       </div>
       <div class="num">Até 50% de redução</div>
-      <div class="label">No tempo com geração de relatórios</div>
+      <div class="label">No tempo dos processos operacionais</div>
     </div>
     <div class="h-stat sf-appear">
       <div class="icon-badge">
-        <svg class="icon" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="12" r="8" stroke="currentColor" stroke-width="1.6"/><path d="M11 7v5l3.5 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M17 17l4 4M21 18v3h-3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M9.5 4L12 8l2.5-4M12 4v17M12 8L7 21M12 8l5 13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 11h8M7 16h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M4 11h4M16 11h4M3 16h4M17 16h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
       </div>
-      <div class="num">Até 40% de redução</div>
-      <div class="label">No tempo dos processos operacionais</div>
+      <div class="num">+70.000 km</div>
+      <div class="label">de linhas de transmissão gerenciadas no Specifor</div>
     </div>
   </div>
 
@@ -1232,7 +1237,7 @@
   <div class="label">Nossas soluções estão com os melhores do mercado</div>
   <div class="marquee-row row1">
     <img class="logo-item" src="clientes-cor/auren.png" alt="Auren">
-    <img class="logo-item" src="clientes-cor/brf.png" alt="BRF">
+    <img class="logo-item" src="clientes-cor/brf-branco.png" alt="BRF">
     <img class="logo-item" src="clientes-cor/copel.png" alt="Copel">
     <img class="logo-item" src="clientes-cor/cpfl.png" alt="CPFL Energia">
     <img class="logo-item" src="clientes-cor/csn.png" alt="CSN">
@@ -1246,9 +1251,10 @@
     <img class="logo-item" src="clientes-cor/taesa.png" alt="Taesa">
     <img class="logo-item" src="clientes-cor/vale.png" alt="Vale">
     <img class="logo-item" src="clientes-cor/usiminas.png" alt="Usiminas">
+    <img class="logo-item" src="clientes-cor/arauco.png" alt="Arauco">
     <!-- duplicado para loop contínuo -->
     <img class="logo-item" src="clientes-cor/auren.png" alt="Auren">
-    <img class="logo-item" src="clientes-cor/brf.png" alt="BRF">
+    <img class="logo-item" src="clientes-cor/brf-branco.png" alt="BRF">
     <img class="logo-item" src="clientes-cor/copel.png" alt="Copel">
     <img class="logo-item" src="clientes-cor/cpfl.png" alt="CPFL Energia">
     <img class="logo-item" src="clientes-cor/csn.png" alt="CSN">
@@ -1262,6 +1268,7 @@
     <img class="logo-item" src="clientes-cor/taesa.png" alt="Taesa">
     <img class="logo-item" src="clientes-cor/vale.png" alt="Vale">
     <img class="logo-item" src="clientes-cor/usiminas.png" alt="Usiminas">
+    <img class="logo-item" src="clientes-cor/arauco.png" alt="Arauco">
   </div>
   <div class="marquee-row row2">
     <img class="logo-item" src="clientes-cor/alianca.png" alt="Aliança">
@@ -1280,6 +1287,8 @@
     <img class="logo-item" src="clientes-cor/echoenergia.png" alt="Echoenergia">
     <img class="logo-item" src="clientes-cor/elera.png" alt="Elera Renováveis">
     <img class="logo-item" src="clientes-cor/qair.png" alt="Qair">
+    <img class="logo-item" src="clientes-cor/thopen_logo.png" alt="Thopen Energia">
+    <img class="logo-item" src="clientes-cor/comerc.png" alt="Comerc Energia">
     <!-- duplicado para loop contínuo -->
     <img class="logo-item" src="clientes-cor/alianca.png" alt="Aliança">
     <img class="logo-item" src="clientes-cor/bmte.png" alt="BMTE">
@@ -1297,6 +1306,8 @@
     <img class="logo-item" src="clientes-cor/echoenergia.png" alt="Echoenergia">
     <img class="logo-item" src="clientes-cor/elera.png" alt="Elera Renováveis">
     <img class="logo-item" src="clientes-cor/qair.png" alt="Qair">
+    <img class="logo-item" src="clientes-cor/thopen_logo.png" alt="Thopen Energia">
+    <img class="logo-item" src="clientes-cor/comerc.png" alt="Comerc Energia">
   </div>
 </section>
 
@@ -1523,20 +1534,20 @@
     <div class="head center">
       <span class="pill pill-blue">Modelos de contratação</span>
       <h2>Escolha o modelo ideal para a sua operação</h2>
-      <p class="sub">O Specifor On Premise é implantado sob medida no seu ambiente, com Contrato AMS de suporte e evolução contínua. Escolha entre licença perpétua ou licença mensal/anual.</p>
+      <p class="sub">O Specifor On Premise é implantado sob medida no seu ambiente, com Contrato AMS de suporte e evolução contínua. Escolha entre licença perpétua ou assinatura.</p>
     </div>
     <div class="approval-cards">
       <div class="a-card">
         <div class="a-label">Licença Perpétua</div>
         <div class="a-big">Investimento único</div>
-        <div class="a-sub">Propriedade definitiva da licença</div>
+        <div class="a-sub">Modelo Enterprise</div>
         <hr class="a-divider">
         <div class="a-list-title">Incluído</div>
         <ul class="a-check">
           <li>Implantação sob medida</li>
-          <li>Ambiente on premise dedicado</li>
+          <li>Ambiente on premise</li>
           <li>Integração GIS nativa (ArcGIS ESRI)</li>
-          <li>Integração com ERP e Jurídico</li>
+          <li>Integração com ERPs, GEDs, sistemas Jurídicos e outros</li>
         </ul>
         <hr class="a-divider">
         <div class="a-list-title">Suporte:</div>
@@ -1548,16 +1559,16 @@
         <a class="btn btn-falar a-cta" href="https://4asset.rds.land/fale-com-um-consultor">Falar com especialistas</a>
       </div>
       <div class="a-card">
-        <div class="a-label">Licença Mensal/Anual</div>
+        <div class="a-label">Assinatura</div>
         <div class="a-big">Custo previsível</div>
-        <div class="a-sub">Flexibilidade de assinatura</div>
+        <div class="a-sub">Modelo SaaS</div>
         <hr class="a-divider">
         <div class="a-list-title">Incluído</div>
         <ul class="a-check">
           <li>Implantação sob medida</li>
-          <li>Ambiente on premise dedicado</li>
+          <li>Ambiente on premise</li>
           <li>Integração GIS nativa (ArcGIS ESRI)</li>
-          <li>Integração com ERP e Jurídico</li>
+          <li>Integração com ERPs, GEDs, sistemas Jurídicos e outros</li>
           <li>App Mobile Offline para campo</li>
         </ul>
         <hr class="a-divider">
@@ -1573,7 +1584,43 @@
   </div>
 </section>
 
-<!-- ============ 6. ADD-ONS ============ -->
+<!-- ============ 6. TEMPLATES ============ -->
+<section class="addons" id="templates">
+  <div class="wrap">
+    <div class="head center">
+      <h2>Templates</h2>
+      <p class="sub">Templates de negócio disponíveis para trazer ainda mais eficiência para a sua gestão, sem precisar de grandes e demoradas customizações</p>
+    </div>
+    <div class="addons-strip">
+      <div class="addon-item">
+        <svg class="icon sf-breathe" viewBox="0 0 24 24" fill="none"><path d="M7 3h7l4 4v14H7z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="13.5" cy="15" r="3" stroke="currentColor" stroke-width="1.6"/><path d="M13.5 13.3v3.4M12.4 14h2.2M12.4 16h2.2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+        <div class="name">Contratos e Pagamentos</div>
+      </div>
+      <div class="addon-item">
+        <svg class="icon sf-breathe" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/></svg>
+        <div class="name">Monitoramento 360º</div>
+      </div>
+      <div class="addon-item">
+        <svg class="icon sf-breathe" viewBox="0 0 24 24" fill="none"><path d="M4 9l8-6 8 6v11a1 1 0 01-1 1H5a1 1 0 01-1-1z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9.5 13l2 2 3.5-3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="name">Fundiário e Compliance dominial</div>
+      </div>
+      <div class="addon-item">
+        <svg class="icon sf-breathe" viewBox="0 0 24 24" fill="none"><path d="M6 20c-2-6 1-13 12-14 1 10-4 14-10 14-.7 0-1.4-.3-2 0z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M7 19c3-4 6-7 10-11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <div class="name">Meio Ambiente e Socioambiental</div>
+      </div>
+      <div class="addon-item">
+        <svg class="icon sf-breathe" viewBox="0 0 24 24" fill="none"><rect x="5" y="4" width="14" height="17" rx="1" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 8h1.5M14 8h1.5M8.5 12h1.5M14 12h1.5M8.5 16h1.5M14 16h1.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <div class="name">Patrimonial e Facilities</div>
+      </div>
+      <div class="addon-item">
+        <svg class="icon sf-breathe" viewBox="0 0 24 24" fill="none"><rect x="6" y="4" width="12" height="17" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M9 4V3a1 1 0 011-1h4a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.6"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="name">Inspeções e Vistorias</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6b. ADD-ONS ============ -->
 <section class="addons">
   <div class="wrap">
     <div class="head center">
@@ -1597,6 +1644,13 @@
         <div class="addon-tip">Alertas automáticos de vencimentos, renovações e obrigações — direto pra quem precisa agir.</div>
       </div>
       <div class="addon-item">
+        <svg class="icon sf-breathe" viewBox="0 0 24 24" fill="none"><path d="M4 6a2 2 0 012-2h4l2 2h6a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M8 12h8M8 16h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <div class="name">Gestão Documental</div>
+        <div class="addon-tip">Conecte o Specifor a mais de 35.000 órgãos públicos e 5.500 municípios, automatizando a solicitação de documentos direto no cadastro.<span class="partner">Parceria com a Docket</span></div>
+      </div>
+    </div>
+    <div class="addons-strip">
+      <div class="addon-item">
         <svg class="icon sf-breathe" viewBox="0 0 24 24" fill="none"><rect x="5" y="8" width="14" height="10" rx="2" stroke="currentColor" stroke-width="1.6"/><circle cx="9.5" cy="13" r="1.1" fill="currentColor"/><circle cx="14.5" cy="13" r="1.1" fill="currentColor"/><path d="M12 8V5M9 5h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
         <div class="name">Agentes IA</div>
         <div class="addon-tip">Automatize tarefas repetitivas e tenha respostas rápidas sobre o seu portfólio com inteligência artificial.</div>
@@ -1611,15 +1665,20 @@
         <div class="name">Compliance e Automação Legal</div>
         <div class="addon-tip">Automatize o acompanhamento de obrigações legais e regulatórias, com trilha de auditoria completa.</div>
       </div>
+      <div class="addon-item">
+        <svg class="icon sf-breathe" viewBox="0 0 24 24" fill="none"><path d="M12 3c1 3-2 4-2 7a4 4 0 008 0c0-2-1-3-1-3s1 4-2 4c-1.5 0-2-1-2-2 0-2 2-3 1-6z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M6 9a9 9 0 000 9M18 9a9 9 0 010 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <div class="name">Detecção e Monitoramento de Incêndios</div>
+        <div class="addon-tip">Monitore áreas propícias a incêndios florestais e detecte focos de incêndio antes que se alastre.<span class="partner">Parceria com a Ororatech</span></div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ============ 6b. CTA: QUAL O PLANO IDEAL ============ -->
+<!-- ============ 6c. CTA: FALE COM A EQUIPE ============ -->
 <section class="quiz-cta">
   <div class="wrap">
-    <p class="quiz-question">Não sabe qual é o seu plano ideal? Então clique no botão e descubra a combinação perfeita para sua empresa.</p>
-    <button class="btn btn-falar" id="openQuizBtn" type="button">Descubra o plano ideal para sua empresa</button>
+    <p class="quiz-question">Quer saber qual a melhor forma de aplicar o Specifor On Premise na sua operação?</p>
+    <a class="btn btn-falar" href="https://4asset.rds.land/fale-com-um-consultor">Fale com a nossa equipe especializada</a>
   </div>
 </section>
 
@@ -1670,34 +1729,18 @@
 
 <!-- ============ 9. FOOTER ============ -->
 <footer class="site-footer">
-  <div class="footer-top">
-    <nav class="footer-markets">
-      <div>
-        <a href="#">Construction</a>
-      </div>
-      <div>
-        <a href="#">Agro</a>
-      </div>
-      <div>
-        <a href="#">Mining</a><br>
-        <a href="#">Infra</a>
-      </div>
-      <div>
-        <span class="markets-label">Specifor<br>Mercados</span><br>
-        <a href="#">Energy</a><br>
-        <a href="#">Industry</a>
-      </div>
-    </nav>
-  </div>
-
   <div class="footer-mid">
     <div class="footer-mid-left">
+      <a class="footer-nav-link" href="#problema">O que resolve</a>
+      <a class="footer-nav-link" href="#recursos">Recursos</a>
+      <a class="footer-nav-link" href="#planos">Preços</a>
+      <a class="footer-nav-link" href="#cases">Depoimentos</a>
       <a class="footer-link-especialista" href="https://4asset.rds.land/fale-com-um-consultor">Fale com um especialista</a>
-      <a class="btn-parceiro" href="#">Seja um parceiro <span>→</span></a>
     </div>
     <div class="footer-verante">
-      Uma empresa do<br>
-      <div class="verante-nome"><span>Grupo</span>verante</div>
+      <img src="Logo_4Asset.png" alt="4Asset" class="footer-logo-4asset">
+      <div class="footer-logo-divider" aria-hidden="true"></div>
+      <img src="Logo_GrupoVerante-01.png" alt="Uma empresa do Grupo Verante" class="footer-logo-verante">
     </div>
   </div>
 
@@ -1711,69 +1754,6 @@
     <div><a href="privacidade.html">Privacidade</a> – <a href="mailto:dpo@4asset.com.br">dpo@4asset.com.br</a></div>
   </div>
 </footer>
-
-<!-- ============ MODAL: QUIZ DO PLANO IDEAL ============ -->
-<div class="modal-overlay" id="quizModal" hidden>
-  <div class="modal-box">
-    <button class="modal-close" id="closeQuizBtn" type="button" aria-label="Fechar">✕</button>
-    <div class="modal-progress" id="quizProgress">Pergunta 1 de 4</div>
-
-    <div class="quiz-step" id="quizStep1">
-      <h3>Quantos imóveis sua empresa gerencia?</h3>
-      <div class="quiz-options">
-        <button class="quiz-opt" data-q="1" data-v="standard">Até 250</button>
-        <button class="quiz-opt" data-q="1" data-v="standard">Até 500</button>
-        <button class="quiz-opt" data-q="1" data-v="standard">Até 1.000</button>
-        <button class="quiz-opt" data-q="1" data-v="standard">Até 5.000</button>
-        <button class="quiz-opt" data-q="1" data-v="professional">Acima de 5.000</button>
-      </div>
-    </div>
-
-    <div class="quiz-step" id="quizStep2" hidden>
-      <h3>Sua empresa utiliza ERPs, necessitando de integração?</h3>
-      <div class="quiz-options">
-        <button class="quiz-opt" data-q="2" data-v="professional">Sim</button>
-        <button class="quiz-opt" data-q="2" data-v="standard">Não</button>
-      </div>
-    </div>
-
-    <div class="quiz-step" id="quizStep3" hidden>
-      <h3>Escolha os templates necessários para o seu negócio:</h3>
-      <div class="quiz-options quiz-options-multi">
-        <label class="quiz-check"><input type="checkbox" name="template" value="Fundiário e Compliance dominial"> Fundiário e Compliance dominial</label>
-        <label class="quiz-check"><input type="checkbox" name="template" value="Meio ambiente/Socioambiental"> Meio ambiente/Socioambiental</label>
-        <label class="quiz-check"><input type="checkbox" name="template" value="Patrimonial/Facilities"> Patrimonial/Facilities</label>
-        <label class="quiz-check"><input type="checkbox" name="template" value="Inspeções/Vistorias"> Inspeções/Vistorias</label>
-        <label class="quiz-check"><input type="checkbox" name="template" value="Contratos e Pagamentos" data-pro="1"> Contratos e Pagamentos</label>
-        <label class="quiz-check"><input type="checkbox" name="template" value="Monitoramento 360º/Territorial" data-pro="1"> Monitoramento 360º/Territorial</label>
-      </div>
-      <button class="btn btn-falar" id="quizStep3Next" type="button" style="margin-top:22px; width:100%;">Continuar</button>
-    </div>
-
-    <div class="quiz-step" id="quizStep4" hidden>
-      <h3>Escolha os complementos que fazem sentido para sua operação:</h3>
-      <div class="quiz-options quiz-options-multi">
-        <label class="quiz-check"><input type="checkbox" name="addon" value="Specifor GIS"> Specifor GIS</label>
-        <label class="quiz-check"><input type="checkbox" name="addon" value="Mobile Campo"> Mobile Campo</label>
-        <label class="quiz-check"><input type="checkbox" name="addon" value="Specifor Notify"> Specifor Notify</label>
-        <label class="quiz-check"><input type="checkbox" name="addon" value="Agentes IA"> Agentes IA</label>
-        <label class="quiz-check"><input type="checkbox" name="addon" value="Base GIS Pública"> Base GIS Pública</label>
-        <label class="quiz-check"><input type="checkbox" name="addon" value="Compliance e automação legal"> Compliance e automação legal</label>
-      </div>
-      <button class="btn btn-falar" id="quizSeeResult" type="button">Ver resultado</button>
-    </div>
-
-    <div class="quiz-step" id="quizResult" hidden>
-      <div class="quiz-result-label">Sua base ideal</div>
-      <h3 id="quizResultPlan">Standard</h3>
-      <p id="quizResultDesc"></p>
-      <div id="quizResultTemplates"></div>
-      <div id="quizResultAddons"></div>
-      <a class="btn btn-falar" href="https://4asset.rds.land/fale-com-um-consultor">Falar com um especialista</a>
-      <button class="quiz-restart" id="quizRestart" type="button">Refazer o quiz</button>
-    </div>
-  </div>
-</div>
 
 <!-- ============ WHATSAPP FLOAT (abre modal) ============ -->
 <button type="button" class="whatsapp-float" aria-label="Abrir WhatsApp" id="wa-trigger" style="background:transparent;border:0;padding:0;cursor:pointer;">
@@ -1932,86 +1912,6 @@
     });
   })();
 
-  var modal = document.getElementById('quizModal');
-  var openBtn = document.getElementById('openQuizBtn');
-  var closeBtn = document.getElementById('closeQuizBtn');
-  var progress = document.getElementById('quizProgress');
-  var steps = ['quizStep1','quizStep2','quizStep3','quizStep4','quizResult'];
-  var answers = {};
-
-  function showStep(id){
-    for (var i=0;i<steps.length;i++){
-      document.getElementById(steps[i]).hidden = (steps[i] !== id);
-    }
-    var idx = steps.indexOf(id);
-    progress.textContent = (id === 'quizResult') ? 'Resultado' : ('Pergunta ' + (idx+1) + ' de 4');
-  }
-
-  function resetQuiz(){
-    answers = {};
-    var checks = document.querySelectorAll('.quiz-check input');
-    for (var i=0;i<checks.length;i++){ checks[i].checked = false; }
-    showStep('quizStep1');
-  }
-
-  openBtn.addEventListener('click', function(){
-    modal.hidden = false;
-    resetQuiz();
-  });
-  closeBtn.addEventListener('click', function(){ modal.hidden = true; });
-  modal.addEventListener('click', function(e){ if (e.target === modal) modal.hidden = true; });
-  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !modal.hidden) modal.hidden = true; });
-
-  // Perguntas 1 e 2: escolha única — avança automaticamente.
-  var opts = document.querySelectorAll('.quiz-opt');
-  for (var j=0;j<opts.length;j++){
-    opts[j].addEventListener('click', function(){
-      var q = this.getAttribute('data-q');
-      answers[q] = this.getAttribute('data-v');
-      showStep('quizStep' + (parseInt(q,10)+1));
-    });
-  }
-
-  // Pergunta 3 (templates, múltipla escolha): botão Continuar avança pra pergunta 4.
-  document.getElementById('quizStep3Next').addEventListener('click', function(){
-    showStep('quizStep4');
-  });
-
-  document.getElementById('quizSeeResult').addEventListener('click', function(){
-    // Base Professional se: volume acima de 5.000, uso de ERP, ou template exclusivo Pro.
-    var proTemplate = false;
-    var tmpl = document.querySelectorAll('#quizStep3 input:checked');
-    for (var t=0;t<tmpl.length;t++){ if (tmpl[t].getAttribute('data-pro')) proTemplate = true; }
-    var isPro = answers['1']==='professional' || answers['2']==='professional' || proTemplate;
-    var plan = isPro ? 'Professional' : 'Standard';
-    document.getElementById('quizResultPlan').textContent = plan;
-    document.getElementById('quizResultDesc').textContent = isPro
-      ? 'Imóveis ilimitados, com todos os templates disponíveis e integração com os principais ERPs do mercado.'
-      : 'Até 5.000 imóveis, com os templates essenciais, go live em 3 semanas e alertas automáticos.';
-
-    // Templates escolhidos
-    var tmplDiv = document.getElementById('quizResultTemplates');
-    if (tmpl.length){
-      var th = '<div class="quiz-addons-title">Templates selecionados:</div><ul>';
-      for (var i=0;i<tmpl.length;i++){ th += '<li>' + tmpl[i].value + '</li>'; }
-      th += '</ul>';
-      tmplDiv.innerHTML = th;
-    } else { tmplDiv.innerHTML = ''; }
-
-    // Complementos (add-ons) escolhidos
-    var addon = document.querySelectorAll('#quizStep4 input:checked');
-    var addonsDiv = document.getElementById('quizResultAddons');
-    if (addon.length){
-      var html = '<div class="quiz-addons-title">Complementos recomendados:</div><ul>';
-      for (var k=0;k<addon.length;k++){ html += '<li>' + addon[k].value + '</li>'; }
-      html += '</ul>';
-      addonsDiv.innerHTML = html;
-    } else { addonsDiv.innerHTML = ''; }
-
-    showStep('quizResult');
-  });
-
-  document.getElementById('quizRestart').addEventListener('click', resetQuiz);
 })();
 </script>
 
