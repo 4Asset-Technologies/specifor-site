@@ -95,9 +95,24 @@ A **foto é conteúdo**: adicione `<img class="m-img" src="setor.jpg" alt="Setor
 
 ---
 
+## Como funciona: CSS vs Agente
+
+São **duas camadas** com papéis diferentes. Entender isso é o que torna o sistema confiável:
+
+| | O que é | Quando age | Garantia |
+|---|---|---|---|
+| **Camada 1 — CSS** (`design-system.css`) | Uma folha de estilo. **Não é agente.** | **Sempre**, ao carregar a página no navegador. Instantâneo. | **Determinística.** Todo conteúdo que usa as classes padrão já sai estilizado, sem ninguém rodar nada. É o "motor". |
+| **Camada 2 — Agente** (GitHub Action) | Assistente de IA no CI. | **Automaticamente a cada Pull Request** (ver abaixo). | Assistida por IA (probabilística). É a "rede de segurança" que ajeita/sinaliza markup fora do padrão. |
+
+Analogia: o **CSS é a fôrma** (todo bolo que cai nela sai no formato); o **agente é o confeiteiro** que, quando chega uma massa em formato errado, ajeita antes de assar — e avisa se faltou ingrediente.
+
+> **Sem comando.** Ninguém precisa digitar `@claude` nem barra-comando. O agente dispara **pelo próprio evento do PR** (o workflow não define `trigger_phrase`). A única ação humana é o **merge** — que é governança, não comando pro agente.
+
+---
+
 ## O agente (aplicação automática)
 
-Roda no GitHub Actions a cada push/PR (`.github/workflows/design-system.yml`). Papel:
+Roda no GitHub Actions **automaticamente a cada Pull Request** (`.github/workflows/design-system.yml`), sem comando humano. Papel:
 
 1. **Garante** que `design-system.css` está linkado nas páginas.
 2. **Aplica o design a conteúdo novo**: quando aparece markup novo, normaliza para as classes/padrões do design system (ex.: envelopa ícone em `.icon-badge`, aplica `.market-card`, troca hex por token).
