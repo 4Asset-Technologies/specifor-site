@@ -83,21 +83,12 @@
       text-align: center;
       color: #ffffff;
       font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.16em;
+      font-weight: 700;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
-      margin-bottom: 18px;
+      margin-bottom: 24px;
       padding: 0 24px;
     }
-    .about-marquee .marquee + .marquee { margin-top: 12px; }
-    /* logos voltam ao visual original (claros sobre fundo escuro) */
-    .about-marquee .marquee-track img {
-      height: 46px !important;
-      margin-right: 64px !important;
-      filter: none;
-      opacity: 0.78 !important;
-    }
-    .about-marquee .marquee-track img:hover { opacity: 1 !important; }
 
     /* ============================================================
        HERO WRAPPER  (nav + hero + stats share mesmo background)
@@ -420,6 +411,25 @@
       max-width: 140px;
     }
 
+    /* Telas menores: evita que os números (nowrap) estourem a coluna e sobreponham o vizinho */
+    @media (max-width: 900px) {
+      .stats-bar { flex-wrap: wrap; }
+      .stat-item {
+        flex: 1 1 50%;
+        min-width: 0;
+        padding: 22px 20px;
+      }
+      .stat-item:nth-child(odd) { border-left: none; }
+      .stat-item:nth-child(n+3) { border-top: 1px solid rgba(255, 255, 255, 0.14); }
+      .stat-number { font-size: 30px; white-space: normal; }
+      .stat-label { max-width: none; }
+    }
+
+    @media (max-width: 520px) {
+      .stat-item { flex: 1 1 100%; }
+      .stat-item:nth-child(n+2) { border-top: 1px solid rgba(255, 255, 255, 0.14); border-left: none; }
+    }
+
     /* ============================================================
        WHATSAPP FLOAT BUTTON
     ============================================================ */
@@ -737,56 +747,43 @@
     .clients-title {
       text-align: center;
       color: #ffffff;
-      font-size: 18px;
-      font-weight: 600;
-      letter-spacing: 0.16em;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
-      margin-bottom: 64px;
+      margin-bottom: 36px;
       padding: 0 24px;
     }
 
-    .marquee {
-      width: 100%;
-      overflow: hidden;
-      -webkit-mask-image: linear-gradient(to right, transparent 0, #000 9%, #000 91%, transparent 100%);
-      mask-image: linear-gradient(to right, transparent 0, #000 9%, #000 91%, transparent 100%);
-    }
-
-    .marquee + .marquee { margin-top: 46px; }
-
-    .marquee-track {
+    /* Barra de clientes — igual às páginas Essential e On Premise */
+    .marquee-row {
       display: flex;
-      align-items: center;
       width: max-content;
+      align-items: center;
+      gap: 52px;
+      will-change: transform;
     }
-
-    .marquee-track.left { animation: marquee-left 55s linear infinite; }
-    .marquee-track.right { animation: marquee-right 55s linear infinite; }
-
-    .marquee-track img {
-      height: 54px;
+    .marquee-row.row1 { animation: marquee-scroll 46s linear infinite; margin-bottom: 48px; }
+    .marquee-row.row2 { animation: marquee-scroll 54s linear infinite reverse; }
+    .marquee-row .logo-item {
+      height: 52px;
       width: auto;
-      margin-right: 80px;
+      max-width: 190px;
+      object-fit: contain;
+      object-position: center;
       flex-shrink: 0;
-      opacity: 0.82;
-      transition: opacity 0.3s ease;
+      opacity: 0.9;
+      transition: opacity 0.25s, transform 0.25s cubic-bezier(0.34,1.4,0.64,1);
     }
+    .marquee-row .logo-item:hover { opacity: 1; transform: scale(1.32); }
 
-    .marquee:hover .marquee-track { animation-play-state: paused; }
-    .marquee-track img:hover { opacity: 1; }
-
-    @keyframes marquee-left {
+    @keyframes marquee-scroll {
       from { transform: translateX(0); }
       to { transform: translateX(-50%); }
     }
 
-    @keyframes marquee-right {
-      from { transform: translateX(-50%); }
-      to { transform: translateX(0); }
-    }
-
     @media (prefers-reduced-motion: reduce) {
-      .marquee-track { animation: none; }
+      .marquee-row { animation: none; }
     }
 
     /* ============================================================
@@ -1040,29 +1037,27 @@
       margin-bottom: 12px;
     }
 
-    .product-brand .brand-word {
-      font-size: 18px;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-      color: #0f1d33;
-    }
-
-    .product-brand .brand-mark {
-      height: 16px;
+    .product-brand .brand-logo {
+      height: 22px;
       width: auto;
+      display: block;
     }
 
-    .badge {
-      font-size: 10px;
-      font-weight: 600;
-      padding: 4px 11px;
-      border-radius: 20px;
-      color: #ffffff;
-      letter-spacing: 0.04em;
+    .product-brand .brand-tag {
+      display: inline-flex;
+      align-items: center;
+      line-height: 1;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: rgba(15,29,51,0.08);
+      border: 1px solid rgba(15,29,51,0.14);
+      color: #0f1d33;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      white-space: nowrap;
     }
-
-    .badge-saas { background: #22a94e; }
-    .badge-onpremise { background: #0f1d33; letter-spacing: 0.1em; }
 
     .product-body h3 {
       font-size: 18px;
@@ -1123,8 +1118,8 @@
     }
 
     .product-btn:hover { opacity: 0.92; }
-    .btn-saas { background: #22a94e; }
-    .btn-onpremise { background: #1f7fe5; }
+    .btn-saas { background: #758650; }
+    .btn-onpremise { background: #505FFF; }
     .product-btn .arrow { font-size: 18px; line-height: 1; }
 
     /* ============================================================
@@ -1599,13 +1594,13 @@
     <!-- Left: text + CTA -->
     <div class="hero-text">
       <h1 class="hero-title">
-        A <span class="blue">plataforma de gestão</span>
+        Soluções robustas para<br>a Gestão de Ativos
       </h1>
       <p class="hero-subtitle">
-        Transforme a complexidade fundiária em estratégia com uma solução pensada para o seu negócio.
+        Transforme a complexidade patrimonial em estratégia com uma solução pensada para o seu negócio.
       </p>
       <a href="#produtos" class="btn-hero">
-        Conhecer a plataforma
+        Conheça nossas soluções
         <span class="arrow">&#8594;</span>
       </a>
     </div>
@@ -1622,19 +1617,23 @@
   ============================================================ -->
   <div class="stats-bar">
     <div class="stat-item">
+      <span class="stat-number">AI-First</span>
+      <span class="stat-label">IA incorporada ao ciclo de engenharia</span>
+    </div>
+    <div class="stat-item">
       <span class="stat-number">+20</span>
       <span class="stat-label">anos de mercado<br>Grupo Verante</span>
     </div>
     <div class="stat-item">
       <span class="stat-number">77%</span>
-      <span class="stat-label">do mercado de transmissão de energia<br>do Brasil</span>
+      <span class="stat-label">do mercado de transmissão<br>de energia do Brasil</span>
     </div>
     <div class="stat-item">
       <span class="stat-number">64%</span>
       <span class="stat-label">do mercado de<br>geração de energia</span>
     </div>
     <div class="stat-item">
-      <span class="stat-number">+400mil</span>
+      <span class="stat-number">+500mil</span>
       <span class="stat-label">imóveis<br>gerenciados</span>
     </div>
   </div>
@@ -1649,7 +1648,7 @@
 
     <!-- Esquerda: card de texto -->
     <div class="about-card reveal">
-      <h2>Tecnologia para os <span class="blue">desafios mais complexos</span> de gestão de ativos.</h2>
+      <h2>Tecnologia para os <span class="blue">desafios mais complexos</span> da gestão de ativos</h2>
 
       <p class="about-intro">
         Com tecnologia de ponta e uma equipe altamente capacitada, a <strong>4Asset</strong> é especializada em soluções para grandes empreendimentos e organizações que enfrentam desafios complexos na gestão <strong>fundiária, patrimonial, regulatória e socioambiental</strong>.
@@ -1677,72 +1676,79 @@
   <div class="about-marquee">
     <h2 class="clients-title">Nossas soluções estão com os melhores do mercado</h2>
 
-    <div class="marquee">
-      <div class="marquee-track left">
-        <img src="clientes/image 13.png" alt="" />
-        <img src="clientes/image 14.png" alt="" />
-        <img src="clientes/image 15.png" alt="" />
-        <img src="clientes/image 16.png" alt="" />
-        <img src="clientes/image 17.png" alt="" />
-        <img src="clientes/image 18.png" alt="" />
-        <img src="clientes/image 19.png" alt="" />
-        <img src="clientes/image 20.png" alt="" />
-        <img src="clientes/image 21.png" alt="" />
-        <img src="clientes/image 22.png" alt="" />
-        <img src="clientes/image 23.png" alt="" />
-        <img src="clientes/image 24.png" alt="" />
-        <img src="clientes/image 25.png" alt="" />
-        <img src="clientes/image 26.png" alt="" />
-        <img src="clientes/new-logo.svg" alt="" />
-        <img src="clientes/image 13.png" alt="" />
-        <img src="clientes/image 14.png" alt="" />
-        <img src="clientes/image 15.png" alt="" />
-        <img src="clientes/image 16.png" alt="" />
-        <img src="clientes/image 17.png" alt="" />
-        <img src="clientes/image 18.png" alt="" />
-        <img src="clientes/image 19.png" alt="" />
-        <img src="clientes/image 20.png" alt="" />
-        <img src="clientes/image 21.png" alt="" />
-        <img src="clientes/image 22.png" alt="" />
-        <img src="clientes/image 23.png" alt="" />
-        <img src="clientes/image 24.png" alt="" />
-        <img src="clientes/image 25.png" alt="" />
-        <img src="clientes/image 26.png" alt="" />
-        <img src="clientes/new-logo.svg" alt="" />
-      </div>
+    <div class="marquee-row row1">
+      <img class="logo-item" src="clientes-cor/auren.png" alt="Auren">
+      <img class="logo-item" src="clientes-cor/brf.png" alt="BRF">
+      <img class="logo-item" src="clientes-cor/copel.png" alt="Copel">
+      <img class="logo-item" src="clientes-cor/cpfl.png" alt="CPFL Energia">
+      <img class="logo-item" src="clientes-cor/csn.png" alt="CSN">
+      <img class="logo-item" src="clientes-cor/enel.png" alt="Enel">
+      <img class="logo-item" src="clientes-cor/engie.png" alt="Engie">
+      <img class="logo-item" src="clientes-cor/gerdau.png" alt="Gerdau">
+      <img class="logo-item" src="clientes-cor/gol.png" alt="Gol">
+      <img class="logo-item" src="clientes-cor/isa-energia.png" alt="Isa Energia">
+      <img class="logo-item" src="clientes-cor/marista.png" alt="Marista">
+      <img class="logo-item" src="clientes-cor/petrobras.png" alt="Petrobras">
+      <img class="logo-item" src="clientes-cor/taesa.png" alt="Taesa">
+      <img class="logo-item" src="clientes-cor/vale.png" alt="Vale">
+      <img class="logo-item" src="clientes-cor/usiminas.png" alt="Usiminas">
+      <img class="logo-item" src="clientes-cor/arauco.png" alt="Arauco">
+      <!-- duplicado para loop contínuo -->
+      <img class="logo-item" src="clientes-cor/auren.png" alt="Auren">
+      <img class="logo-item" src="clientes-cor/brf.png" alt="BRF">
+      <img class="logo-item" src="clientes-cor/copel.png" alt="Copel">
+      <img class="logo-item" src="clientes-cor/cpfl.png" alt="CPFL Energia">
+      <img class="logo-item" src="clientes-cor/csn.png" alt="CSN">
+      <img class="logo-item" src="clientes-cor/enel.png" alt="Enel">
+      <img class="logo-item" src="clientes-cor/engie.png" alt="Engie">
+      <img class="logo-item" src="clientes-cor/gerdau.png" alt="Gerdau">
+      <img class="logo-item" src="clientes-cor/gol.png" alt="Gol">
+      <img class="logo-item" src="clientes-cor/isa-energia.png" alt="Isa Energia">
+      <img class="logo-item" src="clientes-cor/marista.png" alt="Marista">
+      <img class="logo-item" src="clientes-cor/petrobras.png" alt="Petrobras">
+      <img class="logo-item" src="clientes-cor/taesa.png" alt="Taesa">
+      <img class="logo-item" src="clientes-cor/vale.png" alt="Vale">
+      <img class="logo-item" src="clientes-cor/usiminas.png" alt="Usiminas">
+      <img class="logo-item" src="clientes-cor/arauco.png" alt="Arauco">
     </div>
-
-    <div class="marquee">
-      <div class="marquee-track right">
-        <img src="clientes/image 27.png" alt="" />
-        <img src="clientes/image 28.png" alt="" />
-        <img src="clientes/image 29.png" alt="" />
-        <img src="clientes/image 30.png" alt="" />
-        <img src="clientes/image 31.png" alt="" />
-        <img src="clientes/image 32.png" alt="" />
-        <img src="clientes/image 33.png" alt="" />
-        <img src="clientes/image 34.png" alt="" />
-        <img src="clientes/image 35.png" alt="" />
-        <img src="clientes/image 36.png" alt="" />
-        <img src="clientes/image 37.png" alt="" />
-        <img src="clientes/image 38.png" alt="" />
-        <img src="clientes/image 39.png" alt="" />
-        <img src="clientes/image 40.png" alt="" />
-        <img src="clientes/image 27.png" alt="" />
-        <img src="clientes/image 28.png" alt="" />
-        <img src="clientes/image 29.png" alt="" />
-        <img src="clientes/image 30.png" alt="" />
-        <img src="clientes/image 31.png" alt="" />
-        <img src="clientes/image 32.png" alt="" />
-        <img src="clientes/image 33.png" alt="" />
-        <img src="clientes/image 34.png" alt="" />
-        <img src="clientes/image 35.png" alt="" />
-        <img src="clientes/image 36.png" alt="" />
-        <img src="clientes/image 37.png" alt="" />
-        <img src="clientes/image 38.png" alt="" />
-        <img src="clientes/image 39.png" alt="" />
-        <img src="clientes/image 40.png" alt="" />
-      </div>
+    <div class="marquee-row row2">
+      <img class="logo-item" src="clientes-cor/alianca.png" alt="Aliança">
+      <img class="logo-item" src="clientes-cor/bmte.png" alt="BMTE">
+      <img class="logo-item" src="clientes-cor/brazilian-nickel.png" alt="Brazilian Nickel">
+      <img class="logo-item" src="clientes-cor/cgn.png" alt="CGN">
+      <img class="logo-item" src="clientes-cor/ciscea.png" alt="Ciscea">
+      <img class="logo-item" src="clientes-cor/cmoc.png" alt="CMOC">
+      <img class="logo-item" src="clientes-cor/foz-do-chapeco.png" alt="Foz do Chapecó">
+      <img class="logo-item" src="clientes-cor/grupo-itaquareia.png" alt="Grupo Itaquareia">
+      <img class="logo-item" src="clientes-cor/mosaic.png" alt="Mosaic">
+      <img class="logo-item" src="clientes-cor/pec-energia.png" alt="PEC Energia">
+      <img class="logo-item" src="clientes-cor/spic.png" alt="SPIC Brasil">
+      <img class="logo-item" src="clientes-cor/state-grid.png" alt="State Grid">
+      <img class="logo-item" src="clientes-cor/tag.png" alt="TAG">
+      <img class="logo-item" src="clientes-cor/echoenergia.png" alt="Echoenergia">
+      <img class="logo-item" src="clientes-cor/elera.png" alt="Elera Renováveis">
+      <img class="logo-item" src="clientes-cor/qair.png" alt="Qair">
+      <img class="logo-item" src="clientes-cor/thopen_logo.png" alt="Thopen Energia">
+      <img class="logo-item" src="clientes-cor/comerc.png" alt="Comerc Energia">
+      <!-- duplicado para loop contínuo -->
+      <img class="logo-item" src="clientes-cor/alianca.png" alt="Aliança">
+      <img class="logo-item" src="clientes-cor/bmte.png" alt="BMTE">
+      <img class="logo-item" src="clientes-cor/brazilian-nickel.png" alt="Brazilian Nickel">
+      <img class="logo-item" src="clientes-cor/cgn.png" alt="CGN">
+      <img class="logo-item" src="clientes-cor/ciscea.png" alt="Ciscea">
+      <img class="logo-item" src="clientes-cor/cmoc.png" alt="CMOC">
+      <img class="logo-item" src="clientes-cor/foz-do-chapeco.png" alt="Foz do Chapecó">
+      <img class="logo-item" src="clientes-cor/grupo-itaquareia.png" alt="Grupo Itaquareia">
+      <img class="logo-item" src="clientes-cor/mosaic.png" alt="Mosaic">
+      <img class="logo-item" src="clientes-cor/pec-energia.png" alt="PEC Energia">
+      <img class="logo-item" src="clientes-cor/spic.png" alt="SPIC Brasil">
+      <img class="logo-item" src="clientes-cor/state-grid.png" alt="State Grid">
+      <img class="logo-item" src="clientes-cor/tag.png" alt="TAG">
+      <img class="logo-item" src="clientes-cor/echoenergia.png" alt="Echoenergia">
+      <img class="logo-item" src="clientes-cor/elera.png" alt="Elera Renováveis">
+      <img class="logo-item" src="clientes-cor/qair.png" alt="Qair">
+      <img class="logo-item" src="clientes-cor/thopen_logo.png" alt="Thopen Energia">
+      <img class="logo-item" src="clientes-cor/comerc.png" alt="Comerc Energia">
     </div>
   </div>
 </section>
@@ -1752,7 +1758,7 @@
 ============================================================ -->
 <section class="segments-section" id="setores">
   <div class="segments-header">
-    <h2>Quem busca a 4Asset.</h2>
+    <h2>Quem busca a 4Asset</h2>
     <p>Empresas que operam ativos fundiários, imobiliários e regulatórios em grande escala — e precisam de controle, prazo e conformidade.</p>
   </div>
 
@@ -1761,7 +1767,7 @@
       <div class="seg-image"><img src="energia.jpg" alt="" /></div>
       <div class="seg-body">
         <h3>Energia</h3>
-        <p class="seg-desc">Controle de faixas de servidão, gestão de concessões da ANEEL e regularização fundiária de linhas de transmissão e geração. Parceiro de 77% das transmissoras do Brasil.</p>
+        <p class="seg-desc">Controle de faixas de servidão, gestão de concessões da ANEEL e regularização fundiária de linhas de transmissão e geração.</p>
       </div>
     </div>
 
@@ -1769,7 +1775,7 @@
       <div class="seg-image"><img src="mineracao.jpg" alt="" /></div>
       <div class="seg-body">
         <h3>Mineração</h3>
-        <p class="seg-desc">Regularização fundiária de áreas de mineração, controle de licenças socioambientais e gestão de servidões em empreendimentos de grande porte.</p>
+        <p class="seg-desc">Regularização territorial de áreas de mineração, controle de licenças socioambientais e gestão de servidões em empreendimentos de grande porte.</p>
       </div>
     </div>
 
@@ -1793,7 +1799,7 @@
       <div class="seg-image"><img src="saneamento.jpg" alt="" /></div>
       <div class="seg-body">
         <h3>Saneamento</h3>
-        <p class="seg-desc">Governança regulatória e gestão fundiária em contratos de concessão pública. Transparência e rastreabilidade para órgãos de controle.</p>
+        <p class="seg-desc">Gestão de processos de liberação dominial e regularização fundiária, automação de workflows e governança centralizada.</p>
       </div>
     </div>
 
@@ -1801,7 +1807,7 @@
       <div class="seg-image"><img src="agronegocio.jpeg" alt="" /></div>
       <div class="seg-body">
         <h3>Agronegócio</h3>
-        <p class="seg-desc">Contratos de arrendamento de terra, gestão de áreas produtivas e regularização fundiária rural com integração ao INCRA e SIGEF.</p>
+        <p class="seg-desc">IA para gestão de contratos de arrendamento de terra, automação de processos, gestão de áreas produtivas e regularização fundiária rural com integração às bases públicas, como CAR, INCRA e SIGEF.</p>
       </div>
     </div>
   </div>
@@ -1812,7 +1818,7 @@
 ============================================================ -->
 <section class="pillars-section">
   <div class="pillars-header">
-    <h2>Como operamos.</h2>
+    <h2>Como operamos</h2>
     <p>Nossa expertise a serviço da sua gestão de ativos. Nossos softwares oferecem controle, segurança e eficiência à sua gestão fundiária, economizando tempo e dinheiro.</p>
   </div>
 
@@ -1848,7 +1854,7 @@
 ============================================================ -->
 <section class="products-section" id="produtos">
   <div class="products-header">
-    <h2>Specifor.</h2>
+    <h2>Specifor</h2>
     <p>Escolha o modelo de solução que faz sentido para a sua operação.</p>
   </div>
 
@@ -1864,28 +1870,22 @@
       </div>
       <div class="product-body">
         <div class="product-brand">
-          <span class="brand-word">SPECIFOR</span>
-          <svg class="brand-mark" viewBox="278 9 49 48" xmlns="http://www.w3.org/2000/svg">
-            <path fill="#16243d" d="M316,32.8c1.5,0,2.9-0.3,4.2-0.8c1.3-0.6,2.6-1.4,3.6-2.4c1-1,1.8-2.2,2.4-3.6c0.6-1.3,0.8-2.8,0.8-4.2c0-2.9-1.2-5.7-3.2-7.8c-2.1-2.1-4.9-3.2-7.8-3.2c-1.5,0-2.9,0.3-4.2,0.8c-1.3,0.6-2.6,1.4-3.6,2.4c-1,1-1.8,2.2-2.4,3.6c-0.6,1.3-0.8,2.8-0.8,4.2c0,2.9,1.2,5.7,3.2,7.8C310.2,31.6,313,32.8,316,32.8z"/>
-            <path fill="#16243d" d="M289.1,33.7c-1.5,0-2.9,0.3-4.2,0.8c-1.3,0.6-2.6,1.4-3.6,2.4c-1,1-1.8,2.2-2.4,3.6c-0.6,1.3-0.8,2.8-0.8,4.2c0,2.9,1.2,5.7,3.2,7.8c2.1,2.1,4.9,3.2,7.8,3.2c1.5,0,2.9-0.3,4.2-0.8c1.3-0.6,2.6-1.4,3.6-2.4c1-1,1.8-2.2,2.4-3.6c0.6-1.3,0.8-2.8,0.8-4.2c0-2.9-1.2-5.7-3.2-7.8C294.8,34.9,292,33.7,289.1,33.7L289.1,33.7z"/>
-            <path fill="#16243d" d="M309.1,34.1c-7,3-10.7,10-8.2,15.7c2.4,5.6,10.1,7.8,17.1,4.8c7-3,10.7-10,8.2-15.7C323.8,33.3,316.1,31.1,309.1,34.1z"/>
-            <path fill="#16243d" d="M295.9,32.3c7-3,10.7-10,8.2-15.7c-2.4-5.6-10.1-7.8-17.1-4.8c-7,3-10.7,10-8.2,15.7C281.2,33.2,288.9,35.3,295.9,32.3z"/>
-          </svg>
-          <span class="badge badge-saas">SaaS</span>
+          <img src="logo-specifor.svg" alt="Specifor" class="brand-logo">
+          <span class="brand-tag">Essential</span>
         </div>
 
-        <h3>Solução pronta, verticalizada, entregue como serviço.</h3>
-        <p class="product-desc">Assinatura mensal — implantação rápida e gestão pelo fornecedor.</p>
+        <h3>Solução pronta, verticalizada, entregue como serviço</h3>
+        <p class="product-desc">Modelo por assinatura — implantação rápida e gestão pelo fornecedor.</p>
 
         <ul class="product-list">
-          <li>2 a 6 semanas com pacote pré-parametrizado</li>
+          <li>até 4 semanas com pacote pré-parametrizado</li>
           <li>Gerenciada pelo fornecedor (AWS multi-tenant)</li>
           <li>APIs disponíveis para integrações simples a moderada</li>
           <li>Atualizações automáticas incluídas na assinatura</li>
         </ul>
 
         <a href="https://4asset.rds.land/fale-com-um-consultor" target="_blank" rel="noopener" class="product-btn btn-saas">
-          Quero saber mais sobre o SaaS
+          Quero saber mais sobre o Essential
           <span class="arrow">&#8594;</span>
         </a>
       </div>
@@ -1901,18 +1901,12 @@
       </div>
       <div class="product-body">
         <div class="product-brand">
-          <span class="brand-word">SPECIFOR</span>
-          <svg class="brand-mark" viewBox="278 9 49 48" xmlns="http://www.w3.org/2000/svg">
-            <path fill="#16243d" d="M316,32.8c1.5,0,2.9-0.3,4.2-0.8c1.3-0.6,2.6-1.4,3.6-2.4c1-1,1.8-2.2,2.4-3.6c0.6-1.3,0.8-2.8,0.8-4.2c0-2.9-1.2-5.7-3.2-7.8c-2.1-2.1-4.9-3.2-7.8-3.2c-1.5,0-2.9,0.3-4.2,0.8c-1.3,0.6-2.6,1.4-3.6,2.4c-1,1-1.8,2.2-2.4,3.6c-0.6,1.3-0.8,2.8-0.8,4.2c0,2.9,1.2,5.7,3.2,7.8C310.2,31.6,313,32.8,316,32.8z"/>
-            <path fill="#16243d" d="M289.1,33.7c-1.5,0-2.9,0.3-4.2,0.8c-1.3,0.6-2.6,1.4-3.6,2.4c-1,1-1.8,2.2-2.4,3.6c-0.6,1.3-0.8,2.8-0.8,4.2c0,2.9,1.2,5.7,3.2,7.8c2.1,2.1,4.9,3.2,7.8,3.2c1.5,0,2.9-0.3,4.2-0.8c1.3-0.6,2.6-1.4,3.6-2.4c1-1,1.8-2.2,2.4-3.6c0.6-1.3,0.8-2.8,0.8-4.2c0-2.9-1.2-5.7-3.2-7.8C294.8,34.9,292,33.7,289.1,33.7L289.1,33.7z"/>
-            <path fill="#16243d" d="M309.1,34.1c-7,3-10.7,10-8.2,15.7c2.4,5.6,10.1,7.8,17.1,4.8c7-3,10.7-10,8.2-15.7C323.8,33.3,316.1,31.1,309.1,34.1z"/>
-            <path fill="#16243d" d="M295.9,32.3c7-3,10.7-10,8.2-15.7c-2.4-5.6-10.1-7.8-17.1-4.8c-7,3-10.7,10-8.2,15.7C281.2,33.2,288.9,35.3,295.9,32.3z"/>
-          </svg>
-          <span class="badge badge-onpremise">ON PREMISE</span>
+          <img src="logo-specifor.svg" alt="Specifor" class="brand-logo">
+          <span class="brand-tag">On Premise</span>
         </div>
 
-        <h3>Plataforma completa instalada em ambiente dedicado.</h3>
-        <p class="product-desc">Licença perpétua + projeto de implantação sob medida — controle total da sua infraestrutura.</p>
+        <h3>Plataforma robusta pensada para grandes operações</h3>
+        <p class="product-desc">Licença perpétua ou Assinatura + implantação sob medida - controle total da sua infraestrutura.</p>
 
         <ul class="product-list">
           <li>3 a 12 meses com projeto sob medida</li>
@@ -1947,7 +1941,7 @@
 ============================================================ -->
 <section class="cases-section" id="cases">
   <div class="cases-header">
-    <h2>Confiança para decisões precisas.</h2>
+    <h2>Confiança para decisões precisas</h2>
     <p>Conheça os depoimentos das empresas que já confiam na 4Asset.</p>
   </div>
 
