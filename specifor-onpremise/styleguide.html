@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design System — Specifor On Premise</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:'Inter',Arial,sans-serif; background:#05070d; color:#fff; line-height:1.5; padding:48px clamp(20px,5vw,72px);}
+  h1{font-size:34px; letter-spacing:-.02em; margin-bottom:6px;}
+  .lead{color:rgba(255,255,255,.6); margin-bottom:40px; max-width:640px;}
+  h2.sg{font-size:13px; text-transform:uppercase; letter-spacing:.08em; color:#8fb3ff; margin:44px 0 18px; border-top:1px solid rgba(255,255,255,.1); padding-top:20px;}
+  .row{display:flex; flex-wrap:wrap; gap:20px; align-items:flex-end;}
+  .swatch{width:150px;}
+  .swatch .chip{height:64px; border-radius:12px; border:1px solid rgba(255,255,255,.12);}
+  .swatch code{display:block; font-size:12px; margin-top:8px; color:rgba(255,255,255,.75);}
+  .swatch small{color:rgba(255,255,255,.45); font-size:11px;}
+  .demo{background:#0b1220; border:1px solid rgba(255,255,255,.08); border-radius:16px; padding:28px; margin-top:8px;}
+  .note{font-size:12.5px; color:rgba(255,255,255,.5); margin-top:10px;}
+  /* wrappers mínimos p/ os componentes do DS renderizarem no styleguide */
+  .sg-badges{display:flex; gap:20px; align-items:center;}
+  .icon-badge{width:52px; height:52px; display:flex; align-items:center; justify-content:center;}
+  .icon{width:24px; height:24px;}
+  .hero .hero-stats{display:flex; gap:32px; flex-wrap:wrap;}
+  .hero .hero-stats .h-stat{display:grid; grid-template-columns:auto 1fr; grid-template-rows:auto auto; column-gap:14px; align-items:center;}
+  .hero .hero-stats .num{font-weight:700; font-size:18px;}
+  .hero .hero-stats .label{font-size:13px; color:rgba(255,255,255,.62);}
+  .name{color:#fff;}
+</style>
+</head>
+<body>
+  <h1>Design System — Specifor On Premise</h1>
+  <p class="lead">Camada de design aplicada por cima do conteúdo. Copie os blocos abaixo — a aparência vem sozinha do <code>design-system.css</code>. Não use valores fixos de cor/efeito. Ver <b>DESIGN.md</b>.</p>
+
+  <h2 class="sg">Cores / Tokens</h2>
+  <div class="row">
+    <div class="swatch"><div class="chip" style="background:#5cc6ff"></div><code>--ds-icon</code><small>#5cc6ff · ícones</small></div>
+    <div class="swatch"><div class="chip" style="background:#4f63ff"></div><code>--ds-brand</code><small>#4f63ff · marca</small></div>
+    <div class="swatch"><div class="chip" style="background:#0f1d33"></div><code>--ds-ink</code><small>#0f1d33</small></div>
+    <div class="swatch"><div class="chip" style="background:#05070d"></div><code>--ds-surface-dark</code><small>#05070d</small></div>
+    <div class="swatch"><div class="chip" style="background:var(--ds-glass-bg)"></div><code>--ds-glass-bg</code><small>vidro (badge)</small></div>
+  </div>
+
+  <h2 class="sg">Badge de ícone (Liquid Glass)</h2>
+  <div class="demo market-card" style="min-height:auto; display:block; padding:28px; background:#0b1220;">
+    <div class="sg-badges">
+      <div class="icon-badge"><svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
+      <div class="icon-badge"><svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M3 19l5.5-9 3.5 5 2.5-3.5L20 19H3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
+      <div class="icon-badge"><svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M12 3.3s6.7 7.6 6.7 12.2A6.7 6.7 0 015.3 15.5C5.3 10.9 12 3.3 12 3.3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
+    </div>
+    <p class="note">Vidro fosco + brilho no topo + profundidade. Glyph em <code>--ds-icon</code>. Classe: <code>.icon-badge</code> &gt; <code>.icon</code>.</p>
+  </div>
+
+  <h2 class="sg">Hero — big number (passe o mouse)</h2>
+  <div class="demo hero">
+    <div class="hero-stats">
+      <div class="h-stat">
+        <div class="icon-badge"><svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M7 3h7l4 4v14H7z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
+        <div class="num">+70.000 km</div>
+        <div class="label">exemplo de métrica</div>
+      </div>
+      <div class="h-stat">
+        <div class="icon-badge"><svg class="icon" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/></svg></div>
+        <div class="num">+650</div>
+        <div class="label">exemplo de métrica</div>
+      </div>
+    </div>
+    <p class="note">Badge de vidro + fundo que varre do centro no hover (easing <code>--ds-ease-glass</code>).</p>
+  </div>
+
+  <h2 class="sg">Card de setor (Mercados)</h2>
+  <div class="markets-row" style="grid-template-columns:repeat(3,1fr);">
+    <div class="market-card">
+      <img class="m-img" src="energia.jpg" alt="Setor de Energia">
+      <div class="m-body">
+        <div class="icon-badge"><svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
+        <div class="name">Com foto</div>
+      </div>
+    </div>
+    <div class="market-card is-placeholder">
+      <div class="m-body">
+        <div class="icon-badge"><svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M12 3.3s6.7 7.6 6.7 12.2A6.7 6.7 0 015.3 15.5C5.3 10.9 12 3.3 12 3.3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
+        <div class="name">Sem foto (placeholder)</div>
+      </div>
+    </div>
+  </div>
+  <p class="note">Foto = conteúdo: <code>&lt;img class="m-img" src="..." alt="Setor de X"&gt;</code>. Sem foto → classe <code>is-placeholder</code>.</p>
+
+  <h2 class="sg">Cabeçalho de seção</h2>
+  <div class="demo">
+    <div class="head center">
+      <span class="pill pill-blue" style="display:inline-block; padding:6px 14px; border-radius:999px; background:rgba(79,99,255,.12); color:#4f63ff; font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.04em;">Etiqueta</span>
+      <h2 style="font-size:32px; margin:14px 0 8px;">Título da seção</h2>
+      <p style="color:rgba(255,255,255,.6);">Subtítulo opcional</p>
+    </div>
+  </div>
+</body>
+</html>
