@@ -1,0 +1,67 @@
+# =============================================================================
+# Design System Agent — Specifor On Premise
+# AUTOMÁTICO, SEM COMANDO: dispara sozinho a cada Pull Request (não espera @menção
+# nem barra-comando). Aplica a camada de design ao que mudou, SEM alterar conteúdo.
+#
+# ATIVAÇÃO (fazer no repo, via processo de segurança/SGSI):
+#   1. Habilitar GitHub Actions no repositório.
+#   2. Settings → Secrets and variables → Actions → New secret: ANTHROPIC_API_KEY
+#   3. Settings → Actions → Workflow permissions → "Read and write permissions".
+#   4. Branch protection na branch publicada (PR obrigatório + checks verdes).
+#
+# Ref. oficial: https://github.com/anthropics/claude-code-action
+# =============================================================================
+name: Design System
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - "**/*.html"
+      - "**/*.css"
+
+permissions:
+  contents: write         # p/ o agente commitar as normalizações no branch do PR
+  pull-requests: write    # p/ comentar no PR
+
+jobs:
+  lint-tokens:
+    name: Lint (tokens do design system)
+    # Segurança: só roda em PRs do próprio repo, nunca de forks (evita injeção via PR externo)
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: npm i -g stylelint@16 stylelint-config-standard@36
+      - name: Rodar lint (só reporta no começo)
+        run: npx stylelint "**/*.css" --config .stylelintrc.json || true
+
+  apply-design:
+    name: Aplicar design (agente Claude — automático)
+    needs: lint-tokens
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          # SEM `trigger_phrase`  =>  roda automaticamente no evento do PR (sem comando humano).
+          prompt: |
+            Leia e siga a risca `.github/design-system-agent.md` e `specifor-onpremise/DESIGN.md`.
+            Este PR alterou HTML/CSS. Sua tarefa e ADEQUAR o que mudou ao design system,
+            SEM alterar conteudo (texto/secoes):
+            - Garanta que `design-system.css` esta linkado no <head> das paginas.
+            - Normalize o markup novo para as classes/tokens padrao
+              (`.icon-badge`, `.market-card`, `.h-stat`, `var(--ds-*)`, etc.).
+            - Aplique as correcoes COMMITANDO no branch deste PR e comente um resumo em PT-BR.
+            - NUNCA altere texto, remova secoes ou troque fotos existentes.
+              Se faltar conteudo (ex.: foto de um setor), apenas SINALIZE no comentario.
+          claude_args: |
+            --max-turns 8
+          track_progress: true       # atualiza um unico comentario conforme trabalha
+          use_sticky_comment: true   # concentra o feedback num comentario so

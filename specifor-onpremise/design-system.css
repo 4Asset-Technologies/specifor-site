@@ -1,0 +1,141 @@
+/* ============================================================================
+   SPECIFOR ON PREMISE — DESIGN SYSTEM (camada de design)
+   ----------------------------------------------------------------------------
+   Esta folha NÃO altera conteúdo (texto/seções). Ela apenas PADRONIZA a
+   aparência das classes que já existem no site. Carregue-a DEPOIS do <style>
+   da página (por isso ela vence por ordem de origem, usando os mesmos seletores).
+
+   Como usar:  <link rel="stylesheet" href="design-system.css">  antes de </head>
+   Referência visual: styleguide.html   |   Documentação: DESIGN.md
+   ============================================================================ */
+
+/* ===================== TOKENS (fonte única da verdade) ===================== */
+:root{
+  --ds-icon:#5cc6ff;              /* cor padrão do glyph dos ícones */
+  --ds-brand:#4f63ff;             /* azul da marca */
+  --ds-ink:#0f1d33;               /* tinta/superfície escura */
+  --ds-surface-dark:#05070d;      /* fundo de seções escuras */
+  /* Badge "Liquid Glass" (referência: Apple Icon Composer) — receita única */
+  --ds-glass-bg:linear-gradient(155deg, rgba(130,185,255,0.34) 0%, rgba(79,163,255,0.16) 48%, rgba(79,163,255,0.06) 100%);
+  --ds-glass-border:1px solid rgba(160,200,255,0.30);
+  --ds-glass-blur:blur(10px) saturate(150%);
+  --ds-glass-shadow:inset 0 1px 0 rgba(255,255,255,0.55), inset 0 -7px 14px rgba(0,0,0,0.20), 0 6px 16px rgba(0,0,0,0.30);
+  --ds-glass-sheen:linear-gradient(180deg, rgba(255,255,255,0.50) 0%, rgba(255,255,255,0.11) 42%, transparent 70%);
+  --ds-r-badge:16px;              /* raio squircle do badge */
+  --ds-r-card:18px;               /* raio dos cards */
+  --ds-ease-glass:cubic-bezier(.16,1,.3,1);      /* varredura de fundo no hover */
+  --ds-ease-spring:cubic-bezier(.34,1.4,.64,1);  /* elevação/entrada de cards */
+  --ds-fill-hover:rgba(255,255,255,0.10);        /* preenchimento que varre no hover */
+}
+
+/* ===================== BADGE DE ÍCONE — LIQUID GLASS =======================
+   Aplica o mesmo tratamento de vidro em TODOS os badges de ícone do site. */
+.market-card .icon-badge,
+.h-stat .icon-badge{
+  position:relative; overflow:hidden; border-radius:var(--ds-r-badge);
+  background:var(--ds-glass-bg); border:var(--ds-glass-border);
+  -webkit-backdrop-filter:var(--ds-glass-blur); backdrop-filter:var(--ds-glass-blur);
+  box-shadow:var(--ds-glass-shadow);
+  display:flex; align-items:center; justify-content:center; flex-shrink:0;
+}
+.market-card .icon-badge::before,
+.h-stat .icon-badge::before{
+  content:''; position:absolute; left:-20%; top:-62%; width:140%; height:120%;
+  background:var(--ds-glass-sheen); transform:rotate(-12deg); pointer-events:none;
+}
+/* glyph do ícone: cor padrão + z-index acima do brilho */
+.market-card .icon,
+.h-stat .icon{
+  position:relative; z-index:1; color:var(--ds-icon);
+  filter:drop-shadow(0 1px 2px rgba(0,0,0,0.35));
+}
+
+/* Ícone dos add-ons como "chip" de vidro (não tem caixa própria no markup) */
+.addon-item .icon{
+  box-sizing:content-box; padding:10px; border-radius:14px; color:var(--ds-icon);
+  background:var(--ds-glass-bg); border:var(--ds-glass-border);
+  -webkit-backdrop-filter:var(--ds-glass-blur); backdrop-filter:var(--ds-glass-blur);
+  box-shadow:var(--ds-glass-shadow);
+}
+
+/* ===================== HERO — BIG NUMBERS =================================
+   Badge de vidro nos ícones + fundo que "varre" do centro no hover
+   (mesma animação do botão "Agent Portal" — scaleX 0->1, origem central). */
+.hero .hero-stats .icon-badge{
+  position:relative; z-index:1; overflow:hidden;
+  width:48px; height:48px; border-radius:var(--ds-r-badge); margin:0; padding:0;
+  display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  background:var(--ds-glass-bg); border:var(--ds-glass-border);
+  -webkit-backdrop-filter:var(--ds-glass-blur); backdrop-filter:var(--ds-glass-blur);
+  box-shadow:var(--ds-glass-shadow);
+}
+.hero .hero-stats .icon-badge::before{
+  content:''; position:absolute; left:-20%; top:-62%; width:140%; height:120%;
+  background:var(--ds-glass-sheen); transform:rotate(-12deg); pointer-events:none;
+}
+.hero .hero-stats .icon{width:24px; height:24px; color:var(--ds-icon); position:relative; z-index:1; filter:drop-shadow(0 1px 2px rgba(0,0,0,0.35));}
+.hero .hero-stats .h-stat{position:relative; padding:10px 16px; border-radius:12px; overflow:visible;}
+.hero .hero-stats .h-stat::after{
+  content:''; position:absolute; inset:0; z-index:0; pointer-events:none;
+  background:var(--ds-fill-hover); border-radius:inherit;
+  transform:scaleX(0); transform-origin:center;
+  transition:transform .8s var(--ds-ease-glass);
+}
+.hero .hero-stats .h-stat:hover::after{transform:scaleX(1);}
+.hero .hero-stats .num,
+.hero .hero-stats .label{position:relative; z-index:1;}
+
+/* ===================== "O QUE RESOLVE" — orbit cards =====================
+   Cards ancorados nas bordas da tablet (colados em qualquer largura); o meio
+   fica mais afastado, criando o arco. Posições independentes da tela. */
+.diagram-problems .orbit-card{transform:translate(var(--tx,-50%),-50%);}
+.diagram-problems .orbit-card:hover{transform:translate(var(--tx,-50%),-50%) scale(1.06);}
+.diagram-problems .p1,.diagram-problems .p3,.diagram-problems .p5{left:0;}
+.diagram-problems .p2,.diagram-problems .p4,.diagram-problems .p6{left:100%;}
+.diagram-problems .p1,.diagram-problems .p5{--tx:calc(-100% + 14px);}
+.diagram-problems .p3{--tx:calc(-100% - 20px);}   /* meio esq — mais afastado */
+.diagram-problems .p2,.diagram-problems .p6{--tx:-14px;}
+.diagram-problems .p4{--tx:20px;}                  /* meio dir — mais afastado */
+.diagram-problems .p1,.diagram-problems .p2{top:15%;}
+.diagram-problems .p3,.diagram-problems .p4{top:50%;}
+.diagram-problems .p5,.diagram-problems .p6{top:85%;}
+@media (max-width:900px){
+  .stars-diagram.diagram-problems{flex-direction:row; min-height:auto; max-width:100%;}
+  .problems-stage{width:min(50vw,720px);}
+  .diagram-problems .orbit-card{width:clamp(96px,14.5vw,210px); gap:6px;}
+  .diagram-problems .orbit-card .icon-badge{width:clamp(26px,3.9vw,40px); height:clamp(26px,3.9vw,40px);}
+  .diagram-problems .orbit-card .icon{width:clamp(14px,2vw,20px); height:clamp(14px,2vw,20px);}
+  .diagram-problems .orbit-card .num{font-size:clamp(8.5px,1.4vw,13.5px);}
+}
+
+/* ===================== SETORES (Mercados) — cards com foto ================
+   Grid uniforme + card grande com foto full-bleed, degradê e glow no hover.
+   A FOTO é conteúdo: adicione <img class="m-img" src="..."> dentro do card.
+   Sem foto, o card usa o fundo de marca (.is-placeholder). */
+.markets-row{display:grid; grid-template-columns:repeat(3,1fr); gap:22px; max-width:1120px; margin:0 auto;}
+.market-card{
+  position:relative; overflow:hidden; min-height:232px; border-radius:var(--ds-r-card);
+  display:flex; align-items:flex-end; padding:22px; background:var(--ds-ink);
+  border:1px solid rgba(255,255,255,0.12);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.16), 0 14px 34px rgba(15,29,51,0.12);
+  transition:transform .5s var(--ds-ease-spring), box-shadow .4s ease, border-color .4s ease;
+}
+.market-card:hover{
+  transform:translateY(-6px); border-color:rgba(90,160,255,0.55);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.24), 0 0 0 1px rgba(90,160,255,0.35),
+             0 22px 50px rgba(15,29,51,0.22), 0 0 46px rgba(30,95,205,0.45);
+}
+.market-card .m-img{position:absolute; inset:0; width:100%; height:100%; z-index:0; object-fit:cover; object-position:center; transition:transform .6s var(--ds-ease-glass);}
+.market-card:hover .m-img{transform:scale(1.06);}
+.market-card::after{
+  content:''; position:absolute; inset:0; z-index:1; pointer-events:none;
+  background:linear-gradient(to top, rgba(5,8,18,0.92) 0%, rgba(5,8,18,0.55) 34%, rgba(5,8,18,0.12) 62%, rgba(5,8,18,0) 82%);
+}
+.market-card .m-body{position:relative; z-index:2; display:flex; align-items:center; gap:13px;}
+.market-card .name{font-size:18px; font-weight:700; color:#fff; line-height:1.25; letter-spacing:-0.01em;}
+.market-card.is-placeholder{background:linear-gradient(150deg, #4f63ff 0%, #2c3aa8 55%, #0f1d33 100%);}
+.market-card.is-placeholder::after{background:linear-gradient(to top, rgba(5,8,18,0.45) 0%, rgba(5,8,18,0) 70%);}
+@media (max-width:900px){ .markets-row{grid-template-columns:repeat(2,1fr); gap:18px;} }
+@media (max-width:560px){ .markets-row{grid-template-columns:1fr;} .market-card{min-height:200px;} }
+
+/* ===================== FIM DO DESIGN SYSTEM ===================== */

@@ -1144,6 +1144,8 @@
   .final-cta p{color:rgba(255,255,255,0.6); font-size:17px; line-height:1.6; max-width:620px; margin:0 auto 34px;}
   .final-cta .btn{font-size:16px; padding:15px 34px;}
 </style>
+<!-- Design System (camada de design — não altera conteúdo). Ver DESIGN.md / styleguide.html -->
+<link rel="stylesheet" href="design-system.css">
 </head>
 <body>
 
@@ -1501,28 +1503,46 @@
     </div>
     <div class="markets-row">
       <div class="market-card sf-appear">
-        <div class="icon-badge"><svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
-        <div class="name">Energia</div>
+        <img class="m-img" src="energia.jpg" alt="Setor de Energia" loading="lazy">
+        <div class="m-body">
+          <div class="icon-badge"><svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
+          <div class="name">Energia</div>
+        </div>
       </div>
       <div class="market-card sf-appear">
-        <div class="icon-badge"><svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M3 19l5.5-9 3.5 5 2.5-3.5L20 19H3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
-        <div class="name">Mineração</div>
+        <img class="m-img" src="mineracao.jpg" alt="Setor de Mineração" loading="lazy">
+        <div class="m-body">
+          <div class="icon-badge"><svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M3 19l5.5-9 3.5 5 2.5-3.5L20 19H3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
+          <div class="name">Mineração</div>
+        </div>
       </div>
       <div class="market-card sf-appear">
-        <div class="icon-badge"><svg class="icon" viewBox="0 0 24 24" fill="none"><rect x="4" y="10" width="6" height="10" stroke="currentColor" stroke-width="1.6"/><rect x="14" y="5" width="6" height="15" stroke="currentColor" stroke-width="1.6"/><path d="M6.5 13h1M6.5 16h1M16.5 8h1M16.5 11h1M16.5 14h1M16.5 17h1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
-        <div class="name">Infraestrutura</div>
+        <img class="m-img" src="infraestrutura.jpg" alt="Setor de Infraestrutura" loading="lazy">
+        <div class="m-body">
+          <div class="icon-badge"><svg class="icon" viewBox="0 0 24 24" fill="none"><rect x="4" y="10" width="6" height="10" stroke="currentColor" stroke-width="1.6"/><rect x="14" y="5" width="6" height="15" stroke="currentColor" stroke-width="1.6"/><path d="M6.5 13h1M6.5 16h1M16.5 8h1M16.5 11h1M16.5 14h1M16.5 17h1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+          <div class="name">Infraestrutura</div>
+        </div>
       </div>
       <div class="market-card sf-appear">
-        <div class="icon-badge"><svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M5 19c-1.2-7.5 3.3-13.5 14-14.5 1.2 10.7-5.3 14.5-14 14.5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 19c3-4.3 7-7.6 12.3-9.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
-        <div class="name">Agronegócio</div>
+        <img class="m-img" src="agronegocio.jpg" alt="Setor de Agronegócio" loading="lazy">
+        <div class="m-body">
+          <div class="icon-badge"><svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M5 19c-1.2-7.5 3.3-13.5 14-14.5 1.2 10.7-5.3 14.5-14 14.5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 19c3-4.3 7-7.6 12.3-9.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+          <div class="name">Agronegócio</div>
+        </div>
       </div>
       <div class="market-card sf-appear">
-        <div class="icon-badge"><svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M12 3.3s6.7 7.6 6.7 12.2A6.7 6.7 0 015.3 15.5C5.3 10.9 12 3.3 12 3.3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
-        <div class="name">Saneamento</div>
+        <img class="m-img" src="saneamento.jpg" alt="Setor de Saneamento" loading="lazy">
+        <div class="m-body">
+          <div class="icon-badge"><svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M12 3.3s6.7 7.6 6.7 12.2A6.7 6.7 0 015.3 15.5C5.3 10.9 12 3.3 12 3.3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
+          <div class="name">Saneamento</div>
+        </div>
       </div>
       <div class="market-card sf-appear">
-        <div class="icon-badge"><svg class="icon" viewBox="0 0 24 24" fill="none"><rect x="6" y="4" width="12" height="16" rx="3" stroke="currentColor" stroke-width="1.6"/><path d="M6 9.5h12M6 14.5h12" stroke="currentColor" stroke-width="1.6"/></svg></div>
-        <div class="name">Óleo e Gás</div>
+        <img class="m-img" src="oleo-gas.jpg" alt="Setor de Óleo e Gás" loading="lazy">
+        <div class="m-body">
+          <div class="icon-badge"><svg class="icon" viewBox="0 0 24 24" fill="none"><rect x="6" y="4" width="12" height="16" rx="3" stroke="currentColor" stroke-width="1.6"/><path d="M6 9.5h12M6 14.5h12" stroke="currentColor" stroke-width="1.6"/></svg></div>
+          <div class="name">Óleo e Gás</div>
+        </div>
       </div>
     </div>
   </div>
