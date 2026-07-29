@@ -1,0 +1,2334 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>4Asset – Gestão de Patrimônios</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* ============================================================
+       RESET / BASE
+    ============================================================ */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      font-family: 'Inter', sans-serif;
+      background: #031120;
+      color: #fff;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Scroll-snap: imanta no topo de cada dobra */
+    html {
+      scroll-snap-type: y mandatory;
+      scroll-padding-top: 0;
+      scroll-behavior: smooth;     /* anima a transição entre dobras no wheel/touch */
+    }
+
+    .hero-wrapper,
+    .about-section,
+    .segments-section,
+    .pillars-section,
+    .products-section,
+    .solution-cta,
+    .cases-section,
+    .final-cta {
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+    }
+
+    /* Fullpage estrito: cada dobra ocupa exatamente 1 tela */
+    .segments-section,
+    .pillars-section,
+    .products-section,
+    .cases-section {
+      height: 100vh;
+      min-height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: 58px !important;   /* só o necessário para clear do header (menor agora) */
+      padding-bottom: 0 !important;
+    }
+
+    /* Sobre: altura automática, conteúdo cola no topo, marquee logo em seguida (sem vazio) */
+    .about-section {
+      display: flex;
+      flex-direction: column;
+      padding-top: 58px !important;
+      padding-bottom: 0 !important;
+    }
+    /* Demais seções: conteúdo centralizado para visual balanceado */
+
+    /* CTAs: faixas compactas (não ocupam a tela inteira), conteúdo centralizado */
+    .solution-cta,
+    .final-cta {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .about-marquee {
+      margin-top: 56px;
+      width: calc(100% + 120px);   /* extrapola padding lateral 60+60 */
+      margin-left: -60px;
+      margin-right: -60px;
+      background: #0a1322;
+      padding: 22px 0 24px;
+    }
+    .about-marquee .clients-title {
+      text-align: center;
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+      padding: 0 24px;
+    }
+    .about-marquee .marquee + .marquee { margin-top: 12px; }
+    /* logos voltam ao visual original (claros sobre fundo escuro) */
+    .about-marquee .marquee-track img {
+      height: 46px !important;
+      margin-right: 64px !important;
+      filter: none;
+      opacity: 0.78 !important;
+    }
+    .about-marquee .marquee-track img:hover { opacity: 1 !important; }
+
+    /* ============================================================
+       HERO WRAPPER  (nav + hero + stats share mesmo background)
+    ============================================================ */
+    .hero-wrapper {
+      position: relative;
+      height: 100vh;
+      min-height: 700px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background: #031120;
+    }
+
+    /* Fundo completo (navy + mapa + glow radial) — tudo embutido no PNG */
+    .hero-wrapper::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url('bg002.png');
+      background-size: cover;
+      background-position: 60% center;
+      background-repeat: no-repeat;
+      z-index: 0;
+    }
+
+    /* Camada escura para amenizar o fundo (mais forte à esquerda p/ legibilidade) */
+    .hero-wrapper::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg,
+        rgba(4, 13, 29, 0.86) 0%,
+        rgba(4, 13, 29, 0.55) 38%,
+        rgba(4, 13, 29, 0.40) 60%,
+        rgba(4, 13, 29, 0.60) 100%);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* Brand mark gigante cortado pela metade na borda direita (ao lado da mulher) */
+    .brand-mark-deco {
+      position: absolute;
+      right: -150px;
+      top: 52%;
+      transform: translateY(-50%);
+      width: 450px;
+      height: auto;
+      opacity: 0.5;
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    /* Luzes do mapa — pulsar bem sutil e dessincronizado */
+    .hero-lights {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    .hero-lights .light {
+      position: absolute;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #74b4ff;
+      box-shadow: 0 0 10px 2px rgba(116, 180, 255, 0.9);
+      animation: lightBlink var(--dur, 2.6s) ease-in-out var(--delay, 0s) infinite;
+    }
+
+    /* Anel de "ping" — alerta de ponto clicável no mapa */
+    .hero-lights .light::after {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      border: 2px solid rgba(120, 185, 255, 0.85);
+      opacity: 0;
+      animation: lightPing var(--dur, 2.6s) cubic-bezier(0, 0, 0.2, 1) var(--delay, 0s) infinite;
+    }
+
+    @keyframes lightBlink {
+      0%, 100% { opacity: 0.4; transform: scale(0.85); }
+      50%      { opacity: 1;   transform: scale(1); }
+    }
+
+    @keyframes lightPing {
+      0%        { transform: scale(1);   opacity: 0.9; }
+      70%, 100% { transform: scale(3.4); opacity: 0; }
+    }
+
+    /* Variante discreta — luzes atrás do texto */
+    .hero-lights .light.dim {
+      width: 6px;
+      height: 6px;
+      box-shadow: 0 0 6px 1px rgba(116, 180, 255, 0.4);
+      filter: brightness(0.8);
+    }
+    .hero-lights .light.dim::after { border-color: rgba(120, 185, 255, 0.4); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-lights .light,
+      .hero-lights .light::after { animation: none; }
+      .hero-lights .light { opacity: 0.5; }
+    }
+
+    /* ============================================================
+       HEADER / NAV
+    ============================================================ */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 60px;
+      background: rgba(6, 14, 30, 0.5);
+      transition: background 0.35s ease, padding 0.35s ease, box-shadow 0.35s ease, backdrop-filter 0.35s ease;
+    }
+
+    header.scrolled {
+      padding: 10px 60px;
+      background: rgba(6, 14, 30, 0.85);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.28);
+    }
+
+    /* Logo */
+    .logo-link {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    .logo-svg {
+      height: 26px;
+      width: auto;
+    }
+
+    /* Nav links */
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: rgba(255, 255, 255, 0.82);
+      text-decoration: none;
+      font-size: 13.5px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: #fff; }
+
+    /* CTA button (header) */
+    .btn-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #505FFF;
+      color: #fff;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 9px 18px;
+      border-radius: 7px;
+      white-space: nowrap;
+      letter-spacing: 0.01em;
+      transition: opacity 0.2s;
+    }
+
+    .btn-cta:hover { opacity: 0.92; }
+
+    .btn-cta .arrow {
+      font-size: 15px;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    /* ============================================================
+       HERO CONTENT AREA
+    ============================================================ */
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      flex: 1;
+      display: flex;
+      align-items: flex-end;
+      padding: 40px 60px 0;
+    }
+
+    /* ---- Left: text ---- */
+    .hero-text {
+      position: relative;
+      z-index: 5;
+      max-width: 600px;
+      padding-bottom: 64px;
+      flex-shrink: 0;
+      transform-origin: left center;
+      will-change: transform, filter, opacity;
+    }
+
+    .hero-title {
+      font-size: 44px;
+      font-weight: 700;
+      line-height: 1.14;
+      letter-spacing: -1px;
+      margin-bottom: 24px;
+    }
+
+    .hero-title .blue {
+      color: #fff;
+    }
+
+    .hero-subtitle {
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.58;
+      color: rgba(255, 255, 255, 0.72);
+      max-width: 400px;
+      margin-bottom: 36px;
+    }
+
+    /* Hero CTA button */
+    .btn-hero {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      background: #505FFF;
+      color: #fff;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 500;
+      padding: 16px 28px;
+      border-radius: 8px;
+      letter-spacing: 0.01em;
+      transition: opacity 0.2s;
+    }
+
+    .btn-hero:hover { opacity: 0.92; }
+
+    .btn-hero .arrow {
+      font-size: 18px;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    /* ---- Right: hero image (pessoas centralizadas sobre o glow) ---- */
+    .hero-image-wrap {
+      position: absolute;
+      left: 52%;
+      bottom: 0;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      z-index: 4;
+      transform-origin: bottom center;
+      will-change: transform, filter, opacity;
+    }
+
+    .hero-image-wrap img {
+      display: block;
+      height: min(610px, 70vh);
+      width: auto;
+      object-fit: contain;
+      object-position: bottom center;
+    }
+
+    /* ============================================================
+       STATS BAR
+    ============================================================ */
+    .stats-bar {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      align-items: stretch;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      background: #031120;
+      will-change: transform;
+    }
+
+    .stat-item {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 32px 28px;
+    }
+
+    .stat-item + .stat-item {
+      border-left: 1px solid rgba(255, 255, 255, 0.14);
+    }
+
+    .stat-number {
+      font-size: 42px;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -1.5px;
+      white-space: nowrap;
+      color: #fff;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 1.45;
+      color: rgba(255, 255, 255, 0.6);
+      max-width: 140px;
+    }
+
+    /* ============================================================
+       WHATSAPP FLOAT BUTTON
+    ============================================================ */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      width: 62px;
+      height: 62px;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s;
+    }
+
+    .whatsapp-float:hover { transform: scale(1.07); }
+
+    .whatsapp-float img {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* ============================================================
+       MODAL DO WHATSAPP — formulário + redirect com pré-msg
+    ============================================================ */
+    .wa-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: none;
+      align-items: flex-end;
+      justify-content: flex-end;
+      padding: 24px 28px 100px 28px;
+      animation: waFadeIn 0.2s ease;
+    }
+    .wa-modal.is-open { display: flex; }
+
+    .wa-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(8, 14, 26, 0.5);
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+    }
+
+    .wa-window {
+      position: relative;
+      width: 100%;
+      max-width: 380px;
+      background: #efe7dc;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      animation: waPopIn 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+      /* leve textura WhatsApp */
+      background-image:
+        radial-gradient(circle at 12% 18%, rgba(7, 94, 84, 0.05) 0 8px, transparent 9px),
+        radial-gradient(circle at 86% 36%, rgba(7, 94, 84, 0.05) 0 6px, transparent 7px),
+        radial-gradient(circle at 28% 72%, rgba(7, 94, 84, 0.04) 0 7px, transparent 8px),
+        radial-gradient(circle at 74% 86%, rgba(7, 94, 84, 0.04) 0 6px, transparent 7px);
+    }
+
+    @keyframes waFadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes waPopIn { from { transform: translateY(20px) scale(0.95); opacity: 0; } to { transform: none; opacity: 1; } }
+
+    .wa-header {
+      background: #075e54;
+      color: #fff;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .wa-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #128c7e, #25d366);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 15px;
+      flex-shrink: 0;
+      letter-spacing: 0.5px;
+    }
+    .wa-info { flex: 1; min-width: 0; }
+    .wa-info .wa-name {
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .wa-info .wa-status {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.75);
+      margin-top: 2px;
+    }
+    .wa-close {
+      background: transparent;
+      border: 0;
+      color: #fff;
+      font-size: 22px;
+      cursor: pointer;
+      padding: 4px 6px;
+      line-height: 1;
+      opacity: 0.85;
+      transition: opacity 0.2s;
+    }
+    .wa-close:hover { opacity: 1; }
+
+    .wa-body {
+      padding: 16px;
+    }
+
+    .wa-bubble {
+      background: #ffffff;
+      color: #1f2a37;
+      font-size: 13.5px;
+      line-height: 1.5;
+      padding: 10px 14px;
+      border-radius: 0 12px 12px 12px;
+      max-width: 88%;
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+      margin-bottom: 16px;
+    }
+
+    .wa-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .wa-form input {
+      width: 100%;
+      background: #e7f5ea;
+      border: 1px solid rgba(7, 94, 84, 0.15);
+      border-radius: 6px;
+      padding: 11px 14px;
+      font-size: 13.5px;
+      font-family: inherit;
+      color: #1f2a37;
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .wa-form input::placeholder { color: #6b7280; }
+    .wa-form input:focus {
+      border-color: #25d366;
+      background: #fff;
+    }
+
+    .wa-tel {
+      display: flex;
+      align-items: center;
+      background: #e7f5ea;
+      border: 1px solid rgba(7, 94, 84, 0.15);
+      border-radius: 6px;
+      padding-left: 10px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .wa-tel:focus-within { border-color: #25d366; background: #fff; }
+    .wa-tel .wa-flag {
+      font-size: 16px;
+      margin-right: 6px;
+      line-height: 1;
+    }
+    .wa-tel .wa-code {
+      font-size: 12px;
+      color: #4b5563;
+      margin-right: 8px;
+      font-weight: 600;
+    }
+    .wa-tel input {
+      background: transparent;
+      border: 0;
+      flex: 1;
+      padding: 11px 14px 11px 0;
+    }
+    .wa-tel input:focus { background: transparent; }
+
+    .wa-submit {
+      background: #25d366;
+      color: #fff;
+      border: 0;
+      border-radius: 6px;
+      padding: 12px 18px;
+      font-size: 14px;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      align-self: flex-end;
+      margin-top: 6px;
+      transition: background 0.2s, transform 0.1s;
+      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.35);
+    }
+    .wa-submit:hover { background: #1ebe5d; }
+    .wa-submit:active { transform: scale(0.98); }
+
+    @media (max-width: 520px) {
+      .wa-modal { padding: 0; align-items: stretch; justify-content: stretch; }
+      .wa-window { max-width: none; border-radius: 0; }
+    }
+
+    /* ============================================================
+       SEÇÃO SOBRE (2ª dobra)
+    ============================================================ */
+    .about-section {
+      background: #eef1f5;
+      padding: 24px 60px;
+    }
+
+    .about-container {
+      max-width: 1280px;
+      width: 100%;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: stretch;
+    }
+
+    /* ---- Card de texto (esquerda) ---- */
+    .about-card {
+      background: #ffffff;
+      border-radius: 32px 32px 32px 90px;
+      padding: 28px 32px;
+      box-shadow: 0 30px 70px rgba(15, 30, 60, 0.08);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .about-card h2 {
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1.22;
+      letter-spacing: -0.5px;
+      color: #0f1d33;
+      margin-bottom: 12px;
+    }
+
+    .about-card h2 .blue { color: #505FFF; }
+
+    .about-intro {
+      font-size: 13.5px;
+      line-height: 1.5;
+      color: #5b6472;
+      margin-bottom: 14px;
+    }
+
+    .about-intro strong { color: #2a3445; font-weight: 600; }
+
+    .about-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .about-list li {
+      position: relative;
+      padding-left: 22px;
+      font-size: 12.5px;
+      line-height: 1.45;
+      color: #4a5462;
+    }
+
+    .about-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #505FFF;
+    }
+
+    .about-list strong { color: #2a3445; font-weight: 600; }
+    .about-list .blue { color: #505FFF; font-weight: 600; }
+
+    /* ---- Coluna direita (imagem) ---- */
+    .about-right {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .about-image {
+      width: 100%;
+      height: 100%;
+      border-radius: 24px 24px 24px 70px;
+      overflow: hidden;
+    }
+
+    .about-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* ============================================================
+       SEÇÃO CLIENTES (esteira de logos)
+    ============================================================ */
+    .clients-section {
+      background: #0a1322;
+      padding: 96px 0;
+      overflow: hidden;
+    }
+
+    .clients-title {
+      text-align: center;
+      color: #ffffff;
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 64px;
+      padding: 0 24px;
+    }
+
+    .marquee {
+      width: 100%;
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(to right, transparent 0, #000 9%, #000 91%, transparent 100%);
+      mask-image: linear-gradient(to right, transparent 0, #000 9%, #000 91%, transparent 100%);
+    }
+
+    .marquee + .marquee { margin-top: 46px; }
+
+    .marquee-track {
+      display: flex;
+      align-items: center;
+      width: max-content;
+    }
+
+    .marquee-track.left { animation: marquee-left 55s linear infinite; }
+    .marquee-track.right { animation: marquee-right 55s linear infinite; }
+
+    .marquee-track img {
+      height: 54px;
+      width: auto;
+      margin-right: 80px;
+      flex-shrink: 0;
+      opacity: 0.82;
+      transition: opacity 0.3s ease;
+    }
+
+    .marquee:hover .marquee-track { animation-play-state: paused; }
+    .marquee-track img:hover { opacity: 1; }
+
+    @keyframes marquee-left {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    @keyframes marquee-right {
+      from { transform: translateX(-50%); }
+      to { transform: translateX(0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .marquee-track { animation: none; }
+    }
+
+    /* ============================================================
+       SEÇÃO SEGMENTOS — "Quem busca a 4Asset" (4ª dobra)
+    ============================================================ */
+    .segments-section {
+      background: #eef1f5;
+      padding: 28px 60px;
+    }
+
+    .segments-header {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 14px;
+    }
+
+    .segments-header h2 {
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: -0.8px;
+      line-height: 1.18;
+      color: #0f1d33;
+      margin-bottom: 10px;
+    }
+
+    .segments-header p {
+      font-size: 14px;
+      line-height: 1.55;
+      color: #5b6472;
+    }
+
+    .segments-grid {
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .segment-card {
+      background: #ffffff;
+      border-radius: 18px;
+      height: 220px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 14px 34px rgba(15, 30, 60, 0.06);
+      transition: box-shadow 0.4s ease;
+      cursor: default;
+    }
+
+    .segment-card:hover {
+      box-shadow: 0 22px 50px rgba(15, 30, 60, 0.12);
+    }
+
+    .seg-image {
+      height: 122px;
+      overflow: hidden;
+      flex-shrink: 0;
+      transition: height 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .seg-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .segment-card:hover .seg-image {
+      height: 78px;
+    }
+
+    .seg-body {
+      padding: 12px 18px 0;
+    }
+
+    .seg-body h3 {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: #0f1d33;
+      margin-bottom: 8px;
+    }
+
+    .seg-desc {
+      font-size: 12.5px;
+      line-height: 1.5;
+      color: #6b7280;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.4s ease 0.05s, transform 0.4s ease 0.05s;
+    }
+
+    .segment-card:hover .seg-desc {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ============================================================
+       SEÇÃO PILARES — "Três pilares" (5ª dobra)
+    ============================================================ */
+    .pillars-section {
+      background: #eef1f5;
+      padding: 28px 60px;
+    }
+
+    .pillars-header {
+      text-align: center;
+      max-width: 1100px;
+      margin: 0 auto 22px;
+    }
+
+    .pillars-header h2 {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.8px;
+      line-height: 1.18;
+      color: #0f1d33;
+      margin-bottom: 8px;
+    }
+
+    .pillars-header p {
+      font-size: 13px;
+      line-height: 1.5;
+      color: #5b6472;
+    }
+
+    .pillars-grid {
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .pillar-card {
+      background: #ffffff;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 14px 34px rgba(15, 30, 60, 0.06);
+    }
+
+    .pillar-image {
+      overflow: hidden;
+      height: 290px;
+    }
+
+    .pillar-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .pillar-body {
+      padding: 14px 18px 16px;
+    }
+
+    .pillar-body h3 {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.2px;
+      line-height: 1.2;
+      color: #0f1d33;
+      margin-bottom: 8px;
+    }
+
+    .pillar-body p {
+      font-size: 12px;
+      line-height: 1.5;
+      color: #8b94a3;
+    }
+
+    /* ============================================================
+       SEÇÃO PRODUTOS — "Dois produtos" (6ª dobra)
+    ============================================================ */
+    .products-section {
+      background: #0a1322;
+      padding: 24px 60px;
+    }
+
+    .products-header {
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto 22px;
+    }
+
+    .products-header h2 {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.8px;
+      line-height: 1.18;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+
+    .products-header p {
+      font-size: 13px;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .products-grid {
+      max-width: 1120px;
+      width: 100%;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+
+    .product-card {
+      background: #ffffff;
+      border-radius: 18px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Mídia (vídeo) — full, sem bordas arredondadas (segue o card) */
+    .product-media {
+      width: 100%;
+      height: 200px;
+      background: #0d1b2a;
+      flex-shrink: 0;
+    }
+
+    .product-media video,
+    .product-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .product-body {
+      padding: 16px 28px 22px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .product-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .product-brand .brand-word {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: #0f1d33;
+    }
+
+    .product-brand .brand-mark {
+      height: 16px;
+      width: auto;
+    }
+
+    .badge {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 4px 11px;
+      border-radius: 20px;
+      color: #ffffff;
+      letter-spacing: 0.04em;
+    }
+
+    .badge-saas { background: #22a94e; }
+    .badge-onpremise { background: #0f1d33; letter-spacing: 0.1em; }
+
+    .product-body h3 {
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.25;
+      letter-spacing: -0.3px;
+      color: #0f1d33;
+      margin-bottom: 10px;
+    }
+
+    .product-desc {
+      font-size: 13px;
+      line-height: 1.5;
+      color: #8b94a3;
+      margin-bottom: 12px;
+    }
+
+    .product-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+
+    .product-list li {
+      position: relative;
+      padding-left: 18px;
+      font-size: 12.5px;
+      line-height: 1.4;
+      color: #5b6472;
+    }
+
+    .product-list li::before {
+      content: '';
+      position: absolute;
+      left: 2px;
+      top: 8px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #b6bdc9;
+    }
+
+    .product-btn {
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 11px 22px;
+      border-radius: 10px;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #ffffff;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .product-btn:hover { opacity: 0.92; }
+    .btn-saas { background: #22a94e; }
+    .btn-onpremise { background: #1f7fe5; }
+    .product-btn .arrow { font-size: 18px; line-height: 1; }
+
+    /* ============================================================
+       CTA "Não sabe qual solução" (banda escura)
+    ============================================================ */
+    .solution-cta {
+      background: #0a1322;
+      text-align: center;
+      padding: 78px 60px 88px;
+    }
+
+    .solution-cta h2 {
+      font-size: 48px;
+      font-weight: 700;
+      letter-spacing: -1.2px;
+      line-height: 1.15;
+      color: #ffffff;
+      margin-bottom: 36px;
+      max-width: 860px;
+    }
+
+    .btn-green {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      background: #25c05a;
+      color: #fff;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 600;
+      padding: 16px 28px;
+      border-radius: 10px;
+      transition: opacity 0.2s;
+    }
+    .btn-green:hover { opacity: 0.92; }
+    .btn-green .arrow { font-size: 18px; line-height: 1; }
+
+    /* ============================================================
+       CASES — "Resultados que falam por si" (claro)
+    ============================================================ */
+    .cases-section {
+      background: #eef1f5;
+      padding: 24px 60px;
+    }
+
+    .cases-header {
+      text-align: center;
+      max-width: 820px;
+      margin: 0 auto 22px;
+    }
+
+    .cases-header h2 {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.8px;
+      color: #0f1d33;
+      margin-bottom: 8px;
+    }
+
+    .cases-header p {
+      font-size: 13px;
+      line-height: 1.5;
+      color: #5b6472;
+    }
+
+    .cases-grid {
+      max-width: 1180px;
+      width: 100%;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .case-card {
+      background: #ffffff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 14px 34px rgba(15, 30, 60, 0.06);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .case-image {
+      height: 220px;
+      flex-shrink: 0;
+    }
+
+    .case-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .case-body {
+      padding: 14px 18px 16px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .case-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .case-logo {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 700;
+      font-size: 15px;
+      flex-shrink: 0;
+      object-fit: contain;
+    }
+
+    .case-name {
+      font-size: 17px;
+      font-weight: 700;
+      color: #0f1d33;
+      line-height: 1.15;
+    }
+
+    .case-cat {
+      font-size: 12px;
+      color: #8b94a3;
+      margin-top: 2px;
+    }
+
+    .case-desc {
+      font-size: 12px;
+      line-height: 1.5;
+      color: #8b94a3;
+      margin-bottom: 12px;
+    }
+
+    .btn-ver-caso {
+      margin-top: auto;
+      align-self: flex-start;
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      border: 1px solid #d4d9e0;
+      border-radius: 8px;
+      padding: 10px 18px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #0f1d33;
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-ver-caso:hover { border-color: #0f1d33; }
+    .btn-ver-caso .arrow { font-size: 16px; line-height: 1; }
+
+    /* ============================================================
+       CTA FINAL — "A 4Asset é a empresa certa"
+    ============================================================ */
+    .final-cta {
+      background: #0a1322;
+      text-align: center;
+      padding: 92px 60px 84px;
+    }
+
+    .final-cta h2 {
+      font-size: 48px;
+      font-weight: 700;
+      letter-spacing: -1.2px;
+      line-height: 1.15;
+      color: #ffffff;
+      margin-bottom: 22px;
+      max-width: 860px;
+    }
+
+    .final-cta p {
+      font-size: 17px;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.6);
+      max-width: 680px;
+      margin: 0 auto 38px;
+    }
+
+    .btn-purple {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      background: #505FFF;
+      color: #fff;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 600;
+      padding: 16px 28px;
+      border-radius: 10px;
+      transition: opacity 0.2s;
+    }
+    .btn-purple:hover { opacity: 0.92; }
+    .btn-purple .arrow { font-size: 18px; line-height: 1; }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    .site-footer {
+      background: #080f1c;
+      position: relative;
+      overflow: hidden;
+      padding: 68px 60px 0;
+    }
+
+    .footer-top {
+      max-width: 1180px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.7fr 1fr 1fr 1fr;
+      gap: 40px;
+      padding-bottom: 48px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .footer-brand .fb-logo {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: rgba(255, 255, 255, 0.85);
+      margin-bottom: 20px;
+    }
+
+    .footer-brand .fb-desc {
+      font-size: 13.5px;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.45);
+      max-width: 330px;
+      margin-bottom: 28px;
+    }
+
+    .footer-news-title {
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.4);
+      margin-bottom: 12px;
+    }
+
+    .footer-news-desc {
+      font-size: 13px;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.45);
+      max-width: 330px;
+    }
+
+    .footer-form {
+      display: flex;
+      gap: 10px;
+      max-width: 380px;
+      margin-top: 18px;
+    }
+
+    .footer-form input {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 12px 14px;
+      color: #fff;
+      font-size: 13px;
+      font-family: inherit;
+      outline: none;
+    }
+    .footer-form input::placeholder { color: rgba(255, 255, 255, 0.35); }
+
+    .footer-form button {
+      background: #505FFF;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 0 22px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .footer-form button:hover { opacity: 0.9; }
+
+    .footer-col h4 {
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.4);
+      margin-bottom: 18px;
+    }
+
+    .footer-col a {
+      display: block;
+      font-size: 13.5px;
+      color: rgba(255, 255, 255, 0.6);
+      text-decoration: none;
+      margin-bottom: 13px;
+      transition: color 0.2s;
+    }
+    .footer-col a:hover { color: #fff; }
+
+    .footer-bottom {
+      max-width: 1180px;
+      margin: 0 auto;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 24px 0 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 12.5px;
+      color: rgba(255, 255, 255, 0.4);
+      position: relative;
+      z-index: 2;
+    }
+
+    .footer-bottom .fb-links a {
+      color: rgba(255, 255, 255, 0.55);
+      text-decoration: none;
+      margin-left: 20px;
+    }
+    .footer-bottom .fb-links a:hover { color: #fff; }
+
+    .footer-watermark {
+      text-align: center;
+      font-size: 200px;
+      font-weight: 800;
+      letter-spacing: -4px;
+      line-height: 0.7;
+      color: rgba(255, 255, 255, 0.035);
+      margin-top: 10px;
+      margin-bottom: -36px;
+      user-select: none;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    /* ============================================================
+       REVEAL ON SCROLL (entrada suave estilo Apple)
+    ============================================================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(46px);
+      transition: opacity 2.2s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 2.2s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: opacity, transform;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ================================================================
+     HERO WRAPPER  (nav + hero + stats)
+================================================================ -->
+<div class="hero-wrapper">
+
+  <!-- Brand mark gigante esmaecido (decorativo) -->
+  <img class="brand-mark-deco" src="bg0032.png" alt="" aria-hidden="true" />
+
+  <!-- Luzes de alerta sobre o mapa (ping + piscada) -->
+  <div class="hero-lights" aria-hidden="true">
+    <!-- discretas, atrás do texto (esquerda) -->
+    <span class="light dim" style="left:9%;top:30%;--dur:3.2s;--delay:-0.4s;"></span>
+    <span class="light dim" style="left:30%;top:18%;--dur:2.8s;--delay:-1.9s;"></span>
+    <span class="light dim" style="left:16%;top:60%;--dur:3.4s;--delay:-1.1s;"></span>
+    <!-- sobre o mapa / pessoas (direita) -->
+    <span class="light" style="left:60%;top:22%;--dur:2.6s;--delay:-0.2s;"></span>
+    <span class="light" style="left:74%;top:32%;--dur:3.3s;--delay:-1.5s;"></span>
+    <span class="light" style="left:85%;top:26%;--dur:2.2s;--delay:-0.8s;"></span>
+    <span class="light" style="left:67%;top:51%;--dur:3s;--delay:-2.4s;"></span>
+    <span class="light" style="left:83%;top:56%;--dur:2.7s;--delay:-1.2s;"></span>
+    <span class="light" style="left:91%;top:43%;--dur:3.5s;--delay:-0.6s;"></span>
+  </div>
+
+  <!-- ============================================================
+       HEADER
+  ============================================================ -->
+  <header>
+
+    <!-- LOGO -->
+    <a href="#" class="logo-link">
+      <svg class="logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 327 57" aria-label="4Asset">
+        <style>.s0{fill:#505FFF;} .s1{fill:#ffffff;}</style>
+
+        <!-- Brand mark — quatro elipses azuis -->
+        <path class="s0" d="M316,32.8c1.5,0,2.9-0.3,4.2-0.8c1.3-0.6,2.6-1.4,3.6-2.4c1-1,1.8-2.2,2.4-3.6
+          c0.6-1.3,0.8-2.8,0.8-4.2c0-2.9-1.2-5.7-3.2-7.8c-2.1-2.1-4.9-3.2-7.8-3.2c-1.5,0-2.9,0.3-4.2,0.8
+          c-1.3,0.6-2.6,1.4-3.6,2.4c-1,1-1.8,2.2-2.4,3.6c-0.6,1.3-0.8,2.8-0.8,4.2c0,2.9,1.2,5.7,3.2,7.8
+          C310.2,31.6,313,32.8,316,32.8z"/>
+        <path class="s0" d="M289.1,33.7c-1.5,0-2.9,0.3-4.2,0.8c-1.3,0.6-2.6,1.4-3.6,2.4c-1,1-1.8,2.2-2.4,3.6
+          c-0.6,1.3-0.8,2.8-0.8,4.2c0,2.9,1.2,5.7,3.2,7.8c2.1,2.1,4.9,3.2,7.8,3.2c1.5,0,2.9-0.3,4.2-0.8
+          c1.3-0.6,2.6-1.4,3.6-2.4c1-1,1.8-2.2,2.4-3.6c0.6-1.3,0.8-2.8,0.8-4.2c0-2.9-1.2-5.7-3.2-7.8
+          C294.8,34.9,292,33.7,289.1,33.7L289.1,33.7z"/>
+        <path class="s0" d="M309.1,34.1c-7,3-10.7,10-8.2,15.7c2.4,5.6,10.1,7.8,17.1,4.8
+          c7-3,10.7-10,8.2-15.7C323.8,33.3,316.1,31.1,309.1,34.1z"/>
+        <path class="s0" d="M295.9,32.3c7-3,10.7-10,8.2-15.7c-2.4-5.6-10.1-7.8-17.1-4.8
+          c-7,3-10.7,10-8.2,15.7C281.2,33.2,288.9,35.3,295.9,32.3z"/>
+
+        <!-- Texto do logo — branco para fundo escuro -->
+        <!-- "4" -->
+        <path class="s1" d="M39.6,18.7h-7.3V35H8.4L27.2,0.8h-8L0.1,35.6L0,35.8V42h32.2v13.7h7.3V41.9h7.5V35
+          l-7.5,0V18.7z"/>
+        <!-- "A" -->
+        <path class="s1" d="M59.5,55.9c1.1-3.6,3.4-6.7,6.4-9c3-2.2,6.7-3.5,10.4-3.5c3.8,0,7.4,1.3,10.4,3.5
+          c3,2.2,5.3,5.4,6.4,9h6.7c-1.2-5.4-4.2-10.2-8.4-13.6c-4.3-3.5-9.6-5.4-15.1-5.5
+          c-5.5,0.1-10.8,2-15.1,5.5s-7.2,8.3-8.4,13.6H59.5z"/>
+        <path class="s1" d="M59.5,55.9l14.3-39.6h5l14.4,39.6h8.1l-14-38.7C86.4,15,85,13.1,83,11.7
+          c-2-1.4-4.3-2.1-6.7-2.1l0,0c-2.4,0-4.7,0.7-6.7,2.1s-3.4,3.3-4.3,5.6l-14,38.7L59.5,55.9z"/>
+        <!-- "s" (1º) -->
+        <path class="s1" d="M126.6,29.8c-7.5-1.5-14.9-3.1-14.9-7.5c0-2.6,3.1-5.9,10-5.9c4.7,0,7.7,1.7,9.4,3.4
+          c1,1,1.8,2.1,2.4,3.3h7.7c-0.7-2.5-1.9-4.8-3.4-6.8c-2.9-3.4-7.6-6.8-16-6.8c-11.3,0-17.2,5.9-17.2,12.7
+          c0,8.4,7.5,11.7,14.9,13.3c7.5,1.6,14.9,3.1,14.9,7.5c0,3.6-3.1,6.8-11.3,6.8c-1.9,0.1-3.9-0.2-5.7-0.9
+          c-1.8-0.7-3.4-1.8-4.8-3.2c-1.1-1.2-2-2.6-2.6-4.1h-7.7c0.8,2.7,2.1,5.3,3.8,7.5c3,3.7,8.2,7.5,17,7.5
+          c12.2,0,18.6-6.3,18.6-13.6C141.5,34.8,134.1,31.4,126.6,29.8z"/>
+        <!-- "s" (2º) -->
+        <path class="s1" d="M169.8,29.8c-7.5-1.5-14.9-3.1-14.9-7.5c0-2.6,3.1-5.9,10-5.9c4.7,0,7.7,1.7,9.4,3.4
+          c1,1,1.8,2.1,2.3,3.3h7.7c-0.7-2.5-1.9-4.8-3.4-6.8c-2.9-3.4-7.6-6.8-16-6.8c-11.3,0-17.2,5.9-17.2,12.7
+          c0,8.4,7.4,11.7,14.9,13.3c7.5,1.6,14.9,3.1,14.9,7.5c0,3.6-3.1,6.8-11.3,6.8c-1.9,0.1-3.9-0.2-5.7-0.9
+          c-1.8-0.7-3.4-1.8-4.8-3.2c-1.1-1.2-2-2.6-2.6-4.1h-7.7c0.8,2.7,2.1,5.3,3.8,7.5c3,3.7,8.2,7.5,17,7.5
+          c12.2,0,18.6-6.3,18.6-13.6C184.7,34.8,177.3,31.4,169.8,29.8z"/>
+        <!-- "e" -->
+        <path class="s1" d="M212.6,9.6c-13.2,0-23.1,10.1-23.1,23.6c0,13.4,9.9,23.6,23.1,23.6
+          c3.3,0.1,6.6-0.5,9.6-1.8c3-1.3,5.7-3.2,8-5.6c2-2.2,3.6-4.7,4.6-7.5l0.1-0.2h-7.5v0.1
+          c-0.9,1.5-2.1,2.9-3.4,4c-3.2,2.7-7.2,4.1-11.4,4c-8.2,0-14.6-5.8-15.6-14.1h38.7v-2.8
+          c0.1-3.1-0.5-6.1-1.6-8.9c-1.1-2.8-2.8-5.4-5-7.6s-4.7-3.8-7.6-5C218.7,10.1,215.7,9.6,212.6,9.6L212.6,9.6z
+          M197.2,29c0.7-3.6,2.6-6.8,5.4-9c2.8-2.3,6.4-3.4,10-3.3c6.4,0,13.9,3.9,15.2,12.3H197.2z"/>
+        <!-- "t" -->
+        <path class="s1" d="M250.5,0.8H243v9.9h-5.9v7h5.9V42c0,9.1,5,14.1,14.1,14.1h9.9v-7h-9.9
+          c-4.4,0-6.6-2.4-6.6-7.1V17.8h16.8v-7h-16.8L250.5,0.8z"/>
+      </svg>
+    </a>
+
+    <!-- Nav links -->
+    <ul class="nav-links">
+      <li><a href="#produtos">Soluções</a></li>
+      <li><a href="#setores">Setores</a></li>
+      <li><a href="#cases">Depoimentos</a></li>
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="https://www.4asset.com.br/blog/" target="_blank" rel="noopener">Blog</a></li>
+    </ul>
+
+    <!-- CTA button -->
+    <a href="https://4asset.rds.land/fale-com-um-consultor" target="_blank" rel="noopener" class="btn-cta">
+      Falar com um especialista
+      <span class="arrow">&#8594;</span>
+    </a>
+
+  </header>
+
+  <!-- ============================================================
+       HERO CONTENT
+  ============================================================ -->
+  <div class="hero-content">
+
+    <!-- Left: text + CTA -->
+    <div class="hero-text">
+      <h1 class="hero-title">
+        A <span class="blue">plataforma de gestão</span>
+      </h1>
+      <p class="hero-subtitle">
+        Transforme a complexidade fundiária em estratégia com uma solução pensada para o seu negócio.
+      </p>
+      <a href="#produtos" class="btn-hero">
+        Conhecer a plataforma
+        <span class="arrow">&#8594;</span>
+      </a>
+    </div>
+
+    <!-- Right: photo -->
+    <div class="hero-image-wrap">
+      <img src="imagem 01.png" alt="Profissionais usando a plataforma 4Asset" />
+    </div>
+
+  </div>
+
+  <!-- ============================================================
+       STATS BAR
+  ============================================================ -->
+  <div class="stats-bar">
+    <div class="stat-item">
+      <span class="stat-number">+20</span>
+      <span class="stat-label">anos de mercado<br>Grupo Verante</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">77%</span>
+      <span class="stat-label">do mercado de transmissão de energia<br>do Brasil</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">64%</span>
+      <span class="stat-label">do mercado de<br>geração de energia</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">+400mil</span>
+      <span class="stat-label">imóveis<br>gerenciados</span>
+    </div>
+  </div>
+
+</div><!-- /.hero-wrapper -->
+
+<!-- ============================================================
+     SEÇÃO SOBRE (2ª dobra)
+============================================================ -->
+<section class="about-section" id="sobre">
+  <div class="about-container">
+
+    <!-- Esquerda: card de texto -->
+    <div class="about-card reveal">
+      <h2>Tecnologia para os <span class="blue">desafios mais complexos</span> de gestão de ativos.</h2>
+
+      <p class="about-intro">
+        Com tecnologia de ponta e uma equipe altamente capacitada, a <strong>4Asset</strong> é especializada em soluções para grandes empreendimentos e organizações que enfrentam desafios complexos na gestão <strong>fundiária, patrimonial, regulatória e socioambiental</strong>.
+      </p>
+
+      <p class="about-intro">
+        Nossos softwares atendem empresas de diversos setores, oferecendo <strong>controle, segurança e eficiência</strong>.
+      </p>
+
+      <p class="about-intro">
+        A 4Asset faz parte do <strong>Grupo <span class="blue">Verante</span></strong> — há mais de <strong>20 anos</strong> entregando confiança para decisões precisas.
+      </p>
+    </div>
+
+    <!-- Direita: imagem -->
+    <div class="about-right">
+      <div class="about-image reveal" style="transition-delay:0.25s;">
+        <img src="imagem 02.png" alt="Profissional 4Asset" />
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Marquee de clientes no rodapé da 2ª dobra -->
+  <div class="about-marquee">
+    <h2 class="clients-title">Nossas soluções estão com os melhores do mercado</h2>
+
+    <div class="marquee">
+      <div class="marquee-track left">
+        <img src="clientes/image 13.png" alt="" />
+        <img src="clientes/image 14.png" alt="" />
+        <img src="clientes/image 15.png" alt="" />
+        <img src="clientes/image 16.png" alt="" />
+        <img src="clientes/image 17.png" alt="" />
+        <img src="clientes/image 18.png" alt="" />
+        <img src="clientes/image 19.png" alt="" />
+        <img src="clientes/image 20.png" alt="" />
+        <img src="clientes/image 21.png" alt="" />
+        <img src="clientes/image 22.png" alt="" />
+        <img src="clientes/image 23.png" alt="" />
+        <img src="clientes/image 24.png" alt="" />
+        <img src="clientes/image 25.png" alt="" />
+        <img src="clientes/image 26.png" alt="" />
+        <img src="clientes/new-logo.svg" alt="" />
+        <img src="clientes/image 13.png" alt="" />
+        <img src="clientes/image 14.png" alt="" />
+        <img src="clientes/image 15.png" alt="" />
+        <img src="clientes/image 16.png" alt="" />
+        <img src="clientes/image 17.png" alt="" />
+        <img src="clientes/image 18.png" alt="" />
+        <img src="clientes/image 19.png" alt="" />
+        <img src="clientes/image 20.png" alt="" />
+        <img src="clientes/image 21.png" alt="" />
+        <img src="clientes/image 22.png" alt="" />
+        <img src="clientes/image 23.png" alt="" />
+        <img src="clientes/image 24.png" alt="" />
+        <img src="clientes/image 25.png" alt="" />
+        <img src="clientes/image 26.png" alt="" />
+        <img src="clientes/new-logo.svg" alt="" />
+      </div>
+    </div>
+
+    <div class="marquee">
+      <div class="marquee-track right">
+        <img src="clientes/image 27.png" alt="" />
+        <img src="clientes/image 28.png" alt="" />
+        <img src="clientes/image 29.png" alt="" />
+        <img src="clientes/image 30.png" alt="" />
+        <img src="clientes/image 31.png" alt="" />
+        <img src="clientes/image 32.png" alt="" />
+        <img src="clientes/image 33.png" alt="" />
+        <img src="clientes/image 34.png" alt="" />
+        <img src="clientes/image 35.png" alt="" />
+        <img src="clientes/image 36.png" alt="" />
+        <img src="clientes/image 37.png" alt="" />
+        <img src="clientes/image 38.png" alt="" />
+        <img src="clientes/image 39.png" alt="" />
+        <img src="clientes/image 40.png" alt="" />
+        <img src="clientes/image 27.png" alt="" />
+        <img src="clientes/image 28.png" alt="" />
+        <img src="clientes/image 29.png" alt="" />
+        <img src="clientes/image 30.png" alt="" />
+        <img src="clientes/image 31.png" alt="" />
+        <img src="clientes/image 32.png" alt="" />
+        <img src="clientes/image 33.png" alt="" />
+        <img src="clientes/image 34.png" alt="" />
+        <img src="clientes/image 35.png" alt="" />
+        <img src="clientes/image 36.png" alt="" />
+        <img src="clientes/image 37.png" alt="" />
+        <img src="clientes/image 38.png" alt="" />
+        <img src="clientes/image 39.png" alt="" />
+        <img src="clientes/image 40.png" alt="" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SEÇÃO SEGMENTOS — "Quem busca a 4Asset" (4ª dobra)
+============================================================ -->
+<section class="segments-section" id="setores">
+  <div class="segments-header">
+    <h2>Quem busca a 4Asset.</h2>
+    <p>Empresas que operam ativos fundiários, imobiliários e regulatórios em grande escala — e precisam de controle, prazo e conformidade.</p>
+  </div>
+
+  <div class="segments-grid">
+    <div class="segment-card">
+      <div class="seg-image"><img src="energia.jpg" alt="" /></div>
+      <div class="seg-body">
+        <h3>Energia</h3>
+        <p class="seg-desc">Controle de faixas de servidão, gestão de concessões da ANEEL e regularização fundiária de linhas de transmissão e geração. Parceiro de 77% das transmissoras do Brasil.</p>
+      </div>
+    </div>
+
+    <div class="segment-card">
+      <div class="seg-image"><img src="mineracao.jpg" alt="" /></div>
+      <div class="seg-body">
+        <h3>Mineração</h3>
+        <p class="seg-desc">Regularização fundiária de áreas de mineração, controle de licenças socioambientais e gestão de servidões em empreendimentos de grande porte.</p>
+      </div>
+    </div>
+
+    <div class="segment-card">
+      <div class="seg-image"><img src="construcao.jpeg" alt="" /></div>
+      <div class="seg-body">
+        <h3>Construção &amp; Real Estate</h3>
+        <p class="seg-desc">Do estudo fundiário à regularização de imóveis. Controle de distratos, gestão de passivos fundiários e conformidade cartorária integrada.</p>
+      </div>
+    </div>
+
+    <div class="segment-card">
+      <div class="seg-image"><img src="infraestrutura.jpg" alt="" /></div>
+      <div class="seg-body">
+        <h3>Infraestrutura</h3>
+        <p class="seg-desc">Gestão de passagens, faixas de duto e regularização fundiária de infraestrutura de rede. Controle georreferenciado de toda a malha.</p>
+      </div>
+    </div>
+
+    <div class="segment-card">
+      <div class="seg-image"><img src="saneamento.jpg" alt="" /></div>
+      <div class="seg-body">
+        <h3>Saneamento</h3>
+        <p class="seg-desc">Governança regulatória e gestão fundiária em contratos de concessão pública. Transparência e rastreabilidade para órgãos de controle.</p>
+      </div>
+    </div>
+
+    <div class="segment-card">
+      <div class="seg-image"><img src="agronegocio.jpeg" alt="" /></div>
+      <div class="seg-body">
+        <h3>Agronegócio</h3>
+        <p class="seg-desc">Contratos de arrendamento de terra, gestão de áreas produtivas e regularização fundiária rural com integração ao INCRA e SIGEF.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SEÇÃO PILARES — "Três pilares" (5ª dobra)
+============================================================ -->
+<section class="pillars-section">
+  <div class="pillars-header">
+    <h2>Como operamos.</h2>
+    <p>Nossa expertise a serviço da sua gestão de ativos. Nossos softwares oferecem controle, segurança e eficiência à sua gestão fundiária, economizando tempo e dinheiro.</p>
+  </div>
+
+  <div class="pillars-grid">
+    <div class="pillar-card">
+      <div class="pillar-image"><img src="conhecimento-de-mercado.png" alt="" /></div>
+      <div class="pillar-body">
+        <h3>Conhecimento de mercado</h3>
+        <p>As soluções refletem a realidade operacional de cada setor — construímos processos específicos para energia, mineração, infraestrutura, agro, entre outros.</p>
+      </div>
+    </div>
+
+    <div class="pillar-card">
+      <div class="pillar-image"><img src="solucoes-ciclo-de-vida.jpeg" alt="" /></div>
+      <div class="pillar-body">
+        <h3>Soluções para todo o ciclo de vida do empreendimento</h3>
+        <p>Elaboração de estudos preliminares, implantação da solução e suporte especializado — do início ao fim do projeto.</p>
+      </div>
+    </div>
+
+    <div class="pillar-card">
+      <div class="pillar-image"><img src="decisoes-precisas.jpg" alt="" /></div>
+      <div class="pillar-body">
+        <h3>Confiança para decisões precisas</h3>
+        <p>Nosso sistema aumenta a transparência dos processos e proporciona rastreabilidade e conformidade total em cada etapa.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SEÇÃO PRODUTOS — "Dois produtos" (6ª dobra)
+============================================================ -->
+<section class="products-section" id="produtos">
+  <div class="products-header">
+    <h2>Specifor.</h2>
+    <p>Escolha o modelo de solução que faz sentido para a sua operação.</p>
+  </div>
+
+  <div class="products-grid">
+
+    <!-- Card SaaS -->
+    <div class="product-card">
+      <div class="product-media">
+        <!-- Solte aqui o vídeo do Specifor SaaS (sem áudio). Já está mudo / autoplay / loop. -->
+        <video autoplay muted loop playsinline preload="auto">
+          <source src="specifor-saas.mp4" type="video/mp4" />
+        </video>
+      </div>
+      <div class="product-body">
+        <div class="product-brand">
+          <span class="brand-word">SPECIFOR</span>
+          <svg class="brand-mark" viewBox="278 9 49 48" xmlns="http://www.w3.org/2000/svg">
+            <path fill="#16243d" d="M316,32.8c1.5,0,2.9-0.3,4.2-0.8c1.3-0.6,2.6-1.4,3.6-2.4c1-1,1.8-2.2,2.4-3.6c0.6-1.3,0.8-2.8,0.8-4.2c0-2.9-1.2-5.7-3.2-7.8c-2.1-2.1-4.9-3.2-7.8-3.2c-1.5,0-2.9,0.3-4.2,0.8c-1.3,0.6-2.6,1.4-3.6,2.4c-1,1-1.8,2.2-2.4,3.6c-0.6,1.3-0.8,2.8-0.8,4.2c0,2.9,1.2,5.7,3.2,7.8C310.2,31.6,313,32.8,316,32.8z"/>
+            <path fill="#16243d" d="M289.1,33.7c-1.5,0-2.9,0.3-4.2,0.8c-1.3,0.6-2.6,1.4-3.6,2.4c-1,1-1.8,2.2-2.4,3.6c-0.6,1.3-0.8,2.8-0.8,4.2c0,2.9,1.2,5.7,3.2,7.8c2.1,2.1,4.9,3.2,7.8,3.2c1.5,0,2.9-0.3,4.2-0.8c1.3-0.6,2.6-1.4,3.6-2.4c1-1,1.8-2.2,2.4-3.6c0.6-1.3,0.8-2.8,0.8-4.2c0-2.9-1.2-5.7-3.2-7.8C294.8,34.9,292,33.7,289.1,33.7L289.1,33.7z"/>
+            <path fill="#16243d" d="M309.1,34.1c-7,3-10.7,10-8.2,15.7c2.4,5.6,10.1,7.8,17.1,4.8c7-3,10.7-10,8.2-15.7C323.8,33.3,316.1,31.1,309.1,34.1z"/>
+            <path fill="#16243d" d="M295.9,32.3c7-3,10.7-10,8.2-15.7c-2.4-5.6-10.1-7.8-17.1-4.8c-7,3-10.7,10-8.2,15.7C281.2,33.2,288.9,35.3,295.9,32.3z"/>
+          </svg>
+          <span class="badge badge-saas">SaaS</span>
+        </div>
+
+        <h3>Solução pronta, verticalizada, entregue como serviço.</h3>
+        <p class="product-desc">Assinatura mensal — implantação rápida e gestão pelo fornecedor.</p>
+
+        <ul class="product-list">
+          <li>2 a 6 semanas com pacote pré-parametrizado</li>
+          <li>Gerenciada pelo fornecedor (AWS multi-tenant)</li>
+          <li>APIs disponíveis para integrações simples a moderada</li>
+          <li>Atualizações automáticas incluídas na assinatura</li>
+        </ul>
+
+        <a href="https://4asset.rds.land/fale-com-um-consultor" target="_blank" rel="noopener" class="product-btn btn-saas">
+          Quero saber mais sobre o SaaS
+          <span class="arrow">&#8594;</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Card OnPremise -->
+    <div class="product-card">
+      <div class="product-media">
+        <!-- Solte aqui o vídeo do Specifor OnPremise (sem áudio). Já está mudo / autoplay / loop. -->
+        <video autoplay muted loop playsinline preload="auto">
+          <source src="specifor-onpremise.mp4" type="video/mp4" />
+        </video>
+      </div>
+      <div class="product-body">
+        <div class="product-brand">
+          <span class="brand-word">SPECIFOR</span>
+          <svg class="brand-mark" viewBox="278 9 49 48" xmlns="http://www.w3.org/2000/svg">
+            <path fill="#16243d" d="M316,32.8c1.5,0,2.9-0.3,4.2-0.8c1.3-0.6,2.6-1.4,3.6-2.4c1-1,1.8-2.2,2.4-3.6c0.6-1.3,0.8-2.8,0.8-4.2c0-2.9-1.2-5.7-3.2-7.8c-2.1-2.1-4.9-3.2-7.8-3.2c-1.5,0-2.9,0.3-4.2,0.8c-1.3,0.6-2.6,1.4-3.6,2.4c-1,1-1.8,2.2-2.4,3.6c-0.6,1.3-0.8,2.8-0.8,4.2c0,2.9,1.2,5.7,3.2,7.8C310.2,31.6,313,32.8,316,32.8z"/>
+            <path fill="#16243d" d="M289.1,33.7c-1.5,0-2.9,0.3-4.2,0.8c-1.3,0.6-2.6,1.4-3.6,2.4c-1,1-1.8,2.2-2.4,3.6c-0.6,1.3-0.8,2.8-0.8,4.2c0,2.9,1.2,5.7,3.2,7.8c2.1,2.1,4.9,3.2,7.8,3.2c1.5,0,2.9-0.3,4.2-0.8c1.3-0.6,2.6-1.4,3.6-2.4c1-1,1.8-2.2,2.4-3.6c0.6-1.3,0.8-2.8,0.8-4.2c0-2.9-1.2-5.7-3.2-7.8C294.8,34.9,292,33.7,289.1,33.7L289.1,33.7z"/>
+            <path fill="#16243d" d="M309.1,34.1c-7,3-10.7,10-8.2,15.7c2.4,5.6,10.1,7.8,17.1,4.8c7-3,10.7-10,8.2-15.7C323.8,33.3,316.1,31.1,309.1,34.1z"/>
+            <path fill="#16243d" d="M295.9,32.3c7-3,10.7-10,8.2-15.7c-2.4-5.6-10.1-7.8-17.1-4.8c-7,3-10.7,10-8.2,15.7C281.2,33.2,288.9,35.3,295.9,32.3z"/>
+          </svg>
+          <span class="badge badge-onpremise">ON PREMISE</span>
+        </div>
+
+        <h3>Plataforma completa instalada em ambiente dedicado.</h3>
+        <p class="product-desc">Licença perpétua + projeto de implantação sob medida — controle total da sua infraestrutura.</p>
+
+        <ul class="product-list">
+          <li>3 a 12 meses com projeto sob medida</li>
+          <li>Totalmente customizável com módulos sob medida</li>
+          <li>Integração profunda com SAP, TOTVS, Oracle e sistemas internos</li>
+          <li>Atualizações sob demanda via suporte contratado</li>
+        </ul>
+
+        <a href="https://4asset.rds.land/fale-com-um-consultor" target="_blank" rel="noopener" class="product-btn btn-onpremise">
+          Quero saber mais sobre o On Premise
+          <span class="arrow">&#8594;</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     CTA "Não sabe qual solução" (banda escura)
+============================================================ -->
+<section class="solution-cta">
+  <h2>Não sabe qual solução atende seu cenário?</h2>
+  <a href="https://4asset.rds.land/fale-com-um-consultor" target="_blank" rel="noopener" class="btn-green">
+    Solicite um diagnóstico
+    <span class="arrow">&#8594;</span>
+  </a>
+</section>
+
+<!-- ============================================================
+     CASES — "Resultados que falam por si"
+============================================================ -->
+<section class="cases-section" id="cases">
+  <div class="cases-header">
+    <h2>Confiança para decisões precisas.</h2>
+    <p>Conheça os depoimentos das empresas que já confiam na 4Asset.</p>
+  </div>
+
+  <div class="cases-grid">
+    <!-- Depoimento Vale -->
+    <div class="case-card">
+      <div class="case-image"><img src="foto-vale.png" alt="Vale S.A." /></div>
+      <div class="case-body">
+        <div class="case-head">
+          <img class="case-logo" src="clientes/vale-logo.svg" alt="Vale S.A." />
+          <div>
+            <div class="case-name">Vale S.A.</div>
+            <div class="case-cat">Daniel Abood e Emília Carvalho</div>
+          </div>
+        </div>
+        <p class="case-desc">“Tivemos um ganho de distrato — de contratos de imóveis — de quase 50% de saving e uma economia de R$ 15 milhões em 18 meses.”</p>
+      </div>
+    </div>
+
+    <!-- Depoimento TAG -->
+    <div class="case-card">
+      <div class="case-image"><img src="tag-imagem.jpg" alt="TAG" /></div>
+      <div class="case-body">
+        <div class="case-head">
+          <img class="case-logo" src="clientes/tag-logo.jpg" alt="TAG" />
+          <div>
+            <div class="case-name">TAG</div>
+            <div class="case-cat">Bruno Silva</div>
+          </div>
+        </div>
+        <p class="case-desc">“Specifor é um ótimo produto para digitalização e padronização de processos. O SaaS é a opção de baixo custo de implantação e modelável para as necessidades dos clientes.”</p>
+      </div>
+    </div>
+
+    <!-- Depoimento Echoenergia -->
+    <div class="case-card">
+      <div class="case-image"><img src="echoenergia-foto.webp" alt="Echoenergia" /></div>
+      <div class="case-body">
+        <div class="case-head">
+          <img class="case-logo" src="clientes/logo-echoenergia.png" alt="Echoenergia" />
+          <div>
+            <div class="case-name">Echoenergia</div>
+            <div class="case-cat">Wander Pires e Guilherme Avelar</div>
+          </div>
+        </div>
+        <p class="case-desc">“Economizamos no mínimo 40 horas/homem mensais na gestão de pagamentos. Antes eram duas pessoas durante quase dois dias inteiros, e hoje fazemos com uma pessoa em até 3 horas.”</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CTA FINAL — "A 4Asset é a empresa certa"
+============================================================ -->
+<section class="final-cta">
+  <h2>Pronto para organizar sua gestão de ativos?</h2>
+  <p>A 4Asset é a empresa certa para o seu projeto. Converse com nossos especialistas e descubra qual solução faz sentido para sua operação.</p>
+  <a href="https://4asset.rds.land/fale-com-um-consultor" target="_blank" rel="noopener" class="btn-purple">
+    Falar com um especialista
+    <span class="arrow">&#8594;</span>
+  </a>
+</section>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer class="site-footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="fb-logo">SPECIFOR</div>
+      <p class="fb-desc">Sistema de gestão fundiária, imobiliária e regulatória para empreendimentos de energia, infraestrutura e real estate. Uma empresa do Grupo Verante.</p>
+      <div class="footer-news-title">Newsletter</div>
+      <p class="footer-news-desc">Conteúdo sobre gestão fundiária, regularização e contratos de arrendamento para o setor de energia — sem spam.</p>
+      <form class="footer-form" onsubmit="return false;">
+        <input type="email" placeholder="Insira seu e-mail" />
+        <button type="submit">ENVIAR</button>
+      </form>
+    </div>
+
+    <div class="footer-col">
+      <h4>Empresa</h4>
+      <a href="#sobre">Sobre a 4Asset</a>
+      <a href="#">Grupo Verante</a>
+      <a href="#cases">Cases</a>
+      <a href="https://www.4asset.com.br/blog/" target="_blank" rel="noopener">Blog</a>
+      <a href="#">Trabalhe conosco</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Produtos</h4>
+      <a href="#produtos">Specifor SaaS</a>
+      <a href="#produtos">Specifor OnPremise</a>
+      <a href="#">Módulo GIS</a>
+      <a href="#">Módulo Pagamentos</a>
+      <a href="privacidade.html">Segurança</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Contato</h4>
+      <a href="https://4asset.rds.land/fale-com-um-consultor" target="_blank" rel="noopener">Falar com especialista</a>
+      <a href="https://4asset.rds.land/fale-com-um-consultor" target="_blank" rel="noopener">Agendar demonstração</a>
+      <a href="#">Seja um parceiro</a>
+      <a href="#">Suporte</a>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div>© 2025 4Asset · Todos os direitos reservados</div>
+    <div class="fb-links">
+      <span>Uma empresa do Grupo Verante · #4Asset</span>
+      <a href="privacidade.html">Termos</a>
+      <a href="privacidade.html">Privacidade</a>
+    </div>
+  </div>
+
+  <div class="footer-watermark">SPECIFOR</div>
+</footer>
+
+<!-- ============================================================
+     WHATSAPP FLOAT (abre modal)
+============================================================ -->
+<button type="button" class="whatsapp-float" aria-label="Abrir WhatsApp" id="wa-trigger" style="background:transparent;border:0;padding:0;cursor:pointer;">
+  <img src="WhatsApp-Logo.wine.svg" alt="" />
+</button>
+
+<!-- ============================================================
+     MODAL DO WHATSAPP
+============================================================ -->
+<div class="wa-modal" id="wa-modal" role="dialog" aria-labelledby="wa-name" aria-modal="true">
+  <div class="wa-overlay" data-wa-close></div>
+  <div class="wa-window">
+    <div class="wa-header">
+      <div class="wa-avatar" aria-hidden="true">VC</div>
+      <div class="wa-info">
+        <div class="wa-name" id="wa-name">Vinicius Costa - 4Asset</div>
+        <div class="wa-status">online</div>
+      </div>
+      <button type="button" class="wa-close" data-wa-close aria-label="Fechar">×</button>
+    </div>
+    <div class="wa-body">
+      <div class="wa-bubble">
+        Olá! Quer saber mais sobre os softwares da 4Asset? Estou aqui para te ajudar!
+      </div>
+      <form class="wa-form" id="wa-form" novalidate>
+        <input type="text" name="nome" placeholder="Nome *" required autocomplete="name" />
+        <input type="email" name="email" placeholder="Email *" required autocomplete="email" />
+        <div class="wa-tel">
+          <span class="wa-flag" aria-hidden="true">🇧🇷</span>
+          <span class="wa-code">+55</span>
+          <input type="tel" name="telefone" placeholder="Telefone *" required autocomplete="tel-national" />
+        </div>
+        <input type="text" name="empresa" placeholder="Empresa *" required autocomplete="organization" />
+        <input type="text" name="cargo" placeholder="Cargo *" required autocomplete="organization-title" />
+        <button type="submit" class="wa-submit">Iniciar conversa</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Header fixo + transição do hero no scroll -->
+<script>
+  (function () {
+    var header = document.querySelector('header');
+    var hero = document.querySelector('.hero-wrapper');
+    var heroText = document.querySelector('.hero-text');
+    var heroImg = document.querySelector('.hero-image-wrap');
+    var stats = document.querySelector('.stats-bar');
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function clamp(v, a, b) { return Math.min(Math.max(v, a), b); }
+
+    var current = 0;   // progresso suavizado (lerp)
+    var target = 0;    // progresso-alvo (do scroll real)
+    var rafId = null;
+
+    function computeTarget() {
+      var y = window.scrollY || window.pageYOffset || 0;
+      // Header fixo: intensifica o fundo após rolar um pouco
+      if (header) header.classList.toggle('scrolled', y > 40);
+      var h = hero ? hero.offsetHeight : window.innerHeight;
+      target = clamp(y / (h * 0.9), 0, 1);
+      if (rafId === null) rafId = window.requestAnimationFrame(render);
+    }
+
+    function apply(p) {
+      // easing extra para acentuar o miolo do movimento
+      var e = p * p * (3 - 2 * p); // smoothstep
+      if (heroText) {
+        heroText.style.transform = 'scale(' + (1 + e * 0.4).toFixed(4) + ')';
+        heroText.style.filter = 'blur(' + (e * 11).toFixed(2) + 'px)';
+        heroText.style.opacity = (1 - e * 0.92).toFixed(3);
+      }
+      if (heroImg) {
+        heroImg.style.transform = 'translateX(-50%) scale(' + (1 + e * 0.32).toFixed(4) + ')';
+        heroImg.style.filter = 'blur(' + (e * 8).toFixed(2) + 'px)';
+        heroImg.style.opacity = (1 - e * 0.78).toFixed(3);
+      }
+      // Stats fica fixa no rodapé do hero — nada de translate, pra não criar vazio na transição
+    }
+
+    function render() {
+      // interpolação suave: current persegue o target (sensação amortecida estilo Apple)
+      current += (target - current) * 0.085;
+      var done = Math.abs(target - current) < 0.0005;
+      if (done) current = target;
+      if (!reduce) apply(current);
+      if (!done) {
+        rafId = window.requestAnimationFrame(render);
+      } else {
+        rafId = null;
+      }
+    }
+
+    window.addEventListener('scroll', computeTarget, { passive: true });
+    window.addEventListener('resize', computeTarget);
+    computeTarget();
+  })();
+</script>
+
+<!-- Anchor jumps: anima manualmente (mandatory snap não cooperaria com smooth nativo) -->
+<script>
+  (function () {
+    var html = document.documentElement;
+
+    function animateScroll(targetY, duration) {
+      var startY = window.scrollY || window.pageYOffset;
+      var diff = targetY - startY;
+      if (Math.abs(diff) < 1) return;
+      // pausa o snap p/ permitir a animação
+      var prevSnap = html.style.scrollSnapType;
+      html.style.scrollSnapType = 'none';
+      function easeInOutCubic(t) {
+        return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+      }
+      var startTime = performance.now();
+      var rafId;
+      function step() {
+        var elapsed = performance.now() - startTime;
+        var p = Math.min(elapsed / duration, 1);
+        window.scrollTo(0, startY + diff * easeInOutCubic(p));
+        if (p < 1) {
+          rafId = requestAnimationFrame(step);
+        } else {
+          html.style.scrollSnapType = prevSnap || '';
+        }
+      }
+      // fallback: se rAF for throttled, garante a chegada com setTimeout
+      var safety = setTimeout(function () {
+        if (Math.abs(window.scrollY - targetY) > 2) {
+          window.scrollTo(0, targetY);
+          html.style.scrollSnapType = prevSnap || '';
+        }
+      }, duration + 100);
+      rafId = requestAnimationFrame(step);
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+      var href = a.getAttribute('href');
+      if (!href || href === '#' || href.length < 2) return;
+      a.addEventListener('click', function (e) {
+        var target = document.querySelector(href);
+        if (!target) return;
+        e.preventDefault();
+        // duração baseada na distância (mais natural)
+        var dist = Math.abs(target.offsetTop - window.scrollY);
+        var duration = Math.min(900, Math.max(400, dist * 0.4));
+        animateScroll(target.offsetTop, duration);
+        history.replaceState(null, '', href);
+      });
+    });
+  })();
+</script>
+
+<!-- Modal do WhatsApp: abre, valida, envia para RD Station e redireciona -->
+<script>
+  (function () {
+    var trigger = document.getElementById('wa-trigger');
+    var modal = document.getElementById('wa-modal');
+    var form = document.getElementById('wa-form');
+    if (!trigger || !modal || !form) return;
+
+    function openModal() {
+      modal.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+      var first = form.querySelector('input');
+      if (first) setTimeout(function () { first.focus(); }, 150);
+    }
+    function closeModal() {
+      modal.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    trigger.addEventListener('click', openModal);
+
+    modal.querySelectorAll('[data-wa-close]').forEach(function (el) {
+      el.addEventListener('click', closeModal);
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+    });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      var data = new FormData(form);
+      var nome = (data.get('nome') || '').toString().trim();
+      var email = (data.get('email') || '').toString().trim();
+      var telefone = (data.get('telefone') || '').toString().trim();
+      var empresa = (data.get('empresa') || '').toString().trim();
+      var cargo = (data.get('cargo') || '').toString().trim();
+
+      // RD Station — fire-and-forget (no-cors, não bloqueia redirect)
+      try {
+        fetch('https://cta-redirect.rdstation.com/v2/conversions', {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            conversion_identifier: 'site-4asset-bruna',
+            name: nome,
+            email: email,
+            mobile_phone: '+55' + telefone.replace(/\D/g, ''),
+            company_name: empresa,
+            cf_cargo: cargo
+          })
+        }).catch(function () {});
+      } catch (err) { /* ignora */ }
+
+      // Monta mensagem personalizada e abre WhatsApp em nova aba
+      var msg = 'Quero saber mais sobre os produtos da 4Asset.' +
+        '\n\nNome: ' + nome +
+        '\nEmpresa: ' + empresa +
+        '\nCargo: ' + cargo;
+      var waUrl = 'https://wa.me/5548984360428?text=' + encodeURIComponent(msg);
+      window.open(waUrl, '_blank', 'noopener');
+
+      closeModal();
+      form.reset();
+    });
+  })();
+</script>
+
+<!-- Reveal suave (fade + sobe) ao entrar de fato na dobra -->
+<script>
+  (function () {
+    var els = document.querySelectorAll('.reveal');
+    if (!els.length) return;
+
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce || !('IntersectionObserver' in window)) {
+      els.forEach(function (el) { el.classList.add('is-visible'); });
+      return;
+    }
+
+    // Agrupa os elementos .reveal por seção, para a cascata tocar junto
+    var groups = [];
+    els.forEach(function (el) {
+      var sec = el.closest('section') || el.parentElement;
+      if (groups.indexOf(sec) === -1) groups.push(sec);
+    });
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.querySelectorAll('.reveal').forEach(function (el) {
+            el.classList.add('is-visible');
+          });
+          io.unobserve(entry.target);
+        }
+      });
+    }, {
+      // dispara quando o topo da seção cruza ~65% da altura da tela
+      // (ou seja, a seção já entrou bem na viewport)
+      threshold: 0,
+      rootMargin: '0px 0px -35% 0px'
+    });
+
+    groups.forEach(function (sec) { io.observe(sec); });
+  })();
+</script>
+
+</body>
+</html>
