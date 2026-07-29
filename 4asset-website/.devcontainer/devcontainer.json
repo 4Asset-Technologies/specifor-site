@@ -1,0 +1,36 @@
+{
+  "name": "Site 4Asset — Marketing",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:1-20-bookworm",
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.11"
+    }
+  },
+  "postCreateCommand": "npm install -g @anthropic-ai/claude-code && echo 'Claude Code instalado. Rode: claude login (primeira vez) ou claude (uso normal).'",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "anthropic.claude-code",
+        "esbenp.prettier-vscode",
+        "github.vscode-pull-request-github"
+      ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "editor.formatOnSave": false,
+        "files.autoSave": "afterDelay"
+      }
+    }
+  },
+  "forwardPorts": [8000],
+  "portsAttributes": {
+    "8000": {
+      "label": "Preview do Site",
+      "onAutoForward": "openPreview"
+    }
+  },
+  "remoteUser": "node",
+  "containerEnv": {
+    "PROJECT_NAME": "Site 4Asset — Marketing"
+  }
+}
