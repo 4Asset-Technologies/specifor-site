@@ -41,7 +41,6 @@
     }
 
     /* Fullpage estrito: cada dobra ocupa exatamente 1 tela */
-    .segments-section,
     .pillars-section,
     .products-section,
     .cases-section {
@@ -53,6 +52,18 @@
       justify-content: center;
       padding-top: 58px !important;   /* só o necessário para clear do header (menor agora) */
       padding-bottom: 0 !important;
+    }
+
+    /* Segmentos: altura automática (9 caixas em 3 fileiras não cabem mais em 1 tela) */
+    .segments-section {
+      height: auto;
+      min-height: 100vh;
+      overflow: visible;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: 58px !important;
+      padding-bottom: 40px !important;
     }
 
     /* Sobre: altura automática, conteúdo cola no topo, marquee logo em seguida (sem vazio) */
@@ -253,6 +264,42 @@
 
     .nav-links a:hover { color: #fff; }
 
+    .nav-item.has-dropdown { position: relative; }
+    .nav-item.has-dropdown > a { display: inline-flex; align-items: center; gap: 4px; }
+    .nav-caret { font-size: 9px; position: relative; top: 1px; transition: transform 0.2s; }
+    .nav-item.has-dropdown:hover .nav-caret { transform: rotate(180deg); }
+
+    .nav-dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      margin-top: 14px;
+      min-width: 200px;
+      background: #0f1d33;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 10px;
+      padding: 8px;
+      list-style: none;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-6px);
+      transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
+    }
+    .nav-item.has-dropdown:hover .nav-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .nav-dropdown a {
+      display: block;
+      padding: 9px 12px;
+      border-radius: 6px;
+      font-size: 13.5px;
+      white-space: nowrap;
+    }
+    .nav-dropdown a:hover { background: rgba(255, 255, 255, 0.08); color: #fff; }
+
     /* CTA button (header) */
     .btn-cta {
       display: inline-flex;
@@ -395,11 +442,11 @@
     }
 
     .stat-number {
-      font-size: 42px;
+      font-size: clamp(17px, 1.6vw, 25px);
       font-weight: 700;
-      line-height: 1;
-      letter-spacing: -1.5px;
-      white-space: nowrap;
+      line-height: 1.15;
+      letter-spacing: -0.3px;
+      white-space: normal;
       color: #fff;
     }
 
@@ -408,7 +455,7 @@
       font-weight: 400;
       line-height: 1.45;
       color: rgba(255, 255, 255, 0.6);
-      max-width: 140px;
+      max-width: 220px;
     }
 
     /* Telas menores: evita que os números (nowrap) estourem a coluna e sobreponham o vizinho */
@@ -1571,7 +1618,13 @@
 
     <!-- Nav links -->
     <ul class="nav-links">
-      <li><a href="#produtos">Soluções</a></li>
+      <li class="nav-item has-dropdown">
+        <a href="#produtos">Soluções <span class="nav-caret">&#9662;</span></a>
+        <ul class="nav-dropdown">
+          <li><a href="../index.html">Specifor Essential</a></li>
+          <li><a href="../specifor-onpremise/index.html">Specifor On Premise</a></li>
+        </ul>
+      </li>
       <li><a href="#setores">Setores</a></li>
       <li><a href="#cases">Depoimentos</a></li>
       <li><a href="#sobre">Sobre</a></li>
@@ -1594,7 +1647,7 @@
     <!-- Left: text + CTA -->
     <div class="hero-text">
       <h1 class="hero-title">
-        Soluções robustas para<br>a Gestão de Ativos
+        Soluções robustas para Governança Territorial
       </h1>
       <p class="hero-subtitle">
         Transforme a complexidade patrimonial em estratégia com uma solução pensada para o seu negócio.
@@ -1617,24 +1670,20 @@
   ============================================================ -->
   <div class="stats-bar">
     <div class="stat-item">
-      <span class="stat-number">AI-First</span>
+      <span class="stat-number">AI-FIRST</span>
       <span class="stat-label">IA incorporada ao ciclo de engenharia</span>
     </div>
     <div class="stat-item">
-      <span class="stat-number">+20</span>
-      <span class="stat-label">anos de mercado<br>Grupo Verante</span>
+      <span class="stat-number">+20 ANOS</span>
+      <span class="stat-label">pioneiros no mercado, empresa parte do Grupo Verante</span>
     </div>
     <div class="stat-item">
-      <span class="stat-number">77%</span>
-      <span class="stat-label">do mercado de transmissão<br>de energia do Brasil</span>
+      <span class="stat-number">INTELIGÊNCIA OPERACIONAL</span>
+      <span class="stat-label">para governança territorial, com foco no seu negócio</span>
     </div>
     <div class="stat-item">
-      <span class="stat-number">64%</span>
-      <span class="stat-label">do mercado de<br>geração de energia</span>
-    </div>
-    <div class="stat-item">
-      <span class="stat-number">+500mil</span>
-      <span class="stat-label">imóveis<br>gerenciados</span>
+      <span class="stat-number">LÍDER</span>
+      <span class="stat-label">de market share em solução para governança territorial</span>
     </div>
   </div>
 
@@ -1780,10 +1829,10 @@
     </div>
 
     <div class="segment-card">
-      <div class="seg-image"><img src="construcao.jpeg" alt="" /></div>
+      <div class="seg-image"><img src="oleo-gas.jpg" alt="" /></div>
       <div class="seg-body">
-        <h3>Construção &amp; Real Estate</h3>
-        <p class="seg-desc">Do estudo fundiário à regularização de imóveis. Controle de distratos, gestão de passivos fundiários e conformidade cartorária integrada.</p>
+        <h3>Óleo e Gás</h3>
+        <p class="seg-desc">Regularização fundiária de áreas históricas de exploração, refino e distribuição, gestão de servidões e faixas de duto, e integração com SAP e sistemas jurídicos para consolidar o cadastro patrimonial em escala continental.</p>
       </div>
     </div>
 
@@ -1808,6 +1857,30 @@
       <div class="seg-body">
         <h3>Agronegócio</h3>
         <p class="seg-desc">IA para gestão de contratos de arrendamento de terra, automação de processos, gestão de áreas produtivas e regularização fundiária rural com integração às bases públicas, como CAR, INCRA e SIGEF.</p>
+      </div>
+    </div>
+
+    <div class="segment-card">
+      <div class="seg-image"><img src="governo.png" alt="" /></div>
+      <div class="seg-body">
+        <h3>Governo</h3>
+        <p class="seg-desc">Regularização fundiária de terras públicas em todas as esferas — federal (Incra), estadual (institutos de terras) e municipal (CTM e Reurb) —, além da gestão de patrimônio imobiliário público e de bens reversíveis em concessões e licenças ambientais.</p>
+      </div>
+    </div>
+
+    <div class="segment-card">
+      <div class="seg-image"><img src="bancos.jpg" alt="" /></div>
+      <div class="seg-body">
+        <h3>Bancos</h3>
+        <p class="seg-desc">Gestão patrimonial de agências e polos corporativos, regularização de imóveis retomados em garantia, e controle de compliance regulatório (Bacen, AVCB, licenças) em toda a rede física do banco.</p>
+      </div>
+    </div>
+
+    <div class="segment-card">
+      <div class="seg-image"><img src="telecom.png" alt="" /></div>
+      <div class="seg-body">
+        <h3>Telecom</h3>
+        <p class="seg-desc">Regularização fundiária de faixas de passagem para redes de fibra óptica, gestão de contratos de locação de torres e compartilhamento de infraestrutura entre operadoras, e licenciamento municipal e ambiental para instalação de estações e antenas.</p>
       </div>
     </div>
   </div>
