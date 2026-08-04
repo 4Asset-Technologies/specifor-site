@@ -961,20 +961,88 @@
       color: #5b6472;
     }
 
-    .pillars-grid {
+    /* Carrossel: setas + trilho deslizante + bolinhas */
+    .pillars-carousel {
       max-width: 1200px;
       width: 100%;
       margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
     }
 
+    .pillars-arrow {
+      flex-shrink: 0;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid rgba(15, 30, 60, 0.12);
+      background: #ffffff;
+      color: #0f1d33;
+      font-size: 20px;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 6px 16px rgba(15, 30, 60, 0.08);
+      transition: background 0.2s, color 0.2s, transform 0.2s;
+    }
+    .pillars-arrow:hover {
+      background: var(--blue, #4f63ff);
+      color: #fff;
+      transform: scale(1.06);
+    }
+
+    .pillars-grid {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      gap: 18px;
+      cursor: grab;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .pillars-grid::-webkit-scrollbar { display: none; }
+    .pillars-grid.dragging { cursor: grabbing; scroll-behavior: auto; }
+
     .pillar-card {
+      flex: 0 0 calc((100% - 36px) / 3);   /* 3 cards por vez (2 gaps de 18px) */
+      scroll-snap-align: start;
       background: #ffffff;
       border-radius: 18px;
       overflow: hidden;
       box-shadow: 0 14px 34px rgba(15, 30, 60, 0.06);
+    }
+
+    /* Telas menores: 1 card por vez (aí sim o arraste faz sentido) */
+    @media (max-width: 900px) {
+      .pillar-card {
+        flex: 0 0 100%;
+        scroll-snap-align: center;
+      }
+    }
+
+    .pillars-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .pillars-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(15, 30, 60, 0.18);
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .pillars-dot.active {
+      background: var(--blue, #4f63ff);
+      transform: scale(1.2);
     }
 
     .pillar-image {
@@ -1071,7 +1139,7 @@
     }
 
     .product-body {
-      padding: 16px 28px 22px;
+      padding: 19.36px 28px 22px;
       display: flex;
       flex-direction: column;
       flex: 1;
@@ -1081,11 +1149,11 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      margin-bottom: 12px;
+      margin-bottom: 13.2px;
     }
 
     .product-brand .brand-logo {
-      height: 22px;
+      height: 19.8px;
       width: auto;
       display: block;
     }
@@ -1157,7 +1225,7 @@
       gap: 24px;
       padding: 11px 22px;
       border-radius: 10px;
-      font-size: 13.5px;
+      font-size: 14.85px;
       font-weight: 600;
       color: #ffffff;
       text-decoration: none;
@@ -1165,7 +1233,7 @@
     }
 
     .product-btn:hover { opacity: 0.92; }
-    .btn-saas { background: #758650; }
+    .btn-saas { background: #10cf5c; }
     .btn-onpremise { background: #505FFF; }
     .product-btn .arrow { font-size: 18px; line-height: 1; }
 
@@ -1232,22 +1300,90 @@
       color: #5b6472;
     }
 
-    .cases-grid {
+    /* Carrossel: setas + trilho deslizante + bolinhas (mesmo padrão de "Como operamos") */
+    .cases-carousel {
       max-width: 1180px;
       width: 100%;
       margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .cases-arrow {
+      flex-shrink: 0;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid rgba(15, 30, 60, 0.12);
+      background: #ffffff;
+      color: #0f1d33;
+      font-size: 20px;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 6px 16px rgba(15, 30, 60, 0.08);
+      transition: background 0.2s, color 0.2s, transform 0.2s;
+    }
+    .cases-arrow:hover {
+      background: var(--blue, #4f63ff);
+      color: #fff;
+      transform: scale(1.06);
+    }
+
+    .cases-grid {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
       gap: 18px;
+      cursor: grab;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .cases-grid::-webkit-scrollbar { display: none; }
+    .cases-grid.dragging { cursor: grabbing; scroll-behavior: auto; }
+
+    .cases-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .cases-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(15, 30, 60, 0.18);
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .cases-dot.active {
+      background: var(--blue, #4f63ff);
+      transform: scale(1.2);
     }
 
     .case-card {
+      flex: 0 0 calc((100% - 36px) / 3);   /* 3 cards por vez (2 gaps de 18px) */
+      scroll-snap-align: start;
       background: #ffffff;
       border-radius: 16px;
       overflow: hidden;
       box-shadow: 0 14px 34px rgba(15, 30, 60, 0.06);
       display: flex;
       flex-direction: column;
+    }
+
+    /* Telas menores: 1 card por vez */
+    @media (max-width: 900px) {
+      .case-card {
+        flex: 0 0 100%;
+        scroll-snap-align: center;
+      }
     }
 
     .case-image {
@@ -1392,11 +1528,10 @@
       z-index: 2;
     }
 
-    .footer-brand .fb-logo {
-      font-size: 22px;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-      color: rgba(255, 255, 255, 0.85);
+    .footer-brand .fb-logo-img {
+      height: 26px;
+      width: auto;
+      display: block;
       margin-bottom: 20px;
     }
 
@@ -1405,6 +1540,13 @@
       line-height: 1.7;
       color: rgba(255, 255, 255, 0.45);
       max-width: 330px;
+      margin-bottom: 20px;
+    }
+
+    .footer-brand .fb-verante-logo {
+      height: 22px;
+      width: auto;
+      display: block;
       margin-bottom: 28px;
     }
 
@@ -1474,6 +1616,28 @@
       transition: color 0.2s;
     }
     .footer-col a:hover { color: #fff; }
+
+    .footer-address {
+      font-size: 12.5px;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.45);
+      margin-top: 6px;
+    }
+
+    .footer-social {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .footer-social img {
+      height: 22px;
+      width: 22px;
+      display: block;
+      opacity: 0.8;
+      transition: opacity 0.2s;
+    }
+    .footer-social a:hover img { opacity: 1; }
 
     .footer-bottom {
       max-width: 1180px;
@@ -1892,34 +2056,58 @@
 <section class="pillars-section">
   <div class="pillars-header">
     <h2>Como operamos</h2>
-    <p>Nossa expertise a serviço da sua gestão de ativos. Nossos softwares oferecem controle, segurança e eficiência à sua gestão fundiária, economizando tempo e dinheiro.</p>
+    <p>Nossa expertise a serviço da sua governança territorial. Nossos softwares oferecem controle, segurança e eficiência aos seu patrimônio imobiliário, economizando tempo e dinheiro.</p>
   </div>
 
-  <div class="pillars-grid">
-    <div class="pillar-card">
-      <div class="pillar-image"><img src="conhecimento-de-mercado.png" alt="" /></div>
-      <div class="pillar-body">
-        <h3>Conhecimento de mercado</h3>
-        <p>As soluções refletem a realidade operacional de cada setor — construímos processos específicos para energia, mineração, infraestrutura, agro, entre outros.</p>
+  <div class="pillars-carousel">
+    <button type="button" class="pillars-arrow pillars-arrow-prev" aria-label="Anterior" onclick="pillarsScroll(-1)">&#8249;</button>
+
+    <div class="pillars-grid" id="pillarsTrack">
+      <div class="pillar-card">
+        <div class="pillar-image"><img src="conhecimento-de-mercado.png" alt="" /></div>
+        <div class="pillar-body">
+          <h3>Conhecimento de mercado</h3>
+          <p>As soluções refletem a realidade operacional de cada setor — construímos processos específicos para energia, mineração, infraestrutura, agro, entre outros.</p>
+        </div>
+      </div>
+
+      <div class="pillar-card">
+        <div class="pillar-image"><img src="solucoes-ciclo-de-vida.jpeg" alt="" /></div>
+        <div class="pillar-body">
+          <h3>Soluções para todo o ciclo de vida do empreendimento</h3>
+          <p>Elaboração de estudos preliminares, implantação da solução e suporte especializado — do início ao fim do projeto.</p>
+        </div>
+      </div>
+
+      <div class="pillar-card">
+        <div class="pillar-image"><img src="decisoes-precisas.png" alt="" /></div>
+        <div class="pillar-body">
+          <h3>Confiança para decisões precisas</h3>
+          <p>Nosso sistema aumenta a transparência dos processos e proporciona rastreabilidade e conformidade total em cada etapa.</p>
+        </div>
+      </div>
+
+      <div class="pillar-card">
+        <div class="pillar-image"><img src="inteligencia-artificial.jpg" alt="" /></div>
+        <div class="pillar-body">
+          <h3>Inteligência Artificial</h3>
+          <p>IA aplicada de ponta a ponta, acelerando implantação, realizando automações e otimizando processos.</p>
+        </div>
+      </div>
+
+      <div class="pillar-card">
+        <div class="pillar-image"><img src="automacoes.jpg" alt="" /></div>
+        <div class="pillar-body">
+          <h3>Automações</h3>
+          <p>Com sistemas conectados e processos automatizados e bem-estruturados, seu time está livre da operação manual, focando naquilo que interessa: o seu negócio.</p>
+        </div>
       </div>
     </div>
 
-    <div class="pillar-card">
-      <div class="pillar-image"><img src="solucoes-ciclo-de-vida.jpeg" alt="" /></div>
-      <div class="pillar-body">
-        <h3>Soluções para todo o ciclo de vida do empreendimento</h3>
-        <p>Elaboração de estudos preliminares, implantação da solução e suporte especializado — do início ao fim do projeto.</p>
-      </div>
-    </div>
-
-    <div class="pillar-card">
-      <div class="pillar-image"><img src="decisoes-precisas.jpg" alt="" /></div>
-      <div class="pillar-body">
-        <h3>Confiança para decisões precisas</h3>
-        <p>Nosso sistema aumenta a transparência dos processos e proporciona rastreabilidade e conformidade total em cada etapa.</p>
-      </div>
-    </div>
+    <button type="button" class="pillars-arrow pillars-arrow-next" aria-label="Próximo" onclick="pillarsScroll(1)">&#8250;</button>
   </div>
+
+  <div class="pillars-dots" id="pillarsDots"></div>
 </section>
 
 <!-- ============================================================
@@ -1947,14 +2135,14 @@
           <span class="brand-tag">Essential</span>
         </div>
 
-        <h3>Solução pronta, verticalizada, entregue como serviço</h3>
-        <p class="product-desc">Modelo por assinatura — implantação rápida e gestão pelo fornecedor.</p>
+        <h3>Solução pronta, verticalizada e entregue como serviço</h3>
+        <p class="product-desc">Assinatura, implantação rápida, gestão pelo fornecedor</p>
 
         <ul class="product-list">
-          <li>até 4 semanas com pacote pré-parametrizado</li>
-          <li>Gerenciada pelo fornecedor (AWS multi-tenant)</li>
-          <li>APIs disponíveis para integrações simples a moderada</li>
-          <li>Atualizações automáticas incluídas na assinatura</li>
+          <li>Go-live em até 4 semanas, com templates prontos por setor</li>
+          <li>Investimento previsível, aprovado direto pela sua gerência</li>
+          <li>Gerenciado pelo fornecedor (AWS multi-tenant)</li>
+          <li>Evolução por templates, add-ons e níveis, sem reimplementação</li>
         </ul>
 
         <a href="https://4asset.rds.land/fale-com-um-consultor" target="_blank" rel="noopener" class="product-btn btn-saas">
@@ -1979,13 +2167,13 @@
         </div>
 
         <h3>Plataforma robusta pensada para grandes operações</h3>
-        <p class="product-desc">Licença perpétua ou Assinatura + implantação sob medida - controle total da sua infraestrutura.</p>
+        <p class="product-desc">Personalização total: módulos, fluxos e regras moldados ao seu negócio</p>
 
         <ul class="product-list">
-          <li>3 a 12 meses com projeto sob medida</li>
-          <li>Totalmente customizável com módulos sob medida</li>
-          <li>Integração profunda com SAP, TOTVS, Oracle e sistemas internos</li>
-          <li>Atualizações sob demanda via suporte contratado</li>
+          <li>Amplia verticalmente para as necessidades específicas do seu setor</li>
+          <li>Fluxos e regras de negócio construídos junto com a sua equipe</li>
+          <li>Automação que a própria área de negócio evolui, sem depender da TI</li>
+          <li>Solução especialista dedicada ao seu segmento</li>
         </ul>
 
         <a href="https://4asset.rds.land/fale-com-um-consultor" target="_blank" rel="noopener" class="product-btn btn-onpremise">
@@ -2018,59 +2206,97 @@
     <p>Conheça os depoimentos das empresas que já confiam na 4Asset.</p>
   </div>
 
-  <div class="cases-grid">
-    <!-- Depoimento Vale -->
-    <div class="case-card">
-      <div class="case-image"><img src="foto-vale.png" alt="Vale S.A." /></div>
-      <div class="case-body">
-        <div class="case-head">
-          <img class="case-logo" src="clientes/vale-logo.svg" alt="Vale S.A." />
-          <div>
-            <div class="case-name">Vale S.A.</div>
-            <div class="case-cat">Daniel Abood e Emília Carvalho</div>
+  <div class="cases-carousel">
+    <button type="button" class="cases-arrow cases-arrow-prev" aria-label="Anterior" onclick="casesScroll(-1)">&#8249;</button>
+
+    <div class="cases-grid" id="casesTrack">
+      <!-- Depoimento Vale -->
+      <div class="case-card">
+        <div class="case-image"><img src="foto-vale.png" alt="Vale S.A." /></div>
+        <div class="case-body">
+          <div class="case-head">
+            <img class="case-logo" src="clientes/vale-logo.svg" alt="Vale S.A." />
+            <div>
+              <div class="case-name">Vale S.A.</div>
+              <div class="case-cat">Daniel Abood e Emília Carvalho</div>
+            </div>
           </div>
+          <p class="case-desc">“Tivemos um ganho de distrato — de contratos de imóveis — de quase 50% de saving e uma economia de R$ 15 milhões em 18 meses.”</p>
         </div>
-        <p class="case-desc">“Tivemos um ganho de distrato — de contratos de imóveis — de quase 50% de saving e uma economia de R$ 15 milhões em 18 meses.”</p>
+      </div>
+
+      <!-- Depoimento Axia -->
+      <div class="case-card">
+        <div class="case-image"><img src="axia-foto.jpg" alt="Axia Energia" /></div>
+        <div class="case-body">
+          <div class="case-head">
+            <img class="case-logo" src="clientes/axia-logo.png" alt="Axia Energia" />
+            <div>
+              <div class="case-name">Axia Energia</div>
+              <div class="case-cat">Guilherme</div>
+            </div>
+          </div>
+          <p class="case-desc">“Produto excelente, principalmente pela possibilidade de realizar customizações e deixá-lo de acordo com as necessidades do cliente. O excelente atendimento e a cordialidade da equipe técnica são destaques do time 4Asset, sempre disponíveis para buscar melhorias e na solução de eventuais problemas.”</p>
+        </div>
+      </div>
+
+      <!-- Depoimento Petrobras -->
+      <div class="case-card">
+        <div class="case-image"><img src="petrobras-foto.jpg" alt="Petrobras" /></div>
+        <div class="case-body">
+          <div class="case-head">
+            <img class="case-logo" src="clientes/petrobras-logo.png" alt="Petrobras" />
+            <div>
+              <div class="case-name">Petrobras</div>
+              <div class="case-cat">Mauro Maffessoni e Alessandra Carvalho</div>
+            </div>
+          </div>
+          <p class="case-desc">“O sistema da 4Asset permite a gente repensar os nossos processos de forma modular e reescrevê-los. Hoje conseguimos ver, numa mesma solução, processos que antes eram completamente desconectados — com visão dos dados e integração com o painel de BI, o que garante uma tomada de decisão muito melhor. Já migramos mais de 41 mil cadastros e temos mais de 24 mil imóveis georreferenciados dentro da plataforma. No fim, o sistema é uma ferramenta para ajudar o processo: se a gente não pensar no processo e nas pessoas, não adianta ter a melhor ferramenta do mundo.”</p>
+        </div>
+      </div>
+
+      <!-- Depoimento TAG -->
+      <div class="case-card">
+        <div class="case-image"><img src="tag-imagem.jpg" alt="TAG" /></div>
+        <div class="case-body">
+          <div class="case-head">
+            <img class="case-logo" src="clientes/tag-logo.jpg" alt="TAG" />
+            <div>
+              <div class="case-name">TAG</div>
+              <div class="case-cat">Bruno Silva</div>
+            </div>
+          </div>
+          <p class="case-desc">“Specifor é um ótimo produto para digitalização e padronização de processos. O SaaS é a opção de baixo custo de implantação e modelável para as necessidades dos clientes.”</p>
+        </div>
+      </div>
+
+      <!-- Depoimento Echoenergia -->
+      <div class="case-card">
+        <div class="case-image"><img src="echoenergia-foto.webp" alt="Echoenergia" /></div>
+        <div class="case-body">
+          <div class="case-head">
+            <img class="case-logo" src="clientes/logo-echoenergia.png" alt="Echoenergia" />
+            <div>
+              <div class="case-name">Echoenergia</div>
+              <div class="case-cat">Wander Pires e Guilherme Avelar</div>
+            </div>
+          </div>
+          <p class="case-desc">“Economizamos no mínimo 40 horas/homem mensais na gestão de pagamentos. Antes eram duas pessoas durante quase dois dias inteiros, e hoje fazemos com uma pessoa em até 3 horas.”</p>
+        </div>
       </div>
     </div>
 
-    <!-- Depoimento TAG -->
-    <div class="case-card">
-      <div class="case-image"><img src="tag-imagem.jpg" alt="TAG" /></div>
-      <div class="case-body">
-        <div class="case-head">
-          <img class="case-logo" src="clientes/tag-logo.jpg" alt="TAG" />
-          <div>
-            <div class="case-name">TAG</div>
-            <div class="case-cat">Bruno Silva</div>
-          </div>
-        </div>
-        <p class="case-desc">“Specifor é um ótimo produto para digitalização e padronização de processos. O SaaS é a opção de baixo custo de implantação e modelável para as necessidades dos clientes.”</p>
-      </div>
-    </div>
-
-    <!-- Depoimento Echoenergia -->
-    <div class="case-card">
-      <div class="case-image"><img src="echoenergia-foto.webp" alt="Echoenergia" /></div>
-      <div class="case-body">
-        <div class="case-head">
-          <img class="case-logo" src="clientes/logo-echoenergia.png" alt="Echoenergia" />
-          <div>
-            <div class="case-name">Echoenergia</div>
-            <div class="case-cat">Wander Pires e Guilherme Avelar</div>
-          </div>
-        </div>
-        <p class="case-desc">“Economizamos no mínimo 40 horas/homem mensais na gestão de pagamentos. Antes eram duas pessoas durante quase dois dias inteiros, e hoje fazemos com uma pessoa em até 3 horas.”</p>
-      </div>
-    </div>
+    <button type="button" class="cases-arrow cases-arrow-next" aria-label="Próximo" onclick="casesScroll(1)">&#8250;</button>
   </div>
+
+  <div class="cases-dots" id="casesDots"></div>
 </section>
 
 <!-- ============================================================
      CTA FINAL — "A 4Asset é a empresa certa"
 ============================================================ -->
 <section class="final-cta">
-  <h2>Pronto para organizar sua gestão de ativos?</h2>
+  <h2>Pronto para transformar sua gestão de ativos?</h2>
   <p>A 4Asset é a empresa certa para o seu projeto. Converse com nossos especialistas e descubra qual solução faz sentido para sua operação.</p>
   <a href="https://4asset.rds.land/fale-com-um-consultor" target="_blank" rel="noopener" class="btn-purple">
     Falar com um especialista
@@ -2084,10 +2310,11 @@
 <footer class="site-footer">
   <div class="footer-top">
     <div class="footer-brand">
-      <div class="fb-logo">SPECIFOR</div>
-      <p class="fb-desc">Sistema de gestão fundiária, imobiliária e regulatória para empreendimentos de energia, infraestrutura e real estate. Uma empresa do Grupo Verante.</p>
+      <img class="fb-logo-img" src="logo-4asset-branco.png" alt="4Asset" />
+      <p class="fb-desc">Soluções para governança territorial desenvolvidas por quem é especialista no assunto.</p>
+      <img class="fb-verante-logo" src="logo-verante-branco.png" alt="Uma empresa do Grupo Verante" />
       <div class="footer-news-title">Newsletter</div>
-      <p class="footer-news-desc">Conteúdo sobre gestão fundiária, regularização e contratos de arrendamento para o setor de energia — sem spam.</p>
+      <p class="footer-news-desc">Conteúdos elaborados e selecionados para profissionais da governança territorial, do fundiário ao patrimonial.</p>
       <form class="footer-form" onsubmit="return false;">
         <input type="email" placeholder="Insira seu e-mail" />
         <button type="submit">ENVIAR</button>
@@ -2107,22 +2334,24 @@
       <h4>Produtos</h4>
       <a href="#produtos">Specifor SaaS</a>
       <a href="#produtos">Specifor OnPremise</a>
-      <a href="#">Módulo GIS</a>
-      <a href="#">Módulo Pagamentos</a>
-      <a href="privacidade.html">Segurança</a>
     </div>
 
     <div class="footer-col">
       <h4>Contato</h4>
-      <a href="https://4asset.rds.land/fale-com-um-consultor" target="_blank" rel="noopener">Falar com especialista</a>
-      <a href="https://4asset.rds.land/fale-com-um-consultor" target="_blank" rel="noopener">Agendar demonstração</a>
-      <a href="#">Seja um parceiro</a>
+      <a href="https://4asset.rds.land/fale-com-um-consultor" target="_blank" rel="noopener">Fale com um especialista</a>
       <a href="#">Suporte</a>
+      <a href="#">Nossas vagas</a>
+      <p class="footer-address">Rod. José Carlos Daux, 600 - Edifício Alfama, salas 600 a 613 - João Paulo, Florianópolis/SC<br />Telefone: (48) 3234-1051</p>
     </div>
   </div>
 
   <div class="footer-bottom">
     <div>© 2025 4Asset · Todos os direitos reservados</div>
+    <div class="footer-social">
+      <a href="#" target="_blank" rel="noopener" aria-label="LinkedIn"><img src="linkedin-branco.png" alt="LinkedIn" /></a>
+      <a href="#" target="_blank" rel="noopener" aria-label="Instagram"><img src="instagram-branco.png" alt="Instagram" /></a>
+      <a href="#" target="_blank" rel="noopener" aria-label="YouTube"><img src="youtube-branco.png" alt="YouTube" /></a>
+    </div>
     <div class="fb-links">
       <span>Uma empresa do Grupo Verante · #4Asset</span>
       <a href="privacidade.html">Termos</a>
@@ -2130,7 +2359,7 @@
     </div>
   </div>
 
-  <div class="footer-watermark">SPECIFOR</div>
+  <div class="footer-watermark">4ASSET</div>
 </footer>
 
 <!-- ============================================================
@@ -2394,6 +2623,206 @@
     });
 
     groups.forEach(function (sec) { io.observe(sec); });
+  })();
+</script>
+
+<!-- Carrossel "Como operamos": setas, bolinhas e arraste com mouse/touch -->
+<script>
+  (function () {
+    var track = document.getElementById('pillarsTrack');
+    if (!track) return;
+    var dotsWrap = document.getElementById('pillarsDots');
+    var arrows = document.querySelectorAll('.pillars-arrow');
+    var cardCount = track.querySelectorAll('.pillar-card').length;
+
+    // 3 cards por vez no desktop, 1 por vez quando empilha (mesmo breakpoint do CSS: 900px)
+    function cardsPerView() {
+      return window.matchMedia('(max-width: 900px)').matches ? 1 : 3;
+    }
+
+    function pageCount() {
+      return Math.max(1, Math.ceil(cardCount / cardsPerView()));
+    }
+
+    function currentIndex() {
+      return Math.round(track.scrollLeft / track.clientWidth);
+    }
+
+    function buildDots() {
+      if (!dotsWrap) return;
+      var pages = pageCount();
+      dotsWrap.innerHTML = '';
+      for (var i = 0; i < pages; i++) {
+        var dot = document.createElement('span');
+        dot.className = 'pillars-dot' + (i === 0 ? ' active' : '');
+        dot.addEventListener('click', (function (idx) {
+          return function () { window.pillarsGoTo(idx); };
+        })(i));
+        dotsWrap.appendChild(dot);
+      }
+    }
+
+    function updateDots() {
+      if (!dotsWrap) return;
+      var idx = currentIndex();
+      var dots = dotsWrap.querySelectorAll('.pillars-dot');
+      dots.forEach(function (d, i) { d.classList.toggle('active', i === idx); });
+    }
+
+    // Mostra setas/bolinhas só quando os cards não cabem todos de uma vez
+    function updateCarouselMode() {
+      var overflow = track.scrollWidth > track.clientWidth + 2;
+      arrows.forEach(function (a) { a.style.display = overflow ? '' : 'none'; });
+      if (dotsWrap) dotsWrap.style.display = overflow ? '' : 'none';
+      buildDots();
+      updateDots();
+    }
+    updateCarouselMode();
+
+    var resizeTimer;
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(updateCarouselMode, 120);
+    });
+
+    var scrollTimer;
+    track.addEventListener('scroll', function () {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(updateDots, 80);
+    });
+
+    window.pillarsScroll = function (dir) {
+      var pages = pageCount();
+      var next = Math.max(0, Math.min(pages - 1, currentIndex() + dir));
+      track.scrollTo({ left: next * track.clientWidth, behavior: 'smooth' });
+    };
+
+    window.pillarsGoTo = function (i) {
+      track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+    };
+
+    // Arraste com mouse (desktop) — touch já funciona nativamente via overflow-x
+    var isDown = false, startX = 0, startScroll = 0, moved = false;
+    track.addEventListener('mousedown', function (e) {
+      isDown = true;
+      moved = false;
+      track.classList.add('dragging');
+      startX = e.pageX;
+      startScroll = track.scrollLeft;
+    });
+    window.addEventListener('mouseup', function () {
+      isDown = false;
+      track.classList.remove('dragging');
+    });
+    window.addEventListener('mousemove', function (e) {
+      if (!isDown) return;
+      e.preventDefault();
+      var dx = e.pageX - startX;
+      if (Math.abs(dx) > 4) moved = true;
+      track.scrollLeft = startScroll - dx;
+    });
+    // Evita disparar clique em link/imagem dentro do card após um arraste
+    track.addEventListener('click', function (e) {
+      if (moved) { e.preventDefault(); e.stopPropagation(); }
+    }, true);
+  })();
+</script>
+
+<!-- Carrossel "Confiança para decisões precisas": setas, bolinhas e arraste com mouse/touch -->
+<script>
+  (function () {
+    var track = document.getElementById('casesTrack');
+    if (!track) return;
+    var dotsWrap = document.getElementById('casesDots');
+    var arrows = document.querySelectorAll('.cases-arrow');
+    var cardCount = track.querySelectorAll('.case-card').length;
+
+    function cardsPerView() {
+      return window.matchMedia('(max-width: 900px)').matches ? 1 : 3;
+    }
+
+    function pageCount() {
+      return Math.max(1, Math.ceil(cardCount / cardsPerView()));
+    }
+
+    function currentIndex() {
+      return Math.round(track.scrollLeft / track.clientWidth);
+    }
+
+    function buildDots() {
+      if (!dotsWrap) return;
+      var pages = pageCount();
+      dotsWrap.innerHTML = '';
+      for (var i = 0; i < pages; i++) {
+        var dot = document.createElement('span');
+        dot.className = 'cases-dot' + (i === 0 ? ' active' : '');
+        dot.addEventListener('click', (function (idx) {
+          return function () { window.casesGoTo(idx); };
+        })(i));
+        dotsWrap.appendChild(dot);
+      }
+    }
+
+    function updateDots() {
+      if (!dotsWrap) return;
+      var idx = currentIndex();
+      var dots = dotsWrap.querySelectorAll('.cases-dot');
+      dots.forEach(function (d, i) { d.classList.toggle('active', i === idx); });
+    }
+
+    function updateCarouselMode() {
+      var overflow = track.scrollWidth > track.clientWidth + 2;
+      arrows.forEach(function (a) { a.style.display = overflow ? '' : 'none'; });
+      if (dotsWrap) dotsWrap.style.display = overflow ? '' : 'none';
+      buildDots();
+      updateDots();
+    }
+    updateCarouselMode();
+
+    var resizeTimer;
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(updateCarouselMode, 120);
+    });
+
+    var scrollTimer;
+    track.addEventListener('scroll', function () {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(updateDots, 80);
+    });
+
+    window.casesScroll = function (dir) {
+      var pages = pageCount();
+      var next = Math.max(0, Math.min(pages - 1, currentIndex() + dir));
+      track.scrollTo({ left: next * track.clientWidth, behavior: 'smooth' });
+    };
+
+    window.casesGoTo = function (i) {
+      track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+    };
+
+    var isDown = false, startX = 0, startScroll = 0, moved = false;
+    track.addEventListener('mousedown', function (e) {
+      isDown = true;
+      moved = false;
+      track.classList.add('dragging');
+      startX = e.pageX;
+      startScroll = track.scrollLeft;
+    });
+    window.addEventListener('mouseup', function () {
+      isDown = false;
+      track.classList.remove('dragging');
+    });
+    window.addEventListener('mousemove', function (e) {
+      if (!isDown) return;
+      e.preventDefault();
+      var dx = e.pageX - startX;
+      if (Math.abs(dx) > 4) moved = true;
+      track.scrollLeft = startScroll - dx;
+    });
+    track.addEventListener('click', function (e) {
+      if (moved) { e.preventDefault(); e.stopPropagation(); }
+    }, true);
   })();
 </script>
 
