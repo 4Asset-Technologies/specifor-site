@@ -491,6 +491,11 @@
   .addon-item:last-child .addon-tip{left:auto; right:0; transform:translateX(0) translateY(-6px);}
   .addon-item:last-child:hover .addon-tip{transform:translateX(0) translateY(0);}
   .addon-item:last-child .addon-tip::after{left:auto; right:24px; transform:none;}
+  .addon-tip .partner{
+    display:block; margin-top:10px; padding-top:10px; border-top:1px solid rgba(255,255,255,0.14);
+    font-size:11.5px; font-weight:700; color:#7cbcff; text-transform:uppercase; letter-spacing:.03em;
+  }
+  .addons-strip + .addons-strip{margin-top:16px;}
 
   /* ===== CTA: QUAL O PLANO IDEAL ===== */
   .quiz-cta{background:#05070d; padding:0 24px 100px; text-align:center;}
@@ -1205,18 +1210,60 @@
   </div>
 </section>
 
+<!-- ============ 5b. TEMPLATES ============ -->
+<section class="addons" id="templates">
+  <div class="wrap">
+    <div class="head center">
+      <h2>Templates</h2>
+      <p class="sub">Templates de negócio disponíveis para trazer ainda mais eficiência para a sua gestão, sem precisar de grandes e demoradas customizações</p>
+    </div>
+    <div class="addons-strip">
+      <div class="addon-item">
+        <svg class="icon sf-breathe" viewBox="0 0 24 24" fill="none"><path d="M7 3h7l4 4v14H7z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="13.5" cy="15" r="3" stroke="currentColor" stroke-width="1.6"/><path d="M13.5 13.3v3.4M12.4 14h2.2M12.4 16h2.2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+        <div class="name">Contratos e Pagamentos</div>
+        <div class="addon-tip">Automatize a gestão de contratos de arrendamento, cessão, comodato e servidão, com motor de cálculo para geração de pagamentos, reajuste por índices econômicos e integração com ERP.</div>
+      </div>
+      <div class="addon-item">
+        <svg class="icon sf-breathe" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/></svg>
+        <div class="name">Monitoramento 360º</div>
+        <div class="addon-tip">Acompanhe áreas territoriais via polígonos georreferenciados, identificando invasões, conflitos de uso e ocorrências sobre os ativos sob gestão da empresa.</div>
+      </div>
+      <div class="addon-item">
+        <svg class="icon sf-breathe" viewBox="0 0 24 24" fill="none"><path d="M4 9l8-6 8 6v11a1 1 0 01-1 1H5a1 1 0 01-1-1z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9.5 13l2 2 3.5-3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="name">Fundiário e Compliance dominial</div>
+        <div class="addon-tip">Gerencie todo o ciclo de vida do seu portfólio imobiliário, de matrículas aos processos judiciais e administrativos e garanta regularidade dominial e rastreabilidade completa de cada imóvel.</div>
+      </div>
+      <div class="addon-item">
+        <svg class="icon sf-breathe" viewBox="0 0 24 24" fill="none"><path d="M6 20c-2-6 1-13 12-14 1 10-4 14-10 14-.7 0-1.4-.3-2 0z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M7 19c3-4 6-7 10-11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <div class="name">Meio Ambiente e Socioambiental</div>
+        <div class="addon-tip">Controle o licenciamento ambiental (LP, LI, LO), condicionantes, programas socioambientais e relacionamento com stakeholders, do início do empreendimento ao monitoramento contínuo de conformidade.</div>
+      </div>
+      <div class="addon-item">
+        <svg class="icon sf-breathe" viewBox="0 0 24 24" fill="none"><rect x="5" y="4" width="14" height="17" rx="1" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 8h1.5M14 8h1.5M8.5 12h1.5M14 12h1.5M8.5 16h1.5M14 16h1.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <div class="name">Patrimonial e Facilities</div>
+        <div class="addon-tip">Administre o ciclo completo dos ativos imobiliários até a devolução ou alienação do ativo.</div>
+      </div>
+      <div class="addon-item">
+        <svg class="icon sf-breathe" viewBox="0 0 24 24" fill="none"><rect x="6" y="4" width="12" height="17" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M9 4V3a1 1 0 011-1h4a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.6"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="name">Inspeções e Vistorias</div>
+        <div class="addon-tip">Planeje, execute e acompanhe inspeções e vistorias em ativos e instalações, com checklists padronizados, registro de não conformidades e geração de planos de ação e ordens de serviço.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ============ 6. ADD-ONS ============ -->
 <section class="addons">
   <div class="wrap">
     <div class="head center">
       <h2>Add-ons</h2>
-      <p class="sub">Potencialize a sua gestão operacional com add-ons transversais a todos os templates.</p>
+      <p class="sub">Potencialize a sua gestão operacional com add-ons que ampliam a plataforma conforme a necessidade da sua operação.</p>
     </div>
     <div class="addons-strip">
       <div class="addon-item">
         <svg class="icon sf-breathe" viewBox="0 0 24 24" fill="none"><path d="M3 5l7-2 7 2 4-1v15l-4 1-7-2-7 2z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M10 3v15M17 4v15" stroke="currentColor" stroke-width="1.6"/></svg>
         <div class="name">Specifor GIS</div>
-        <div class="addon-tip">Integração nativa com ArcGIS, além com outros sistemas geoespaciais (GIS)</div>
+        <div class="addon-tip">Visualize e analise seus ativos territoriais em mapas interativos, com camadas geoespaciais integradas ao cadastro.<span class="partner">Parceria com a ESRI</span></div>
       </div>
       <div class="addon-item">
         <svg class="icon sf-breathe" viewBox="0 0 24 24" fill="none"><rect x="7" y="2" width="10" height="20" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M10 18h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
@@ -1228,6 +1275,13 @@
         <div class="name">Specifor Notify</div>
         <div class="addon-tip">Alertas automáticos de vencimentos, renovações e obrigações — direto pra quem precisa agir.</div>
       </div>
+      <div class="addon-item">
+        <svg class="icon sf-breathe" viewBox="0 0 24 24" fill="none"><path d="M4 6a2 2 0 012-2h4l2 2h6a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M8 12h8M8 16h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <div class="name">Gestão Documental</div>
+        <div class="addon-tip">Conecte o Specifor a mais de 35.000 órgãos públicos e 5.500 municípios, automatizando a solicitação de documentos direto no cadastro.<span class="partner">Parceria com a Docket</span></div>
+      </div>
+    </div>
+    <div class="addons-strip">
       <div class="addon-item">
         <svg class="icon sf-breathe" viewBox="0 0 24 24" fill="none"><rect x="5" y="8" width="14" height="10" rx="2" stroke="currentColor" stroke-width="1.6"/><circle cx="9.5" cy="13" r="1.1" fill="currentColor"/><circle cx="14.5" cy="13" r="1.1" fill="currentColor"/><path d="M12 8V5M9 5h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
         <div class="name">Agentes IA</div>
@@ -1242,6 +1296,11 @@
         <svg class="icon sf-breathe" viewBox="0 0 24 24" fill="none"><path d="M12 3l7 3v5c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6l7-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9.5 12l1.8 1.8L15 10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         <div class="name">Compliance e Automação Legal</div>
         <div class="addon-tip">Automatize o acompanhamento de obrigações legais e regulatórias, com trilha de auditoria completa.</div>
+      </div>
+      <div class="addon-item">
+        <svg class="icon sf-breathe" viewBox="0 0 24 24" fill="none"><path d="M12 3c1 3-2 4-2 7a4 4 0 008 0c0-2-1-3-1-3s1 4-2 4c-1.5 0-2-1-2-2 0-2 2-3 1-6z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M6 9a9 9 0 000 9M18 9a9 9 0 010 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <div class="name">Detecção e Monitoramento de Incêndios</div>
+        <div class="addon-tip">Monitore áreas propícias a incêndios florestais e detecte focos de incêndio antes que se alastre.<span class="partner">Parceria com a Ororatech</span></div>
       </div>
     </div>
   </div>
