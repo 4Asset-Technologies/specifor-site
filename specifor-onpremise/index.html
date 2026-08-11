@@ -484,7 +484,11 @@
   /* Palco com a MESMA largura da tablet — cards são posicionados relativos a ele,
      não ao container grande (1680px). Assim o padrão de distância cards↔tablet
      fica idêntico em qualquer monitor, em vez de "esticar" em telas largas. */
-  .problems-stage{position:relative; z-index:1; width:clamp(400px,50vw,720px);}
+  .problems-stage{
+    position:relative; z-index:1; width:clamp(400px,50vw,720px);
+    height:clamp(680px,74vh,820px); flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
+  }
   /* Tablet com o app, no centro, com sombra/brilho azul (estilo do 2º print) */
   .diagram-problems .stars-main-img{
     display:block; height:auto; width:100%; max-width:none; max-height:none;
@@ -519,17 +523,19 @@
     box-shadow:inset 0 1px 0 rgba(255,255,255,0.14), 0 18px 40px rgba(0,0,0,0.45);
   }
   .diagram-problems .orbit-card:hover{transform:translate(-50%,-50%) scale(1.06); background:rgba(22,32,58,0.94);}
-  /* Cards flanqueando a tablet: 3 à esquerda, 3 à direita (escalonados, meio mais afastado).
+  /* Cards flanqueando a tablet: 4 à esquerda, 4 à direita (escalonados).
      left em % do próprio .problems-stage (mesma largura da tablet): a distância
      cards↔tablet escala junto com a tablet em qualquer monitor — e como a tablet
      trava em 720px (clamp), a distância também trava, nunca "espalhando" em telas
      largas. top em % da altura do stage (idem, sempre proporcional à tablet). */
-  .diagram-problems .p1{left:-25%; top:15%;}  /* esq — topo   */
-  .diagram-problems .p3{left:-25%; top:50%;}  /* esq — meio   */
-  .diagram-problems .p5{left:-25%; top:85%;}  /* esq — baixo  */
-  .diagram-problems .p2{left:125%; top:15%;}  /* dir — topo   */
-  .diagram-problems .p4{left:125%; top:50%;}  /* dir — meio   */
-  .diagram-problems .p6{left:125%; top:85%;}  /* dir — baixo  */
+  .diagram-problems .p1{left:-25%; top:5%;}   /* esq — topo    */
+  .diagram-problems .p3{left:-25%; top:35%;}  /* esq — meio-alto */
+  .diagram-problems .p5{left:-25%; top:65%;}  /* esq — meio-baixo */
+  .diagram-problems .p7{left:-25%; top:95%;}  /* esq — baixo   */
+  .diagram-problems .p2{left:125%; top:5%;}   /* dir — topo    */
+  .diagram-problems .p4{left:125%; top:35%;}  /* dir — meio-alto */
+  .diagram-problems .p6{left:125%; top:65%;}  /* dir — meio-baixo */
+  .diagram-problems .p8{left:125%; top:95%;}  /* dir — baixo   */
   /* Tooltips dos cards da esquerda (p1,p3,p5,p7) alinhados à esquerda */
   .diagram-problems .p1 .label,.diagram-problems .p3 .label,.diagram-problems .p5 .label,.diagram-problems .p7 .label{
     left:0; right:auto; transform:translateX(0) translateY(-6px);
@@ -540,19 +546,19 @@
   .diagram-problems .p1 .label::before,.diagram-problems .p3 .label::before,.diagram-problems .p5 .label::before,.diagram-problems .p7 .label::before{
     left:24px; right:auto; transform:none;
   }
-  /* Tooltips dos cards da direita (p2,p4,p6) alinhados à direita */
-  .diagram-problems .p2 .label,.diagram-problems .p4 .label,.diagram-problems .p6 .label{
+  /* Tooltips dos cards da direita (p2,p4,p6,p8) alinhados à direita */
+  .diagram-problems .p2 .label,.diagram-problems .p4 .label,.diagram-problems .p6 .label,.diagram-problems .p8 .label{
     left:auto; right:0; transform:translateX(0) translateY(-6px);
   }
-  .diagram-problems .p2:hover .label,.diagram-problems .p4:hover .label,.diagram-problems .p6:hover .label{
+  .diagram-problems .p2:hover .label,.diagram-problems .p4:hover .label,.diagram-problems .p6:hover .label,.diagram-problems .p8:hover .label{
     transform:translateX(0) translateY(0);
   }
-  .diagram-problems .p2 .label::before,.diagram-problems .p4 .label::before,.diagram-problems .p6 .label::before{
+  .diagram-problems .p2 .label::before,.diagram-problems .p4 .label::before,.diagram-problems .p6 .label::before,.diagram-problems .p8 .label::before{
     left:auto; right:24px; transform:none;
   }
-  /* Cards mais baixos (p5,p6): tooltip abre para cima, para não cortar na base */
-  .diagram-problems .p5 .label,.diagram-problems .p6 .label{top:auto; bottom:calc(100% + 12px);}
-  .diagram-problems .p5 .label::before,.diagram-problems .p6 .label::before{
+  /* Cards mais baixos (p7,p8): tooltip abre para cima, para não cortar na base */
+  .diagram-problems .p7 .label,.diagram-problems .p8 .label{top:auto; bottom:calc(100% + 12px);}
+  .diagram-problems .p7 .label::before,.diagram-problems .p8 .label::before{
     top:100%; bottom:auto; border-bottom-color:transparent; border-top-color:#101a2e;
   }
 
@@ -623,6 +629,77 @@
   @media(max-width:560px){
     .bento-grid{grid-template-columns:1fr; gap:16px;}
     .bento-card, .bento-card.bento-lg{grid-column:span 1; min-height:224px;}
+  }
+
+  /* ===== RECURSOS — chips extras (itens 7-12), mesmo padrão "ícone + rótulo curto
+     + descrição em tooltip" já usado em .orbit-card/.h-stat, só que em grid fixo
+     em vez de posicionamento orbital ao redor de uma imagem central. ===== */
+  .recursos-chips{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:16px;
+    max-width:1160px; margin:32px auto 0;
+  }
+  .recursos-chip{
+    flex-direction:row !important; align-items:center; gap:12px;
+    text-align:left; cursor:pointer; position:relative; z-index:2; overflow:visible;
+    transition:background .2s ease, border-color .2s ease;
+  }
+  .recursos-chip .icon-badge{flex-shrink:0;}
+  .recursos-chip .num{font-size:13.5px; pointer-events:none;}
+  .recursos-chip:hover{background:rgba(255,255,255,0.07); border-color:rgba(90,160,255,0.4); z-index:30;}
+  .recursos-chip .label{
+    display:block; position:absolute; top:calc(100% + 10px); left:50%;
+    transform:translateX(-50%) translateY(-6px);
+    width:280px; background:rgba(16,26,46,0.92);
+    -webkit-backdrop-filter:blur(20px) saturate(180%); backdrop-filter:blur(20px) saturate(180%);
+    border:1px solid rgba(255,255,255,0.14); border-radius:12px;
+    padding:16px 18px; font-size:13px; line-height:1.55; color:rgba(255,255,255,0.75);
+    opacity:0; visibility:hidden; pointer-events:none; z-index:20;
+    box-shadow:0 16px 34px rgba(0,0,0,0.45);
+    transition:opacity .3s ease, transform .3s ease, visibility 0s linear .3s;
+  }
+  .recursos-chip .label::before{
+    content:''; position:absolute; bottom:100%; left:50%; transform:translateX(-50%);
+    border:6px solid transparent; border-bottom-color:#101a2e;
+  }
+  .recursos-chip:hover .label{
+    opacity:1; visibility:visible; transform:translateX(-50%) translateY(0);
+    transition:opacity .3s ease .1s, transform .3s ease .1s, visibility 0s linear;
+  }
+  @media(max-width:900px){
+    .recursos-chips{grid-template-columns:1fr 1fr; gap:12px;}
+  }
+  @media(max-width:640px){
+    .recursos-chips{grid-template-columns:1fr; gap:12px;}
+    .recursos-chip .label{
+      position:static !important; opacity:1 !important; visibility:visible !important; transform:none !important; width:100%;
+      box-shadow:none; border:none; background:transparent; padding:8px 0 0; margin-top:2px;
+    }
+    .recursos-chip .label::before{display:none;}
+  }
+
+  /* ===== DIFERENCIAIS ===== */
+  .diferenciais{background:#05070d; padding:clamp(72px,10vh,120px) 24px; color:#fff;}
+  .diferenciais .head{max-width:720px; margin:0 auto clamp(48px,7vh,64px); text-align:center;}
+  .diferenciais .head .pill{margin-bottom:20px;}
+  .diferenciais h2{font-size:clamp(28px,3.6vw,46px); line-height:1.12; margin:0 0 16px; color:#fff; letter-spacing:-0.015em;}
+  .diferenciais p.sub{color:rgba(255,255,255,0.62); font-size:clamp(14px,1.1vw,16.5px); line-height:1.65; max-width:600px; margin:0 auto;}
+  .dif-grid{display:grid; grid-template-columns:1fr 1fr; gap:40px; max-width:1160px; margin:0 auto; align-items:center;}
+  .dif-list{list-style:none; display:flex; flex-direction:column; gap:16px; margin:0; padding:0;}
+  .dif-list li{display:flex; align-items:flex-start; gap:12px; font-size:clamp(15px,1.1vw,17px); color:rgba(255,255,255,0.85); line-height:1.5; font-weight:600;}
+  .dif-list li::before{
+    content:'✓'; flex-shrink:0; width:26px; height:26px; border-radius:50%;
+    background:rgba(37,192,90,0.15); color:#25c05a; font-weight:800; font-size:13px;
+    display:flex; align-items:center; justify-content:center; margin-top:1px;
+  }
+  .dif-photo{
+    border-radius:26px; overflow:hidden; min-height:340px;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,0.16), 0 24px 60px rgba(0,0,0,0.42);
+    border:1px solid rgba(255,255,255,0.10);
+  }
+  .dif-photo img{display:block; width:100%; height:100%; object-fit:cover;}
+  @media(max-width:900px){
+    .dif-grid{grid-template-columns:1fr; gap:24px;}
+    .dif-photo{min-height:260px; order:-1;}
   }
 
   /* ===== PRICING (Standard x Professional, estilo do print) ===== */
@@ -785,12 +862,12 @@
   }
   .usecases .row{display:flex; gap:24px; max-width:1180px; margin:0 auto; position:relative; z-index:1;}
   .u-card{
-    flex:1; min-width:0; height:560px; border-radius:14px; position:relative; overflow:hidden;
+    flex:1; min-width:0; min-height:560px; border-radius:14px; position:relative; overflow:hidden;
     background:#fff; border:1px solid rgba(15,29,51,0.08); box-shadow:0 10px 30px rgba(15,29,51,0.06);
     display:flex; flex-direction:column;
   }
   .u-card .u-photo{
-    flex:0 0 52%; background-size:cover; background-position:center; position:relative;
+    flex:0 0 230px; background-size:cover; background-position:center; position:relative;
   }
   .u-card .u-photo::after{
     content:''; position:absolute; inset:0;
@@ -808,6 +885,40 @@
   .u-card h4{font-size:21px; font-weight:700; color:#0f1d33; line-height:1.3; margin-bottom:12px;}
   .u-card .u-quote{font-size:14px; color:var(--gray-text); line-height:1.55;}
   .u-card .u-quote .role{display:block; margin-top:8px; color:rgba(15,29,51,0.35); font-size:12.5px;}
+
+  /* Carrossel de depoimentos: setas + trilho deslizante + bolinhas
+     (mesmo esquema de "Confiança para decisões precisas" na home da 4Asset) */
+  .depo-carousel{
+    max-width:1180px; width:100%; margin:0 auto;
+    display:flex; align-items:center; gap:14px; position:relative; z-index:1;
+  }
+  .depo-arrow{
+    flex-shrink:0; width:40px; height:40px; border-radius:50%;
+    border:1px solid rgba(15,30,60,0.12); background:#fff; color:#0f1d33;
+    font-size:20px; line-height:1; display:flex; align-items:center; justify-content:center;
+    cursor:pointer; box-shadow:0 6px 16px rgba(15,30,60,0.08);
+    transition:background .2s, color .2s, transform .2s;
+  }
+  .depo-arrow:hover{background:var(--blue,#4f63ff); color:#fff; transform:scale(1.06);}
+  .usecases .row{
+    flex:1; min-width:0; display:flex; gap:24px;
+    overflow-x:auto; scroll-snap-type:x mandatory; scroll-behavior:smooth; cursor:grab;
+    -ms-overflow-style:none; scrollbar-width:none;
+    max-width:none; margin:0;
+  }
+  .usecases .row::-webkit-scrollbar{display:none;}
+  .usecases .row.dragging{cursor:grabbing; scroll-behavior:auto;}
+  .u-card{flex:0 0 calc((100% - 48px) / 3); scroll-snap-align:start;}
+  .depo-pag-dots{display:flex; justify-content:center; gap:8px; margin-top:24px; position:relative; z-index:1;}
+  .depo-pag-dots span{
+    width:8px; height:8px; border-radius:50%; background:rgba(15,30,60,0.18);
+    cursor:pointer; transition:background .2s, transform .2s; display:block;
+  }
+  .depo-pag-dots span.active{background:var(--blue,#4f63ff); transform:scale(1.2);}
+  @media(max-width:900px){
+    .u-card{flex:0 0 100%; scroll-snap-align:center;}
+    .depo-arrow{display:none;}
+  }
 
   /* ===== MERCADOS ATENDIDOS ===== */
   .markets{background:#fff; padding:90px 24px;}
@@ -1076,8 +1187,7 @@
     .approval h2{font-size:24px;}
     .approval p.sub{font-size:13px;}
     .approval-cards{grid-template-columns:1fr;}
-    .usecases .row{flex-direction:column;}
-    .u-card{height:440px;}
+    .u-card{min-height:440px;}
     .addon-item{flex:1 1 33%; min-width:33%; border-bottom:1px solid rgba(255,255,255,0.08);}
     .addon-item:nth-child(3n){border-right:none;}
     .families-grid{grid-template-columns:1fr; grid-template-rows:auto; height:auto;}
@@ -1097,14 +1207,15 @@
     .stars-diagram{flex-direction:column; min-height:auto; max-width:100%; gap:20px;}
     .stars-main-img{max-height:none;}
     .problems-stage{
-      position:static; width:100%; max-width:420px; margin:0 auto;
+      position:static; width:100%; max-width:420px; margin:0 auto; height:auto;
       display:flex; flex-direction:column; gap:20px;
     }
     .orbit-card{position:relative; left:auto; right:auto; top:auto; bottom:auto; width:100%; max-width:420px; min-height:auto; margin:0 auto; flex-wrap:wrap;}
-    /* especificidade igual/maior que as regras .diagram-problems .p1..p6 (calc()),
+    /* especificidade igual/maior que as regras .diagram-problems .p1..p8 (calc()),
        garantindo que o empilhamento mobile vença mesmo com o novo posicionamento */
     .diagram-problems .p1, .diagram-problems .p2, .diagram-problems .p3,
-    .diagram-problems .p4, .diagram-problems .p5, .diagram-problems .p6{
+    .diagram-problems .p4, .diagram-problems .p5, .diagram-problems .p6,
+    .diagram-problems .p7, .diagram-problems .p8{
       position:relative; left:auto; top:auto;
     }
     .orbit-card.pos-tl, .orbit-card.pos-tr, .orbit-card.pos-bl, .orbit-card.pos-br,
@@ -1325,29 +1436,13 @@
 
       <div class="orbit-card h-stat sf-appear p1">
         <div class="icon-badge">
-          <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M7 3h7l4 4v14H7z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M10 11h6M10 15h6M10 19h3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M12 3l9 5-9 5-9-5 9-5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M3 13l9 5 9-5M3 9l9 5 9-5" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
         </div>
-        <div class="num">Grande volume<br> de contratos</div>
-        <div class="label">Milhares de contratos com diversas variáveis, difíceis de acompanhar manualmente.</div>
+        <div class="num">Escalabilidade<br> limitada</div>
+        <div class="label">Volume alto de ativos (imóveis, contratos, ocupações) inviabiliza gestão manual e impede visão estratégica consolidada.</div>
       </div>
 
       <div class="orbit-card h-stat sf-appear p2">
-        <div class="icon-badge">
-          <svg class="icon" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M3 12h18" stroke="currentColor" stroke-width="1.6"/><path d="M12 3c2.6 2.7 2.6 15.3 0 18M12 3c-2.6 2.7-2.6 15.3 0 18" stroke="currentColor" stroke-width="1.6"/></svg>
-        </div>
-        <div class="num">Falta de<br> visão integrada</div>
-        <div class="label">Áreas trabalham em silos, sem uma visão única e consolidada da operação.</div>
-      </div>
-
-      <div class="orbit-card h-stat sf-appear p3">
-        <div class="icon-badge">
-          <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M13 3H7v18h11V8z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M13 3v5h5" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M4 7v13a1 1 0 001 1h9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-        </div>
-        <div class="num">Informação<br> descentralizada</div>
-        <div class="label">Múltiplos documentos espalhados e descentralização da informação crítica.</div>
-      </div>
-
-      <div class="orbit-card h-stat sf-appear p4">
         <div class="icon-badge">
           <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M20 11a8 8 0 10-2.3 5.7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M20 4v6h-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
@@ -1355,26 +1450,58 @@
         <div class="label">Dificuldade em manter os cadastros atualizados diante do volume da operação.</div>
       </div>
 
+      <div class="orbit-card h-stat sf-appear p3">
+        <div class="icon-badge">
+          <svg class="icon" viewBox="0 0 24 24" fill="none"><circle cx="5" cy="6" r="2" stroke="currentColor" stroke-width="1.6"/><circle cx="18" cy="5" r="2" stroke="currentColor" stroke-width="1.6"/><circle cx="6" cy="18" r="2" stroke="currentColor" stroke-width="1.6"/><circle cx="17" cy="17" r="2" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="11" r="2" stroke="currentColor" stroke-width="1.6"/></svg>
+        </div>
+        <div class="num">Dados fragmentados<br> e inconsistentes</div>
+        <div class="label">Cada área (fundiário, ambiental, contabilidade) mantém sua própria planilha, e nenhuma bate com a outra. Não existe uma fonte única de verdade sobre imóveis, matrículas, licenças e contratos.</div>
+      </div>
+
+      <div class="orbit-card h-stat sf-appear p4">
+        <div class="icon-badge">
+          <svg class="icon" viewBox="0 0 24 24" fill="none"><circle cx="9" cy="7" r="3.2" stroke="currentColor" stroke-width="1.6"/><path d="M3 20v-1.4A4.6 4.6 0 017.6 14h2.8A4.6 4.6 0 0115 18.6V20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M16 8h5M21 8l-2.5-2.5M21 8l-2.5 2.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="num">Perda de conhecimento<br> institucional</div>
+        <div class="label">Quando alguém sai da empresa, o histórico de um processo vai junto (na cabeça da pessoa, no e-mail ou numa pasta perdida), sem rastreabilidade.</div>
+      </div>
+
       <div class="orbit-card h-stat sf-appear p5">
         <div class="icon-badge">
-          <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M11 20A7 7 0 019.8 6.1C15.5 5 17 4.5 19 2c1 2 2 4.2 2 8 0 5.5-4.8 10-10 10z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M2 21c0-3 1.9-5.4 5.1-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <svg class="icon" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="13" r="8" stroke="currentColor" stroke-width="1.6"/><path d="M12 9v4l2.5 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 2h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
         </div>
-        <div class="num">Licenciamento<br> ineficiente</div>
-        <div class="label">Licenciamento ambiental lento e sem controle sobre condicionantes e prazos.</div>
+        <div class="num">Ineficiência no controle<br> de prazos críticos</div>
+        <div class="label">Vencimento de CCIR, licença ambiental, arrendamento, prazo judicial: hoje dependem de lembrete manual, sem alerta automático, gerando risco de multa, interdição ou renovação contratual indesejada.</div>
       </div>
 
       <div class="orbit-card h-stat sf-appear p6">
         <div class="icon-badge">
-          <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M16 20v-1.5a3.5 3.5 0 00-3.5-3.5h-5A3.5 3.5 0 004 18.5V20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="10" cy="8" r="3.2" stroke="currentColor" stroke-width="1.6"/><path d="M20 20v-1.4a3.4 3.4 0 00-2.6-3.3M15.5 5.2a3.2 3.2 0 010 5.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <svg class="icon" viewBox="0 0 24 24" fill="none"><rect x="7" y="2" width="10" height="20" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M10 18h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
         </div>
-        <div class="num">Impactos sociais<br> sem gestão</div>
-        <div class="label">Falhas na gestão de impactos sociais junto às comunidades e proprietários.</div>
+        <div class="num">Retrabalho<br> de campo</div>
+        <div class="label">Dados coletados em papel ou planilha offline precisam ser redigitados no escritório, sem validação em tempo real.</div>
+      </div>
+
+      <div class="orbit-card h-stat sf-appear p7">
+        <div class="icon-badge">
+          <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M6 3h12M6 21h12M7 3c0 5 5 6 5 9s-5 4-5 9M17 3c0 5-5 6-5 9s5 4 5 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="num">Lentidão na geração<br> de relatórios</div>
+        <div class="label">Compilar um status de regularizações/liberações pode levar uma semana, porque os dados estão espalhados em fontes distintas.</div>
+      </div>
+
+      <div class="orbit-card h-stat sf-appear p8">
+        <div class="icon-badge">
+          <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M12 3l7 3v5c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6l7-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9.5 12l1.8 1.8L15 10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="num">Falta de rastreabilidade<br> jurídica</div>
+        <div class="label">Sem audit trail, fica difícil provar quem fez o quê e quando, o que expõe a empresa em auditorias e processos.</div>
       </div>
 
       <img class="stars-main-img" src="tablet-app.png" alt="Specifor On Premise em tablet — mapa e GIS">
      </div>
     </div>
-    <p class="stars-quote problems-sub">Em setores de alta complexidade, a gestão territorial exige um nível de controle e agilidade que planilhas convencionais e sistemas legados cadastrais não conseguem mais suportar, pois estas são suscetíveis a erros humanos e perda de prazos. <br><br><span class="problems-turn-phrase">Mas, e se esses desafios fossem superados com apenas uma solução?</span></p>
+    <p class="stars-quote problems-sub">Em setores de alta complexidade, a governança territorial exige um nível de controle e agilidade que planilhas convencionais e sistemas legados cadastrais não conseguem mais suportar, pois estas são suscetíveis a erros humanos e perda de prazos. <br><br><span class="problems-turn-phrase">Mas e se esses desafios fossem superados com apenas uma solução?</span></p>
   </div>
 </section>
 
@@ -1383,59 +1510,136 @@
   <div class="wrap">
     <div class="head center">
       <span class="pill pill-blue">Recursos</span>
-      <h2>Toda a gestão de ativos<br>em um único ambiente</h2>
+      <h2>Toda a Governança Territorial<br>em um único ambiente</h2>
       <p class="sub">Automatize processos e garanta rastreabilidade total das rotinas operacionais no campo e no escritório</p>
     </div>
     <div class="bento-grid">
 
       <article class="bento-card bento-photo">
-        <img class="bento-img" src="card-gis.jpg" alt="Especialista usando o Specifor On Premise com mapa GIS" loading="lazy">
-        <div class="bento-text">
-          <h3>Integrações e Segurança</h3>
-          <p>Conexão nativa com ArcGIS Server ESRI e integração com ERP e sistemas.</p>
-        </div>
-      </article>
-
-      <article class="bento-card bento-photo">
         <img class="bento-img" src="card-integracoes.jpg" alt="Engenheira em campo usando o Specifor On Premise em tablet" loading="lazy">
         <div class="bento-text">
-          <h3>Gerenciamento de identidade e acesso</h3>
-          <p>Usuários, equipes, grupos e segurança</p>
-        </div>
-      </article>
-
-      <article class="bento-card bento-photo">
-        <img class="bento-img" src="card-documentos.jpg" alt="Especialista usando o Specifor On Premise em tablet no campo" loading="lazy">
-        <div class="bento-text">
-          <h3>Documentos e processos</h3>
-          <p>Tramitação documental, busca de documentos e emissão de certidões online com rastreabilidade total.</p>
-        </div>
-      </article>
-
-      <article class="bento-card bento-photo">
-        <img class="bento-img" src="card-dashboard.jpg" alt="Apresentação do dashboard de processos do Specifor On Premise" loading="lazy">
-        <div class="bento-text">
-          <h3>Relatórios e dashboards</h3>
-          <p>Relatórios, indicadores e dashboard executivo para decisões com dados confiáveis em tempo real.</p>
-        </div>
-      </article>
-
-      <article class="bento-card bento-photo">
-        <img class="bento-img" src="card-app-mobile.jpg" alt="Engenheira usando o Specifor On Premise no celular em campo" loading="lazy">
-        <div class="bento-text">
-          <h3>App Mobile Offline</h3>
-          <p>Aplicativo mobile com modo offline para coleta de dados em campo, mesmo sem conexão.</p>
+          <h3>Cadastros consistentes</h3>
+          <p>Base única para propriedades, pessoas, empreendimentos, fornecedores e equipamentos. Tudo conectado, com histórico completo de quem alterou, quando e o quê.</p>
         </div>
       </article>
 
       <article class="bento-card bento-photo">
         <img class="bento-img" src="card-implantacao.jpg" alt="Especialista implantando o Specifor On Premise em notebook" loading="lazy">
         <div class="bento-text">
-          <h3>Implantação e AMS</h3>
-          <p>Implantação sob medida com contrato AMS e opção de licença perpétua ou mensal/anual.</p>
+          <h3>Automação de processos</h3>
+          <p>Fluxos que refletem sua operação real, com agentes de IA aplicados onde fizer sentido. O Specifor avança etapas, notifica responsáveis e registra cada ação sozinho.</p>
         </div>
       </article>
 
+      <article class="bento-card bento-photo">
+        <img class="bento-img" src="card-documentos.jpg" alt="Especialista usando o Specifor On Premise em tablet no campo" loading="lazy">
+        <div class="bento-text">
+          <h3>Construção de formulários</h3>
+          <p>Crie formulários adaptáveis a qualquer processo ou disciplina da sua operação. Sem código, direto com o administrador.</p>
+        </div>
+      </article>
+
+      <article class="bento-card bento-photo">
+        <img class="bento-img" src="card-gis.jpg" alt="Especialista usando o Specifor On Premise com mapa GIS" loading="lazy">
+        <div class="bento-text">
+          <h3>Integração ArcGIS nativa</h3>
+          <p>Propriedades e processos georreferenciados automaticamente, com mapas em tempo real e consulta por polígono direto na tela.</p>
+        </div>
+      </article>
+
+      <article class="bento-card bento-photo">
+        <img class="bento-img" src="card-app-mobile.jpg" alt="Engenheira usando o Specifor On Premise no celular em campo" loading="lazy">
+        <div class="bento-text">
+          <h3>Integração nativa com Power BI</h3>
+          <p>Seus relatórios viram dashboards automaticamente, incorporados dentro da própria plataforma, sem precisar exportar nada.</p>
+        </div>
+      </article>
+
+      <article class="bento-card bento-photo">
+        <img class="bento-img" src="card-dashboard.jpg" alt="Apresentação do dashboard de processos do Specifor On Premise" loading="lazy">
+        <div class="bento-text">
+          <h3>Relatórios personalizados</h3>
+          <p>Configure relatórios personalizados, sem depender da sua TI.</p>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="recursos-chips">
+      <div class="h-stat sf-appear recursos-chip">
+        <div class="icon-badge">
+          <svg class="icon" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.2" stroke="currentColor" stroke-width="1.6"/><path d="M5 20a7 7 0 0114 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <div class="num">Painel do usuário personalizado</div>
+        <div class="label">Cada pessoa vê seus processos, prazos e tarefas ao entrar, com visão por dia, semana, mês ou equipe.</div>
+      </div>
+
+      <div class="h-stat sf-appear recursos-chip">
+        <div class="icon-badge">
+          <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M7 18a4 4 0 010-8 5 5 0 019.6-1.5A4 4 0 0118 18H7z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M4 4l16 16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <div class="num">App Mobile offline</div>
+        <div class="label">Leve formulários e processos para o campo e sincronize depois, com permissões definidas por perfil de usuário.</div>
+      </div>
+
+      <div class="h-stat sf-appear recursos-chip">
+        <div class="icon-badge">
+          <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M3 12a9 9 0 1 1 3 6.7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M3 8v4h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="num">Rastreabilidade e histórico</div>
+        <div class="label">Matrículas, laudos, contratos e certidões vinculados ao cadastro certo, com versionamento e histórico documental completo.</div>
+      </div>
+
+      <div class="h-stat sf-appear recursos-chip">
+        <div class="icon-badge">
+          <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M6 9a6 6 0 0112 0c0 5 2 6 2 6H4s2-1 2-6z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9.5 19a2.5 2.5 0 005 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <div class="num">Alertas e notificações</div>
+        <div class="label">Prazos e vencimentos avisados automaticamente — sem depender de e-mail ou lembrete manual.</div>
+      </div>
+
+      <div class="h-stat sf-appear recursos-chip">
+        <div class="icon-badge">
+          <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M14 3H6a1 1 0 00-1 1v16a1 1 0 001 1h8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 12h7m0 0l-3-3m3 3l-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="num">Portal para usuários externos</div>
+        <div class="label">Arrendatários, lindeiros e parceiros abrem solicitações direto no portal, disparando os fluxos internos certos.</div>
+      </div>
+
+      <div class="h-stat sf-appear recursos-chip">
+        <div class="icon-badge">
+          <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M9 15l6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M8 16a3 3 0 01-4.2-4.2l3-3a3 3 0 014.2 0M16 8a3 3 0 014.2 4.2l-3 3a3 3 0 01-4.2 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="num">Integração com ERPs</div>
+        <div class="label">Conecte via API com SAP, Oracle e outros sistemas corporativos, sem retrabalho manual entre plataformas.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ 3b-2. DIFERENCIAIS ============ -->
+<section class="diferenciais" id="diferenciais">
+  <div class="wrap">
+    <div class="head center">
+      <span class="pill pill-blue">Diferenciais</span>
+      <h2>Construído para ser seu</h2>
+      <p class="sub">Da implantação ao suporte, cada etapa é pensada para se adaptar ao seu negócio.</p>
+    </div>
+    <div class="dif-grid">
+      <ul class="dif-list">
+        <li>Implantação sob medida</li>
+        <li>Evolução constante da solução</li>
+        <li>Time especializado em Governança Territorial</li>
+        <li>Rapidez na geração de resultados (time-to-value)</li>
+        <li>Redução de riscos na implantação com metodologia validada</li>
+        <li>Aderência regulatória</li>
+        <li>Certificação ISO 27.000</li>
+        <li>Suporte e atendimento diferenciado</li>
+      </ul>
+      <div class="dif-photo">
+        <img src="diferenciais.jpg" alt="Equipe 4Asset apresentando o Specifor On Premise em reunião" loading="lazy">
+      </div>
     </div>
   </div>
 </section>
@@ -1461,35 +1665,49 @@
       <span style="left:3.4%; top:71.05%;"></span>
       <span style="left:49.1%; top:71.05%;"></span>
     </div>
-    <div class="row">
-    <div class="u-card sf-appear">
-      <div class="u-photo" style="background-image:url('energia.jpg')">
-        <div class="u-logo"><img src="clientes-cor/axia.png" alt="Axia Energia"></div>
+    <div class="depo-carousel">
+      <button type="button" class="depo-arrow depo-arrow-prev" aria-label="Anterior" onclick="depoScroll(-1)">&#8249;</button>
+      <div class="row" id="depoTrack">
+      <div class="u-card sf-appear">
+        <div class="u-photo" style="background-image:url('oleo-gas.jpg')">
+          <div class="u-logo"><img src="clientes-cor/petrobras.png" alt="Petrobras"></div>
+        </div>
+        <div class="u-content">
+          <h4>Processos repensados e integrados</h4>
+          <p class="u-quote">"O sistema da 4Asset permite a gente repensar os nossos processos de forma modular e reescrevê-los. Hoje conseguimos ver, numa mesma solução, processos que antes eram completamente desconectados — com visão dos dados e integração com o painel de BI, o que garante uma tomada de decisão muito melhor. Já migramos mais de 41 mil cadastros e temos mais de 24 mil imóveis georreferenciados dentro da plataforma."<span class="role">Mauro Maffessoni e Alessandra Carvalho — Petrobras</span></p>
+        </div>
       </div>
-      <div class="u-content">
-        <h4>Customização e atendimento</h4>
-        <p class="u-quote">"Produto excelente, principalmente pela possibilidade de realizar customizações e deixá-lo de acordo com as necessidades do cliente. O excelente atendimento e a cordialidade da equipe técnica são destaques do time 4Asset, sempre disponíveis para buscar melhorias e na solução de eventuais problemas."<span class="role">Guilherme — AXIA</span></p>
+      <div class="u-card sf-appear">
+        <div class="u-photo" style="background-image:url('energia.jpg')">
+          <div class="u-logo"><img src="clientes-cor/axia.png" alt="Axia Energia"></div>
+        </div>
+        <div class="u-content">
+          <h4>Customização e atendimento</h4>
+          <p class="u-quote">"Produto excelente, principalmente pela possibilidade de realizar customizações e deixá-lo de acordo com as necessidades do cliente. O excelente atendimento e a cordialidade da equipe técnica são destaques do time 4Asset, sempre disponíveis para buscar melhorias e na solução de eventuais problemas."<span class="role">Guilherme — AXIA</span></p>
+        </div>
       </div>
+      <div class="u-card sf-appear">
+        <div class="u-photo" style="background-image:url('mineracao.jpg')">
+          <div class="u-logo"><img src="clientes-cor/vale.png" alt="Vale"></div>
+        </div>
+        <div class="u-content">
+          <h4>Economia em distratos</h4>
+          <p class="u-quote">"Com a 4Asset, tivemos um ganho de distrato — de contratos de imóveis — de quase 50% de saving. Uma economia de R$15 milhões em 18 meses."<span class="role">Daniel e Emília — Vale</span></p>
+        </div>
+      </div>
+      <div class="u-card sf-appear">
+        <div class="u-photo" style="background-image:url('agronegocio.jpg')">
+          <div class="u-logo"><img src="clientes-cor/brf.png" alt="BRF"></div>
+        </div>
+        <div class="u-content">
+          <h4>Robustez e flexibilidade</h4>
+          <p class="u-quote">"Sistema robusto, tem flexibilidade para adaptações. Muito bom!"<span class="role">Ivan — BRF</span></p>
+        </div>
+      </div>
+      </div>
+      <button type="button" class="depo-arrow depo-arrow-next" aria-label="Próximo" onclick="depoScroll(1)">&#8250;</button>
     </div>
-    <div class="u-card sf-appear">
-      <div class="u-photo" style="background-image:url('infraestrutura.jpg')">
-        <div class="u-logo"><img src="clientes-cor/vale.png" alt="Vale"></div>
-      </div>
-      <div class="u-content">
-        <h4>Economia em distratos</h4>
-        <p class="u-quote">"Com a 4Asset, tivemos um ganho de distrato — de contratos de imóveis — de quase 50% de saving. Uma economia de R$15 milhões em 18 meses."<span class="role">Daniel e Emília — Vale</span></p>
-      </div>
-    </div>
-    <div class="u-card sf-appear">
-      <div class="u-photo" style="background-image:url('mineracao.jpg')">
-        <div class="u-logo"><img src="clientes-cor/brf.png" alt="BRF"></div>
-      </div>
-      <div class="u-content">
-        <h4>Robustez e flexibilidade</h4>
-        <p class="u-quote">"Sistema robusto, tem flexibilidade para adaptações. Muito bom!"<span class="role">Ivan — BRF</span></p>
-      </div>
-    </div>
-    </div>
+    <div class="depo-pag-dots" id="depoDots"></div>
   </div>
 </section>
 
@@ -1542,6 +1760,27 @@
         <div class="m-body">
           <div class="icon-badge"><svg class="icon" viewBox="0 0 24 24" fill="none"><rect x="6" y="4" width="12" height="16" rx="3" stroke="currentColor" stroke-width="1.6"/><path d="M6 9.5h12M6 14.5h12" stroke="currentColor" stroke-width="1.6"/></svg></div>
           <div class="name">Óleo e Gás</div>
+        </div>
+      </div>
+      <div class="market-card sf-appear">
+        <img class="m-img" src="governo.png" alt="Setor de Governo" loading="lazy">
+        <div class="m-body">
+          <div class="icon-badge"><svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M3 21h18M5 21V11M19 21V11M4 11l8-6 8 6M9 21v-6h6v6" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg></div>
+          <div class="name">Governo</div>
+        </div>
+      </div>
+      <div class="market-card sf-appear">
+        <img class="m-img" src="bancos.jpg" alt="Setor de Bancos" loading="lazy">
+        <div class="m-body">
+          <div class="icon-badge"><svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M4 10l8-6 8 6M2 21h20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="4" y="10" width="16" height="9" rx="1" stroke="currentColor" stroke-width="1.6"/><path d="M8 13v4M12 13v4M16 13v4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+          <div class="name">Bancos</div>
+        </div>
+      </div>
+      <div class="market-card sf-appear">
+        <img class="m-img" src="telecom.png" alt="Setor de Telecom" loading="lazy">
+        <div class="m-body">
+          <div class="icon-badge"><svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M12 22v-9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M8 13l4-9 4 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.5 8.5a9 9 0 0113 0" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div>
+          <div class="name">Telecom</div>
         </div>
       </div>
     </div>
@@ -1615,26 +1854,32 @@
       <div class="addon-item">
         <svg class="icon sf-breathe" viewBox="0 0 24 24" fill="none"><path d="M7 3h7l4 4v14H7z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="13.5" cy="15" r="3" stroke="currentColor" stroke-width="1.6"/><path d="M13.5 13.3v3.4M12.4 14h2.2M12.4 16h2.2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
         <div class="name">Contratos e Pagamentos</div>
+        <div class="addon-tip">Automatize a gestão de contratos de arrendamento, cessão, comodato e servidão, com motor de cálculo para geração de pagamentos, reajuste por índices econômicos e integração com ERP.</div>
       </div>
       <div class="addon-item">
         <svg class="icon sf-breathe" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/></svg>
         <div class="name">Monitoramento 360º</div>
+        <div class="addon-tip">Acompanhe áreas territoriais via polígonos georreferenciados, identificando invasões, conflitos de uso e ocorrências sobre os ativos sob gestão da empresa.</div>
       </div>
       <div class="addon-item">
         <svg class="icon sf-breathe" viewBox="0 0 24 24" fill="none"><path d="M4 9l8-6 8 6v11a1 1 0 01-1 1H5a1 1 0 01-1-1z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9.5 13l2 2 3.5-3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         <div class="name">Fundiário e Compliance dominial</div>
+        <div class="addon-tip">Gerencie todo o ciclo de vida do seu portfólio imobiliário, de matrículas aos processos judiciais e administrativos e garanta regularidade dominial e rastreabilidade completa de cada imóvel.</div>
       </div>
       <div class="addon-item">
         <svg class="icon sf-breathe" viewBox="0 0 24 24" fill="none"><path d="M6 20c-2-6 1-13 12-14 1 10-4 14-10 14-.7 0-1.4-.3-2 0z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M7 19c3-4 6-7 10-11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
         <div class="name">Meio Ambiente e Socioambiental</div>
+        <div class="addon-tip">Controle o licenciamento ambiental (LP, LI, LO), condicionantes, programas socioambientais e relacionamento com stakeholders, do início do empreendimento ao monitoramento contínuo de conformidade.</div>
       </div>
       <div class="addon-item">
         <svg class="icon sf-breathe" viewBox="0 0 24 24" fill="none"><rect x="5" y="4" width="14" height="17" rx="1" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 8h1.5M14 8h1.5M8.5 12h1.5M14 12h1.5M8.5 16h1.5M14 16h1.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
         <div class="name">Patrimonial e Facilities</div>
+        <div class="addon-tip">Administre o ciclo completo dos ativos imobiliários até a devolução ou alienação do ativo.</div>
       </div>
       <div class="addon-item">
         <svg class="icon sf-breathe" viewBox="0 0 24 24" fill="none"><rect x="6" y="4" width="12" height="17" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M9 4V3a1 1 0 011-1h4a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.6"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         <div class="name">Inspeções e Vistorias</div>
+        <div class="addon-tip">Planeje, execute e acompanhe inspeções e vistorias em ativos e instalações, com checklists padronizados, registro de não conformidades e geração de planos de ação e ordens de serviço.</div>
       </div>
     </div>
   </div>
@@ -1651,7 +1896,7 @@
       <div class="addon-item">
         <svg class="icon sf-breathe" viewBox="0 0 24 24" fill="none"><path d="M3 5l7-2 7 2 4-1v15l-4 1-7-2-7 2z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M10 3v15M17 4v15" stroke="currentColor" stroke-width="1.6"/></svg>
         <div class="name">Specifor GIS</div>
-        <div class="addon-tip">Visualize e analise seus ativos territoriais em mapas interativos, com camadas geoespaciais integradas ao cadastro.</div>
+        <div class="addon-tip">Visualize e analise seus ativos territoriais em mapas interativos, com camadas geoespaciais integradas ao cadastro.<span class="partner">Parceria com a ESRI</span></div>
       </div>
       <div class="addon-item">
         <svg class="icon sf-breathe" viewBox="0 0 24 24" fill="none"><rect x="7" y="2" width="10" height="20" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M10 18h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
@@ -1677,7 +1922,7 @@
       </div>
       <div class="addon-item">
         <svg class="icon sf-breathe" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M3 12h18" stroke="currentColor" stroke-width="1.6"/><path d="M12 3c2.5 2.5 2.5 15.5 0 18M12 3c-2.5 2.5-2.5 15.5 0 18" stroke="currentColor" stroke-width="1.6"/></svg>
-        <div class="name">Base GIS Pública</div>
+        <div class="name">Bases Públicas</div>
         <div class="addon-tip">Acesse camadas públicas de dados geoespaciais (limites, zoneamento, infraestrutura) já integradas à plataforma.</div>
       </div>
       <div class="addon-item">
@@ -2028,6 +2273,90 @@
 
   // 3) Sem loop: ao terminar, o <video> mantém o último frame como imagem fixa.
   video.addEventListener('ended', function(){ try { video.pause(); } catch(e){} hero.dataset.video = 'done'; });
+})();
+</script>
+
+<!-- Carrossel de "Depoimentos": setas, bolinhas e arraste com mouse (mesmo esquema da home) -->
+<script>
+(function(){
+  var track = document.getElementById('depoTrack');
+  if (!track) return;
+  var dotsWrap = document.getElementById('depoDots');
+  var arrows = document.querySelectorAll('.depo-arrow');
+  var cardCount = track.querySelectorAll('.u-card').length;
+
+  function cardsPerView(){
+    return window.matchMedia('(max-width:900px)').matches ? 1 : 3;
+  }
+  function pageCount(){
+    return Math.max(1, Math.ceil(cardCount / cardsPerView()));
+  }
+  function currentIndex(){
+    return Math.round(track.scrollLeft / track.clientWidth);
+  }
+  function buildDots(){
+    if (!dotsWrap) return;
+    var pages = pageCount();
+    dotsWrap.innerHTML = '';
+    for (var i=0;i<pages;i++){
+      var dot = document.createElement('span');
+      dot.className = i===0 ? 'active' : '';
+      dot.addEventListener('click', (function(idx){ return function(){ window.depoGoTo(idx); }; })(i));
+      dotsWrap.appendChild(dot);
+    }
+  }
+  function updateDots(){
+    if (!dotsWrap) return;
+    var idx = currentIndex();
+    var dots = dotsWrap.querySelectorAll('span');
+    dots.forEach(function(d,i){ d.classList.toggle('active', i===idx); });
+  }
+  function updateCarouselMode(){
+    var overflow = track.scrollWidth > track.clientWidth + 2;
+    arrows.forEach(function(a){ a.style.display = overflow ? '' : 'none'; });
+    if (dotsWrap) dotsWrap.style.display = overflow ? '' : 'none';
+    buildDots();
+    updateDots();
+  }
+  updateCarouselMode();
+
+  var resizeTimer;
+  window.addEventListener('resize', function(){
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(updateCarouselMode, 120);
+  });
+
+  var scrollTimer;
+  track.addEventListener('scroll', function(){
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(updateDots, 80);
+  });
+
+  window.depoScroll = function(dir){
+    var pages = pageCount();
+    var next = Math.max(0, Math.min(pages-1, currentIndex()+dir));
+    track.scrollTo({left: next*track.clientWidth, behavior:'smooth'});
+  };
+  window.depoGoTo = function(i){
+    track.scrollTo({left: i*track.clientWidth, behavior:'smooth'});
+  };
+
+  var isDown=false, startX=0, startScroll=0, moved=false;
+  track.addEventListener('mousedown', function(e){
+    isDown=true; moved=false; track.classList.add('dragging');
+    startX=e.pageX; startScroll=track.scrollLeft;
+  });
+  window.addEventListener('mouseup', function(){ isDown=false; track.classList.remove('dragging'); });
+  window.addEventListener('mousemove', function(e){
+    if (!isDown) return;
+    e.preventDefault();
+    var dx = e.pageX-startX;
+    if (Math.abs(dx)>4) moved=true;
+    track.scrollLeft = startScroll-dx;
+  });
+  track.addEventListener('click', function(e){
+    if (moved){ e.preventDefault(); e.stopPropagation(); }
+  }, true);
 })();
 </script>
 
